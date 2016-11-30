@@ -10,6 +10,10 @@ export default {
         loader: 'babel-loader',
         exclude: [/node_modules/],
       },
+      {
+        test: /\.(jpg|png|gif|otf|eot|svg|ttf|woff\d?)$/,
+        loader: 'file-loader',
+      },
     ],
   },
   resolve: {

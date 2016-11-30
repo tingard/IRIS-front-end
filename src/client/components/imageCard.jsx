@@ -16,7 +16,7 @@ const ImageCard = (props) => {
     cardClasses += borderColorIndex;
   }
   return (
-    <div className="w3-col m4 l3">
+    <div className="w3-col m6 l4">
       <div className={cardClasses} style={cardStyle}>
         <div
           className="w3-display-container"

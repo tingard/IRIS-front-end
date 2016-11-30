@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Button from '../components/button';
+import Button from '../components/Button';
 import { makeBark } from '../actions/dog-actions';
 
 const mapDispatchToProps = dispatch => ({

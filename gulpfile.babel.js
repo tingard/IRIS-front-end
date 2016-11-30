@@ -11,13 +11,24 @@ const paths = {
   allSrcJs: 'src/**/*.js?(x)',
   serverSrcJs: 'src/server/**/*.js?(x)',
   sharedSrcJs: 'src/shared/**/*.js?(x)',
-  clientEntryPoint: 'src/client/app.jsx',
+  clientEntryPoint: 'src/client/index.jsx',
   clientBundle: 'dist/client-bundle.js?(.map)',
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',
   libDir: 'lib',
   distDir: 'dist',
 };
+
+gulp.task('lint', () =>
+  gulp.src([
+    paths.allSrcJs,
+    paths.gulpFile,
+    paths.webpackFile,
+  ])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError()),
+);
 
 gulp.task('clean', () => del([
   paths.libDir,
@@ -41,14 +52,3 @@ gulp.task('watch', () => {
 });
 
 gulp.task('default', ['watch', 'main']);
-
-gulp.task('lint', () =>
-  gulp.src([
-    paths.allSrcJs,
-    paths.gulpFile,
-    paths.webpackFile,
-  ])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError()),
-);

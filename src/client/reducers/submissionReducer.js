@@ -46,7 +46,7 @@ const initialState = Immutable.Map({
     },
   ],
   user: {
-    uname: 'God',
+    uname: 'Ka1-el',
     points: 9001,
     levels: {
       physics: 3,

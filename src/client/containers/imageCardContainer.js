@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ImageCard from '../components/imageCard';
+import ImageCard from '../components/ImageCard';
 
 const mapStateToProps = (state, ownProps) => {
   const im = state.grapheel.get('images')[ownProps.subID];
