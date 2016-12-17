@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import { imageStyle, messageStyle, cardStyle } from '../componentStyles';
 
 const ImageCard = (props) => {
   const imStyle = Object.assign({ backgroundImage: `url(${props.imageUrl})` }, imageStyle);
-  const countColor = props.replyCount > 5 ? '#993333' : '#339933';
-  let cardClasses = 'w3-card-4 w3-hover-greyscale w3-hover-black w3-animate-bottom ';
+  const countColor = props.level > props.userLevel ? '#993333' : '#339933';
+  let cardClasses = 'w3-card-4 w3-hover-black w3-hover-shadow-12 w3-animate-bottom ';
   // TODO: there's definitely a better way of doing this
   const borderColorIndex = ({
     physics: 'w3-border-yellow',
@@ -15,37 +16,47 @@ const ImageCard = (props) => {
   if (typeof (borderColorIndex) !== 'undefined') {
     cardClasses += borderColorIndex;
   }
+
+  const condensedMessage = props.message.length > 80 ? `${props.message.substr(0, 77)}...` : props.message;
   return (
-    <div className="w3-col m6 l4">
-      <div className={cardClasses} style={cardStyle}>
+    <div className={cardClasses} style={cardStyle}>
+      <Link to={`image/${props.imageID}`}>
         <div
           className="w3-display-container"
           style={imStyle}
         >
-          <span
-            className="w3-display-topright w3-text-white"
-            style={{ padding: '0 5px', backgroundColor: countColor }}
-          >
-            {props.replyCount}
-          </span>
+          <div className="w3-display-topright" style={{ marginTop: '-2px' }}>
+            <span className="w3-text-white">
+              {`${props.tag.substr(0, 1).toUpperCase()}${props.tag.substr(1)} `}
+            </span>
+            <span
+              className="w3-text-white"
+              style={{ padding: '0 5px', backgroundColor: countColor }}
+            >
+              {props.level}
+            </span>
+          </div>
         </div>
         <div className="w3-container w3-center" style={messageStyle}>
-          {props.message}
+          {condensedMessage}
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
 
 ImageCard.propTypes = {
   imageUrl: PropTypes.string.isRequired,
+  imageID: PropTypes.number.isRequired,
   message: PropTypes.string.isRequired,
-  tag: PropTypes.string,
-  replyCount: PropTypes.number,
+  tag: PropTypes.string.isRequired,
+  level: PropTypes.number.isRequired,
+  userLevel: PropTypes.number.isRequired,
 };
 ImageCard.defaultProps = {
   tag: 'none',
   replyCount: 0,
+  userLevel: 0,
 };
 
 export default ImageCard;

@@ -7,7 +7,7 @@ const App = props => (
     <section className="content-section">
       {props.children}
     </section>
-    <section id="spacer" style={{ height: '50px' }} />
+    <section id="spacer" style={{ height: '60px' }} />
   </div>
 );
 
