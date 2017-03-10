@@ -8,7 +8,6 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   sendReply: (reply, imageID) => {
-    console.log(reply);
     dispatch({ type: 'reply-image', reply, imageID });
   },
 });

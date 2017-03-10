@@ -2,7 +2,10 @@ import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
   uname: 'Ka1-el',
+  email: 'kal@elmail.co.kry',
   points: 9001,
+  rating: 4.245,
+  title: 'Head Squark',
   levels: {
     physics: 3,
     biology: 1,

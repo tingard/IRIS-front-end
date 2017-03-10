@@ -23,7 +23,7 @@ const Navbar = ({ width }) => {
         <li><Link to="/about">About</Link></li>
         <li><Link to="/contact">Help/Contact</Link></li>
         <li className="w3-right">
-          <Link to="/logout" style={themeColors.darkHighlight}>Logout</Link>
+          <Link to="/logout" style={themeColors.lightHighlight}>Logout</Link>
         </li>
       </ul>
     );
