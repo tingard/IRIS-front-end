@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 var Schema = mongoose.Schema;
 
-const volUser = new Schema({
+const volunteerSchema = new Schema({
   email: String,
   pwd: String,
   creationDate: Date,
@@ -14,4 +14,4 @@ const volUser = new Schema({
   browserNotifications: Boolean,
 })
 
-module.exports = volUser;
+module.exports = mongoose.model('Volunteer', volunteerSchema);

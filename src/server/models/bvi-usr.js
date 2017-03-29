@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 var Schema = mongoose.Schema;
 
-const bviUser = new Schema({
+const bviUserSchema = new Schema({
   email: String,
   pwd: String,
   creationDate: Date,
@@ -13,4 +13,4 @@ const bviUser = new Schema({
   emailNotifications: Boolean,
 })
 
-module.exports = bviUser;
+module.exports = mongoose.model('BVIuser', bviUserSchema);;
