@@ -26,11 +26,13 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
+    "body-parser": "^1.17.1",
     "express": "^4.14.0",
     "file-loader": "^0.9.0",
     "history": "^4.4.1",
     "immutable": "^3.8.1",
     "mongodb-runner": "^3.4.0",
+    "mongoose": "^4.9.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^4.4.6",

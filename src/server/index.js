@@ -1,31 +1,36 @@
 /* eslint-disable no-console */
 const express = require('express');
 const path = require('path');
-// const ParseServer = require('parse-server').ParseServer;
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const bviUser = require('./models/bvi-usr');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+// ---- API ----
+mongoose.connect('mongodb://localhost:27017')
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+const api = express.Router();
+
+api.get('/', function(req, res, next) {
+  res.json({message: 'welcome to the api!'})
+});
+
+app.use('/api', api);
+
+// ---- Main website ----
 // serve up compiled static assets if we're in production mode
 app.use(express.static(path.join(__dirname, '../../dist')));
-
-/* const api = new ParseServer({
-  // Connection string for your MongoDB database:
-  databaseURI: 'mongodb://localhost:27017/dev',
-  // Absolute path to your Cloud Code:
-  cloud: '/Users/tlingard/Documents/IRIS/src/server/cloud/main.js',
-  appId: 'myAppId',
-  masterKey: 'myMasterKey', // Keep this key secret!
-  fileKey: 'optionalFileKey',
-  serverURL: 'http://localhost:3000/parse' // Don't forget to change to https if needed
-}); */
 
 app.get('/', (req, res) => {
   app.use(express.static(path.join(__dirname, '../../dist')));
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });
 
-// app.use('/parse', api);
 
 app.listen(port, 'localhost', (err) => {
   if (err) {
