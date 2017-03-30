@@ -1,10 +1,11 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
-
+const Schema = mongoose.Schema;
 const volunteerSchema = new Schema({
   email: String,
   pwd: String,
+  firstName: String,
+  lastName: String,
   creationDate: Date,
   lastLogin: Date,
   emailVerified: Boolean,
@@ -12,6 +13,6 @@ const volunteerSchema = new Schema({
   rejectedResponses: Number,
   emailNotifications: Boolean,
   browserNotifications: Boolean,
-})
+});
 
 module.exports = mongoose.model('Volunteer', volunteerSchema);

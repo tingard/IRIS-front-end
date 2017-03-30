@@ -6,13 +6,17 @@
   "author": "Tim Lingard",
   "license": "MIT",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "test": "eslint src && jest"
   },
   "devDependencies": {
+    "assert": "^1.4.1",
+    "babel-jest": "^19.0.0",
     "babel-loader": "^6.2.8",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "del": "^2.2.2",
+    "enzyme": "^2.8.0",
     "eslint": "^3.10.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
@@ -21,6 +25,8 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
+    "jest": "^19.0.2",
+    "react-addons-test-utils": "^15.4.2",
     "webpack": "^1.13.3",
     "webpack-stream": "^3.2.0"
   },
@@ -31,6 +37,7 @@
     "file-loader": "^0.9.0",
     "history": "^4.4.1",
     "immutable": "^3.8.1",
+    "jsonwebtoken": "^7.3.0",
     "mongodb-runner": "^3.4.0",
     "mongoose": "^4.9.1",
     "react": "^15.4.1",
@@ -53,7 +60,8 @@
     "env": {
       "browser": true,
       "es6": true,
-      "node": true
+      "node": true,
+      "jest": true
     },
     "rules": {
       "no-plusplus": 0,
