@@ -3,7 +3,7 @@ export const imageStyle = {
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
-  backgroundColor: '#000',
+  backgroundColor: '#fff',
   maxWidth: '100%',
   minHeight: '300px',
 };
@@ -25,21 +25,30 @@ export const cardStyle = {
 */
 export const themeColors = {
   darkMain: {
-    backgroundColor: '#AC6300',
+    backgroundColor: '#064458',
     color: 'white',
   },
   mediumMain: {
-    backgroundColor: '#E98D12',
+    backgroundColor: '#2c6e84',
   },
   lightMain: {
-    backgroundColor: '#FFCA84',
+    backgroundColor: '#7cadbd',
   },
   darkHighlight: {
-    backgroundColor: '#07426F',
+    backgroundColor: '#d3ae41',
     color: 'white',
   },
   lightHighlight: {
-    backgroundColor: '#B4CDE1',
+    backgroundColor: '#f3d16e',
+    color: '#333',
   },
-  shadowColor: '#3A2100',
+  darkHighlight2: {
+    backgroundColor: '#8e0505',
+    color: 'white',
+  },
+  lightHighlight2: {
+    backgroundColor: '#536e6e',
+    color: '#333',
+  },
+  shadowColor: '#204060',
 };

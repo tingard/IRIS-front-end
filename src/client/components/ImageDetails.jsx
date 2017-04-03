@@ -6,7 +6,6 @@ import TemplateSelectorButton from './TemplateSelectorButton';
 class ImageDetails extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = { template: 'none' };
     this.addDefaultResponse.bind(this);
   }

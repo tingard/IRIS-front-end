@@ -13,11 +13,13 @@ import MessagePage from './containers/messagePage';
 import userReducer from './reducers/userReducer';
 import messageReducer from './reducers/messageReducer';
 import submissionReducer from './reducers/submissionReducer';
+import ratingReducer from './reducers/ratingReducer';
 
 const store = createStore(combineReducers({
   user: userReducer,
   submissions: submissionReducer,
   messages: messageReducer,
+  ratings: ratingReducer,
 }));
 
 ReactDOM.render(

@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import ImageCard from '../components/ImageCard';
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state.submissions);
   const im = state.submissions.get(ownProps.subID);
   const usr = state.user;
   const d = {
