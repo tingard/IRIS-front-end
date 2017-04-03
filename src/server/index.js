@@ -4,8 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-// const bcrypt = require('bcrypt');
-
+const bcrypt = require('bcrypt');
 const Volunteer = require('./models/vol-usr');
 const BviUser = require('./models/bvi-usr');
 const config = require('./config');
@@ -23,6 +22,12 @@ function validateEmail(email) { return /\S+@\S+\.\S+/.test(email); }
 // API
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
+
+
+const hash = '$2y$08$9TTThrthZhTOcoHELRjuN.3mJd2iKYIeNlV/CYJUWWRnDfRRw6fD2';
+bcrypt.compare('secret', hash, (err, res) => {
+  console.log(res);
+});
 
 mongoose.connect('mongodb://localhost:27017');
 app.set('superSecret', config.secret);
