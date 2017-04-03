@@ -3,9 +3,12 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt')
 
 const Volunteer = require('./models/vol-usr');
 const BviUser = require('./models/bvi-usr');
+const config = require('./config');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,7 +25,7 @@ function validateEmail(email) { return /\S+@\S+\.\S+/.test(email); }
 // -----------------------------------------------------------------------------
 
 mongoose.connect('mongodb://localhost:27017');
-
+app.set('superSecret', config.secret);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -32,6 +35,37 @@ api.get('/', (req, res) => {
   res.json({ message: 'welcome to the api!' });
 });
 
+api.post('/login', (req, res) => {
+  Volunteer.findOne(
+    { email: req.body.email },
+    (err, user) => {
+      if (err) res.send(err);
+      if (!user) {
+        res.json({
+          success: false,
+          message: 'Could not login (err0)',
+        });
+      } else if (user) {
+        if (user.password !== req.body.password) {
+          res.json({
+            success: false,
+            message: 'Could not login (err1)',
+          });
+        } else {
+          const token = jwt.sign(user, app.get('superSecret'), {
+            expiresInMinutes: 1440, // expires in 24 hours
+            // TODO: link to IP address somehow?
+          });
+          // return the information including token as JSON
+          res.json({
+            success: true,
+            message: 'Successfully logged in',
+            token,
+          });
+        }
+      }
+    });
+});
 api.use((req, res, next) => {
   // TODO: handle authentication here
   console.log(`🤖  "recieved api connection, www.grapheel.com/api${req.url}"`);
