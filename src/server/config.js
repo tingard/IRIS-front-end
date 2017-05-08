@@ -1,4 +1,4 @@
 module.exports = {
-  secret: 'grapheelIrisIsAwesomeAndYouKnowIt',
+  secret: 'yVh5htqvJeLT4EzoYeaIQQvjdLNl7E',
   database: 'mongodb://localhost:27017',
 };

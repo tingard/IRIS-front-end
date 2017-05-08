@@ -2,32 +2,26 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const Volunteer = require('./models/vol-usr');
 const BviUser = require('./models/bvi-usr');
 const config = require('./config');
 
 const app = express();
 const port = process.env.PORT || 3000;
+const saltRounds = 10;
 
 function isVar(v) { return (typeof v !== 'undefined'); }
 
 function validateEmail(email) { return /\S+@\S+\.\S+/.test(email); }
-
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 // API
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
-
-
-const hash = '$2y$08$9TTThrthZhTOcoHELRjuN.3mJd2iKYIeNlV/CYJUWWRnDfRRw6fD2';
-bcrypt.compare('secret', hash, (err, res) => {
-  console.log(res);
-});
 
 mongoose.connect('mongodb://localhost:27017');
 app.set('superSecret', config.secret);
@@ -36,11 +30,18 @@ app.use(bodyParser.json());
 
 const api = new express.Router();
 
+api.use((req, res, next) => {
+  // TODO: handle authentication here
+  console.log(`🤖  "recieved api connection, ${req.method}: www.grapheel.com/api${req.url}"`);
+  next();
+});
+
 api.get('/', (req, res) => {
   res.json({ message: 'welcome to the api!' });
 });
 
 api.post('/login', (req, res) => {
+  // TODO: which type of user is logging in?
   Volunteer.findOne(
     { email: req.body.email },
     (err, user) => {
@@ -48,33 +49,31 @@ api.post('/login', (req, res) => {
       if (!user) {
         res.json({
           success: false,
-          message: 'Could not login (err0)',
+          message: 'Could not login',
         });
       } else if (user) {
-        if (user.password !== req.body.password) {
-          res.json({
-            success: false,
-            message: 'Could not login (err1)',
-          });
-        } else {
-          const token = jwt.sign(user, app.get('superSecret'), {
-            expiresInMinutes: 1440, // expires in 24 hours
-            // TODO: link to IP address somehow?
-          });
-          // return the information including token as JSON
-          res.json({
-            success: true,
-            message: 'Successfully logged in',
-            token,
-          });
-        }
+        // TODO: bcrypt checking
+        bcrypt.compare(req.body.pwd, user.pwd, (err, res2) => {
+          if (res2) {
+            const token = jwt.sign(user, app.get('superSecret'), {
+              expiresIn: '24h', // expires in 24 hours
+              // TODO: link to IP address somehow?
+            });
+            // return the information including token as JSON
+            res.json({
+              success: true,
+              message: 'Successfully logged in',
+              token,
+            });
+          } else {
+            res.json({
+              success: false,
+              message: 'Could not login',
+            });
+          }
+        });
       }
     });
-});
-api.use((req, res, next) => {
-  // TODO: handle authentication here
-  console.log(`🤖  "recieved api connection, www.grapheel.com/api${req.url}"`);
-  next();
 });
 
 // TODO: break these off into separate files?
@@ -88,23 +87,31 @@ api.route('/volunteers')
     const volunteer = new Volunteer();
     if (isVar(req.body.email) && isVar(req.body.pwd)) {
       if (validateEmail(req.body.email)) {
-        Object.assign(volunteer, {
-          email: req.body.email,
-          pwd: req.body.pwd, // TODO hashing etc...
-          firstName: isVar(req.body.firstname) ? req.body.firstname : '',
-          lastName: isVar(req.body.lastname) ? req.body.lastname : '',
-          creationDate: Date.now(),
-          lastLogin: Date.now(),
-          emailVerified: false,
-          acceptedResponses: 0,
-          rejectedResponses: 0,
-          emailNotifications: false,
-          browserNotifications: true,
-        });
-        volunteer.save((err) => {
-          if (err) res.send(err);
-          res.json({ message: 'Volunteer created' });
-        });
+        if (req.body.pwd.length > 0) {
+          bcrypt.genSalt(saltRounds, (err, salt) => {
+            bcrypt.hash(req.body.pwd, salt, (err, hash) => {
+              if (!err) {
+                Object.assign(volunteer, {
+                  email: req.body.email,
+                  pwd: hash,
+                  firstName: isVar(req.body.firstname) ? req.body.firstname : '',
+                  lastName: isVar(req.body.lastname) ? req.body.lastname : '',
+                  creationDate: Date.now(),
+                  lastLogin: Date.now(),
+                  emailVerified: false,
+                  acceptedResponses: 0,
+                  rejectedResponses: 0,
+                  emailNotifications: false,
+                  browserNotifications: true,
+                });
+                volunteer.save((err) => {
+                  if (err) res.send(err);
+                  res.json({ message: 'Volunteer created' });
+                });
+              }
+            });
+          });
+        }
       } else {
         res.json({
           message: 'Volunteer not created - invalid email address',

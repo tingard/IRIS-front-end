@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const StarBox = (props) => {
   const ret = Array(3);
@@ -18,7 +19,7 @@ const StarBox = (props) => {
 };
 
 StarBox.propTypes = {
-  n: React.PropTypes.number,
+  n: PropTypes.number,
 };
 
 export default StarBox;

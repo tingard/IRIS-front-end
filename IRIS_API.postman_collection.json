@@ -1,0 +1,107 @@
+{
+	"variables": [],
+	"info": {
+		"name": "IRIS API",
+		"_postman_id": "60489a37-c9dd-7444-d70d-4e3480fee92d",
+		"description": "Testing IRIS API calls \n - get /api\n - post to volunteers (create user)\n - get volunteers\n - post to login (get auth token)\n - use auth token to get more things",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get api",
+			"request": {
+				"url": "http://local.zooniverse.org:3000/api/",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "tim.lingard@grapheel.com",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": "get api (check if online)"
+			},
+			"response": []
+		},
+		{
+			"name": "post to volunteers",
+			"request": {
+				"url": "http://local.zooniverse.org:3000/api/volunteers",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "tim.lingard@grapheel.com",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "pwd",
+							"value": "testing",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": "create a volunteer\n- uname tim@grapheel.com\n- pwd testing"
+			},
+			"response": []
+		},
+		{
+			"name": "post to login",
+			"request": {
+				"url": "http://local.zooniverse.org:3000/api/login",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "tim.lingard@grapheel.com",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "pwd",
+							"value": "test",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": "login to the service with the newly created user"
+			},
+			"response": []
+		},
+		{
+			"name": "get volunteers",
+			"request": {
+				"url": "http://local.zooniverse.org:3000/api/volunteers",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "tim.lingard@grapheel.com",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": "get all registered volunteers (currently not behind auth)"
+			},
+			"response": []
+		}
+	]
+}
