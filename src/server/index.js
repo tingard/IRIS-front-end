@@ -37,7 +37,7 @@ api.use((req, res, next) => {
 });
 
 api.get('/', (req, res) => {
-  res.json({ message: 'welcome to the api!' });
+  res.json({ message: 'welcome to the api!' })
 });
 
 api.post('/login', (req, res) => {
