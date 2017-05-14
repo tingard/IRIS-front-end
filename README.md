@@ -2,7 +2,7 @@
 
 ## Building
 
-Once you've cloned/forked the git repo, make sure you're on a compatible version of node (6.9.1 to be safe).
+Once you've cloned/forked the git repo, make sure you're on a compatible version of node (6.10.2 to be safe).
 
 Use yarn, it's better than npm :wink:
 
@@ -41,6 +41,3 @@ IRIS has two main components, an API running at [grapheel.com/app/api](http://ww
 
 #### Volunteer Side
 #### BVI side
-
-
-

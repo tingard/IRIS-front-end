@@ -15,4 +15,17 @@ const volunteerSchema = new Schema({
   browserNotifications: Boolean,
 });
 
+volunteerSchema.methods.setDefaults = () => {
+  Object.assign(this, {
+    creationDate: Date.now(),
+    lastLogin: Date.now(),
+    emailVerified: false,
+    acceptedResponses: 0,
+    rejectedResponses: 0,
+    emailNotifications: false,
+    browserNotifications: true,
+    utype: 'volunteer',
+  });
+};
+
 module.exports = mongoose.model('Volunteer', volunteerSchema);
