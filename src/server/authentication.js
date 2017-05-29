@@ -3,8 +3,8 @@
 const passportJWT = require('passport-jwt');
 
 const config = require('./config');
-const Volunteer = require('./models/volUsr');
-const BviUser = require('./models/bviUsr');
+const Volunteer = require('./api/models/volUsr');
+const BviUser = require('./api/models/bviUsr');
 
 const JwtStrategy = passportJWT.Strategy;
 const jwtOptions = {

@@ -9,11 +9,15 @@ const passportJWT = require('passport-jwt');
 
 const config = require('./config');
 const api = require('./api');
+const websocket = require('./websocket');
 const authStrategy = require('./authentication');
 
 const ExtractJwt = passportJWT.ExtractJwt;
 
 const app = express();
+/* eslint-disable no-unused-vars */
+const expressWs = require('express-ws')(app);
+/* eslint-enable no-unused-vars */
 const port = process.env.PORT || 3000;
 
 // function isVar(v) { return (typeof v !== 'undefined'); }
@@ -38,15 +42,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // -----------------------------------------------------------------------------
-// Bind to app
+// Bind API to app
 app.use('/api', api);
 
+// -----------------------------------------------------------------------------
+// Bind websocket to app
+app.ws('/websocket', (ws) => {
+  ws.on('message', websocket.onMessage);
+});
+
+// -----------------------------------------------------------------------------
 // Main Website
 
 // serve up compiled static assets if we're in production mode
 app.use(express.static(path.join(__dirname, '../../dist')));
 
-app.get('/', (req, res) => {
+app.get(/\/#?/, (req, res) => {
   app.use(express.static(path.join(__dirname, '../../dist')));
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });

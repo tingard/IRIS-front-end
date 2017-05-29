@@ -8,7 +8,7 @@
   "scripts": {
     "start": "gulp",
     "test": "eslint src && jest",
-    "runserver": "echo -e \"Starting Mongodb\"; mongodb-runner start && echo \" \" && nodemon src/server/index.js; echo -e \"Stopping mongodb\"; mongodb-runner stop",
+    "runserver": "echo -e \"Starting Mongodb\"; mongodb-runner start && echo \" \" && nodemon src/server/index.js; echo -e \"Stopping mongodb\" && mongodb-runner stop",
     "precommit": "yarn test",
     "prepush": "yarn test"
   },
@@ -42,6 +42,7 @@
     "body-parser": "^1.17.1",
     "enzyme": "^2.8.0",
     "express": "^4.14.0",
+    "express-ws": "^3.0.0",
     "file-loader": "^0.9.0",
     "history": "^4.4.1",
     "immutable": "^3.8.1",

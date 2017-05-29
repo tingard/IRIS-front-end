@@ -11,8 +11,8 @@ class MessagePage extends React.Component {
     return (
       <div className="w3-container">
         { this.props.messages.map(m => (
-          <Message {...m} />
-        )) }
+          <Message {...m} key={Math.random()} />
+        ))}
       </div>
     );
   }
