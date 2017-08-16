@@ -12,6 +12,19 @@ const bviUserSchema = new Schema({
   submittedImages: Number,
   acceptedResponses: Number,
   emailNotifications: Boolean,
+  utype: String,
 });
 
-module.exports = mongoose.model('BVIuser', bviUserSchema);
+bviUserSchema.methods.setDefaults = () => {
+  Object.assign(this, {
+    creationDate: Date.now(),
+    lastLogin: Date.now(),
+    emailVerified: false,
+    submittedImages: 0,
+    acceptedResponses: 0,
+    emailNotifications: true,
+    utype: 'bviUsr',
+  });
+};
+
+module.exports = mongoose.model('BviUser', bviUserSchema);

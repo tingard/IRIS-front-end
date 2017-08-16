@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TemplateSelectorButton = props => (
   <button
@@ -10,8 +11,8 @@ const TemplateSelectorButton = props => (
 );
 
 TemplateSelectorButton.propTypes = {
-  clickFunction: React.PropTypes.func.isRequired,
-  children: React.PropTypes.string,
+  clickFunction: PropTypes.func.isRequired,
+  children: PropTypes.string,
 };
 
 export default TemplateSelectorButton;

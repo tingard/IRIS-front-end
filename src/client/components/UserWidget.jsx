@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const UserWidget = (props) => {
   const s = {
@@ -34,7 +35,7 @@ const UserWidget = (props) => {
 };
 
 UserWidget.propTypes = {
-  user: React.PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default UserWidget;

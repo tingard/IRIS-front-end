@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import StarBox from './StarBox';
 
 const closeButtonStyle = {
@@ -40,7 +41,7 @@ const Rating = props => (
 );
 
 Rating.propTypes = {
-  update: React.PropTypes.object,
+  update: PropTypes.object,
 };
 
 const RatingsBox = (props) => {
@@ -61,7 +62,7 @@ const RatingsBox = (props) => {
 };
 
 RatingsBox.propTypes = {
-  updates: React.PropTypes.array,
+  updates: PropTypes.array,
 };
 
 export default RatingsBox;

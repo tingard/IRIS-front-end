@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Navbar from './Navbar';
+
 
 const App = props => (
   <div className="parallax parallax1">
@@ -12,7 +14,7 @@ const App = props => (
 );
 
 App.propTypes = {
-  children: React.PropTypes.object,
+  children: PropTypes.object,
 };
 
 export default App;

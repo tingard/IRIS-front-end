@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { imageStyle } from '../componentStyles';
 import templateReplies from '../templateReplies';
 import TemplateSelectorButton from './TemplateSelectorButton';
@@ -93,10 +94,10 @@ class ImageDetails extends React.Component {
 }
 
 ImageDetails.propTypes = {
-  image: React.PropTypes.object,
-  sendReply: React.PropTypes.func,
-  imageID: React.PropTypes.number.isRequired,
-  router: React.PropTypes.object,
+  image: PropTypes.object,
+  sendReply: PropTypes.func,
+  imageID: PropTypes.number.isRequired,
+  router: PropTypes.object,
 };
 
 export default ImageDetails;

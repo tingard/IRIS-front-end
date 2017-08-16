@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ImageCardContainer from '../containers/imageCardContainer';
 
 const Hand = (props) => {
@@ -16,7 +17,7 @@ const Hand = (props) => {
 };
 
 Hand.propTypes = {
-  submissions: React.PropTypes.array,
+  submissions: PropTypes.array,
 };
 
 export default Hand;

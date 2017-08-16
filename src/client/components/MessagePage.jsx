@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Message from './Message';
 // import { themeColors } from '../componentStyles';
 
@@ -10,15 +11,15 @@ class MessagePage extends React.Component {
     return (
       <div className="w3-container">
         { this.props.messages.map(m => (
-          <Message {...m} />
-        )) }
+          <Message {...m} key={Math.random()} />
+        ))}
       </div>
     );
   }
 }
 
 MessagePage.propTypes = {
-  messages: React.PropTypes.array,
+  messages: PropTypes.array,
 };
 
 export default MessagePage;
