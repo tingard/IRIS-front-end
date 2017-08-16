@@ -58,8 +58,6 @@ gulpfile.babel.js.
 
 yarn tests are run without compiling, therefore it will run without compiling
 
-`TIM PLEASE MAKE THIS MORE CLEAR`
-
 
 
 ### Tests
