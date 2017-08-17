@@ -1,23 +1,64 @@
 # IRIS
 
+## Notes on Git
+While we believe case sensitive file names have been eliminated, it may
+be prudent for OS X users to tell git to ignore cases:
+
+``` bash
+git config core.ignorecase true
+```
+
+## Prerequisites
+This readme will assume that the reader has already setup a working
+node/react development environment. Node version 6.9.1 is recommended,
+installable via nvm or any other node version manager.
+
+* yarn
+
+    Yarn is a very new package manager which is considered by many to be
+    faster and more secure than npm. Running the installation script is
+    the easiest way to add it to your system:
+
+    ```bash
+    curl -o- -L https://yarnpkg.com/install.sh | bash
+    ```
+
+    Use yarn, it's better than npm :wink:
+
+    Also, good luck installing the dependencies without it :wink:
+
+* postman
+
+    Postman is a tool designed to aid in API development. Allows us to
+    create test users for the IRIS service. Installation is simple,
+    follow the [link](http://www.getpostman.com) and select the correct
+    OS
+
 ## Building
 
-Once you've cloned/forked the git repo, make sure you're on a compatible version of node (6.9.1 to be safe).
 
-Use yarn, it's better than npm :wink:
+Navigate to your IRIS directory, then `yarn install` will install dependencies
 
-`yarn install` will install dependancies
+`yarn start` will then build the website, accessible through http://localhost:3000/
 
-`yarn start` will build the site using magic, then `node src/server/index.js` will set the server running.
+`yarn runserver` will then start a mongodb database and the server
 
 Having two commands is  a pain but I cba doing it nicely in webpack for the time being, and don't want yet more requirements.
 
-## Contributing
-
-Thanks for your support! IRIS is starting to build in complexity so the more people contributing the better. To make everyone's lives easier we have some coding standards to stick to.
-
 ### Linting
-IRIS uses ESLint to help enforce a pretty generic code style. Whenever you run `yarn start` or `yarn test`, linting will happen and you may see some errors or warnings to correct. You should also be able to tell your editor to point to the correct linting file if you want it all in one place.
+IRIS uses ESLint to help enforce a slightly modified AirBNB coding style,
+described in the eslintConfig section of the package.json file. Whenever
+you run `yarn start` or `yarn test`, linting will happen and you may see
+some errors or warnings to correct. You should also be able to tell your
+editor to point to the correct linting file if you want it all in one
+place.
+
+It is also possible to start linting from the lint script in
+gulpfile.babel.js.
+
+yarn tests are run without compiling, therefore it will run without compiling
+
+
 
 ### Tests
 
@@ -41,6 +82,10 @@ IRIS has two main components, an API running at [grapheel.com/app/api](http://ww
 
 #### Volunteer Side
 #### BVI side
+
+## Contributing
+
+Thanks for your support! IRIS is starting to build in complexity so the more people contributing the better. To make everyone's lives easier we have some coding standards to stick to.
 
 
 
