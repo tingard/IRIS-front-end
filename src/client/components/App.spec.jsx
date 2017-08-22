@@ -1,4 +1,5 @@
-/* eslint prefer-arrow-callback: 0, func-names: 0, 'react/jsx-boolean-value': ['error', 'always'], 'react/jsx-filename-extension': 0 */
+/* eslint prefer-arrow-callback: 0, func-names: 0, 'react/jsx-boolean-value': ['error', 'always'],
+'react/jsx-filename-extension': 0, no-unused-vars: 0 */
 /* global describe, it, beforeEach */
 
 import { mount } from 'enzyme';
