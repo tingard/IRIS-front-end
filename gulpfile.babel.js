@@ -11,7 +11,8 @@ import webpackConfig from './webpack.config.babel';
 
 const paths = {
   allSrcJs: 'src/**/*.js?(x)',
-  allSrcScss: 'sass/**/*.scss',
+  clientSrcScss: 'src/client/styles/sass/*.scss',
+  clientSrcCss: 'src/client/styles/css/',
   serverSrcJs: 'src/server/**/*.js?(x)',
   sharedSrcJs: 'src/shared/**/*.js?(x)',
   clientEntryPoint: 'src/client/index.jsx',
@@ -51,13 +52,13 @@ gulp.task('main', ['lint', 'clean', 'sass-styles'], () =>
 );
 
 gulp.task('sass-styles', () => {
-  gulp.src(paths.allSrcScss)
+  gulp.src(paths.clientSrcScss)
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./css/'));
+    .pipe(gulp.dest(paths.clientSrcCss));
 });
 
 gulp.task('watch', () => {
-  gulp.watch([paths.allSrcJs, paths.allSrcScss], ['main']);
+  gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['main']);
 });
 
 gulp.task('default', ['watch', 'main']);
