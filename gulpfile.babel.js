@@ -57,7 +57,6 @@ gulp.task('sass-styles', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(paths.allSrcJs, ['main']);
   gulp.watch([paths.allSrcJs, paths.allSrcScss], ['main']);
 });
 
