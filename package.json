@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "gulp",
-    "test": "eslint src && jest"
+    "test": "gulp lint && jest"
   },
   "devDependencies": {
     "assert": "^1.4.1",
