@@ -2,6 +2,8 @@
 /* eslint-disable no-console */
 import gulp from 'gulp';
 import eslint from 'gulp-eslint';
+import nodemon from 'gulp-nodemon';
+import env from 'gulp-env';
 import sass from 'gulp-sass';
 import concat from 'gulp-concat';
 import del from 'del';
@@ -57,6 +59,24 @@ gulp.task('main', ['lint', 'clean', 'sass-styles'], () =>
 
 gulp.task('watch', () => {
   gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['main']);
+});
+
+gulp.task('start-dev', () => {
+  env({
+    file: '.env',
+    type: 'ini',
+    vars: {
+      // any variables you want to overwrite in dev
+      mode: 'development',
+      PORT: '5000',
+      // point to test database in .env file
+    },
+  });
+  nodemon({
+    script: paths.serverEntryPoint,
+    watch: [paths.allSrcJs, paths.clientSrcScss], // this doesn't seem to be working as expected
+    tasks: ['main'],
+  });
 });
 
 gulp.task('default', ['main', 'watch']);
