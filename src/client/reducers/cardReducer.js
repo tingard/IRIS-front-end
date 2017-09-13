@@ -4,7 +4,7 @@ import Immutable from 'immutable';
 
 const initialState = Immutable.List.of(
   {
-    _key: Math.random(),
+    key: Math.random(),
     owner: 'tingard',
     message: 'Can someone describe this image for me? Can someone describe this image for me? Can someone describe this image for me?',
     imageUrl: 'images/test.jpg',
@@ -13,7 +13,7 @@ const initialState = Immutable.List.of(
     replyCount: 0,
   },
   {
-    _key: Math.random(),
+    key: Math.random(),
     owner: 'tingard',
     message: 'What is this a plot of?',
     imageUrl: 'images/test2.png',
@@ -22,7 +22,7 @@ const initialState = Immutable.List.of(
     replyCount: 3,
   },
   {
-    _key: Math.random(),
+    key: Math.random(),
     owner: 'tingard',
     message: 'Is this image just random noise?',
     imageUrl: 'images/test4.png',
@@ -31,7 +31,7 @@ const initialState = Immutable.List.of(
     replyCount: 3,
   },
   {
-    _key: Math.random(),
+    key: Math.random(),
     owner: 'tingard',
     message: 'What is this a plot of?',
     imageUrl: 'images/test2.png',
@@ -40,7 +40,7 @@ const initialState = Immutable.List.of(
     replyCount: 3,
   },
   {
-    _key: Math.random(),
+    key: Math.random(),
     owner: 'tingard',
     message: 'Could someone describe this diagram to me?',
     imageUrl: 'images/test3.png',
@@ -50,11 +50,11 @@ const initialState = Immutable.List.of(
   },
 );
 
-const submissionReducer = (state = initialState, action) => {
+const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
   }
 };
 
-export default submissionReducer;
+export default cardReducer;
