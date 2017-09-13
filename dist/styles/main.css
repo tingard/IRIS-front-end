@@ -1,0 +1,3 @@
+.grapheel-image-card{background-color:#f24d36;width:200px;height:300px}
+
+.grapheel-navbar{height:100px;width:100%;background-color:#fefefe;box-shadow:0 5px 8px 0 rgba(0,0,0,0.1),0 3px 10px 0 rgba(0,0,0,0.14);display:-webkit-flex;display:inline-flex;justify-content:space-between}.grapheel-navbar div{padding:0 10px;display:flex;align-items:center;height:100%}.grapheel-navbar div img{height:80%;margin:0 auto;display:block}.grapheel-navbar div svg{height:80%;margin:0 auto;display:block}

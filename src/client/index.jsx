@@ -5,34 +5,27 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import App from './components/App';
-import HomePage from './components/HomePage';
-import InProgressPage from './components/InProgressPage';
-import imagePage from './containers/imagePage';
-import MessagePage from './containers/messagePage';
+import mainPage from './containers/mainPage';
+import MessagePage from './components/MessagePage';
+import ProfilePage from './components/ProfilePage';
 
 import userReducer from './reducers/userReducer';
 import messageReducer from './reducers/messageReducer';
-import submissionReducer from './reducers/submissionReducer';
-import ratingReducer from './reducers/ratingReducer';
+import cardReducer from './reducers/cardReducer';
 
 const store = createStore(combineReducers({
   user: userReducer,
-  submissions: submissionReducer,
+  cards: cardReducer,
   messages: messageReducer,
-  ratings: ratingReducer,
 }));
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={HomePage} />
+        <IndexRoute component={mainPage} />
         <Route path="/messages" component={MessagePage} />
-        <Route path="/user-profile" component={InProgressPage} />
-        <Route path="/about" component={InProgressPage} />
-        <Route path="/contact" component={InProgressPage} />
-        <Route path="/logout" component={InProgressPage} />
-        <Route path="/image/:imageID" component={imagePage} />
+        <Route path="/profile" component={ProfilePage} />
       </Route>
     </Router>
   </Provider>

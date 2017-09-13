@@ -12,15 +12,15 @@ import webpackConfig from './webpack.config.babel';
 
 
 const paths = {
-  allSrcJs: 'src/**/*.js?(x)',
+  allSrcJs: './src/**/*.js?(x)',
   clientSrcJs: 'src/client/**/*.js?(x)',
   clientSrcScss: 'src/client/styles/sass/*.scss',
   clientSrcCss: 'src/client/styles/css/',
   distCssFile: 'dist/styles/',
   serverSrcJs: 'src/server/**/*.js?(x)',
   sharedSrcJs: 'src/shared/**/*.js?(x)',
-  serverEntryPoint: 'src/server/index.js',
   clientEntryPoint: 'src/client/index.jsx',
+  serverEntryPoint: 'src/server/index.js',
   clientBundle: 'dist/client-bundle.js?(.map)',
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',
@@ -42,7 +42,14 @@ gulp.task('lint', () =>
 gulp.task('clean', () => del([
   paths.libDir,
   paths.clientBundle,
+  paths.distCssFile,
 ]));
+
+gulp.task('main', ['lint', 'clean', 'sass-styles'], () =>
+  gulp.src(paths.clientEntryPoint)
+    .pipe(webpack(webpackConfig))
+    .pipe(gulp.dest(paths.distDir)),
+);
 
 gulp.task('sass-styles', () => {
   gulp.src(paths.clientSrcScss)
@@ -51,17 +58,11 @@ gulp.task('sass-styles', () => {
     .pipe(gulp.dest(paths.distCssFile));
 });
 
-gulp.task('main', ['lint', 'clean', 'sass-styles'], () =>
-  gulp.src(paths.clientEntryPoint)
-    .pipe(webpack(webpackConfig))
-    .pipe(gulp.dest(paths.distDir)),
-);
-
 gulp.task('watch', () => {
   gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['main']);
 });
 
-gulp.task('start-dev', () => {
+gulp.task('start-dev', ['main'], () => {
   env({
     file: '.env',
     type: 'ini',
@@ -72,11 +73,13 @@ gulp.task('start-dev', () => {
       // point to test database in .env file
     },
   });
+
   nodemon({
     script: paths.serverEntryPoint,
-    watch: [paths.allSrcJs, paths.clientSrcScss], // this doesn't seem to be working as expected
+    ext: 'js scss jsx',
+    watch: ['src'], // this doesn't seem to be working as expected
     tasks: ['main'],
   });
 });
 
-gulp.task('default', ['main', 'watch']);
+gulp.task('default', ['watch', 'main']);

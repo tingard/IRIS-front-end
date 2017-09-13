@@ -1,0 +1,13 @@
+var React = require('react');
+
+function BasicCircle (props) {
+    return React.createElement("svg",props,React.createElement("circle",{"cx":"50","cy":"50","r":"40","stroke":"black","strokeWidth":"3","fill":"red"}));
+}
+
+BasicCircle.displayName = "BasicCircle";
+
+BasicCircle.defaultProps = {"height":"100","width":"100"};
+
+module.exports = BasicCircle;
+
+BasicCircle.default = BasicCircle;
