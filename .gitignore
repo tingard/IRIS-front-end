@@ -6,3 +6,4 @@ dist/client-bundle.js*
 #yarn.lock
 .yarnclean
 *.tgz
+.env

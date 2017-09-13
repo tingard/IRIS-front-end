@@ -1,20 +1,23 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 import gulp from 'gulp';
-import babel from 'gulp-babel';
-import del from 'del';
 import eslint from 'gulp-eslint';
-import webpack from 'webpack-stream';
 import sass from 'gulp-sass';
+import concat from 'gulp-concat';
+import del from 'del';
+import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
 
 
 const paths = {
   allSrcJs: 'src/**/*.js?(x)',
+  clientSrcJs: 'src/client/**/*.js?(x)',
   clientSrcScss: 'src/client/styles/sass/*.scss',
   clientSrcCss: 'src/client/styles/css/',
+  distCssFile: 'dist/styles/',
   serverSrcJs: 'src/server/**/*.js?(x)',
   sharedSrcJs: 'src/shared/**/*.js?(x)',
+  serverEntryPoint: 'src/server/index.js',
   clientEntryPoint: 'src/client/index.jsx',
   clientBundle: 'dist/client-bundle.js?(.map)',
   gulpFile: 'gulpfile.babel.js',
@@ -39,11 +42,12 @@ gulp.task('clean', () => del([
   paths.clientBundle,
 ]));
 
-gulp.task('build', ['lint', 'clean'], () =>
-  gulp.src(paths.allSrcJs)
-    .pipe(babel())
-    .pipe(gulp.dest(paths.libDir)),
-);
+gulp.task('sass-styles', () => {
+  gulp.src(paths.clientSrcScss)
+    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+    .pipe(concat('main.css'))
+    .pipe(gulp.dest(paths.distCssFile));
+});
 
 gulp.task('main', ['lint', 'clean', 'sass-styles'], () =>
   gulp.src(paths.clientEntryPoint)
@@ -51,14 +55,8 @@ gulp.task('main', ['lint', 'clean', 'sass-styles'], () =>
     .pipe(gulp.dest(paths.distDir)),
 );
 
-gulp.task('sass-styles', () => {
-  gulp.src(paths.clientSrcScss)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest(paths.clientSrcCss));
-});
-
 gulp.task('watch', () => {
   gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['main']);
 });
 
-gulp.task('default', ['watch', 'main']);
+gulp.task('default', ['main', 'watch']);
