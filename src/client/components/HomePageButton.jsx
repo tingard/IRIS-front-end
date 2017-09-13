@@ -3,27 +3,18 @@ import React from 'react';
 
 const HomePageButton = () => (
   <svg
-    xmlnsDc="http://purl.org/dc/elements/1.1/"
-    xmlnsCc="http://creativecommons.org/ns#"
-    xmlnsRdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlnsSvg="http://www.w3.org/2000/svg"
     xmlns="http://www.w3.org/2000/svg"
-    xmlnsSodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-    xmlnsInkscape="http://www.inkscape.org/namespaces/inkscape"
     width="34.547028mm"
     height="34.547028mm"
     viewBox="0 0 34.547028 34.547028"
     version="1.1"
     id="svg8"
-    inkscapeVersion="0.92.2 (5c3e80d, 2017-08-06)"
-    sodipodiDocname="homeIcon.svg"
   >
     <defs
       id="defs2"
     >
       <filter
         style={{ colorInterpolationFilters: 'sRGB' }}
-        inkscapeLabel="Drop Shadow"
         id="filter375"
       >
         <feFlood
@@ -124,21 +115,9 @@ const HomePageButton = () => (
           y="69.978592"
         />
         <path
-          sodipodiType="star"
           style={{ fill: '#f24d36', fillOpacity: 1, strokeWidth: 1.04906988 }}
           id="path868"
-          sodipodiSides="3"
-          sodipodiCx="74.675194"
-          sodipodiCy="44.426235"
-          sodipodiR1="62.177929"
-          sodipodiR2="31.088964"
-          sodipodiArg1="0.52359878"
-          sodipodiArg2="1.5707963"
-          inkscapeFlatsided="true"
-          inkscapeRounded="0"
-          inkscapeRandomized="0"
           d="m 128.52286,75.5152 -107.695332,-10e-7 53.847666,-93.266893 z"
-          inkscapeTransform-center-y="-1.4062925"
           transform="matrix(0.65210393,0,0,0.35870824,41.340585,50.793916)"
         />
         <rect
