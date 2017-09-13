@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 
 const initialState = Immutable.List.of(
   {
-    _key: Math.random(), // provided by server when data initially loaded in
+    _key: Math.random(), // to provided by server when data initially loaded in
     imageUrl: 'images/test.jpg',
     from: 'nobody@example.com',
     messageType: 'message',
