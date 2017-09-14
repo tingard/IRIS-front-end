@@ -8,7 +8,14 @@ const MainPage = (props) => {
     card => <ImageCard {...card} key={card.key} />,
   );
   return (
-    <div>{cardList}</div>
+    <div>
+      <div className="main-page-topmessage">
+        <h3>Welcome back!</h3>
+        {/* card filters */}
+        <p>I feel like classifying <code>Tag dropdown</code></p>
+      </div>
+      <div>{cardList}</div>
+    </div>
   );
 };
 

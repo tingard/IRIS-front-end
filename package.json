@@ -26,11 +26,14 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
+    "gulp-env": "^0.4.0",
     "gulp-eslint": "^3.0.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sass": "^3.1.0",
     "husky": "^0.14.3",
     "jest": "^19.0.2",
+    "mongodb-runner": "^3.4.0",
     "react-addons-test-utils": "^15.4.2",
-    "svg-react-loader": "^0.4.5",
     "webpack": "^1.13.3",
     "webpack-stream": "^3.2.0"
   },
@@ -41,18 +44,14 @@
     "express": "^4.14.0",
     "file-loader": "^0.9.0",
     "grapheel-iris-client-api": "^1.0.1",
-    "gulp-env": "^0.4.0",
-    "gulp-nodemon": "^2.2.1",
-    "gulp-sass": "^3.1.0",
     "history": "^4.4.1",
     "immutable": "^3.8.1",
-    "mongodb-runner": "^3.4.0",
-    "node-sass-chokidar": "^0.0.3",
     "prop-types": "^15.5.10",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^4.4.6",
     "react-router": "^3.0.0",
+    "react-svg-loader": "^1.1.1",
     "redux": "^3.6.0"
   },
   "babel": {
@@ -60,6 +59,11 @@
       "latest",
       "react"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   },
   "eslintConfig": {
     "extends": "airbnb",
