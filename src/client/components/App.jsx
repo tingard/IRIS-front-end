@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import Navbar from './Navbar';
 
 const App = props => (
-  <div className="parallax parallax1">
+  <div>
     <Navbar />
-    Hihihihih
     <section className="content-section">
       {props.children}
     </section>

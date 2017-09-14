@@ -76,7 +76,7 @@ gulp.task('start-dev', ['main'], () => {
 
   nodemon({
     script: paths.serverEntryPoint,
-    ext: 'js scss jsx',
+    ext: 'js scss jsx svg',
     watch: ['src'], // this doesn't seem to be working as expected
     tasks: ['main'],
   });

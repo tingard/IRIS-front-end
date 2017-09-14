@@ -1,27 +1,58 @@
 @import 'color-scheme';
+@import 'size-constants';
+
+@mixin color-transition($time) {
+  transition: $time;
+  transition-timing-function: ease-in-out;
+  -webkit-transition: $time;
+  -webkit-transition-timing-function: ease-in-out;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin custom-box-shadow() {
+  box-shadow: 10px 10px 5px #888888;
+}
 
 .grapheel-navbar {
-  height: 100px;
+  height: 60px;
   width: 100%;
   background-color: #fefefe;
-  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.14);
+  margin-bottom: 20px;
+  box-shadow: 0 5px 3px 0 rgba(0,0,0,0.1);
   display: -webkit-flex;
   display: inline-flex;
-  justify-content: space-between;
-  div { // this is going to be a button
+  justify-content: center;
+  @media screen and (max-width: $medium-width) {
+    justify-content: space-between;
+  }
+
+  div a { // this is going to be a button
     padding: 0 10px;
     display: flex;
     align-items: center;
     height: 100%;
-    img {
-      height: 80%;
-      margin: 0 auto;
-      display: block;
-    }
     svg {
       height: 80%;
+      width: 100%;
       margin: 0 auto;
       display: block;
+      .iconCenter, .iconCircle{
+        @include color-transition(200ms);
+      }
+      :hover {
+        .iconCenter {
+          fill: #fff
+        }
+        .iconCircle {
+          fill: #666;
+        }
+      }
     }
   }
 }

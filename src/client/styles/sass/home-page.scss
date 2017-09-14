@@ -1,0 +1,47 @@
+@import 'color-scheme';
+@import 'size-constants';
+
+.grapheel-image-card {
+  background-color: #fff;
+  margin: 10px;
+  float: left;
+  width: 200px;
+  height: 300px;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  @media screen and (max-width: $phone-width) {
+    width: 80%;
+    height: 300px;
+  }
+  .image-card-level {
+    position: absolute;
+    right: 0px;
+    span {
+      float: right;
+      text-align: center;
+      width: 20px;
+      background-color: #ffaaaa;
+    }
+  }
+  .image-card-image-wrapper {
+    flex-grow: 2;
+    padding: 10px;
+    height: 150px;
+    .image-card-image {
+      width: 100%;
+      height: 100%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #fff;
+    }
+  }
+  .image-card-message {
+    padding: 10px;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+}

@@ -6,6 +6,7 @@ const config = require('./config');
 
 const app = express();
 const port = config.PORT;
+const domain = config.domain || '0.0.0.0';
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });
 
-app.listen(port, 'localhost', (err) => {
+app.listen(port, domain, (err) => {
   if (err) {
     console.log(err);
   } else {
