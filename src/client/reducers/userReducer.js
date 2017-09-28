@@ -6,11 +6,12 @@ const initialState = Immutable.Map({
   points: 9001,
   rating: 4.245,
   title: 'Head Squark',
-  levels: {
+  level: {
     physics: 3,
     biology: 1,
     chemistry: 1,
     maths: 2,
+    computerScience: 0,
     other: 0,
   },
 });

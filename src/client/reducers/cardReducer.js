@@ -17,7 +17,7 @@ const initialState = Immutable.List.of(
     owner: 'tingard',
     message: 'What is this a plot of?',
     imageUrl: 'images/test2.png',
-    tag: 'physics',
+    tag: 'computerScience',
     level: 2,
     replyCount: 3,
   },
