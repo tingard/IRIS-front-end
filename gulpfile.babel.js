@@ -26,6 +26,7 @@ const paths = {
   webpackFile: 'webpack.config.babel.js',
   libDir: 'lib',
   distDir: 'dist',
+  reactSelectCSS: 'node_modules/react-select/dist/react-select.css',
 };
 
 gulp.task('lint', () =>
@@ -55,6 +56,8 @@ gulp.task('sass-styles', () => {
   gulp.src(paths.clientSrcScss)
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(concat('main.css'))
+    .pipe(gulp.dest(paths.distCssFile));
+  gulp.src(paths.reactSelectCSS)
     .pipe(gulp.dest(paths.distCssFile));
 });
 

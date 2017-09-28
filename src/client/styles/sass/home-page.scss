@@ -1,20 +1,47 @@
 @import 'color-scheme';
 @import 'size-constants';
 
+@mixin colorBorder($color) {
+  border: 1px solid $color;
+}
+.cardHolder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
 .grapheel-image-card {
   background-color: #fff;
   margin: 10px;
   float: left;
   width: 200px;
   height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
   position: relative;
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  &.physics-card {
+    @include colorBorder(#ffff00);
+  }
+  &.chemistry-card {
+    @include colorBorder(#00f);
+  }
+  &.biology-card {
+    @include colorBorder(#0f0);
+  }
+  &.maths-card {
+    @include colorBorder(#000);
+  }
+  &.computerScience-card {
+    @include colorBorder(#f0f);
+  }
   @media screen and (max-width: $phone-width) {
-    width: 80%;
-    height: 300px;
+    margin-left: auto;
+    width: 100%;
+    height: 400px;
   }
   .image-card-level {
     position: absolute;
@@ -23,7 +50,12 @@
       float: right;
       text-align: center;
       width: 20px;
-      background-color: #ffaaaa;
+      &.user-level-above {
+        background-color: #faa; // red as it's above user level
+      }
+      &.user-level-below {
+        background-color: #afa; // green as it's below user level
+      }
     }
   }
   .image-card-image-wrapper {
