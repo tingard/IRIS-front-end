@@ -5,6 +5,8 @@ import Immutable from 'immutable';
 const initialState = Immutable.List.of(
   {
     key: Math.random(),
+    // rest of this should be provided by the API
+    id: 'KOu8trFE7t',
     owner: 'tingard',
     message: 'Can someone describe this image for me? Can someone describe this image for me? Can someone describe this image for me?',
     imageUrl: 'images/test.jpg',
@@ -14,6 +16,7 @@ const initialState = Immutable.List.of(
   },
   {
     key: Math.random(),
+    id: '21otD8kywA',
     owner: 'tingard',
     message: 'What is this a plot of?',
     imageUrl: 'images/test2.png',
@@ -23,6 +26,7 @@ const initialState = Immutable.List.of(
   },
   {
     key: Math.random(),
+    id: 'NB3UvoVsxm',
     owner: 'tingard',
     message: 'Is this image just random noise?',
     imageUrl: 'images/test4.png',
@@ -32,6 +36,7 @@ const initialState = Immutable.List.of(
   },
   {
     key: Math.random(),
+    id: '3jG3bwGFMF',
     owner: 'tingard',
     message: 'What is this a plot of?',
     imageUrl: 'images/test2.png',
@@ -41,6 +46,7 @@ const initialState = Immutable.List.of(
   },
   {
     key: Math.random(),
+    id: 'sjjEM5Enqc',
     owner: 'tingard',
     message: 'Could someone describe this diagram to me?',
     imageUrl: 'images/test3.png',

@@ -2,8 +2,8 @@ import React from 'react';
 
 import Message from './Message';
 
-const MessagePage = () => (
+const MessagesPageButton = () => (
   <Message text="Hi There" />
 );
 
-export default MessagePage;
+export default MessagesPageButton;
