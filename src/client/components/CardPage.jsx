@@ -1,44 +1,85 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import Select from 'react-select';
 
-const CardPage = (props) => {
-  console.log(props);
-  console.log(props.card != null);
-  return (
-    props.card != null ? (
+const templateResponses = [
+  { value: 'none', label: 'None' },
+  { value: 'graph', label: 'Graph' },
+  { value: 'diagram', label: 'Diagram' },
+  { value: 'image', label: 'Photo' },
+];
+class CardPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      template: 'none',
+    };
+    this.handleTemplateChange = this.handleTemplateChange.bind(this);
+  }
+  handleTemplateChange(val) {
+    console.log(val.value);
+    // update
+    this.setState({ template: val.value });
+  }
+  render() {
+    return this.props.card != null ? (
       <div className="w3-container">
         <div className="w3-row">
-          <div className="w3-col s4">
-            <div className="grapheel-image-card">
-              <div className="image-card-image-wrapper">
+          <div className="w3-col m6">
+            <div className="w3-row">
+              <div className="w3-panel card-page-image-wrapper">
                 <div
-                  className="image-card-image"
-                  style={{ backgroundImage: `url(${props.card.imageUrl})` }}
+                  className="card-page-image"
+                  style={{ backgroundImage: `url(${this.props.card.imageUrl})` }}
                   alt=""
                 />
               </div>
+            </div>
+            <div className="w3-row" style={{ marginBottom: '10px' }}>
+              <h5>Student asked:</h5>
               <div className="image-card-message">
-                {props.card.message.length > 60 ? `${props.card.message.slice(0, 50)}...` : props.card.message}
+                <p>
+                  {this.props.card.message}
+                </p>
               </div>
             </div>
           </div>
-          <div className="w3-col s8">
-            <p>{props.match.params.cardId}</p>
-            <p>{props.card.id}</p>
+          <div className="w3-col m6">
+            <div className="w3-card-4">
+              <div className="w3-container card-panel-right-pane">
+                <h3>Reply:</h3>
+                <p>Templates:</p>
+                <Select
+                  name="template-chooser-dropdown"
+                  value={this.state.template}
+                  onChange={this.handleTemplateChange}
+                  options={templateResponses}
+                />
+                <div
+                  ref={(r) => { this.responseDiv = r; }}
+                  className="card-panel-response-holder"
+                  contentEditable
+                />
+                <button
+                  className="submit-reply-button w3-button w3-border w3-round w3-right"
+                >
+                  Send Reply
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     ) : (
       <Redirect to="/" />
-    )
-  );
-};
-
+    );
+  }
+}
 
 CardPage.propTypes = {
-  match: PropTypes.object,
   // user: PropTypes.object,
   card: PropTypes.object,
 };
+
 export default CardPage;
