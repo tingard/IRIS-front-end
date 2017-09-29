@@ -2,8 +2,9 @@
 @import 'size-constants';
 
 @mixin colorBorder($color) {
-  border: 1px solid $color;
+  border-color: $color;
 }
+
 .cardHolder {
   display: flex;
   flex-wrap: wrap;
@@ -23,6 +24,11 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  @media (hover: hover) {
+    a &:hover {
+      border-width: 3px;
+    }
+  }
   &.physics-card {
     @include colorBorder(#ffff00);
   }
@@ -50,11 +56,12 @@
       float: right;
       text-align: center;
       width: 20px;
+      border-radius: 2px;
       &.user-level-above {
-        background-color: #faa; // red as it's above user level
+        background-color: #afa; // green as user level is high enough
       }
       &.user-level-below {
-        background-color: #afa; // green as it's below user level
+        background-color: #faa; // red as it's above user's chosen level
       }
     }
   }

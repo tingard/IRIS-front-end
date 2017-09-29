@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
@@ -5,12 +6,12 @@ import Select from 'react-select';
 import ImageCard from './ImageCard';
 
 const subjectOptions = [
-  { value: 'any', label: 'Any image' },
-  { value: 'physics', label: 'Physics images' },
-  { value: 'biology', label: 'Biology images' },
-  { value: 'chemistry', label: 'Chemistry images' },
-  { value: 'maths', label: 'Maths images' },
-  { value: 'computerScience', label: 'Computer Science images' },
+  { value: 'any', label: 'Any students' },
+  { value: 'physics', label: 'Physics students' },
+  { value: 'biology', label: 'Biology students' },
+  { value: 'chemistry', label: 'Chemistry students' },
+  { value: 'maths', label: 'Maths students' },
+  { value: 'computerScience', label: 'Computer Science students' },
 ];
 
 const levelOptions = [
@@ -37,7 +38,13 @@ class MainPage extends React.Component {
     this.setState({ selectedSubject: val.value });
   }
   render() {
-    const cardList = this.props.cards.filter(
+    const cardListGood = this.props.cards.filter(
+      card => this.props.user.level[card.tag] >= card.level,
+    );
+    const cardListBad = this.props.cards.filter(
+      card => this.props.user.level[card.tag] < card.level,
+    );
+    const cardList = cardListGood.concat(cardListBad).filter(
       card => (
         this.state.selectedSubject === 'any' || card.tag === this.state.selectedSubject
       ) && (
@@ -51,7 +58,7 @@ class MainPage extends React.Component {
         <div className="main-page-topmessage">
           <h3>Welcome back!</h3>
           <label htmlFor="subject-filter-dropdown">
-            <p>I feel like classifying</p>
+            <p>I feel like helping</p>
             <Select
               name="subject-filter-dropdown"
               value={this.state.selectedSubject}
@@ -60,7 +67,7 @@ class MainPage extends React.Component {
             />
           </label>
           <label htmlFor="level-filter-dropdown">
-            <p>at</p>
+            <p>at (or below)</p>
             <Select
               name="level-filter-dropdown"
               value={this.state.selectedLevel}
@@ -69,7 +76,9 @@ class MainPage extends React.Component {
             />
           </label>
         </div>
-        <div className="cardHolder">{cardList}</div>
+        <div className="cardHolder">
+          {cardList.length > 0 ? cardList : (<h4>Looks like there we're all good here!</h4>)}
+        </div>
       </div>
     );
   }

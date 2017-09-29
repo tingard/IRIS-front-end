@@ -46,7 +46,15 @@ gulp.task('clean', () => del([
   paths.distCssFile,
 ]));
 
-gulp.task('main', ['lint', 'clean', 'sass-styles'], () =>
+gulp.task('main', ['compile', 'lint']);
+
+// Doing it this way ensures 'clean' runs before 'compile', otherwise it's async
+gulp.task('compile', ['clean'], () => {
+  gulp.start('webpack');
+  gulp.start('sass-styles');
+});
+
+gulp.task('webpack', () =>
   gulp.src(paths.clientEntryPoint)
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest(paths.distDir)),
@@ -61,7 +69,7 @@ gulp.task('sass-styles', () => {
     .pipe(gulp.dest(paths.distCssFile));
 });
 
-gulp.task('watch', () => {
+gulp.task('watch', ['main'], () => {
   gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['main']);
 });
 
@@ -85,4 +93,4 @@ gulp.task('start-dev', ['main'], () => {
   });
 });
 
-gulp.task('default', ['watch', 'main']);
+gulp.task('default', ['main']);

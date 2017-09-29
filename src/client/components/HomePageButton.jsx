@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import HomeIcon from '../svg/home-icon.svg';
 
-const HomePageButton = () => <Link to="/"><HomeIcon /></Link>;
+const HomePageButton = () => <NavLink to="/"><HomeIcon /></NavLink>;
 export default HomePageButton;
