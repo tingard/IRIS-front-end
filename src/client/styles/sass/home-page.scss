@@ -45,8 +45,7 @@
     @include colorBorder(#f0f);
   }
   @media screen and (max-width: $phone-width) {
-    margin-left: auto;
-    width: 100%;
+    width: 300px;
     height: 400px;
   }
   .image-card-level {

@@ -5,21 +5,23 @@ import Select from 'react-select';
 
 import ImageCard from './ImageCard';
 
-const subjectOptions = [
-  { value: 'any', label: 'Any students' },
-  { value: 'physics', label: 'Physics students' },
-  { value: 'biology', label: 'Biology students' },
-  { value: 'chemistry', label: 'Chemistry students' },
-  { value: 'maths', label: 'Maths students' },
-  { value: 'computerScience', label: 'Computer Science students' },
-];
-
-const levelOptions = [
-  { value: '4', label: 'Any level' },
-  { value: '1', label: 'GCSE level' },
-  { value: '2', label: 'A-level' },
-  { value: '3', label: 'Degree level' },
-];
+// TODO: query API for this?
+const filters = {
+  subject: [
+    { value: 'any', label: 'Any students' },
+    { value: 'physics', label: 'Physics students' },
+    { value: 'biology', label: 'Biology students' },
+    { value: 'chemistry', label: 'Chemistry students' },
+    { value: 'maths', label: 'Maths students' },
+    { value: 'computerScience', label: 'Computer Science students' },
+  ],
+  level: [
+    { value: '4', label: 'Any level' },
+    { value: '1', label: 'GCSE level' },
+    { value: '2', label: 'A-level' },
+    { value: '3', label: 'Degree level' },
+  ],
+};
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -63,7 +65,7 @@ class MainPage extends React.Component {
               name="subject-filter-dropdown"
               value={this.state.selectedSubject}
               onChange={this.handleSubjectChange}
-              options={subjectOptions}
+              options={filters.subject}
             />
           </label>
           <label htmlFor="level-filter-dropdown">
@@ -72,7 +74,7 @@ class MainPage extends React.Component {
               name="level-filter-dropdown"
               value={this.state.selectedLevel}
               onChange={this.handleLevelChange}
-              options={levelOptions}
+              options={filters.level}
             />
           </label>
         </div>
