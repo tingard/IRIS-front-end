@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 
 import ImageCard from './ImageCard';
+// import AlertHolder from './AlertHolder';
 
 // TODO: query API for this?
 const filters = {
@@ -58,7 +59,7 @@ class MainPage extends React.Component {
     return (
       <div>
         <div className="main-page-topmessage">
-          <h3>Welcome back!</h3>
+          {/* TODO: alert holder here, tie visibility to state and pass function to hide */}
           <label htmlFor="subject-filter-dropdown">
             <p>I feel like helping</p>
             <Select
