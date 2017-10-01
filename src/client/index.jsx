@@ -6,7 +6,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import mainPage from './containers/mainPage';
 import Navbar from './components/Navbar';
-import MessagePage from './components/MessagePage';
+import MessagesPage from './containers/messagesPage';
 import ProfilePage from './components/ProfilePage';
 import CardPage from './containers/cardPage';
 
@@ -22,7 +22,6 @@ const store = createStore(
   }),
 );
 
-console.log(HashRouter);
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
@@ -32,7 +31,7 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={mainPage} />
             <Route path="/profile" component={ProfilePage} />
-            <Route path="/messages" component={MessagePage} />
+            <Route path="/messages/:messageID?" component={MessagesPage} />
             <Route path="/cards/:cardId" component={CardPage} />
           </Switch>
         </section>

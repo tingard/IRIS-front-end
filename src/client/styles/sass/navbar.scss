@@ -37,6 +37,13 @@
     display: flex;
     align-items: center;
     height: 100%;
+    &[aria-current=true] {
+      svg {
+        .iconCircle {
+          fill: #eee;
+        }
+      }
+    }
     svg {
       height: 80%;
       width: 100%;

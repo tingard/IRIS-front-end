@@ -18,7 +18,6 @@ const domain = config.domain || '0.0.0.0';
 app.use(express.static(path.join(__dirname, '../../dist')));
 
 app.get('/', (req, res) => {
-  console.log('hi');
   app.use(express.static(path.join(__dirname, '../../dist')));
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });

@@ -18,8 +18,6 @@ class CardPage extends React.Component {
     this.handleTemplateChange = this.handleTemplateChange.bind(this);
   }
   handleTemplateChange(val) {
-    console.log(val.value);
-    // update
     this.setState({ template: val.value });
   }
   render() {
