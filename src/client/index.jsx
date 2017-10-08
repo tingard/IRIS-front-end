@@ -35,7 +35,6 @@ ReactDOM.render(
             <Route path="/cards/:cardId" component={CardPage} />
           </Switch>
         </section>
-        <section id="spacer" style={{ height: '60px' }} />
       </div>
     </HashRouter>
   </Provider>
