@@ -27,12 +27,12 @@ class MessagesPage extends React.Component {
           <MediaQuery minWidth={601}>
             {/* That's not been scaled down*/}
             <div className="w3-col m4 message-page-navigation">
-              {this.props.messages.map(m => <MessagePreview key={m.key} {...m} />)}
+              {this.props.messages.map(m => <MessagePreview key={m.id} {...m} />)}
             </div>
           </MediaQuery>
           :
           <div className="w3-col m4 message-page-navigation">
-            {this.props.messages.map(m => <MessagePreview key={m.key} {...m} />)}
+            {this.props.messages.map(m => <MessagePreview key={m.id} {...m} />)}
           </div>
         }
         {/* Load the content panel only if the screen is big
