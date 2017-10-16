@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 import gulp from 'gulp';
+import lec from 'gulp-line-ending-corrector';
 import eslint from 'gulp-eslint';
 import nodemon from 'gulp-nodemon';
 import env from 'gulp-env';
@@ -35,6 +36,7 @@ gulp.task('lint', () =>
     paths.gulpFile,
     paths.webpackFile,
   ])
+    .pipe(lec())
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError()),
