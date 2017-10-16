@@ -70,7 +70,9 @@ Each component should have a `<comp>.spec.jsx` test file, we use Jest to test, b
  - be explicit with descriptions of what the test does
  - try to be fairly thorough, what could break the component?
 
-To run tests, simply use `yarn test`
+To run tests, first make sure jest-cli is installed:
+`npm install jest-cli --save` 
+then simply use `yarn test`
 
 
 ## Structure of IRIS
