@@ -44,6 +44,7 @@
     "express": "^4.14.0",
     "file-loader": "^0.9.0",
     "grapheel-iris-client-api": "^1.0.1",
+    "gulp-line-ending-corrector": "^1.0.1",
     "history": "^4.7.2",
     "immutable": "^3.8.1",
     "prop-types": "^15.5.10",
