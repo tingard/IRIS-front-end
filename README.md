@@ -23,6 +23,8 @@ installable via nvm or any other node version manager.
     curl -o- -L https://yarnpkg.com/install.sh | bash
     ```
 
+    Windows users can install [here](https://yarnpkg.com/latest.msi).
+
     Use yarn, it's better than npm :wink:
 
     Also, good luck installing the dependencies without it :wink:
