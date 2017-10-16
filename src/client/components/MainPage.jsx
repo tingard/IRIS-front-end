@@ -80,7 +80,7 @@ class MainPage extends React.Component {
           </label>
         </div>
         <div className="cardHolder">
-          {cardList.length > 0 ? cardList : (<h4>Looks like there we're all good here!</h4>)}
+          {cardList.length > 0 ? cardList : (<h4>Looks like there we re all good here!</h4>)}
         </div>
       </div>
     );
