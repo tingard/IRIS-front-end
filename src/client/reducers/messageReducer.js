@@ -10,16 +10,15 @@ const initialState = Immutable.List.of(
     messageChain: [
       {
         fromMe: true, // 1 if volunteer sent it, else 0
-        date: '2016-12-4 18:13:59',
+        date: Date.now() - (3600000 * 3),
         message: 'It\'s a white square...?',
       },
       {
         fromMe: false,
-        date: '2016-12-6 22:33:12',
+        date: Date.now() - 3600000,
         message: 'Thanks for the quick reply! Could you clear up what you meant by "it\'s a white square"?',
       },
     ],
-    date: '2016-12-6 22:33:12',
   },
   {
     _key: Math.random(),
@@ -29,22 +28,22 @@ const initialState = Immutable.List.of(
     messageChain: [
       {
         fromMe: true,
-        date: '2016-12-1 22:33:12',
+        date: Date.now() - (60000 * 25),
         message: 'Insert Response Here.',
       },
       {
         fromMe: false,
-        date: '2016-12-8 22:33:12',
+        date: Date.now() - (60000 * 23),
         message: 'So It looks like you just replied with the template response?',
       },
       {
         fromMe: true,
-        date: '2016-12-8 23:32:03',
+        date: Date.now() - (60000 * 18),
         message: 'Ah sorry. So I did!',
       },
       {
         fromMe: false,
-        date: '2016-12-8 22:33:12',
+        date: Date.now() - (100),
         message: 'Okay, could you describe the image properly?',
       },
     ],
