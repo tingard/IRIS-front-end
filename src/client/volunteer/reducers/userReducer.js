@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
   uname: 'Ka1-el',
-  email: 'kal@elmail.co.kry',
+  email: 'kal@elmail.krypton',
   points: 9001,
   rating: 4.245,
   title: 'Head Squark',
@@ -14,6 +14,7 @@ const initialState = Immutable.Map({
     computerScience: 0,
     other: 0,
   },
+  bio: 'I\'m an Astrophysics PhD student at the institute of cosmology and gravitation in Portsmouth',
 });
 
 const userReducer = (state = initialState, action) => {
