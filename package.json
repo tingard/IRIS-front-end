@@ -7,9 +7,10 @@
   "license": "MIT",
   "scripts": {
     "start-dev": "gulp start-dev",
-    "start": "gulp compile && node src/server",
+    "start": "node src/server",
     "test": "gulp lint && jest",
-    "precommit": "gulp lint && jest"
+    "precommit": "gulp lint && jest",
+    "prestart": "gulp compile"
   },
   "devDependencies": {
     "assert": "^1.4.1",
@@ -26,7 +27,6 @@
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "jest-cli": "^21.2.1",
-    "mongodb-runner": "^3.4.0",
     "react-addons-test-utils": "^15.4.2",
     "webpack": "^1.13.3",
     "webpack-stream": "^3.2.0"
