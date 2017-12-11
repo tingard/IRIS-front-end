@@ -1,12 +1,13 @@
 language: node_js
-node_js: "6"
-
+node_js: '6'
 script:
-  - yarn test
-
+- yarn test
 notifications:
   email:
     on_success: never
     on_failure: never
     on_pull_requests: false
-  slack: 'grapheel:StZjU1wi6TtaZFkYyGaOBc4m'
+  slack: grapheel:StZjU1wi6TtaZFkYyGaOBc4m
+deploy:
+  api_key:
+    secure: d3MZaaDmZ1ii2bUbUWCQDxNsoaeg5o/4oLKwcdl2QqAsJuUWFNuGm0lpj1pbXs2FjL6w7eD8UqxUvJJ8aeUGn8bXg4yXUKl2ahGxjwGYR4NoPyiNmYNOsN/RGXQsjhPyiaD846FLhpCsu6Xfl+jJsafQ0NVNu23+GfioIhBO4ITT2uotl7kMx6O9f82RSvNOSqGYYFboMY8ts43n1cYFNRbiI6O2R+VYymD/8sddt77Btmyn4cbuRf4FmDkrA4uWFeywbVSt9Nt8Mo/iZFsZ7t88dBi3oVzvLfjefVdkqBzsjKeY5eBB/ULAnVvnptxGE3/TpTJFUjyRtuFvmqD0Du4EmfsENLtYSDs/3fgO3Mp3w7jeaRYf7jb68v81vHQ5su8j2s2WN/nXU7aKl+Lhen/2sJR/uTcbovhWfwT7oIP8uLLg/aMpWnXQ4M1UkX9znEj7nZ+WD8LG/ogI+K1hAL9FPpZiI1bE21QP6InsyZi8V11AY5vvZWePD8JW4I2mOxk0VWBdpEjcnOSAGYwf9F4ODGEAbzPXdmXdjRDZcX4prof9kEQwQHeOkgI7eQ2xzYNt5zUDgvMRqq5b1MYYQo0RUFD2HGk/bA0Zg7yRxpQjwH8b0dRH/wU9ybaTdqnpG8mUX0oQ/fSmax99buaIrOe1YqUEd4LXNnA8idqe2wU=
