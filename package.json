@@ -7,10 +7,11 @@
   "license": "MIT",
   "scripts": {
     "start-dev": "gulp start-dev",
+    "prestart": "gulp compile",
     "compile": "gulp compile",
     "start": "node src/server",
     "test": "gulp lint && jest",
-    "precommit": "gulp lint && jest && gulp compile"
+    "precommit": "gulp lint && jest"
   },
   "devDependencies": {
     "assert": "^1.4.1",
