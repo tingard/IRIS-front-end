@@ -6,6 +6,7 @@ if (typeof process.env.PORT === 'undefined') {
 }
 module.exports = {
   PORT: process.env.PORT || 5000,
+  HOST: process.env.HOST || '0.0.0.0',
   stripe: {
     publicKey: process.env.STRIPE_PUBLIC,
   },

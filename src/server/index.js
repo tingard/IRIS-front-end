@@ -6,8 +6,7 @@ const config = require('./config');
 
 const app = express();
 const port = config.PORT;
-const domain = config.domain || '0.0.0.0';
-
+const domain = config.HOST;
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 // Main Website
@@ -26,6 +25,6 @@ app.listen(port, domain, (err) => {
   if (err) {
     console.log(err);
   } else {
-    console.info('==> 🌎 Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port);
+    console.info(`==> 🌎 Listening on port ${port}. Open up http://${domain}:${port}/ in your browser.`);
   }
 });
