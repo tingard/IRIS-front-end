@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start-dev": "gulp start-dev",
-    "start": "node src/server",
+    "start": "gulp compile && node src/server",
     "test": "gulp lint && jest",
     "precommit": "gulp lint && jest"
   },
@@ -48,6 +48,7 @@
     "gulp-line-ending-corrector": "^1.0.1",
     "history": "^4.7.2",
     "immutable": "^3.8.1",
+    "moment": "^2.19.3",
     "prop-types": "^15.5.10",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",

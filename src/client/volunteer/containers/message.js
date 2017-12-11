@@ -10,4 +10,6 @@ const mapStateToProps = (state, ownProps) => {
   return r;
 };
 
+// TODO: mapDispatchToProps
+
 export default connect(mapStateToProps)(Message);

@@ -15,8 +15,8 @@ import webpackConfig from './webpack.config.babel';
 const paths = {
   allSrcJs: './src/**/*.js?(x)',
   clientSrcJs: 'src/client/**/*.js?(x)',
-  clientSrcScss: 'src/client/styles/sass/*.scss',
-  clientSrcCss: 'src/client/styles/css/',
+  clientSrcScss: 'src/client/*/styles/sass/*.scss',
+  clientSrcCss: 'src/client/*/styles/css/',
   distCssFile: 'dist/styles/',
   serverSrcJs: 'src/server/**/*.js?(x)',
   sharedSrcJs: 'src/shared/**/*.js?(x)',
@@ -48,9 +48,9 @@ gulp.task('clean', () => del([
   paths.distCssFile,
 ]));
 
-gulp.task('main', ['compile', 'lint']);
+gulp.task('main', ['lint', 'compile']); // TODO: lint failing on error won't matter as this is async?
 
-// Doing it this way ensures 'clean' runs before 'compile', otherwise it's async
+// Doing it this way ensures (maybe) 'clean' runs before 'compile', otherwise it's async
 gulp.task('compile', ['clean'], () => {
   gulp.start('webpack');
   gulp.start('sass-styles');
