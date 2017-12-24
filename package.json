@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start-dev": "gulp start-dev",
-    "postinstall": "gulp",
+    "postinstall": "gulp compile",
     "compile": "gulp",
     "lint": "gulp lint",
     "start": "node src/server",
