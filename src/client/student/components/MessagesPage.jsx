@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import Message from './Message';
 
 const MessagesPage = props => (
-  <div className="w3-container w3-animate-opacity">
-    <h1>Your Messages:</h1>
-    {
-      props.messages.map(m => <Message key={m.id} {...m} />)
-    }
-  </div>
+  <main role="region" aria-labelledby="messages-header" className="w3-container w3-animate-opacity">
+    <h1 id="messages-header">Your Messages:</h1>
+    <ul style={{ listStyle: 'none', paddingLeft: 0 }} aria-label="Messages list" role="grid">
+      {
+        props.messages.map(m => <li key={m.id} role="row"><Message {...m} /></li>)
+      }
+    </ul>
+  </main>
 );
 
 MessagesPage.propTypes = {
