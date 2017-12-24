@@ -13,7 +13,7 @@ const initialState = Immutable.List.of(
   },
   {
     id: '19i3O3a09h',
-    note: 'no idea',
+    note: 'hype vs time',
     question: 'Could you tell me what this is an image of?',
     url: 'images/test2.jpg',
     replyChains: [

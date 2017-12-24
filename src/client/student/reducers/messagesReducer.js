@@ -52,6 +52,22 @@ const initialState = Immutable.List.of(
       },
     ],
   },
+  {
+    _key: Math.random(),
+    type: 'message',
+    id: 'o1nwANDN3F',
+    imageID: '19i3O3a09h',
+    imageUrl: 'images/test3.jpg',
+    imageNote: 'topology image',
+    from: 'keenStudent',
+    messageChain: [
+      {
+        fromMe: false,
+        date: Date.now() - (1000 * 60 * 23),
+        message: 'This is a graph of "Hype" vs time, and the graph shows that hype increases exponentially',
+      },
+    ],
+  },
 );
 
 const messageReducer = (state = initialState, action) => {

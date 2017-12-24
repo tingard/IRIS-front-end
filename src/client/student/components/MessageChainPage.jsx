@@ -12,7 +12,6 @@ class MessageChainPage extends Component {
       const m = this.props.messageChain[this.props.messageChain.length - 1];
       return (
         <div className="w3-container">
-          <h1>Your messages:</h1>
           <div className="w3-card-4 w3-panel">
             <p>
               <span>For the Image you uploaded tagged: <em>{`"${this.props.imageNote}"`}</em>, </span>
@@ -69,6 +68,7 @@ class MessageChainPage extends Component {
         </div>
       );
     }
+    console.log(this.props);
     return <Redirect to="/messages" />;
   }
 }

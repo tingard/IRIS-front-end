@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// TODO: replace with actual API
-// const api = {
-//   imageUploadAction: '/',
-//   imageUploadMethod: 'post',
-// };
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -25,7 +20,7 @@ class HomePage extends React.Component {
     } else if (data.note.length === 0) {
       alert('Please specify a note so you can find this image later');
     } else {
-      // send the request?
+      // send the request
     }
     console.log(data);
     return false;
@@ -70,6 +65,8 @@ class HomePage extends React.Component {
               ref={(r) => { this.inputs.noteInput = r; }}
               className="w3-input w3-border"
             />
+            <p>Input difficulty placeholder</p>
+            <p>Input subject tag placeholder</p>
             <button
               className="w3-button w3-green w3-panel"
               ref={(r) => { this.submitBtn = r; }}

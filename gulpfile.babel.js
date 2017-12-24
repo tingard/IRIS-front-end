@@ -30,6 +30,11 @@ const paths = {
   reactSelectCSS: 'node_modules/react-select/dist/react-select.css',
 };
 
+gulp.task('default', ['lint', 'clean'], () => {
+  gulp.start('webpack');
+  gulp.start('sass-styles');
+});
+
 gulp.task('lint', () =>
   gulp.src([
     paths.allSrcJs,
@@ -48,14 +53,6 @@ gulp.task('clean', () => del([
   paths.distCssFile,
 ]));
 
-gulp.task('main', ['lint', 'compile']); // TODO: lint failing on error won't matter as this is async?
-
-// Doing it this way ensures (maybe) 'clean' runs before 'compile', otherwise it's async
-gulp.task('compile', ['clean'], () => {
-  gulp.start('webpack');
-  gulp.start('sass-styles');
-});
-
 gulp.task('webpack', () =>
   gulp.src(paths.clientEntryPoint)
     .pipe(webpack(webpackConfig))
@@ -71,11 +68,11 @@ gulp.task('sass-styles', () => {
     .pipe(gulp.dest(paths.distCssFile));
 });
 
-gulp.task('watch', ['main'], () => {
-  gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['main']);
+gulp.task('watch', ['default'], () => {
+  gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['default']);
 });
 
-gulp.task('start-dev', ['main'], () => {
+gulp.task('start-dev', ['default'], () => {
   env({
     file: '.env',
     type: 'ini',
@@ -91,8 +88,6 @@ gulp.task('start-dev', ['main'], () => {
     script: paths.serverEntryPoint,
     ext: 'js scss jsx svg',
     watch: ['src'], // this doesn't seem to be working as expected
-    tasks: ['main'],
+    tasks: ['default'],
   });
 });
-
-gulp.task('default', ['main']);
