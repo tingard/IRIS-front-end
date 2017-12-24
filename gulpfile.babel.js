@@ -47,6 +47,11 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError()),
 );
 
+gulp.task('compile', ['clean'], () => {
+  gulp.start('webpack');
+  gulp.start('sass-styles');
+});
+
 gulp.task('clean', () => del([
   paths.libDir,
   paths.clientBundle,
