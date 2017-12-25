@@ -10,16 +10,16 @@ const ImagesPage = props => (
       You currently have {props.images.length} images on IRIS
     </section>
     <section>
-      <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+      <ul style={{ listStyle: 'none', paddingLeft: 0 }} aria-label="List of images on IRIS" role="grid">
         {props.images.sort((i, j) => (i.uploadDate < j.uploadDate)).map(im => (
-          <li key={`${im.id}`}>
-            <div className="w3-panel w3-card-4">
+          <li key={`${im.id}`} role="row">
+            <div className="w3-panel w3-card-4" role="gridcell">
               <p>
                 Image with note: <em>{`"${im.note}"`}</em>,
                 uploaded {moment(im.uploadDate).fromNow()},
                 has {im.replyChains.length} {im.replyChains.length > 1 ? 'replies' : 'reply'}
               </p>
-              <div className="w3-btn-bar" role="group">
+              <div className="w3-btn-bar" role="group" aria-label="action buttons">
                 Actions:
                 <Link to={`/images/messages/${im.id}`} className="w3-button">
                   See replies

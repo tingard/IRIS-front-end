@@ -14,7 +14,7 @@ class MessageChainPage extends Component {
         <div className="w3-container">
           <div className="w3-card-4 w3-panel">
             <p>
-              <span>For the Image you uploaded tagged: <em>{`"${this.props.imageNote}"`}</em>, </span>
+              <span>For your image tagged: <em>{`"${this.props.imageNote}"`}</em>, </span>
               <span>most recent message {moment(m.date).fromNow()}:</span>
             </p>
             {

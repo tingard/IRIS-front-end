@@ -9,7 +9,7 @@ const MainPage = (props) => {
     <div role="gridcell" aria-live="polite" className="w3-card-4 w3-panel">
       <div role="group">
         <p>
-          For the Image you uploaded tagged:
+          For your image tagged:
           <em>{` "${props.imageNote}"`}</em>,
         </p>
         <p>
