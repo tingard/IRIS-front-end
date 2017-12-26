@@ -72,9 +72,6 @@ const initialState = Immutable.List.of(
 
 const messageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'reply-image':
-      console.log('you have replied to an image!!');
-      return state;
     default:
       return state;
   }
