@@ -7,38 +7,76 @@ import { Link, Redirect } from 'react-router-dom';
 const capitalize = s => `${s.charAt(0).toUpperCase()}${s.slice(1)}`;
 
 class MessageChainPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messageOrder: 'newest',
+    };
+    this.setOrder = this.setOrder.bind(this);
+  }
+  setOrder() {
+    // TODO: should this be reflected in redux?
+    this.setState({ messageOrder: this.messageOrderSelector.value });
+  }
   render() {
+    const sortFunction = this.state.messageOrder === 'newest' ? (
+      (m1, m2) => m2.date - m1.date
+    ) : (
+      (m1, m2) => m1.date - m2.date
+    );
+    const sortedMessages = this.props.messageChain.sort(sortFunction);
     if (typeof this.props.id !== 'undefined') {
       const m = this.props.messageChain[this.props.messageChain.length - 1];
       return (
         <div className="w3-container">
           <div className="w3-card-4 w3-panel">
-            <p>
-              <span>For your image tagged: <em>{`"${this.props.imageNote}"`}</em>, </span>
-              <span>most recent message {moment(m.date).fromNow()}:</span>
-            </p>
-            {
-              this.props.messageChain.reverse().map((msg, i) => (
-                <p key={`${this.props.id}-${i}`}>
-                  <span className="message-deltaT">
-                    {capitalize(moment(msg.date).fromNow())}
-                  </span>
-                  <span className="message-from-who">
-                    {msg.fromMe ? ' you said: ' : ' they said: '}
-                  </span>
-                  <span className="message-content">
-                    {msg.message}
-                  </span>
-                </p>
-              ))
-            }
+            <h2>For your image tagged:</h2>
+            <p><em>{`"${this.props.imageNote}"`}</em>, most recent message {moment(m.date).fromNow()}:</p>
+            <div className="w3-margin" role="group">
+              <label htmlFor="message-order-selector" id="message-order-selector-label">
+                Change message order
+              </label>
+              <select
+                aria-labelledby="message-order-selector-label"
+                className="w3-select"
+                name="message-order-selector"
+                onChange={this.setOrder}
+                ref={(r) => { this.messageOrderSelector = r; }}
+              >
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+              </select>
+            </div>
+            <ul
+              role="list"
+              aria-label={`Messages ordered by ${this.state.messageOrder} first`}
+              style={{ listStyle: 'none', paddingLeft: 0 }}
+            >
+              {
+                sortedMessages.map((msg, i) => (
+                  <li key={`${this.props.id}-${i}`} role="listitem">
+                    <p>
+                      <span className="message-dt">
+                        {capitalize(moment(msg.date).fromNow())}
+                      </span>
+                      <span className="message-from-who">
+                        {msg.fromMe ? ' you said: ' : ' they said: '}
+                      </span>
+                      <span className="message-content">
+                        {msg.message}
+                      </span>
+                    </p>
+                  </li>
+                ))
+              }
+            </ul>
             <div className="w3-row w3-padding-16">
               <div className="w3-col s12">
-                <p>
+                <h3>
                   <label htmlFor="questionInput">
                     Send a message:
                   </label>
-                </p>
+                </h3>
                 <p>
                   <input
                     type="text"
@@ -68,7 +106,6 @@ class MessageChainPage extends Component {
         </div>
       );
     }
-    console.log(this.props);
     return <Redirect to="/messages" />;
   }
 }

@@ -8,17 +8,13 @@ const mapStateToProps = (state, ownProps) => {
   const image = state.images.toArray().filter(
     i => i.id === m.imageID,
   );
-  let r;
   if (m.length) {
-    r = Object.assign(
+    return Object.assign(
       { user: state.user.toObject(), image },
       m[0],
     );
-  } else {
-    r = { user: state.user.toObject() };
   }
-  console.log('messageChainPage', r);
-  return r;
+  return { user: state.user.toObject() };
 };
 
 export default connect(mapStateToProps)(MessageChainPage);

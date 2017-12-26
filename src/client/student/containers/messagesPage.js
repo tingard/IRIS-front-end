@@ -11,7 +11,12 @@ const mapStateToProps = (state, ownProps) => {
     messages = state.messages.toArray();
   }
   const r = ({
-    messages,
+    messages: messages.sort(
+      (m1, m2) => (
+        m2.messageChain[m2.messageChain.length - 1].date -
+        m1.messageChain[m1.messageChain.length - 1].date
+      ),
+    ),
     user: state.user.toObject(),
   });
   return r;
