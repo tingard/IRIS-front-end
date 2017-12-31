@@ -5,7 +5,7 @@ const initialState = Immutable.Map({
   email: 'kal@elmail.krypton',
   images: 9001,
   rating: 4.245,
-  bio: 'I\'m not actually BVI, just like talking to people',
+  bio: 'I\'m not actually V.I., just like talking to people',
 });
 
 const userReducer = (state = initialState, action) => {

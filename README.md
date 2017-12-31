@@ -1,8 +1,7 @@
 # IRIS
 
 ## Notes on Git
-While we believe case sensitive file names have been eliminated, it may
-be prudent for OS X users to tell git to ignore cases:
+While we believe case sensitive file names have been eliminated, it may be needed for OS X users to tell git to ignore cases:
 
 ``` bash
 git config core.ignorecase true
@@ -15,9 +14,7 @@ installable via nvm or any other node version manager.
 
 * yarn
 
-    Yarn is a very new package manager which is considered by many to be
-    faster and more secure than npm. Running the installation script is
-    the easiest way to add it to your system:
+	Yarn is a package manager which is considered by many to be faster and more secure than npm. Running the installation script is the easiest way to add it to your system:
 
     ```bash
     curl -o- -L https://yarnpkg.com/install.sh | bash
@@ -25,41 +22,22 @@ installable via nvm or any other node version manager.
 
     Windows users can install [here](https://yarnpkg.com/latest.msi).
 
-    Use yarn, it's better than npm :wink:
-
-    Also, good luck installing the dependencies without it :wink:
-
-* postman
-
-    Postman is a tool designed to aid in API development. Allows us to
-    create test users for the IRIS service. Installation is simple,
-    follow the [link](http://www.getpostman.com) and select the correct
-    OS
 
 ## Building
 
 
 Navigate to your IRIS directory, then `yarn install` will install dependencies
 
-`yarn start` will then build the website, accessible through http://localhost:3000/
+The best way to get started is to run `yarn start-dev`, which will start a server using nodemon to watch for file changes and perform linting and compiling automagically.
 
-`yarn runserver` will then start a mongodb database and the server
-
-Having two commands is  a pain but I cba doing it nicely in webpack for the time being, and don't want yet more requirements.
+Other running options can be used, check `package.json` for the list.
 
 ### Linting
-IRIS uses ESLint to help enforce a slightly modified AirBNB coding style,
-described in the eslintConfig section of the package.json file. Whenever
-you run `yarn start` or `yarn test`, linting will happen and you may see
-some errors or warnings to correct. You should also be able to tell your
-editor to point to the correct linting file if you want it all in one
-place.
+
+IRIS uses ESLint to help enforce a slightly modified AirBNB coding style, described in the eslintConfig section of the package.json file. Whenever you run `yarn start` or `yarn test`, linting will happen and you may see some errors or warnings to correct. You should also be able to tell your editor to point to the correct linting file if you want it all in one place.
 
 It is also possible to start linting from the lint script in
 gulpfile.babel.js.
-
-yarn tests are run without compiling, therefore it will run without compiling
-
 
 
 ### Tests
@@ -70,14 +48,13 @@ Each component should have a `<comp>.spec.jsx` test file, we use Jest to test, b
  - be explicit with descriptions of what the test does
  - try to be fairly thorough, what could break the component?
 
-To run tests, first make sure jest-cli is installed:
-`npm install jest-cli --save` 
-then simply use `yarn test`
+To run all tests use `yarn test`
 
 
 ## Structure of IRIS
+<!-- should be common to all READMEs of IRIS -->
 
-IRIS has two main components, an API running at [grapheel.com/app/api](http://www.grapheel.com/app/api), and a frontend you access through [grapheel.com/app](http://grapheel.com/app). The API is written using Express and run on Node, and the same server provides the React frontend to users.
+IRIS has two main components: an API and a separate front-end. The API is written using Express and run on Node, and a different Express server provides the React frontend to users.
 
 ### API
 
@@ -85,11 +62,8 @@ IRIS has two main components, an API running at [grapheel.com/app/api](http://ww
 ### React Frontend
 
 #### Volunteer Side
-#### BVI side
+#### Student side
 
 ## Contributing
 
 Thanks for your support! IRIS is starting to build in complexity so the more people contributing the better. To make everyone's lives easier we have some coding standards to stick to.
-
-
-
