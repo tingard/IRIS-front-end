@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import moment from 'moment';
 
 import { Link, Redirect } from 'react-router-dom';
@@ -26,12 +27,12 @@ class MessageChainPage extends Component {
     );
     const sortedMessages = this.props.messageChain.sort(sortFunction);
     if (typeof this.props.id !== 'undefined') {
-      const m = this.props.messageChain[this.props.messageChain.length - 1];
+      const m = this.props.messageChain.get(this.props.messageChain.size - 1);
       return (
         <div className="w3-container">
           <div className="w3-card-4 w3-panel">
             <h2>For your image tagged:</h2>
-            <p><em>{`"${this.props.imageNote}"`}</em>, most recent message {moment(m.date).fromNow()}:</p>
+            <p><em>{`"${this.props.imageNote}"`}</em>, most recent message {moment(m.get('date')).fromNow()}:</p>
             <div className="w3-margin" role="group">
               <label htmlFor="message-order-selector" id="message-order-selector-label">
                 Change message order
@@ -57,13 +58,13 @@ class MessageChainPage extends Component {
                   <li key={`${this.props.id}-${i}`} role="listitem">
                     <p>
                       <span className="message-dt">
-                        {capitalize(moment(msg.date).fromNow())}
+                        {capitalize(moment(msg.get('date')).fromNow())}
                       </span>
                       <span className="message-from-who">
-                        {msg.fromMe ? ' you said: ' : ' they said: '}
+                        {msg.get('fromMe') ? ' you said: ' : ' they said: '}
                       </span>
                       <span className="message-content">
-                        {msg.message}
+                        {msg.get('message')}
                       </span>
                     </p>
                   </li>
@@ -113,8 +114,8 @@ class MessageChainPage extends Component {
 MessageChainPage.propTypes = {
   id: PropTypes.string,
   imageNote: PropTypes.string,
-  messageChain: PropTypes.arrayOf(
-    PropTypes.shape({
+  messageChain: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.contains({
       message: PropTypes.string,
     }),
   ),

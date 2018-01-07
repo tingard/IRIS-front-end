@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
+import { Map } from 'immutable';
+
 import MessageChainPage from '../components/MessageChainPage';
 
 const mapStateToProps = (state, ownProps) => {
-  const m = state.messages.toArray().filter(
-    i => i.id === ownProps.match.params.messageID,
+  const m = state.messages.get('messages').filter(
+    i => i.get('id') === ownProps.match.params.messageID,
   );
-  const image = state.images.toArray().filter(
-    i => i.id === m.imageID,
-  );
-  if (m.length) {
-    return Object.assign(
-      { user: state.user.toObject(), image },
-      m[0],
+  console.log(m);
+  if (m.size) {
+    const image = state.images.get('images').filter(
+      i => i.get('id') === m.get(0).get('imageID'),
     );
+    return m.merge({ user: state.user, image });
   }
-  return { user: state.user.toObject() };
+  return Map({ user: state.user });
 };
 
 export default connect(mapStateToProps)(MessageChainPage);

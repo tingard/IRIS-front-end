@@ -3,7 +3,7 @@ import ProfilePage from '../components/ProfilePage';
 
 const mapStateToProps = (state) => {
   const r = ({
-    user: state.user.toObject(),
+    user: state.user,
   });
   return r;
 };

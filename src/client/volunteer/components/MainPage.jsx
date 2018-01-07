@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import Select from 'react-select';
 
 import ImageCard from './ImageCard';
@@ -34,6 +35,17 @@ class MainPage extends React.Component {
     this.handleLevelChange = this.handleLevelChange.bind(this);
     this.handleSubjectChange = this.handleSubjectChange.bind(this);
   }
+  componentDidMount() {
+    if (this.props.user.get('isStale')) {
+      this.props.getUserDetails();
+    }
+    if (this.props.messages.get('isStale')) {
+      this.props.getMessages();
+    }
+    if (this.props.cards.get('isStale')) {
+      this.props.getImages();
+    }
+  }
   handleLevelChange(val) {
     this.setState({ selectedLevel: val.value });
   }
@@ -41,20 +53,20 @@ class MainPage extends React.Component {
     this.setState({ selectedSubject: val.value });
   }
   render() {
-    const cardListGood = this.props.cards.filter(
-      card => this.props.user.level[card.tag] >= card.level,
+    const cardListGood = this.props.cards.get('cards').filter(
+      card => this.props.user.get('level').get(card.get('subject')) >= card.get('difficulty'),
     );
-    const cardListBad = this.props.cards.filter(
-      card => this.props.user.level[card.tag] < card.level,
+    const cardListBad = this.props.cards.get('cards').filter(
+      card => this.props.user.get('level').get(card.get('subject')) < card.get('difficulty'),
     );
     const cardList = cardListGood.concat(cardListBad).filter(
       card => (
-        this.state.selectedSubject === 'any' || card.tag === this.state.selectedSubject
+        this.state.selectedSubject === 'any' || card.get('subject') === this.state.selectedSubject
       ) && (
-        parseFloat(this.state.selectedLevel) >= parseFloat(card.level)
+        parseFloat(this.state.selectedLevel) >= parseFloat(card.get('difficulty'))
       ),
     ).map(
-      card => <ImageCard {...card} key={card.key} user={this.props.user} />,
+      card => <ImageCard {...card.toObject()} key={card.get('id')} user={this.props.user} />,
     );
     return (
       <div>
@@ -80,7 +92,8 @@ class MainPage extends React.Component {
           </label>
         </div>
         <div className="cardHolder">
-          {cardList.length > 0 ? cardList : (<h4>Looks like there we re all good here!</h4>)}
+          {cardList.size > 0 ? cardList.toArray() : (
+            <h4>Looks like there aren't any cards here!</h4>)}
         </div>
       </div>
     );
@@ -88,8 +101,33 @@ class MainPage extends React.Component {
 }
 
 MainPage.propTypes = {
-  cards: PropTypes.array,
-  user: PropTypes.object,
+  cards: ImmutablePropTypes.contains({
+    cards: ImmutablePropTypes.listOf(
+      ImmutablePropTypes.contains({
+        subject: PropTypes.string,
+        difficulty: PropTypes.number,
+        key: PropTypes.string,
+      }),
+    ),
+    isFetching: PropTypes.bool,
+    isStale: PropTypes.bool,
+  }),
+  user: ImmutablePropTypes.contains({
+    level: ImmutablePropTypes.contains({
+      physics: PropTypes.number,
+      biology: PropTypes.number,
+      chemistry: PropTypes.number,
+      maths: PropTypes.number,
+      computerScience: PropTypes.number,
+    }),
+  }),
+  messages: ImmutablePropTypes.contains({
+    isFetching: PropTypes.bool,
+    isStale: PropTypes.bool,
+  }),
+  getUserDetails: PropTypes.func,
+  getMessages: PropTypes.func,
+  getImages: PropTypes.func,
 };
 
 export default MainPage;

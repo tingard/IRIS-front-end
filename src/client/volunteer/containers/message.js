@@ -5,7 +5,7 @@ const mapStateToProps = (state, ownProps) => {
   // messageChain is messageChain if given else filter using messageID
   const r = {
     message: ownProps.message,
-    user: state.user.toObject(),
+    user: state.user,
   };
   return r;
 };
