@@ -1,6 +1,8 @@
 import React from 'react';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Route, Switch } from 'react-router-dom';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
 import mainPage from './containers/mainPage';
 import Navbar from './components/Navbar';
@@ -12,12 +14,17 @@ import userReducer from './reducers/userReducer';
 import messageReducer from './reducers/messageReducer';
 import cardReducer from './reducers/cardReducer';
 
+const loggerMiddleware = createLogger({
+  stateTransformer: s => JSON.parse(JSON.stringify(s)),
+});
+
 const store = createStore(
   combineReducers({
     user: userReducer,
     cards: cardReducer,
     messages: messageReducer,
   }),
+  applyMiddleware(thunkMiddleware, loggerMiddleware),
 );
 
 const App = () => (

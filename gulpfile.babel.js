@@ -11,7 +11,6 @@ import del from 'del';
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
 
-
 const paths = {
   allSrcJs: './src/**/*.js?(x)',
   clientSrcJs: 'src/client/**/*.js?(x)',

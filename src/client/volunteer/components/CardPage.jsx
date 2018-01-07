@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Redirect } from 'react-router-dom';
 import Select from 'react-select';
 
@@ -29,7 +30,7 @@ class CardPage extends React.Component {
               <div className="w3-panel card-page-image-wrapper">
                 <div
                   className="card-page-image"
-                  style={{ backgroundImage: `url(${this.props.card.imageUrl})` }}
+                  style={{ backgroundImage: `url(${this.props.card.get('url')})` }}
                   alt=""
                 />
               </div>
@@ -38,7 +39,7 @@ class CardPage extends React.Component {
               <h5>Student asked:</h5>
               <div className="image-card-message">
                 <p>
-                  {this.props.card.message}
+                  {this.props.card.get('question')}
                 </p>
               </div>
             </div>
@@ -77,7 +78,10 @@ class CardPage extends React.Component {
 
 CardPage.propTypes = {
   // user: PropTypes.object,
-  card: PropTypes.object,
+  card: ImmutablePropTypes.contains({
+    url: PropTypes.string,
+    question: PropTypes.string,
+  }),
 };
 
 export default CardPage;

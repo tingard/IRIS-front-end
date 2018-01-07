@@ -1,6 +1,8 @@
 import React from 'react';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Route, Switch } from 'react-router-dom';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
 import Navbar from './components/Navbar';
 import HomePage from './containers/homePage';
@@ -9,10 +11,13 @@ import MessageChainPage from './containers/messageChainPage';
 import ImagesPage from './containers/imagesPage';
 import ProfilePage from './containers/profilePage';
 
-
 import userReducer from './reducers/userReducer';
 import messagesReducer from './reducers/messagesReducer';
 import imagesReducer from './reducers/imagesReducer';
+
+const loggerMiddleware = createLogger({
+  stateTransformer: s => JSON.parse(JSON.stringify(s)),
+});
 
 const store = createStore(
   combineReducers({
@@ -20,6 +25,7 @@ const store = createStore(
     messages: messagesReducer,
     images: imagesReducer,
   }),
+  applyMiddleware(thunkMiddleware, loggerMiddleware),
 );
 
 const App = () => (

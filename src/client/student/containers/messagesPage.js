@@ -4,21 +4,21 @@ import MessagesPage from '../components/MessagesPage';
 const mapStateToProps = (state, ownProps) => {
   let messages;
   if (ownProps.filterByImage) {
-    messages = state.messages.toArray().filter(
-      m => m.imageID === ownProps.match.params.imageID,
+    messages = state.messages.get('messages').filter(
+      m => m.get('imageID') === ownProps.match.params.imageID,
     );
   } else {
-    messages = state.messages.toArray();
+    messages = state.messages.get('messages');
   }
-  const r = ({
+  const r = {
     messages: messages.sort(
       (m1, m2) => (
-        m2.messageChain[m2.messageChain.length - 1].date -
-        m1.messageChain[m1.messageChain.length - 1].date
+        m2.get('messageChain').get(m2.get('messageChain').size - 1).get('date') -
+        m1.get('messageChain').get(m1.get('messageChain').size - 1).get('date')
       ),
     ),
-    user: state.user.toObject(),
-  });
+    user: state.user,
+  };
   return r;
 };
 
