@@ -1,22 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import moment from 'moment';
 import { NavLink } from 'react-router-dom';
 
 const MessagePreview = (props) => {
-  const lastMessageDate = props.messageChain[props.messageChain.length - 1].date;
+  const lastMessageDate = props.messageChain.get(props.messageChain.size - 1).get('sendDate');
   return (
     <NavLink to={`/messages/${props.id}`}>
       <div className="w3-row w3-display-container">
         <div className="w3-container message-page-message-preview">
           <div className="w3-col s4 message-preview-image">
-            <img src={props.imageUrl} alt="" />
+            <img src={props.image.get('url')} alt="" />
           </div>
           <div className="w3-col s8">
             {/*  Teaser of message */}
             <div className="row">
               <span className="message-preview-message">
-                {`${props.messageChain[props.messageChain.length - 1].message.slice(0, 25).trim()}...`}
+                {`${
+                  props.messageChain.get(props.messageChain.size - 1)
+                  .get('message').slice(0, 25).trim()}...`}
               </span>
             </div>
             {/*  Time since last message */}
@@ -34,8 +37,14 @@ const MessagePreview = (props) => {
 
 MessagePreview.propTypes = {
   id: PropTypes.string,
-  imageUrl: PropTypes.string,
-  messageChain: PropTypes.array,
+  image: ImmutablePropTypes.contains({
+    url: PropTypes.string,
+  }),
+  messageChain: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.contains({
+      message: PropTypes.string,
+    }),
+  ),
 };
 
 export default MessagePreview;

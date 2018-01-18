@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+// import Modal from './Modal';
 
 // TODO: Upload form should be a modal which users are guided through
 // (with clearly labelled steps)
@@ -10,6 +11,9 @@ class HomePage extends React.Component {
     super(props);
     this.inputs = {};
     this.formShouldSubmit = this.formShouldSubmit.bind(this);
+    this.state = {
+      modalActive: false,
+    };
   }
   componentDidMount() {
     if (this.props.user.get('isStale')) {
@@ -44,8 +48,13 @@ class HomePage extends React.Component {
       formData.append('note', data.note);
       formData.append('difficulty', data.difficulty);
       formData.append('subject', data.subject);
-
-      this.props.uploadImage(formData);
+      // this.props.uploadImage(formData);
+      this.setState({ successDialogActive: true });
+      this.inputs.imageInput.value = '';
+      this.inputs.questionInput.value = '';
+      this.inputs.noteInput.value = '';
+      this.inputs.difficultyInput.value = 'maths';
+      this.inputs.subjectInput.value = '0';
     }
     return false;
   }
@@ -60,8 +69,28 @@ class HomePage extends React.Component {
     return (
       <div className="w3-container w3-animate-opacity">
         <h1>Welcome back, {this.props.user.get('firstName')}</h1>
-        <section>
-          <h3>Upload an Image:</h3>
+        <div role="alert">
+          {this.state.successDialogActive ? (
+            <div
+              className="w3-panel w3-round w3-card-4 w3-display-container"
+              role="group"
+              aria-labelledby="upload-image-success-header"
+              aria-atomic="true"
+            >
+              <h3 id="upload-image-success-header">Successfully uploaded image</h3>
+              <p>Image has been successfully uploaded to IRIS</p>
+              <button
+                onClick={() => this.setState({ successDialogActive: false })}
+                className="w3-button w3-display-topright"
+                aria-label="Close this message"
+              >
+                &times;
+              </button>
+            </div>
+          ) : null}
+        </div>
+        <section role="group" aria-labelledby="upload-image-section-header">
+          <h3 id="upload-image-section-header">Upload an Image:</h3>
           <form
             onSubmit={this.formShouldSubmit}
           >
@@ -153,6 +182,7 @@ HomePage.propTypes = {
   getUserDetails: PropTypes.func,
   getMessages: PropTypes.func,
   getImages: PropTypes.func,
-  uploadImage: PropTypes.func,
+  // uploadImage: PropTypes.func,
 };
+
 export default HomePage;

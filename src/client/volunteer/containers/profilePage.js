@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import ProfilePage from '../components/ProfilePage';
+import { setUserDetails } from '../actions';
 
-const mapStateToProps = (state) => {
-  const r = ({
-    user: state.user,
-  });
-  return r;
-};
+const mapStateToProps = state => ({
+  user: state.user,
+});
 
-// TODO: mapDispatchToProps
+const mapDispatchToProps = dispatch => ({
+  setUserDetails: payload => dispatch(setUserDetails(payload)),
+});
 
-export default connect(mapStateToProps)(ProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

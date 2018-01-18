@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
@@ -16,14 +17,11 @@ const userReducer = (state = initialState, action) => {
       return state.set('isFetching', true).set('isStale', false);
     case 'GET_USER_DETAILS_SUCCESS':
       // potentially many changes, so simply gonna update things here
-      return state.merge({
-        firstName: action.res.firstName || state.get('firstName'),
-        lastName: action.res.lastName || state.get('lastName'),
-        email: action.res.email || state.get('email'),
-        submittedImages: action.res.submittedImages || state.get('submittedImages'),
-        isFetching: false,
-        isStale: false,
-      });
+      return state.mergeDeep(action.res.student)
+        .set('isFetching', false)
+        .set('isStale', false)
+        .set('id', action.res.student._id)
+        .remove('_id');
     default:
       return state;
   }

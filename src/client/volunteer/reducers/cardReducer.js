@@ -5,6 +5,7 @@ import { Map, List } from 'immutable';
 const initialState = Map({
   isFetching: false,
   isStale: true,
+  updateDidFail: false,
   cards: List([]),
 });
 
@@ -13,7 +14,6 @@ const cardReducer = (state = initialState, action) => {
     case 'GET_IMAGES':
       return state.merge({ isFetching: true });
     case 'GET_IMAGES_SUCCESS':
-      console.log('here');
       return state.merge({ cards: action.res.images, isStale: false, isFetching: false });
     default:
       return state;

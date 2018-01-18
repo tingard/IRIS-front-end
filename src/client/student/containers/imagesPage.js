@@ -3,7 +3,10 @@ import ImagesPage from '../components/ImagesPage';
 
 const mapStateToProps = state => ({
   user: state.user,
+  isStale: state.images.get('isStale') || state.messages.get('isStale'),
+  isFetching: state.images.get('isFetching') || state.messages.get('isFetching'),
   images: state.images.get('images'),
+  messages: state.messages.get('messages'),
 });
 
 // TODO: actually use dispatch here

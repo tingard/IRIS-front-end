@@ -7,7 +7,7 @@ import { createLogger } from 'redux-logger';
 import Navbar from './components/Navbar';
 import HomePage from './containers/homePage';
 import MessagesPage from './containers/messagesPage';
-import MessageChainPage from './containers/messageChainPage';
+import ConversationPage from './containers/conversationPage';
 import ImagesPage from './containers/imagesPage';
 import ProfilePage from './containers/profilePage';
 
@@ -29,17 +29,17 @@ const store = createStore(
 );
 
 const App = () => (
-  <div>
+  <div id="modal-root">
     <div className="w3-container">
       <Navbar />
     </div>
     <Switch>
       <Route exact path="/messages" render={p => <MessagesPage {...p} />} />
-      <Route exact path="/messages/:messageID" render={p => <MessageChainPage {...p} />} />
+      <Route exact path="/messages/:messageID" render={p => <ConversationPage {...p} />} />
       <Route exact path="/images" component={ImagesPage} />
       <Route
         exact
-        path="/images/messages/:imageID"
+        path="/images/messages/:imageId"
         render={p => <MessagesPage {...p} filterByImage />}
       />
       <Route exact path="/profile" component={ProfilePage} />
