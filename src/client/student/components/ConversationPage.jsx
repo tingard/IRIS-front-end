@@ -1,38 +1,58 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { List } from 'immutable';
 import moment from 'moment';
-
 import { Link, Redirect } from 'react-router-dom';
 
 const capitalize = s => `${s.charAt(0).toUpperCase()}${s.slice(1)}`;
 
-class MessageChainPage extends Component {
+class ConversationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       messageOrder: 'newest',
     };
     this.setOrder = this.setOrder.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
+  }
+  componentDidMount() {
+    if (this.props.isStale) {
+      this.props.getMessages();
+    }
   }
   setOrder() {
     // TODO: should this be reflected in redux?
     this.setState({ messageOrder: this.messageOrderSelector.value });
   }
+  sendMessage() {
+    this.props.sendMessage(
+      { messageId: this.props.id, message: this.input.value },
+    );
+  }
   render() {
+    if (this.props.isFetching) return <div>Loading spinner</div>;
+    if (this.props.message.get('messageChain').size === 0) {
+      return <Redirect to="/messages" />;
+    }
     const sortFunction = this.state.messageOrder === 'newest' ? (
       (m1, m2) => m2.date - m1.date
     ) : (
       (m1, m2) => m1.date - m2.date
     );
-    const sortedMessages = this.props.messageChain.sort(sortFunction);
-    if (typeof this.props.id !== 'undefined') {
-      const m = this.props.messageChain.get(this.props.messageChain.size - 1);
+    const sortedMessages = this.props.message.get('messageChain').sort(sortFunction);
+    if (this.props.id !== null) {
+      const m = this.props.message.get('messageChain')
+        .get(this.props.message.get('messageChain').size - 1);
       return (
         <div className="w3-container">
           <div className="w3-card-4 w3-panel">
             <h2>For your image tagged:</h2>
-            <p><em>{`"${this.props.imageNote}"`}</em>, most recent message {moment(m.get('date')).fromNow()}:</p>
+            <p>
+              <em>
+                {`"${this.props.message.get('image').get('note')}"`}
+              </em>, most recent message {moment(m.get('sendDate')).fromNow()}:
+            </p>
             <div className="w3-margin" role="group">
               <label htmlFor="message-order-selector" id="message-order-selector-label">
                 Change message order
@@ -58,10 +78,10 @@ class MessageChainPage extends Component {
                   <li key={`${this.props.id}-${i}`} role="listitem">
                     <p>
                       <span className="message-dt">
-                        {capitalize(moment(msg.get('date')).fromNow())}
+                        {capitalize(moment(msg.get('sendDate')).fromNow())}
                       </span>
                       <span className="message-from-who">
-                        {msg.get('fromMe') ? ' you said: ' : ' they said: '}
+                        {msg.get('fromType') === 'student' ? ' you said: ' : ' they said: '}
                       </span>
                       <span className="message-content">
                         {msg.get('message')}
@@ -91,7 +111,7 @@ class MessageChainPage extends Component {
                 <p>
                   <button
                     className="w3-btn w3-green"
-                    onClick={() => this.props.sendMessage(this.input.value)}
+                    onClick={this.sendMessage}
                   >
                     Send
                   </button>
@@ -111,19 +131,28 @@ class MessageChainPage extends Component {
   }
 }
 
-MessageChainPage.propTypes = {
+ConversationPage.propTypes = {
   id: PropTypes.string,
-  imageNote: PropTypes.string,
-  messageChain: ImmutablePropTypes.listOf(
-    ImmutablePropTypes.contains({
-      message: PropTypes.string,
+  isStale: PropTypes.bool,
+  isFetching: PropTypes.bool,
+  message: ImmutablePropTypes.contains({
+    messageChain: ImmutablePropTypes.listOf(
+      ImmutablePropTypes.contains({
+        message: PropTypes.string,
+      }),
+    ),
+    image: ImmutablePropTypes.contains({
+      url: PropTypes.string,
+      note: PropTypes.string,
+      question: PropTypes.string,
     }),
-  ),
+  }),
   sendMessage: PropTypes.func,
+  getMessages: PropTypes.func,
 };
 
-MessageChainPage.defaultProps = {
-  sendMessage: (m) => { console.log(m); },
+ConversationPage.defaultProps = {
+  messageChain: List([]),
 };
 
-export default MessageChainPage;
+export default ConversationPage;

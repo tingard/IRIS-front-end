@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import MainPage from '../components/MainPage';
-import { getUserDetails, getMessages, getImages } from '../actions';
+import ApiWrapper from '../components/ApiWrapper';
+import { getMessages, getUserDetails, getImages } from '../actions';
+
 
 const mapStateToProps = state => ({
   cards: state.cards,
@@ -9,10 +10,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUserDetails: () => dispatch(getUserDetails({ hi: 'there' })),
   getMessages: () => dispatch(getMessages()),
+  getUserDetails: () => dispatch(getUserDetails()),
   getImages: () => dispatch(getImages()),
 });
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ApiWrapper);

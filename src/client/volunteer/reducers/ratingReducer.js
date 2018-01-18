@@ -3,6 +3,7 @@ import { Map, List } from 'immutable';
 const initialState = Map({
   isFetching: false,
   isStale: true,
+  didFail: false,
   ratings: List([]),
 });
 

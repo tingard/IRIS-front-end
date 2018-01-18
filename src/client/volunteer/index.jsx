@@ -1,10 +1,11 @@
 import React from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-import mainPage from './containers/mainPage';
+import ApiWrapper from './containers/apiWrapper';
+import homePage from './containers/homePage';
 import Navbar from './components/Navbar';
 import MessagesPage from './containers/messagesPage';
 import ProfilePage from './containers/profilePage';
@@ -30,14 +31,17 @@ const store = createStore(
 const App = () => (
   <div>
     <Navbar />
-    <section className="content-section">
-      <Switch>
-        <Route exact path="/" component={mainPage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/messages/:messageID?" component={MessagesPage} />
-        <Route path="/cards/:cardId" component={CardPage} />
-      </Switch>
-    </section>
+    <ApiWrapper>
+      <section className="content-section">
+        <Switch>
+          <Route exact path="/" component={homePage} />
+          <Route path="/profile" component={ProfilePage} />
+          <Route path="/messages/:messageID?" component={MessagesPage} />
+          <Route path="/cards/:cardId" component={CardPage} />
+          <Route render={() => <Redirect to="/" />} />
+        </Switch>
+      </section>
+    </ApiWrapper>
   </div>
 );
 

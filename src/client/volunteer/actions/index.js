@@ -15,12 +15,12 @@ const fetch = type => (
       // make sure we have auth loaded in
       api.loadTokenFromStorage();
       // send the the request action (start loading spinners etc...)
-      dispatch(type.sendRequest());
+      dispatch(type.sendRequest(payload));
       // api.handle will return a Promise, chain to that promise and dispatch
       // appropriate action
       return api.handle(type, payload).then(
         res => dispatch(type.success(res)),
-        err => dispatch(type.error(err)),
+        err => dispatch(type.failure(err)),
       );
     }
   )
@@ -30,15 +30,21 @@ const fetch = type => (
 export const userDetails = {
   get: {
     name: 'GET_USER_DETAILS',
-    sendRequest: () => ({ type: 'GET_USER_DETAILS_REQUEST' }),
+    sendRequest: () => ({ type: 'GET_USER_DETAILS' }),
     success: res => ({ type: 'GET_USER_DETAILS_SUCCESS', res }),
     failure: error => ({ type: 'GET_USER_DETAILS_FAILURE', error }),
   },
   set: {
     name: 'SET_USER_DETAILS',
-    sendRequest: details => ({ type: 'SET_USER_DETAILS', details }),
+    sendRequest: ({ details }) => ({ type: 'SET_USER_DETAILS', details }),
     success: res => ({ type: 'SET_USER_DETAILS_SUCCESS', res }),
     failure: error => ({ type: 'SET_USER_DETAILS_FAILURE', error }),
+  },
+  setLevels: {
+    name: 'SET_USER_LEVELS',
+    sendRequest: details => ({ type: 'SET_USER_LEVELS', details }),
+    success: res => ({ type: 'SET_USER_LEVELS_SUCCESS', res }),
+    failure: error => ({ type: 'SET_USER_LEVELS_FAILURE', error }),
   },
   changePassword: {
     name: 'CHANGE_PASSWORD',

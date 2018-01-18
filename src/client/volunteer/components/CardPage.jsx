@@ -17,9 +17,16 @@ class CardPage extends React.Component {
       template: 'none',
     };
     this.handleTemplateChange = this.handleTemplateChange.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
   handleTemplateChange(val) {
     this.setState({ template: val.value });
+  }
+  sendMessage() {
+    this.props.sendMessage({
+      imageId: this.props.card.get('id'),
+      message: this.textarea.value,
+    });
   }
   render() {
     return this.props.card != null ? (
@@ -55,13 +62,17 @@ class CardPage extends React.Component {
                   onChange={this.handleTemplateChange}
                   options={templateResponses}
                 />
-                <div
-                  ref={(r) => { this.responseDiv = r; }}
+                <textarea
+                  ref={(r) => { this.textarea = r; }}
                   className="card-panel-response-holder"
-                  contentEditable
+                  rows={10}
+                  style={{ resize: 'none' }}
+                  autoFocus
+                  required
                 />
                 <button
                   className="submit-reply-button w3-button w3-border w3-round w3-right"
+                  onClick={this.sendMessage}
                 >
                   Send Reply
                 </button>
@@ -79,9 +90,11 @@ class CardPage extends React.Component {
 CardPage.propTypes = {
   // user: PropTypes.object,
   card: ImmutablePropTypes.contains({
+    id: PropTypes.string,
     url: PropTypes.string,
     question: PropTypes.string,
   }),
+  sendMessage: PropTypes.func,
 };
 
 export default CardPage;

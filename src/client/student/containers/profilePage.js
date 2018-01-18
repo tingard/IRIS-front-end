@@ -6,7 +6,7 @@ const mapStateToProps = state => state.user.toObject();
 
 const mapDispatchToProps = dispatch => ({
   fetchUserDetails: () => dispatch(getUserDetails()),
-  userDetailsShouldUpdate: newDetails => dispatch(setUserDetails(newDetails)),
+  setUserDetails: payload => dispatch(setUserDetails(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

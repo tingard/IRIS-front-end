@@ -15,12 +15,12 @@ const fetch = type => (
       // make sure we have auth loaded in
       api.loadTokenFromStorage();
       // send the the request action (start loading spinners etc...)
-      dispatch(type.sendRequest());
+      dispatch(type.sendRequest(payload));
       // api.handle will return a Promise, chain to that promise and dispatch
       // appropriate action
       return api.handle(type, payload).then(
         res => dispatch(type.success(res)),
-        err => dispatch(type.error(err)),
+        err => dispatch(type.failure(err)),
       );
     }
   )
@@ -36,7 +36,7 @@ export const userDetails = {
   },
   set: {
     name: 'SET_USER_DETAILS',
-    sendRequest: details => ({ type: 'SET_USER_DETAILS', details }),
+    sendRequest: ({ details }) => ({ type: 'SET_USER_DETAILS', details }),
     success: res => ({ type: 'SET_USER_DETAILS_SUCCESS', res }),
     failure: error => ({ type: 'SET_USER_DETAILS_FAILURE', error }),
   },
@@ -87,5 +87,12 @@ export const messages = {
     success: res => ({ type: 'GET_MESSAGES_SUCCESS', res }),
     failure: error => ({ type: 'GET_MESSAGES_FAILURE', error }),
   },
+  send: {
+    name: 'SEND_MESSAGE',
+    sendRequest: message => ({ type: 'SEND_MESSAGE', message }),
+    success: res => ({ type: 'SEND_MESSAGE_SUCCESS', res }),
+    failure: error => ({ type: 'SEND_MESSAGE_FAILURE', error }),
+  },
 };
 export const getMessages = fetch(messages.get);
+export const sendMessage = fetch(messages.send);

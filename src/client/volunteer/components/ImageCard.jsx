@@ -8,7 +8,7 @@ const ImageCard = props => (
       <div className="image-card-level">
         <span
           className={`user-level-${
-            props.user.get('level').get(props.subject) >= props.difficulty ? 'above' : 'below'
+            props.user.get('levels').get(props.subject) >= props.difficulty ? 'above' : 'below'
           }`}
         >
           {props.difficulty}

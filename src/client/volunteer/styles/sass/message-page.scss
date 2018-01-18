@@ -1,3 +1,23 @@
+@mixin messageMetadata() {
+  font-size: 10px;
+  color: #999;
+  position: absolute;
+}
+@mixin messageTag($from, $isTop) {
+  content: $from;
+  @include messageMetadata();
+  @if $isTop {
+    top: -14px;
+  } @else {
+    bottom: -14px;
+  }
+  @if $from == 'me' {
+    right: 5px;
+  } @else {
+    left: 5px;
+  }
+}
+
 .message-page-message-preview {
   min-height: 50px;
   margin: 10px;
@@ -16,14 +36,42 @@
     max-width: 90%;
     padding: 5px;
     border-radius: 2px;
+    p {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+    .fail-message {
+      font-size: 10px;
+      color: #a22;
+      margin-right: 5px;
+      left: -60px;
+    }
   }
   .from-me {
     background-color: #fafaff;
     border: 1px solid #cce;
+    min-width: 150px;
+    &::before {
+      @include messageTag('me', true);
+    }
+    &::after {
+      @include messageTag(attr(data-deltat), false);
+    }
   }
   .from-them {
     background-color: #fafafa;
     border: 1px solid #eee;
+    min-width: 150px;
+    &::before {
+      @include messageTag('student', true);
+    }
+    &::after {
+      @include messageTag(attr(data-deltat), false);
+    }
+  }
+  .pending-failed {
+    background-color: #fffafa;
+    border: 1px solid #ecc;
   }
 }
 .message-page-content {

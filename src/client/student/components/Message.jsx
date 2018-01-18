@@ -4,18 +4,19 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-const MainPage = (props) => {
-  const m = props.messageChain.get(props.messageChain.length - 1);
+const Message = (props) => {
+  const m = props.messageChain.get(props.messageChain.size - 1);
+  console.log('message m', m.toObject());
   return (
     <div role="gridcell" aria-live="polite" className="w3-card-4 w3-panel">
       <div role="group">
         <p>
           For your image tagged:
-          <em>{` "${props.imageNote}"`}</em>,
+          <em>{` "${props.image.get('note')}"`}</em>,
         </p>
         <p>
-          <span>Most recent message {moment(m.get('date')).fromNow()}.</span>
-          <span>{m.get('fromMe') ? ' You said:' : ' They said:'} {m.get('message')}</span>
+          <span>Most recent message {moment(m.get('sendDate')).fromNow()}.</span>
+          <span>{m.get('fromType') === 'volunteer' ? ' You said:' : ' They said:'} {m.get('message')}</span>
         </p>
         <Link
           to={`/messages/${props.id}`}
@@ -27,9 +28,11 @@ const MainPage = (props) => {
   );
 };
 
-MainPage.propTypes = {
+Message.propTypes = {
   id: PropTypes.string,
-  imageNote: PropTypes.string,
+  image: ImmutablePropTypes.contains({
+    note: PropTypes.string,
+  }),
   messageChain: ImmutablePropTypes.listOf(
     ImmutablePropTypes.contains({
       message: PropTypes.string,
@@ -37,4 +40,4 @@ MainPage.propTypes = {
   ),
 };
 
-export default MainPage;
+export default Message;

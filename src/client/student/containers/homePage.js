@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
   getUserDetails: () => dispatch(getUserDetails({ hi: 'there' })),
   getMessages: () => dispatch(getMessages()),
   getImages: () => dispatch(getImages()),
-  uploadImage: () => dispatch(uploadImage()),
+  uploadImage: formData => dispatch(uploadImage(formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
