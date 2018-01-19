@@ -11,7 +11,7 @@ const MessagesPage = (props) => {
       aria-labelledby="messages-header"
       className="w3-container w3-animate-opacity"
     >
-      <h1 id="messages-header">Your Messages:</h1>
+      <h1 id="messages-header">{props.isFiltered ? 'Messages for your image' : 'Your Messages' }:</h1>
       {
         props.messages.size > 0 ? (
           <ul style={{ listStyle: 'none', paddingLeft: 0 }} aria-label="Messages list" role="grid">
@@ -29,6 +29,7 @@ const MessagesPage = (props) => {
 
 MessagesPage.propTypes = {
   isFetching: PropTypes.bool,
+  isFiltered: PropTypes.bool,
   messages: ImmutablePropTypes.listOf(
     ImmutablePropTypes.contains({
       id: PropTypes.string,

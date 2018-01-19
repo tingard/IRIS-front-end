@@ -43,7 +43,7 @@ const App = () => (
           <Route
             exact
             path="/images/messages/:imageId"
-            render={p => <MessagesPage {...p} filterByImage />}
+            render={p => <MessagesPage filterByImage {...p} />}
           />
           <Route exact path="/profile" component={ProfilePage} />
 

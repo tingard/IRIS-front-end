@@ -6,9 +6,8 @@ import moment from 'moment';
 
 const Message = (props) => {
   const m = props.messageChain.get(props.messageChain.size - 1);
-  console.log('message m', m.toObject());
   return (
-    <div role="gridcell" aria-live="polite" className="w3-card-4 w3-panel">
+    <div role="gridcell" aria-live="polite" className="w3-border-left w3-panel">
       <div role="group">
         <p>
           For your image tagged:

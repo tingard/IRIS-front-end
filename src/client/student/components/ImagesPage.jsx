@@ -21,7 +21,7 @@ const ImagesPage = (props) => {
         <ul style={{ listStyle: 'none', paddingLeft: 0 }} aria-label="List of images on IRIS" role="grid">
           {props.images.sort((i, j) => (i.get('uploadDate') < j.get('uploadDate'))).map(im => (
             <li key={`${im.get('id')}`} role="row">
-              <div className="w3-panel w3-card-4" role="gridcell">
+              <div className="w3-panel w3-border-left" role="gridcell">
                 <p>
                   Image with note: <em>{`"${im.get('note')}"`}</em>,
                   uploaded {moment(im.get('uploadDate')).fromNow()},
@@ -30,14 +30,27 @@ const ImagesPage = (props) => {
                   }
                 </p>
                 <div className="w3-btn-bar" role="group" aria-label="action buttons">
-                  Actions:
-                  <Link to={`/images/messages/${im.get('id')}`} className="w3-button">
-                    See replies
-                  </Link>
-                  <button className="w3-button w3-blue" disabled onClick={() => props.markImageAsDone(im.get('id'))}>
+                  <span className="w3-margin-right">Actions:</span>
+                  {getLen(im) !== 0 ? (
+                    <Link
+                      to={`/images/messages/${im.get('id')}`}
+                      className="w3-button w3-light-blue w3-margin-right"
+                    >
+                      See replies
+                    </Link>
+                  ) : null}
+                  <button
+                    className="w3-button w3-green w3-margin-right"
+                    onClick={() => props.markImageAsDone(im.get('id'))}
+                    disabled
+                  >
                     Mark as completed
                   </button>
-                  <button className="w3-button w3-red" disabled onClick={() => props.deleteImage(im.get('id'))}>
+                  <button
+                    className="w3-button w3-red w3-margin-right"
+                    onClick={() => props.deleteImage(im.get('id'))}
+                    disabled
+                  >
                     Delete image
                   </button>
                 </div>

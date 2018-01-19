@@ -6,9 +6,11 @@ const ProfilePage = props => (
   props.state.get('isFetching') ?
     <div>Connecting to the IRIS database...</div> :
     <div className="w3-container w3-animate-opacity">
-      <h1>Your Profile:</h1>
-      <p>Name: {props.firstName} {props.lastName}</p>
-      <p>Email: {props.email}</p>
+      <div className="w3-panel">
+        <h1>Your Profile:</h1>
+        <p>Name: {props.firstName} {props.lastName}</p>
+        <p>Email: {props.email}</p>
+      </div>
       <p>TODO: browser / email notification preferences</p>
       <div className="w3-row">
         <button

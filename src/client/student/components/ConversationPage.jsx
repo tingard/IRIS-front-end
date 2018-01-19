@@ -43,7 +43,7 @@ class ConversationPage extends Component {
         .get(this.props.message.get('messageChain').size - 1);
       return (
         <div className="w3-container">
-          <div className="w3-card-4 w3-panel">
+          <div className="w3-boder-left w3-panel">
             <h2>For your image tagged:</h2>
             <p>
               <em>
@@ -117,7 +117,7 @@ class ConversationPage extends Component {
             </div>
           </div>
           <div className="w3-panel">
-            <Link to="/messages" className="w3-button">
+            <Link to="/messages" className="w3-button w3-border">
               Go back to messages
             </Link>
           </div>
