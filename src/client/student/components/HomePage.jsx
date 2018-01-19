@@ -15,17 +15,6 @@ class HomePage extends React.Component {
       modalActive: false,
     };
   }
-  componentDidMount() {
-    if (this.props.user.get('isStale')) {
-      this.props.getUserDetails();
-    }
-    if (this.props.messages.get('isStale')) {
-      this.props.getMessages();
-    }
-    if (this.props.images.get('isStale')) {
-      this.props.getImages();
-    }
-  }
   formShouldSubmit(e) {
     e.preventDefault();
     const formData = new FormData();
@@ -60,9 +49,9 @@ class HomePage extends React.Component {
   }
   render() {
     if (
-      this.props.user.get('isFetching') ||
-      this.props.messages.get('isFetching') ||
-      this.props.images.get('isFetching')
+      this.props.user.get('state').get('isFetching') ||
+      this.props.messages.get('state').get('isFetching') ||
+      this.props.images.get('state').get('isFetching')
     ) {
       return <div>Loading spinner</div>;
     }
@@ -179,9 +168,6 @@ HomePage.propTypes = {
     isStale: PropTypes.bool,
     isFetching: PropTypes.bool,
   }),
-  getUserDetails: PropTypes.func,
-  getMessages: PropTypes.func,
-  getImages: PropTypes.func,
   // uploadImage: PropTypes.func,
 };
 

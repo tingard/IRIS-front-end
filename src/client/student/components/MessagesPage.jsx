@@ -4,7 +4,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Message from './Message';
 
 const MessagesPage = (props) => {
-  if (props.isStale) props.getMessages();
   if (props.isFetching) return <div>Loading Spinner</div>;
   return (
     <main
@@ -29,9 +28,7 @@ const MessagesPage = (props) => {
 };
 
 MessagesPage.propTypes = {
-  isStale: PropTypes.bool,
   isFetching: PropTypes.bool,
-  getMessages: PropTypes.func,
   messages: ImmutablePropTypes.listOf(
     ImmutablePropTypes.contains({
       id: PropTypes.string,

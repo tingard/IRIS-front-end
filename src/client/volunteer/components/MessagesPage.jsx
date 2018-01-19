@@ -16,7 +16,7 @@ class MessagesPage extends React.Component {
     };
   }
   render() {
-    if (this.props.messages.get('state').get('isFetching')) {
+    if (this.props.messages.get('state').get('isFetching') && this.props.messages.get('messages').size === 0) {
       return <FullPageSpinner />;
     }
     const routerMessageID = this.props.match.params.messageID || false;
@@ -29,7 +29,7 @@ class MessagesPage extends React.Component {
       return (
         <div className="w3-container w3-panel">
           <h2>You don't have any messages yet.</h2>
-          <p>When a student responds to one of your image replies it'll appear here.</p>
+          <p>When you reply to an image it will appear here.</p>
         </div>
       );
     }

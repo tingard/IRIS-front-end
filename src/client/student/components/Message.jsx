@@ -16,7 +16,7 @@ const Message = (props) => {
         </p>
         <p>
           <span>Most recent message {moment(m.get('sendDate')).fromNow()}.</span>
-          <span>{m.get('fromType') === 'volunteer' ? ' You said:' : ' They said:'} {m.get('message')}</span>
+          <span>{m.get('fromType') === 'student' ? ' You said:' : ' They said:'} {m.get('message')}</span>
         </p>
         <Link
           to={`/messages/${props.id}`}

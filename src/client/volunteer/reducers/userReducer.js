@@ -1,11 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-import { Map } from 'immutable';
+import { Map, Record } from 'immutable';
+
+const StateRecord = new Record({
+  isFetching: false,
+  isStale: false,
+  updateDidFail: false,
+});
 
 const initialState = Map({
   id: '',
-  isFetching: false,
-  isStale: true,
-  updateDidFail: false,
+  state: new StateRecord({ isStale: true }),
   firstName: '',
   lastName: '',
   email: '',
@@ -26,12 +30,18 @@ const initialState = Map({
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_USER_DETAILS':
-      return state.set('isFetching', true).set('isStale', false);
+      return state.set(
+        'state',
+        state.get('state').set('isFetching', true).set('isStale', false),
+      );
     case 'GET_USER_DETAILS_SUCCESS':
       // potentially many changes, so simply gonna update things here
       return state.mergeDeep(action.res.volunteer)
-        .set('isFetching', false)
-        .set('isStale', false)
+        .set('state',
+          state.get('state')
+            .set('isFetching', false)
+            .set('isStale', false),
+        )
         .set('id', action.res.volunteer._id)
         .remove('_id');
     case 'SET_USER_DETAILS':

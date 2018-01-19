@@ -66,8 +66,6 @@ ImagesPage.propTypes = {
       imageId: PropTypes.string,
     }),
   ),
-  isStale: PropTypes.bool,
-  isFetching: PropTypes.bool,
   /* eslint-enable react/no-unused-prop-types */
   // markImageAsDone: PropTypes.func,
   // deleteImage: PropTypes.func,

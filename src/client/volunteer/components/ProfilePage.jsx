@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Select from 'react-select';
+import moment from 'moment';
 
 import Circle from '../svg/basic-circle.svg';
 import FullPageSpinner from './FullPageSpinner';
@@ -21,7 +22,7 @@ const level = [
 ];
 
 const ProfilePage = (props) => {
-  if (props.user.get('isFetching')) return <FullPageSpinner />;
+  if (props.user.get('state').get('isFetching')) return <FullPageSpinner />;
   return (
     <div className="profile-page">
       <div className="row">
@@ -34,7 +35,7 @@ const ProfilePage = (props) => {
             </div>
             <div className="w3-col s8">
               <h3>{props.user.get('firstName')} {props.user.get('lastName')}</h3>
-              <p>Active since {props.user.get('creationDate')}</p>
+              <p>Active since {moment(props.user.get('creationDate')).fromNow()}</p>
               <p>Points: {props.user.get('points')}</p>
             </div>
           </div>

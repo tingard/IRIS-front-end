@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import MessagesPage from '../components/MessagesPage';
-import { getMessages } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   let messages;
@@ -13,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
   }
   const r = {
     isStale: state.messages.get('state').get('isStale'),
-    isFetching: state.messages.get('isFetching'),
+    isFetching: state.messages.get('state').get('isFetching'),
     messages: messages.sort(
       (m1, m2) => (
         m2.get('messageChain').get(m2.get('messageChain').size - 1).get('sendDate') -
@@ -25,8 +24,4 @@ const mapStateToProps = (state, ownProps) => {
   return r;
 };
 
-const mapDispatchToProps = dispatch => ({
-  getMessages: () => dispatch(getMessages()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MessagesPage);
+export default connect(mapStateToProps)(MessagesPage);

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
-import { getMessages, sendMessage } from '../actions';
+import { sendMessage } from '../actions';
 
 import MessageChainPage from '../components/ConversationPage';
 
@@ -11,15 +11,13 @@ const mapStateToProps = (state, ownProps) => {
   const r = {
     id: m.size ? m.get(0).get('id') : null,
     user: state.user,
-    isStale: state.messages.get('isStale'),
-    isFetching: state.messages.get('isFetching'),
+    isFetching: state.messages.get('state').get('isFetching'),
     message: m.size ? m.get(0) : Map({}),
   };
   console.log(r); return r;
 };
 
 const mapDispatchToProps = dispatch => ({
-  getMessages: () => dispatch(getMessages()),
   sendMessage: m => dispatch(sendMessage(m)),
 });
 

@@ -32,7 +32,7 @@ const App = () => (
   <div>
     <Navbar />
     <ApiWrapper>
-      <section className="content-section">
+      <section className="volunteer-app content-section">
         <Switch>
           <Route exact path="/" component={homePage} />
           <Route path="/profile" component={ProfilePage} />

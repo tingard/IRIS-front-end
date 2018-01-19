@@ -43,8 +43,7 @@ class HomePage extends React.Component {
     this.setState({ selectedSubject: val.value });
   }
   render() {
-    console.log(JSON.stringify(this.props.cards));
-    if (this.props.cards.get('isFetching') || this.props.user.get('isFetching') || this.props.user.get('isFetching')) {
+    if (this.props.cards.get('state').get('isFetching') || this.props.user.get('isFetching')) {
       return <FullPageSpinner />;
     }
     const cardListGood = this.props.cards.get('cards').filter(
@@ -104,8 +103,9 @@ HomePage.propTypes = {
         key: PropTypes.string,
       }),
     ),
-    isFetching: PropTypes.bool,
-    isStale: PropTypes.bool,
+    state: ImmutablePropTypes.contains({
+      isFetching: PropTypes.bool,
+    }),
   }),
   user: ImmutablePropTypes.contains({
     level: ImmutablePropTypes.contains({
@@ -114,6 +114,9 @@ HomePage.propTypes = {
       chemistry: PropTypes.number,
       maths: PropTypes.number,
       computerScience: PropTypes.number,
+    }),
+    state: ImmutablePropTypes.contains({
+      isFetching: PropTypes.bool,
     }),
   }),
 };

@@ -3,8 +3,7 @@ import ImagesPage from '../components/ImagesPage';
 
 const mapStateToProps = state => ({
   user: state.user,
-  isStale: state.images.get('isStale') || state.messages.get('isStale'),
-  isFetching: state.images.get('isFetching') || state.messages.get('isFetching'),
+  isFetching: state.images.get('state').get('isFetching') || state.messages.get('state').get('isFetching'),
   images: state.images.get('images'),
   messages: state.messages.get('messages'),
 });

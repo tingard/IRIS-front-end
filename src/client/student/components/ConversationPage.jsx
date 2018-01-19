@@ -16,11 +16,6 @@ class ConversationPage extends Component {
     this.setOrder = this.setOrder.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
   }
-  componentDidMount() {
-    if (this.props.isStale) {
-      this.props.getMessages();
-    }
-  }
   setOrder() {
     // TODO: should this be reflected in redux?
     this.setState({ messageOrder: this.messageOrderSelector.value });
@@ -29,16 +24,18 @@ class ConversationPage extends Component {
     this.props.sendMessage(
       { messageId: this.props.id, message: this.input.value },
     );
+    this.input.value = '';
   }
   render() {
     if (this.props.isFetching) return <div>Loading spinner</div>;
     if (this.props.message.get('messageChain').size === 0) {
       return <Redirect to="/messages" />;
     }
+    // breaks for two equal dates, is this a problem?
     const sortFunction = this.state.messageOrder === 'newest' ? (
-      (m1, m2) => m2.date - m1.date
+      (m1, m2) => (m1.get('sendDate') < m2.get('sendDate') ? 1 : -1)
     ) : (
-      (m1, m2) => m1.date - m2.date
+      (m1, m2) => (m1.get('sendDate') > m2.get('sendDate') ? 1 : -1)
     );
     const sortedMessages = this.props.message.get('messageChain').sort(sortFunction);
     if (this.props.id !== null) {
@@ -133,7 +130,6 @@ class ConversationPage extends Component {
 
 ConversationPage.propTypes = {
   id: PropTypes.string,
-  isStale: PropTypes.bool,
   isFetching: PropTypes.bool,
   message: ImmutablePropTypes.contains({
     messageChain: ImmutablePropTypes.listOf(
@@ -148,7 +144,6 @@ ConversationPage.propTypes = {
     }),
   }),
   sendMessage: PropTypes.func,
-  getMessages: PropTypes.func,
 };
 
 ConversationPage.defaultProps = {

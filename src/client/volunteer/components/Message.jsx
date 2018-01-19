@@ -90,7 +90,12 @@ class Message extends React.Component {
           }
         </div>
         <div className="w3-row messages-submit">
-          <input className="w3-input" type="text" ref={(r) => { this.input = r; }} />
+          <input
+            className="w3-input"
+            type="text"
+            ref={(r) => { this.input = r; }}
+            onKeyPress={e => (e.key === 'Enter' ? this.sendMessage() : null)}
+          />
           <button
             className="submit-reply-button w3-button w3-border w3-round w3-right"
             onClick={this.sendMessage}

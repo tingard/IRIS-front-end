@@ -1,10 +1,14 @@
-import { Map, List } from 'immutable';
+import { Map, List, Record } from 'immutable';
 
 // const url = require('../../images/test.jpg');
+const StateRecord = new Record({
+  isFetching: false,
+  isStale: false,
+  updateDidFail: false,
+});
 
 const initialState = Map({
-  isFetching: false,
-  isStale: true,
+  state: new StateRecord({ isStale: true }),
   updateDidFail: false,
   cards: List([]),
 });
@@ -12,9 +16,12 @@ const initialState = Map({
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_IMAGES':
-      return state.merge({ isFetching: true });
+      return state.set('state', state.get('state').set('isFetching', true));
     case 'GET_IMAGES_SUCCESS':
-      return state.merge({ cards: action.res.images, isStale: false, isFetching: false });
+      return state.merge({
+        cards: action.res.images,
+        state: state.get('state').set('isStale', false).set('isFetching', false),
+      });
     default:
       return state;
   }

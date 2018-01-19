@@ -27,6 +27,7 @@ class CardPage extends React.Component {
       imageId: this.props.card.get('id'),
       message: this.textarea.value,
     });
+    this.props.history.push('/');
   }
   render() {
     return this.props.card != null ? (
@@ -93,6 +94,9 @@ CardPage.propTypes = {
     id: PropTypes.string,
     url: PropTypes.string,
     question: PropTypes.string,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }),
   sendMessage: PropTypes.func,
 };

@@ -7,6 +7,10 @@ const mapStateToProps = state => ({
       c => !state.messages.get('messages').map(
         m => m.get('image').get('id') === c.get('id'),
       ).some(i => i),
+    ).filter(
+      c => !state.messages.get('pendingMessages').map(
+        m => m.get('imageId') === c.get('id'),
+      ).some(i => i),
     ),
   }),
   user: state.user,

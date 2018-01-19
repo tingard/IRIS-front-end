@@ -30,7 +30,7 @@ const fetch = type => (
 export const userDetails = {
   get: {
     name: 'GET_USER_DETAILS',
-    sendRequest: () => ({ type: 'GET_USER_DETAILS_REQUEST' }),
+    sendRequest: () => ({ type: 'GET_USER_DETAILS' }),
     success: res => ({ type: 'GET_USER_DETAILS_SUCCESS', res }),
     failure: error => ({ type: 'GET_USER_DETAILS_FAILURE', error }),
   },

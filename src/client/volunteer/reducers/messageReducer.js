@@ -13,6 +13,14 @@ const StateRecord = new Record({
   imageReplyDidFail: false,
 });
 
+const MessageTemplate = new Record({
+  imageId: null,
+  chainId: null,
+  message: '',
+  fromType: 'volunteer',
+  sendDate: (new Date()).toISOString(),
+});
+
 const initialState = Map({
   state: new StateRecord({ isStale: true }),
   messages: List([]),
@@ -42,10 +50,19 @@ const messageReducer = (state = initialState, action) => {
         return state.set(
           'pendingMessages',
           state.get('pendingMessages')
-            .push(Map({
+            .push(new MessageTemplate({
               chainId: action.message.messageId,
               message: action.message.message,
-              fromType: 'volunteer',
+              sendDate: (new Date()).toISOString(),
+            })),
+        );
+      } else if (action.message.imageId || false) {
+        return state.set(
+          'pendingMessages',
+          state.get('pendingMessages')
+            .push(new MessageTemplate({
+              imageId: action.message.imageId,
+              message: action.message.message,
               sendDate: (new Date()).toISOString(),
             })),
         );
@@ -62,7 +79,8 @@ const messageReducer = (state = initialState, action) => {
       return state.set(
         'state',
         state.get('state')
-          .set('sendMessageDidFail', false),
+          .set('sendMessageDidFail', false)
+          .set('isStale', true),
       );
     default:
       return state;
