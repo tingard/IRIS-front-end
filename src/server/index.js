@@ -16,7 +16,7 @@ const domain = config.HOST;
 // serve up compiled static assets if we're in production mode
 app.use(express.static(path.join(__dirname, '../../dist')));
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   app.use(express.static(path.join(__dirname, '../../dist')));
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });

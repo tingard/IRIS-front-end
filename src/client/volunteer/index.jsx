@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
@@ -28,9 +29,9 @@ const store = createStore(
   applyMiddleware(thunkMiddleware, loggerMiddleware),
 );
 
-const App = () => (
-  <div>
-    <Navbar />
+const App = () => [
+  <Navbar key="iris-volunteer-navbar" />,
+  <Provider store={store} key="iris-volunteer-provider">
     <ApiWrapper>
       <section className="volunteer-app content-section">
         <Switch>
@@ -42,10 +43,7 @@ const App = () => (
         </Switch>
       </section>
     </ApiWrapper>
-  </div>
-);
+  </Provider>,
+];
 
-export {
-  store,
-  App,
-};
+export default App;
