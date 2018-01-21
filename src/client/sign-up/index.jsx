@@ -26,7 +26,8 @@ class Login extends React.Component {
         <h1 className="w3-center w3-padding-16">
           <img
             src="/images/irisProposed_withoutBackground_small.png"
-            alt={irisAltText} width="80px"
+            alt={irisAltText}
+            width="80px"
           />
           Sign up to IRIS
         </h1>

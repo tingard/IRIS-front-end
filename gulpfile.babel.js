@@ -57,11 +57,11 @@ gulp.task('clean', () => del([
   paths.distCssFile,
 ]));
 
-gulp.task('webpack', () =>
+gulp.task('webpack', () => (
   gulp.src(paths.clientEntryPoint)
     .pipe(webpack(webpackConfig))
-    .pipe(gulp.dest(paths.distDir)),
-);
+    .pipe(gulp.dest(paths.distDir))
+));
 
 gulp.task('sass-styles', () => {
   gulp.src(paths.clientSrcScss)

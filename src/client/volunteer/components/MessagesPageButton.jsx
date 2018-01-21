@@ -1,7 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import MessagesIcon from '../svg/messages-icon.svg';
+import Icon from './MessagesPageIcon';
 
-const MessagesPageButton = () => <NavLink exact to="/messages"><MessagesIcon /></NavLink>;
+const MessagesPageButton = () => (
+  <NavLink exact to="/messages">
+    <Icon />
+  </NavLink>
+);
 
 export default MessagesPageButton;
