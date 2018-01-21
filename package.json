@@ -14,6 +14,7 @@
     "lint": "gulp lint",
     "jest": "jest",
     "test": "gulp lint && jest",
+    "test-travis": "gulp lint && jest --passWithNoTests",
     "precommit": "gulp lint && jest --passWithNoTests"
   },
   "devDependencies": {
