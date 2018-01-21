@@ -34,9 +34,11 @@ class UtypeSelect extends React.Component {
               className="w3-display-middle select-style large"
             >
               {options.map(
-                o => <option value={o.value} key={`sign-up-select-${o.value}`}>
-                  {o.label}
-                </option>,
+                o => (
+                  <option value={o.value} key={`sign-up-select-${o.value}`}>
+                    {o.label}
+                  </option>
+                ),
               )}
             </select>
           </div>

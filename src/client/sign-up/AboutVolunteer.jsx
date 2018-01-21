@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -54,8 +55,7 @@ class AboutVolunteer extends React.Component {
     const payload = {
       utype: 'volunteer',
       email: this.emailInput.value,
-      firstName: this.nameInput.value,
-      lastName: '',
+      name: this.nameInput.value,
       pwd: this.passwordInput.value,
       levels: {},
     };
@@ -94,7 +94,8 @@ class AboutVolunteer extends React.Component {
           </div>
         </div>
         <div
-          className="w3-row w3-padding-16" role="group"
+          className="w3-row w3-padding-16"
+          role="group"
           aria-label="What is your email address"
         >
           {wrapQuestion('And your email address?', 'email-input')}
@@ -110,7 +111,8 @@ class AboutVolunteer extends React.Component {
           </div>
         </div>
         <div
-          className="w3-row w3-padding-16" role="group"
+          className="w3-row w3-padding-16"
+          role="group"
           aria-label="Which subjects can you help with?"
         >
           {wrapQuestion('What subjects would you like to help with?', '')}
@@ -132,7 +134,8 @@ class AboutVolunteer extends React.Component {
           </div>
         </div>
         <div
-          className="w3-row w3-padding-16" role="group"
+          className="w3-row w3-padding-16"
+          role="group"
           aria-label="Set a password"
         >
           {wrapQuestion('Lastly, set a password:', 'passwordInput')}

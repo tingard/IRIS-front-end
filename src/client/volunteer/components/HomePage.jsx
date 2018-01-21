@@ -56,8 +56,8 @@ class HomePage extends React.Component {
       card => (
         this.state.selectedSubject === 'any' || card.get('subject') === this.state.selectedSubject
       ) && (
-        parseFloat(this.state.selectedLevel) >= parseFloat(card.get('difficulty'))
-      ),
+          parseFloat(this.state.selectedLevel) >= parseFloat(card.get('difficulty'))
+        ),
     ).map(
       card => <ImageCard {...card.toObject()} key={card.get('id')} user={this.props.user} />,
     );

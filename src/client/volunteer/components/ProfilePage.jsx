@@ -4,7 +4,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Select from 'react-select';
 import moment from 'moment';
 
-import Circle from '../svg/basic-circle.svg';
 import FullPageSpinner from './FullPageSpinner';
 
 const subjects = [
@@ -30,7 +29,11 @@ const ProfilePage = (props) => {
           <div className="w3-row">
             <div className="w3-col s4">
               <div style={{ padding: '10px', textAlign: 'center' }}>
-                <Circle width={100} />
+                <img
+                  src="images/irisProposed_withoutBackground_small.png"
+                  alt="user badge"
+                  width={100}
+                />
               </div>
             </div>
             <div className="w3-col s8">

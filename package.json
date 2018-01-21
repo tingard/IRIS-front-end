@@ -10,40 +10,43 @@
     "start-dev": "gulp start-dev",
     "postinstall": "gulp compile",
     "compile": "gulp",
-    "lint": "gulp lint",
     "start": "node src/server",
+    "lint": "gulp lint",
+    "jest": "jest",
     "test": "gulp lint && jest",
-    "precommit": "gulp lint && jest"
+    "precommit": "gulp lint && jest --passWithNoTests"
   },
   "devDependencies": {
     "assert": "^1.4.1",
-    "eslint": "^3.10.2",
-    "eslint-config-airbnb": "^13.0.0",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "2.2.3",
-    "eslint-plugin-react": "^6.7.1",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
     "husky": "^0.14.3",
-    "jest": "^21.2.1",
-    "jest-cli": "^21.2.1"
+    "jest": "^22.1.4",
+    "jest-cli": "^22.1.4"
   },
   "dependencies": {
-    "babel-jest": "^19.0.0",
-    "babel-loader": "^6.2.8",
+    "babel-core": "6",
+    "babel-jest": "22.1.0",
+    "babel-loader": "7.1.2",
+    "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-polyfill": "^6.16.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.16.0",
     "babel-register": "^6.26.0",
-    "del": "^2.2.2",
+    "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "enzyme": "^3.3.0",
     "express": "^4.14.0",
-    "file-loader": "^0.9.0",
+    "file-loader": "^1.1.6",
     "grapheel-iris-client-api": "^1.2.0",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
+    "gulp-babel": "^7.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-env": "^0.4.0",
-    "gulp-eslint": "^3.0.1",
+    "gulp-eslint": "^4.0.1",
     "gulp-line-ending-corrector": "^1.0.1",
     "gulp-nodemon": "^2.2.1",
     "gulp-sass": "^3.1.0",
@@ -55,18 +58,18 @@
     "react-aria-modal": "^2.12.0",
     "react-dom": "^16.2.0",
     "react-immutable-proptypes": "^2.1.0",
-    "react-redux": "^4.4.6",
-    "react-responsive": "^1.3.4",
+    "react-redux": "^5.0.6",
+    "react-responsive": "^4.0.3",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "next",
     "react-select": "^1.0.0-rc.10",
     "react-spinners": "^0.2.5",
-    "react-svg-loader": "^1.1.1",
+    "react-stripe-elements": "^1.4.0",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "webpack": "^1.13.3",
-    "webpack-stream": "^3.2.0"
+    "webpack": "^3.10.0",
+    "webpack-stream": "^4.0.0"
   },
   "babel": {
     "presets": [
@@ -82,6 +85,7 @@
   "eslintConfig": {
     "extends": "airbnb",
     "plugins": [
+      "react",
       "import"
     ],
     "env": {
@@ -90,15 +94,43 @@
       "node": true,
       "jest": true
     },
+    "globals": {
+      "Stripe": true
+    },
     "rules": {
-      "no-plusplus": 0,
+      "function-paren-newline": 0,
+      "jsx-a11y/anchor-is-valid": [
+        "error",
+        {
+          "components": [
+            "Link"
+          ],
+          "specialLink": [
+            "to"
+          ],
+          "aspects": [
+            "noHref",
+            "invalidHref",
+            "preferButton"
+          ]
+        }
+      ],
+      "jsx-a11y/label-has-for": "warn",
+      "jsx-a11y/no-autofocus": "warn",
+      "jsx-a11y/no-noninteractive-element-to-interactive-role": 0,
+      "jsx-a11y/no-noninteractive-tabindex": 1,
+      "jsx-a11y/no-redundant-roles": 0,
       "no-console": 0,
+      "no-restricted-globals": "warn",
       "react/forbid-prop-types": [
         1
       ],
+      "react/no-array-index-key": 0,
       "react/no-unescaped-entities": [
         0
       ],
+      "react/no-unused-state": "warn",
+      "react/require-default-props": 0,
       "new-cap": [
         2,
         {

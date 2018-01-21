@@ -40,7 +40,7 @@ class MessagesPage extends React.Component {
         {this.props.match.params.messageID ?
           /* We have a selected message */
           <MediaQuery minWidth={601}>
-            {/* That's not been scaled down*/}
+            {/* That's not been scaled down */}
             <div className="w3-col m4 message-page-navigation">
               {this.props.messages.get('messages').map(m => <MessagePreview key={m.get('id')} {...m.toObject()} />)}
             </div>
@@ -55,7 +55,7 @@ class MessagesPage extends React.Component {
         {!routerMessageID ?
           /* We do not have a selected message */
           <MediaQuery minWidth={601}>
-            {/* That's not been scaled down*/}
+            {/* That's not been scaled down */}
             <div className="w3-col m8 message-page-content">
               <Message message={selectedMessage} />
             </div>

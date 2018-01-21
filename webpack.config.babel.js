@@ -14,13 +14,9 @@ export default {
         test: /\.(jpg|png|gif|otf|eot|ttf|woff\d?)$/,
         loader: 'file-loader',
       },
-      {
-        test: /\.svg$/,
-        loader: 'babel-loader!react-svg-loader?jsx=1',
-      },
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
 };

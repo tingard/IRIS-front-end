@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { List } from 'immutable';
 import moment from 'moment';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -144,10 +143,6 @@ ConversationPage.propTypes = {
     }),
   }),
   sendMessage: PropTypes.func,
-};
-
-ConversationPage.defaultProps = {
-  messageChain: List([]),
 };
 
 export default ConversationPage;

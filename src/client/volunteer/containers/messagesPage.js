@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
             m.get('messageChain').size - 1,
           ).get('sendDate'),
         ).reverse(),
-      ),
+    ),
     user: state.user,
   });
   return r;
