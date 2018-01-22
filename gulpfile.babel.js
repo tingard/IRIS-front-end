@@ -17,11 +17,13 @@ const paths = {
   clientSrcScss: 'src/client/*/styles/sass/*.scss',
   clientSrcCss: 'src/client/*/styles/css/',
   distCssFile: 'dist/styles/',
+  distManifestFile: 'dist/manifest.json',
   serverSrcJs: 'src/server/**/*.js?(x)',
   sharedSrcJs: 'src/shared/**/*.js?(x)',
   clientEntryPoint: 'src/client/index.jsx',
   serverEntryPoint: 'src/server/index.js',
   clientBundle: 'dist/client-bundle.js?(.map)',
+  manifestFile: 'manifest.json',
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',
   libDir: 'lib',
@@ -30,8 +32,9 @@ const paths = {
 };
 
 gulp.task('default', ['lint', 'clean'], () => {
-  gulp.start('webpack');
   gulp.start('sass-styles');
+  gulp.start('move-manifest');
+  return gulp.start('webpack');
 });
 
 gulp.task('lint', () =>
@@ -46,15 +49,20 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError()),
 );
 
+gulp.task('move-manifest', () => (
+  gulp.src(paths.manifestFile).pipe(gulp.dest(paths.distDir))),
+);
+
 gulp.task('compile', ['clean'], () => {
-  gulp.start('webpack');
   gulp.start('sass-styles');
+  return gulp.start('webpack');
 });
 
 gulp.task('clean', () => del([
   paths.libDir,
   paths.clientBundle,
   paths.distCssFile,
+  paths.distManifestFile,
 ]));
 
 gulp.task('webpack', () => (
@@ -68,13 +76,13 @@ gulp.task('sass-styles', () => {
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(concat('main.css'))
     .pipe(gulp.dest(paths.distCssFile));
-  gulp.src(paths.reactSelectCSS)
+  return gulp.src(paths.reactSelectCSS)
     .pipe(gulp.dest(paths.distCssFile));
 });
 
-gulp.task('watch', ['default'], () => {
-  gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['default']);
-});
+gulp.task('watch', ['default'], () => (
+  gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['default'])),
+);
 
 gulp.task('start-dev', ['default'], () => {
   env({

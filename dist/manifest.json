@@ -1,0 +1,12 @@
+{
+  "short_name": "IRIS",
+  "name": "Grapheel IRIS",
+  "icons": [
+    {
+      "src": "irisProposed_withoutBackground_small.png",
+      "type": "image/png",
+      "sizes": "100x100"
+    },
+  ],
+  "start_url": "index.html?launcher=true"
+}
