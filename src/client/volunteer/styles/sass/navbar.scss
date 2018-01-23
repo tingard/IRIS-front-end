@@ -34,10 +34,18 @@
     display: flex;
     align-items: center;
     height: 100%;
-    &[aria-current=true] {
-      svg {
-        .iconCircle {
-          fill: #eee;
+    &[aria-current=false]:hover {
+      background-color: #eee;
+      .iconCenter {
+        fill: #fff
+      }
+      .iconCircle {
+        fill: #eee;
+        &.messages-icon, &.profile-icon {
+          fill: #efe;
+        }
+        &.home-icon {
+          fill: #fee;
         }
       }
     }
@@ -49,13 +57,13 @@
       display: block;
       .iconCenter, .iconCircle{
         @include color-transition(200ms);
+        fill: #fff;
       }
-      :hover {
-        .iconCenter {
-          fill: #fff
-        }
+    }
+    &[aria-current=true] {
+      svg {
         .iconCircle {
-          fill: #666;
+          fill: #aaa;
         }
       }
     }

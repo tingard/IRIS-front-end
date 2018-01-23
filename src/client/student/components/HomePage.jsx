@@ -12,7 +12,7 @@ class HomePage extends React.Component {
     this.inputs = {};
     this.formShouldSubmit = this.formShouldSubmit.bind(this);
     this.state = {
-      modalActive: false,
+      successDialogActive: false,
     };
   }
   formShouldSubmit(e) {
@@ -37,7 +37,7 @@ class HomePage extends React.Component {
       formData.append('note', data.note);
       formData.append('difficulty', data.difficulty);
       formData.append('subject', data.subject);
-      // this.props.uploadImage(formData);
+      this.props.uploadImage(formData);
       this.setState({ successDialogActive: true });
       this.inputs.imageInput.value = '';
       this.inputs.questionInput.value = '';
@@ -57,7 +57,7 @@ class HomePage extends React.Component {
     }
     return (
       <div className="w3-container w3-animate-opacity">
-        <h1>Welcome back, {this.props.user.get('firstName')}</h1>
+        <h1>Welcome back, {this.props.user.get('name')}</h1>
         <div role="alert">
           {this.state.successDialogActive ? (
             <div
@@ -78,68 +78,68 @@ class HomePage extends React.Component {
             </div>
           ) : null}
         </div>
-        <section role="group" aria-labelledby="upload-image-section-header">
+        <section>
           <h3 id="upload-image-section-header">Upload an Image:</h3>
           <form
             onSubmit={this.formShouldSubmit}
           >
             <label htmlFor="imageInput" className="w3-panel">
               Select image to upload
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                id="imageInput"
+                ref={(r) => { this.inputs.imageInput = r; }}
+                className="w3-input"
+              />
             </label>
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              id="imageInput"
-              ref={(r) => { this.inputs.imageInput = r; }}
-              className="w3-input"
-            />
             <label htmlFor="questionInput" className="w3-panel">
               Specify a short question to ask volunteers
+              <input
+                type="text"
+                name="question"
+                id="questionInput"
+                ref={(r) => { this.inputs.questionInput = r; }}
+                className="w3-input w3-border"
+              />
             </label>
-            <input
-              type="text"
-              name="question"
-              id="questionInput"
-              ref={(r) => { this.inputs.questionInput = r; }}
-              className="w3-input w3-border"
-            />
             <label htmlFor="noteInput" className="w3-panel">
               Add a note for yourself to identify this image
+              <input
+                type="text"
+                name="note"
+                id="noteInput"
+                ref={(r) => { this.inputs.noteInput = r; }}
+                className="w3-input w3-border"
+              />
             </label>
-            <input
-              type="text"
-              name="note"
-              id="noteInput"
-              ref={(r) => { this.inputs.noteInput = r; }}
-              className="w3-input w3-border"
-            />
             <label htmlFor="subjectInput" className="w3-panel">
               What subject field is this image from?
+              <select
+                id="subjectInput"
+                ref={(r) => { this.inputs.subjectInput = r; }}
+                className="w3-input w3-border"
+              >
+                <option value="maths">Maths</option>
+                <option value="physics">Physics</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="biology">Biology</option>
+                <option value="computer-science">Computer Science</option>
+              </select>
             </label>
-            <select
-              id="subjectInput"
-              ref={(r) => { this.inputs.subjectInput = r; }}
-              className="w3-input w3-border"
-            >
-              <option value="maths">Maths</option>
-              <option value="physics">Physics</option>
-              <option value="chemistry">Chemistry</option>
-              <option value="biology">Biology</option>
-              <option value="computer-science">Computer Science</option>
-            </select>
             <label htmlFor="difficultyInput" className="w3-panel">
               What study level is this image?
+              <select
+                id="difficultyInput"
+                ref={(r) => { this.inputs.difficultyInput = r; }}
+                className="w3-input w3-border"
+              >
+                <option value="0">GCSE level or below</option>
+                <option value="1">A-level</option>
+                <option value="2">Degree Level</option>
+              </select>
             </label>
-            <select
-              id="difficultyInput"
-              ref={(r) => { this.inputs.difficultyInput = r; }}
-              className="w3-input w3-border"
-            >
-              <option value="0">GCSE level or below</option>
-              <option value="1">A-level</option>
-              <option value="2">Degree Level</option>
-            </select>
             <button
               className="w3-button w3-green w3-panel"
               ref={(r) => { this.submitBtn = r; }}
@@ -156,7 +156,7 @@ class HomePage extends React.Component {
 
 HomePage.propTypes = {
   user: ImmutablePropTypes.contains({
-    firstName: PropTypes.string,
+    name: PropTypes.string,
     isStale: PropTypes.bool,
     isFetching: PropTypes.bool,
   }),
@@ -168,7 +168,7 @@ HomePage.propTypes = {
     isStale: PropTypes.bool,
     isFetching: PropTypes.bool,
   }),
-  // uploadImage: PropTypes.func,
+  uploadImage: PropTypes.func,
 };
 
 export default HomePage;

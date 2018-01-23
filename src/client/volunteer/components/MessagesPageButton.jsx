@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Icon from './MessagesPageIcon';
+import Icon from './icons/MessagesPageIcon';
 
 const MessagesPageButton = () => (
   <NavLink exact to="/messages">

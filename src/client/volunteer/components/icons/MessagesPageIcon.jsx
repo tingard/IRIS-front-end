@@ -1,5 +1,6 @@
 import React from 'react';
 import Shadow from './SvgShadow';
+import IconCircle from './IconCircle';
 
 export default () => (
   <svg
@@ -18,15 +19,7 @@ export default () => (
         id="g4909"
         transform="matrix(0.25220753,0,0,0.25220753,16.337043,13.161151)"
       >
-        <circle
-          r="57.074402"
-          cy="86.089287"
-          cx="90.336311"
-          id="path21"
-          className="iconCircle"
-          filter="url(#iris-svg-shadow)"
-          style={{ fill: '#ffffff', strokeWidth: 0.3444145 }}
-        />
+        <IconCircle className="messages-icon" />
         <g
           id="g1452"
           className="iconCenter"

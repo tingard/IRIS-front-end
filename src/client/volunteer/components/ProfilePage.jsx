@@ -37,7 +37,7 @@ const ProfilePage = (props) => {
               </div>
             </div>
             <div className="w3-col s8">
-              <h3>{props.user.get('firstName')} {props.user.get('lastName')}</h3>
+              <h3>{props.user.get('name')}</h3>
               <p>Active since {moment(props.user.get('creationDate')).fromNow()}</p>
               <p>Points: {props.user.get('points')}</p>
             </div>
@@ -93,8 +93,7 @@ const ProfilePage = (props) => {
 
 ProfilePage.propTypes = {
   user: ImmutablePropTypes.contains({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
+    name: PropTypes.string,
     emailNotifications: PropTypes.bool,
     browserNotifications: PropTypes.bool,
     points: PropTypes.number,

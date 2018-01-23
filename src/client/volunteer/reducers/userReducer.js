@@ -10,8 +10,7 @@ const StateRecord = new Record({
 const initialState = Map({
   id: '',
   state: new StateRecord({ isStale: true }),
-  firstName: '',
-  lastName: '',
+  name: '',
   email: '',
   points: 0,
   rating: 0,

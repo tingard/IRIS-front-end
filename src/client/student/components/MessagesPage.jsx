@@ -7,7 +7,6 @@ const MessagesPage = (props) => {
   if (props.isFetching) return <div>Loading Spinner</div>;
   return (
     <main
-      role="region"
       aria-labelledby="messages-header"
       className="w3-container w3-animate-opacity"
     >

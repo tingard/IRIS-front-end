@@ -8,7 +8,7 @@ const ProfilePage = props => (
     <div className="w3-container w3-animate-opacity">
       <div className="w3-panel">
         <h1>Your Profile:</h1>
-        <p>Name: {props.firstName} {props.lastName}</p>
+        <p>Name: {props.name}</p>
         <p>Email: {props.email}</p>
       </div>
       <p>TODO: browser / email notification preferences</p>
@@ -33,8 +33,7 @@ const ProfilePage = props => (
 );
 
 ProfilePage.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
+  name: PropTypes.string,
   email: PropTypes.string,
   state: ImmutablePropTypes.contains({
     isFetching: PropTypes.bool,
