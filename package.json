@@ -15,7 +15,7 @@
     "jest": "jest",
     "test": "gulp lint && jest",
     "test-travis": "gulp lint && jest --passWithNoTests",
-    "precommit": "gulp lint && jest --passWithNoTests"
+    "precommit": "eslint \"./src/**/*.js?(x)\" -c ./package.json && jest --passWithNoTests"
   },
   "devDependencies": {
     "assert": "^1.4.1",
