@@ -7,6 +7,7 @@ import nodemon from 'gulp-nodemon';
 import env from 'gulp-env';
 import sass from 'gulp-sass';
 import concat from 'gulp-concat';
+import gzip from 'gulp-gzip';
 // import rename from 'gulp-rename';
 import del from 'del';
 import webpackStream from 'webpack-stream';
@@ -104,6 +105,7 @@ gulp.task('clean', () => del([
 gulp.task('webpack', () => (
   gulp.src(paths.clientEntryPoint)
     .pipe(webpackStream(webpackConfig))
+    .pipe(gzip())
     .pipe(gulp.dest(paths.distDir))
 ));
 
