@@ -16,7 +16,7 @@ const filters = {
     { value: 'biology', label: 'Biology students' },
     { value: 'chemistry', label: 'Chemistry students' },
     { value: 'maths', label: 'Maths students' },
-    { value: 'computer-science', label: 'Computer Science students' },
+    { value: 'computerScience', label: 'Computer Science students' },
   ],
   level: [
     { value: '4', label: 'Any level' },
