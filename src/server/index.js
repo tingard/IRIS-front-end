@@ -14,12 +14,23 @@ const domain = config.HOST;
 // -----------------------------------------------------------------------------
 
 // serve up compiled static assets if we're in production mode
-app.use(express.static(path.join(__dirname, '../../dist')));
+// app.use(express.static(path.join(__dirname, '../../dist')));
 
-app.get('/*', (req, res) => {
-  app.use(express.static(path.join(__dirname, '../../dist')));
+app.get('/client-bundle.js', (req, res, next) => {
+  console.log('someone requested non gzipped 😱');
+  req.url += '.gz';
+  next();
+});
+
+app.get('/client-bundle.js.gz', (req, res, next) => {
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });
+
+app.use(express.static(path.join(__dirname, '../../dist')));
 
 app.listen(port, domain, (err) => {
   if (err) {
