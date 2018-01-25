@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /*
  Copyright 2015 Google Inc. All Rights Reserved.
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -75,7 +76,6 @@ self.addEventListener('fetch', (event) => {
   if (event.request.mode === 'navigate' ||
       (event.request.method === 'GET' &&
        event.request.headers.get('accept').includes('text/html'))) {
-    console.log('Handling fetch event for', event.request.url);
     event.respondWith(
       fetch(event.request).catch((error) => {
         // The catch is only triggered if fetch() throws an exception, which will most likely

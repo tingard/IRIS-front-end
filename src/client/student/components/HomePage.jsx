@@ -125,7 +125,7 @@ class HomePage extends React.Component {
                 <option value="physics">Physics</option>
                 <option value="chemistry">Chemistry</option>
                 <option value="biology">Biology</option>
-                <option value="computer-science">Computer Science</option>
+                <option value="computerScience">Computer Science</option>
               </select>
             </label>
             <label htmlFor="difficultyInput" className="w3-panel">
