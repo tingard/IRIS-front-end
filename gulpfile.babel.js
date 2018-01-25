@@ -7,6 +7,7 @@ import nodemon from 'gulp-nodemon';
 import env from 'gulp-env';
 import sass from 'gulp-sass';
 import concat from 'gulp-concat';
+import rename from 'gulp-rename';
 import del from 'del';
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
@@ -26,16 +27,27 @@ const paths = {
   manifestFile: 'manifest.json',
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',
-  libDir: 'lib',
+  studentServiceWorker: 'src/client/student/service-worker/service-worker.js',
+  studentServiceWorkerOut: 'student-service-worker.js',
+  volunteerServiceWorker: 'src/client/volunteer/service-worker/service-worker.js',
+  volunteerServiceWorkerOut: 'volunteer-service-worker.js',
   distDir: 'dist',
   reactSelectCSS: 'node_modules/react-select/dist/react-select.css',
 };
 
-gulp.task('default', ['lint', 'clean'], () => {
-  gulp.start('sass-styles');
-  gulp.start('move-manifest');
-  return gulp.start('webpack');
-});
+gulp.task('default', ['lint', 'clean'], () => ((
+  gulp.start('sass-styles'),
+  gulp.start('move-manifest'),
+  gulp.start('move-serviceworkers'),
+  gulp.start('webpack')
+)));
+
+gulp.task('compile', ['clean'], () => ((
+  gulp.start('sass-styles'),
+  gulp.start('move-manifest'),
+  gulp.start('move-serviceworkers'),
+  gulp.start('webpack')
+)));
 
 gulp.task('lint', () =>
   gulp.src([
@@ -50,19 +62,24 @@ gulp.task('lint', () =>
 );
 
 gulp.task('move-manifest', () => (
-  gulp.src(paths.manifestFile).pipe(gulp.dest(paths.distDir))),
-);
+  gulp.src(paths.manifestFile).pipe(gulp.dest(paths.distDir))
+));
 
-gulp.task('compile', ['clean'], () => {
-  gulp.start('sass-styles');
-  return gulp.start('webpack');
-});
+gulp.task('move-serviceworkers', () => ((
+  // gulp.src(paths.studentServiceWorker)
+  //   .pipe(rename(paths.studentServiceWorkerOut))
+  //   .pipe(gulp.dest(paths.distDir)),
+  gulp.src(paths.volunteerServiceWorker)
+    .pipe(rename(paths.volunteerServiceWorkerOut))
+    .pipe(gulp.dest(paths.distDir))
+)));
 
 gulp.task('clean', () => del([
-  paths.libDir,
   paths.clientBundle,
   paths.distCssFile,
   paths.distManifestFile,
+  `${paths.distDir}/${paths.studentServiceWorkerOut}`,
+  `${paths.distDir}/${paths.volunteerServiceWorkerOut}`,
 ]));
 
 gulp.task('webpack', () => (
