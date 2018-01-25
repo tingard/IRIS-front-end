@@ -45,10 +45,14 @@ class Message extends React.Component {
           {this.props.message.get('messageChain').map(
             (m, i) => (
               m.get('fromType') === 'volunteer' ? (
-                <div className="w3-row" key={`${this.props.message.get('id')}-${i}`}>
-                  <div className="message-page-message w3-display-container">
+                <div
+                  className="w3-row"
+                  style={{ marginBottom: '30px' }}
+                  key={`${this.props.message.get('id')}-${i}`}
+                >
+                  <div className="message-page-message from-me">
                     <div
-                      className="from-me w3-display-right"
+                      className="w3-display-container"
                       data-deltat={`${moment(m.get('sendDate')).fromNow()}`}
                     >
                       <p>{m.get('message')}</p>
@@ -56,10 +60,14 @@ class Message extends React.Component {
                   </div>
                 </div>
               ) : (
-                <div className="w3-row" key={`${this.props.message.get('id')}-${i}`}>
-                  <div className="message-page-message w3-display-container">
+                <div
+                  className="w3-row"
+                  style={{ marginBottom: '30px' }}
+                  key={`${this.props.message.get('id')}-${i}`}
+                >
+                  <div className="message-page-message from-them">
                     <div
-                      className="from-them w3-display-left"
+                      className="w3-display-container"
                       data-deltat={`${moment(m.get('sendDate')).fromNow()}`}
                     >
                       <p>{m.get('message')}</p>

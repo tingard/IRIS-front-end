@@ -3,15 +3,15 @@
   color: #999;
   position: absolute;
 }
-@mixin messageTag($from, $isTop) {
-  content: $from;
+@mixin messageTag($content, $onRight, $onTop) {
+  content: $content;
   @include messageMetadata();
-  @if $isTop {
+  @if $onTop {
     top: -14px;
   } @else {
     bottom: -14px;
   }
-  @if $from == 'me' {
+  @if $onRight {
     right: 5px;
   } @else {
     left: 5px;
@@ -31,7 +31,6 @@
   }
 }
 .message-page-message {
-  min-height: 80px;
   div {
     max-width: 90%;
     padding: 5px;
@@ -47,26 +46,38 @@
       left: -60px;
     }
   }
-  .from-me {
-    background-color: #fafaff;
-    border: 1px solid #cce;
-    min-width: 150px;
-    &::before {
-      @include messageTag('me', true);
-    }
-    &::after {
-      @include messageTag(attr(data-deltat), false);
+  &.from-me {
+    text-align: right;
+    div {
+      display: inline-block;
+      background-color: #fafaff;
+      border: 1px solid #cce;
+      min-width: 150px;
+      margin-right: 0;
+      margin-left: auto;
+      &::before {
+        @include messageTag('me', true, true);
+      }
+      &::after {
+        @include messageTag(attr(data-deltat), false, false);
+      }
     }
   }
-  .from-them {
-    background-color: #fafafa;
-    border: 1px solid #eee;
-    min-width: 150px;
-    &::before {
-      @include messageTag('student', true);
-    }
-    &::after {
-      @include messageTag(attr(data-deltat), false);
+  &.from-them {
+    text-align: left;
+    div {
+      display: inline-block;
+      background-color: #fafafa;
+      border: 1px solid #eee;
+      min-width: 150px;
+      margin-right: auto;
+      margin-left: 0;
+      &::before {
+        @include messageTag('student', false, true);
+      }
+      &::after {
+        @include messageTag(attr(data-deltat), true, false);
+      }
     }
   }
   .pending-failed {
@@ -85,9 +96,9 @@
   overflow: scroll;
   .message-image-box {
     .w3-display-container {
-      height: 230px;
+      min-height: 230px;
       img {
-        height: 220px;
+        max-height: 220px;
       }
     }
   }
