@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClientAPI from 'grapheel-iris-client-api';
 import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
-    this.api = new ClientAPI();
     this.state = {
       // isLoggedIn: false,
       // user: {},

@@ -7,9 +7,10 @@ import nodemon from 'gulp-nodemon';
 import env from 'gulp-env';
 import sass from 'gulp-sass';
 import concat from 'gulp-concat';
-import rename from 'gulp-rename';
+// import rename from 'gulp-rename';
 import del from 'del';
 import webpack from 'webpack-stream';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import webpackConfig from './webpack.config.babel';
 
 const paths = {
@@ -24,7 +25,8 @@ const paths = {
   clientEntryPoint: 'src/client/index.jsx',
   serverEntryPoint: 'src/server/index.js',
   clientBundle: 'dist/client-bundle.js?(.map)',
-  manifestFile: 'manifest.json',
+  manifestFile: 'src/manifest.json',
+  offlinePageServiceWorker: 'src/offline-page-service-worker.js',
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',
   studentServiceWorker: 'src/client/student/service-worker/service-worker.js',
@@ -35,12 +37,9 @@ const paths = {
   reactSelectCSS: 'node_modules/react-select/dist/react-select.css',
 };
 
-gulp.task('default', ['lint', 'clean'], () => ((
-  gulp.start('sass-styles'),
-  gulp.start('move-manifest'),
-  gulp.start('move-serviceworkers'),
-  gulp.start('webpack')
-)));
+gulp.task('default', ['lint'], () => (
+  gulp.start('compile')
+));
 
 gulp.task('compile', ['clean'], () => ((
   gulp.start('sass-styles'),
@@ -70,7 +69,10 @@ gulp.task('move-serviceworkers', () => ((
   //   .pipe(rename(paths.studentServiceWorkerOut))
   //   .pipe(gulp.dest(paths.distDir)),
   gulp.src(paths.volunteerServiceWorker)
-    .pipe(rename(paths.volunteerServiceWorkerOut))
+    .pipe(webpack({
+      output: { filename: paths.volunteerServiceWorkerOut },
+      plugins: [new UglifyJsPlugin()],
+    }))
     .pipe(gulp.dest(paths.distDir))
 )));
 

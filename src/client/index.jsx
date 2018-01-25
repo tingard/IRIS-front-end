@@ -58,7 +58,7 @@ class IRISApp extends React.Component {
       innerComponent = (
         <Switch>
           <Route path="/sign-up" render={p => <SignUp api={this.api} {...p} />} />;
-          <Route exact path="/" render={p => <Login login={this.login} {...p} />} />;
+          <Route exact path="/" render={p => <Login api={this.api} login={this.login} {...p} />} />;
         </Switch>
       );
     }

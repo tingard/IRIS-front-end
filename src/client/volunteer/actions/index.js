@@ -5,6 +5,8 @@ import ClientAPI from 'grapheel-iris-client-api';
 // -----------------------------------------------------------------------------
 
 // SECTION async action creation
+// this is fine, as I'm loading the token user info from storage and not pinging
+// the API unnecessarily (not calling api.init)
 const api = new ClientAPI();
 
 // wrapper function that creates async fetch actions
