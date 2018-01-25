@@ -3,10 +3,13 @@
   "name": "Grapheel IRIS",
   "icons": [
     {
-      "src": "irisProposed_withoutBackground_small.png",
+      "src": "images/irisProposed_withoutBackground_small.png",
       "type": "image/png",
       "sizes": "100x100"
-    },
+    }
   ],
+  "background-color": "#fff",
+  "theme-color": "#fff",
+  "orientation": "portrait",
   "start_url": "index.html?launcher=true"
 }

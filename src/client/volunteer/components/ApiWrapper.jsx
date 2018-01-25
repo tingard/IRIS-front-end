@@ -4,6 +4,10 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 // watches for stale things and updates accordingly
 const ApiWrapper = (props) => {
+  // register the service worker here? componentDidMount better?
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/volunteer-service-worker.js');
+  }
   if (props.messages.get('state').get('isStale') && !props.messages.get('state').get('isFetching')) {
     props.getMessages();
   }
