@@ -50,6 +50,7 @@
     "gulp-eslint": "^4.0.1",
     "gulp-line-ending-corrector": "^1.0.1",
     "gulp-nodemon": "^2.2.1",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "history": "^4.7.2",
     "immutable": "^3.8.1",
