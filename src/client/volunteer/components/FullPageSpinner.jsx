@@ -1,6 +1,6 @@
 import React from 'react';
-import { BounceLoader } from 'react-spinners';
 import MediaQuery from 'react-responsive';
+import BounceLoader from 'react-spinners/dist/spinners/BounceLoader';
 
 const FullPageSpinner = () => (
   <div>

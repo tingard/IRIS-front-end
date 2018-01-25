@@ -13,6 +13,7 @@ export default {
       {
         test: /\.(jpg|png|gif|otf|eot|ttf|woff\d?)$/,
         loader: 'file-loader',
+        exclude: [/node_modules/],
       },
     ],
   },

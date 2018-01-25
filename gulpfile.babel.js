@@ -9,7 +9,8 @@ import sass from 'gulp-sass';
 import concat from 'gulp-concat';
 // import rename from 'gulp-rename';
 import del from 'del';
-import webpack from 'webpack-stream';
+import webpackStream from 'webpack-stream';
+import webpack from 'webpack';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import webpackConfig from './webpack.config.babel';
 
@@ -36,6 +37,22 @@ const paths = {
   distDir: 'dist',
   reactSelectCSS: 'node_modules/react-select/dist/react-select.css',
 };
+
+if (process.env.NODE_ENV === 'production') {
+  webpackConfig.devtool = false;
+  const plugs = [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new UglifyJsPlugin(),
+  ];
+  webpackConfig.plugins = webpackConfig.plugins ? (
+    webpackConfig.plugins.concat(plugs)
+  ) : (
+    webpackConfig.plugins = plugs
+  );
+}
 
 gulp.task('default', ['lint'], () => (
   gulp.start('compile')
@@ -69,7 +86,7 @@ gulp.task('move-serviceworkers', () => ((
   //   .pipe(rename(paths.studentServiceWorkerOut))
   //   .pipe(gulp.dest(paths.distDir)),
   gulp.src(paths.volunteerServiceWorker)
-    .pipe(webpack({
+    .pipe(webpackStream({
       output: { filename: paths.volunteerServiceWorkerOut },
       plugins: [new UglifyJsPlugin()],
     }))
@@ -86,7 +103,7 @@ gulp.task('clean', () => del([
 
 gulp.task('webpack', () => (
   gulp.src(paths.clientEntryPoint)
-    .pipe(webpack(webpackConfig))
+    .pipe(webpackStream(webpackConfig))
     .pipe(gulp.dest(paths.distDir))
 ));
 
