@@ -1,15 +1,26 @@
 {
   "short_name": "IRIS",
   "name": "Grapheel IRIS",
+  "display": "fullscreen",
   "icons": [
     {
       "src": "images/irisProposed_withoutBackground_small.png",
       "type": "image/png",
       "sizes": "100x100"
+    },
+    {
+      "src": "images/irisProposed_withoutBackground_300x300.png",
+      "type": "image/png",
+      "sizes": "300x300"
+    },
+    {
+      "src": "images/irisProposed_withoutBackground.png",
+      "type": "image/png",
+      "sizes": "960x960"
     }
   ],
-  "background-color": "#fff",
-  "theme-color": "#fff",
+  "background_color": "#fff",
+  "theme_color": "#fff",
   "orientation": "portrait",
   "start_url": "index.html?launcher=true"
 }
