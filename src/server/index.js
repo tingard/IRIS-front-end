@@ -16,8 +16,17 @@ const domain = config.HOST;
 // serve up compiled static assets if we're in production mode
 // app.use(express.static(path.join(__dirname, '../../dist')));
 
+if (process.env.NODE_ENV === 'production') {
+  app.get('/*', (req, res, next) => {
+    if (!req.secure) {
+      res.redirect(`https://${req.headers.host}${req.url}`);
+    } else {
+      next();
+    }
+  });
+}
+
 app.get('/client-bundle.js', (req, res, next) => {
-  console.log('someone requested non gzipped 😱');
   req.url += '.gz';
   next();
 });
