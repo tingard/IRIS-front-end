@@ -58,26 +58,6 @@ class HomePage extends React.Component {
     return (
       <div className="w3-container w3-animate-opacity">
         <h1>Welcome back, {this.props.user.get('name')}</h1>
-        <div role="alert">
-          {this.state.successDialogActive ? (
-            <div
-              className="w3-panel w3-round w3-card-4 w3-display-container"
-              role="group"
-              aria-labelledby="upload-image-success-header"
-              aria-atomic="true"
-            >
-              <h3 id="upload-image-success-header">Successfully uploaded image</h3>
-              <p>Image has been successfully uploaded to IRIS</p>
-              <button
-                onClick={() => this.setState({ successDialogActive: false })}
-                className="w3-button w3-display-topright"
-                aria-label="Close this message"
-              >
-                &times;
-              </button>
-            </div>
-          ) : null}
-        </div>
         <section>
           <h3 id="upload-image-section-header">Upload an Image:</h3>
           <form
@@ -148,6 +128,26 @@ class HomePage extends React.Component {
               Submit image
             </button>
           </form>
+          <div role="alert">
+            {this.state.successDialogActive ? (
+              <div
+                className="w3-panel w3-round w3-card-4 w3-display-container"
+                role="group"
+                aria-labelledby="upload-image-success-header"
+                aria-atomic="true"
+              >
+                <h3 id="upload-image-success-header">Successfully uploaded image</h3>
+                <p>Image has been successfully uploaded to IRIS</p>
+                <button
+                  onClick={() => this.setState({ successDialogActive: false })}
+                  className="w3-button w3-display-topright"
+                  aria-label="Close this message"
+                >
+                  &times;
+                </button>
+              </div>
+            ) : null}
+          </div>
         </section>
       </div>
     );
