@@ -6,9 +6,14 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 class ApiWrapper extends React.Component {
   componentDidMount() {
+    console.log(`Notifcation permission: ${Notification.permission} ${Notification.permission === 'granted' ? '😁' : ''}`);
     if (!('Notification' in window)) {
       console.log('This browser does not support desktop notification');
-    } else if (Notification.permission !== 'denied' || Notification.permission === 'default') {
+    } else if (
+      (Notification.permission !== 'denied' || Notification.permission === 'default') &&
+      Notification.permission !== 'granted'
+    ) {
+      console.log('here');
       Notification.requestPermission((permission) => {
         // If the user accepts, let's create a notification
         if (permission === 'granted') {
