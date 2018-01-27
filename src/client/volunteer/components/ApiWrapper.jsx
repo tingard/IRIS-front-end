@@ -3,22 +3,38 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 // watches for stale things and updates accordingly
-const ApiWrapper = (props) => {
-  // register the service worker here? componentDidMount better?
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/volunteer-service-worker.js');
+
+class ApiWrapper extends React.Component {
+  componentDidMount() {
+    if (!('Notification' in window)) {
+      console.log('This browser does not support desktop notification');
+    } else if (Notification.permission !== 'denied' || Notification.permission === 'default') {
+      Notification.requestPermission((permission) => {
+        // If the user accepts, let's create a notification
+        if (permission === 'granted') {
+          /* eslint-disable no-unused-vars */
+          const notification = new Notification('This is what notifications look like!');
+          /* eslint-enable no-unused-vars */
+        }
+      });
+    }
   }
-  if (props.messages.get('state').get('isStale') && !props.messages.get('state').get('isFetching')) {
-    props.getMessages();
+  render() {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/volunteer-service-worker.js');
+    }
+    if (this.props.messages.get('state').get('isStale') && !this.props.messages.get('state').get('isFetching')) {
+      this.props.getMessages();
+    }
+    if (this.props.cards.get('state').get('isStale') && !this.props.cards.get('state').get('isFetching')) {
+      this.props.getImages();
+    }
+    if (this.props.user.get('state').get('isStale') && !this.props.user.get('state').get('isFetching')) {
+      this.props.getUserDetails();
+    }
+    return <div id="api-watcher">{this.props.children}</div>;
   }
-  if (props.cards.get('state').get('isStale') && !props.cards.get('state').get('isFetching')) {
-    props.getImages();
-  }
-  if (props.user.get('state').get('isStale') && !props.user.get('state').get('isFetching')) {
-    props.getUserDetails();
-  }
-  return <div id="api-watcher">{props.children}</div>;
-};
+}
 
 ApiWrapper.propTypes = {
   messages: ImmutablePropTypes.contains({
