@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import HomePage from '../components/HomePage';
-import { uploadImage } from '../actions';
+import { uploadImage, getImages } from '../actions';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   uploadImage: formData => dispatch(uploadImage(formData)),
+  getImages: () => dispatch(getImages()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

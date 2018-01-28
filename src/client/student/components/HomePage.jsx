@@ -11,9 +11,20 @@ class HomePage extends React.Component {
     super(props);
     this.inputs = {};
     this.formShouldSubmit = this.formShouldSubmit.bind(this);
+    this.checkIfInputsComplete = this.checkIfInputsComplete.bind(this);
     this.state = {
       successDialogActive: false,
+      inputsAreComplete: false,
     };
+  }
+  checkIfInputsComplete() {
+    this.setState({
+      inputsAreComplete: (
+        this.inputs.imageInput.files.length > 0 &&
+        this.inputs.noteInput.value.length > 0 &&
+        this.inputs.questionInput.value.length > 0
+      ),
+    });
   }
   formShouldSubmit(e) {
     e.preventDefault();
@@ -38,7 +49,7 @@ class HomePage extends React.Component {
       formData.append('difficulty', data.difficulty);
       formData.append('subject', data.subject);
       this.props.uploadImage(formData);
-      this.setState({ successDialogActive: true });
+      this.setState({ successDialogActive: true }, this.props.getImages);
       this.inputs.imageInput.value = '';
       this.inputs.questionInput.value = '';
       this.inputs.noteInput.value = '';
@@ -61,7 +72,7 @@ class HomePage extends React.Component {
         <section>
           <h3 id="upload-image-section-header">Upload an Image:</h3>
           <form
-            onSubmit={this.formShouldSubmit}
+            onSubmit={(e) => { e.preventDefault(); return false; }}
           >
             <label htmlFor="imageInput" className="w3-panel">
               Select image to upload
@@ -72,6 +83,7 @@ class HomePage extends React.Component {
                 id="imageInput"
                 ref={(r) => { this.inputs.imageInput = r; }}
                 className="w3-input"
+                onChange={this.checkIfInputsComplete}
               />
             </label>
             <label htmlFor="questionInput" className="w3-panel">
@@ -80,8 +92,10 @@ class HomePage extends React.Component {
                 type="text"
                 name="question"
                 id="questionInput"
+                autoComplete="off"
                 ref={(r) => { this.inputs.questionInput = r; }}
                 className="w3-input w3-border"
+                onChange={this.checkIfInputsComplete}
               />
             </label>
             <label htmlFor="noteInput" className="w3-panel">
@@ -92,6 +106,7 @@ class HomePage extends React.Component {
                 id="noteInput"
                 ref={(r) => { this.inputs.noteInput = r; }}
                 className="w3-input w3-border"
+                onChange={this.checkIfInputsComplete}
               />
             </label>
             <label htmlFor="subjectInput" className="w3-panel">
@@ -120,14 +135,15 @@ class HomePage extends React.Component {
                 <option value="2">Degree Level</option>
               </select>
             </label>
-            <button
-              className="w3-button w3-green w3-panel"
-              ref={(r) => { this.submitBtn = r; }}
-              type="submit"
-            >
-              Submit image
-            </button>
           </form>
+          <button
+            className="w3-button w3-green w3-panel"
+            ref={(r) => { this.submitBtn = r; }}
+            onClick={this.formShouldSubmit}
+            disabled={!this.state.inputsAreComplete}
+          >
+            Submit image
+          </button>
           <div role="alert">
             {this.state.successDialogActive ? (
               <div
@@ -169,6 +185,7 @@ HomePage.propTypes = {
     isFetching: PropTypes.bool,
   }),
   uploadImage: PropTypes.func,
+  getImages: PropTypes.func,
 };
 
 export default HomePage;
