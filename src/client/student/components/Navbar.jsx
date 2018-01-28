@@ -14,9 +14,6 @@ const Navbar = () => (
     <NavLink to="/images" className="w3-bar-item w3-button" activeStyle={activeStyle}>
       Images
     </NavLink>
-    <NavLink to="/messages" className="w3-bar-item w3-button" activeStyle={activeStyle}>
-      Messages
-    </NavLink>
     <NavLink to="/profile" className="w3-bar-item w3-button" activeStyle={activeStyle}>
       Profile
     </NavLink>

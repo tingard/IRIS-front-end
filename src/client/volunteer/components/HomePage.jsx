@@ -47,10 +47,10 @@ class HomePage extends React.Component {
       return <FullPageSpinner />;
     }
     const cardListGood = this.props.cards.get('cards').filter(
-      card => this.props.user.get('levels').get(card.get('subject')) >= card.get('difficulty'),
+      card => this.props.user.get('levels').get(card.get('subject')) > card.get('difficulty'),
     );
     const cardListBad = this.props.cards.get('cards').filter(
-      card => this.props.user.get('levels').get(card.get('subject')) < card.get('difficulty'),
+      card => this.props.user.get('levels').get(card.get('subject')) <= card.get('difficulty'),
     );
     const cardList = cardListGood.concat(cardListBad).filter(
       card => (

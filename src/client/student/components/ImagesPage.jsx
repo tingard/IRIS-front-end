@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import moment from 'moment';
-
+/* eslint-disable no-sequences */
 const ImagesPage = (props) => {
   const getLen = im => props.messages.filter(
-    m => m.get('image').get('id') === im.get('id')).size;
+    m => m.get('image').get('id') === im.get('id'),
+  ).size;
+  console.log(
+    props.images.sort((i, j) => (i.get('uploadDate') > j.get('uploadDate') ? 1 : -1))
+      .map(i => i.get('uploadDate')).toArray(),
+  );
   return (
     <div className="w3-container">
       <h1>Your Images</h1>
@@ -19,7 +24,7 @@ const ImagesPage = (props) => {
       </section>
       <section aria-live="polite" aria-relevant="additions removals">
         <ul style={{ listStyle: 'none', paddingLeft: 0 }} aria-label="List of images on IRIS" role="grid">
-          {props.images.sort((i, j) => (i.get('uploadDate') < j.get('uploadDate'))).map(im => (
+          {props.images.sort((i, j) => (i.get('uploadDate') < j.get('uploadDate') ? 1 : -1)).map(im => (
             <li key={`${im.get('id')}`} role="row">
               <div className="w3-panel w3-border-left" role="gridcell">
                 <p>
@@ -68,7 +73,7 @@ ImagesPage.propTypes = {
     ImmutablePropTypes.contains({
       id: PropTypes.string,
       note: PropTypes.string,
-      uploadDate: PropTypes.number,
+      uploadDate: PropTypes.string,
       replyChains: ImmutablePropTypes.listOf(PropTypes.string),
     }),
   ),

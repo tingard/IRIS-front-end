@@ -54,7 +54,8 @@
     span {
       float: right;
       text-align: center;
-      width: 20px;
+      font-size: 10px;
+      padding: 1px 5px;
       border-radius: 2px;
       &.user-level-above {
         background-color: #afa; // green as user level is high enough

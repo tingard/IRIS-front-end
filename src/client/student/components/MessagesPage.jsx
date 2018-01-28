@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Message from './Message';
 
 const MessagesPage = (props) => {
+  if (!props.isFiltered) {
+    return <Redirect to="/images" />;
+  }
   if (props.isFetching) return <div>Loading Spinner</div>;
   return (
     <main
