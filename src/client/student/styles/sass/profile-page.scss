@@ -12,3 +12,16 @@
     }
   }
 }
+#profile-page-email-input {
+  &.invalid {
+    border: 1px solid #faa !important;
+    &::after {
+      content: 'invalid';
+    }
+  }
+}
+#profile-page-bio-input {
+  display: block;
+  width: 100%;
+  resize: 'none';
+}
