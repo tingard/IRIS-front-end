@@ -34,30 +34,32 @@ const ImagesPage = (props) => {
                     getLen(im) !== 1 ? `${getLen(im)} replies` : `${getLen(im)} reply`
                   }
                 </p>
-                <div className="w3-btn-bar" role="group" aria-label="action buttons">
+                <div className="w3-panel" role="group" aria-label="action buttons">
                   <span className="w3-margin-right">Actions:</span>
-                  {getLen(im) !== 0 ? (
-                    <Link
-                      to={`/images/messages/${im.get('id')}`}
-                      className="w3-button w3-light-blue w3-margin-right"
+                  <div className="w3-btn-bar">
+                    {getLen(im) !== 0 ? (
+                      <Link
+                        to={`/images/messages/${im.get('id')}`}
+                        className="w3-button w3-light-blue w3-margin-right"
+                      >
+                        See replies
+                      </Link>
+                    ) : null}
+                    <button
+                      className="w3-button w3-green w3-margin-right"
+                      onClick={() => props.markImageAsDone(im.get('id'))}
+                      disabled
                     >
-                      See replies
-                    </Link>
-                  ) : null}
-                  <button
-                    className="w3-button w3-green w3-margin-right"
-                    onClick={() => props.markImageAsDone(im.get('id'))}
-                    disabled
-                  >
-                    Mark as completed
-                  </button>
-                  <button
-                    className="w3-button w3-red w3-margin-right"
-                    onClick={() => props.deleteImage(im.get('id'))}
-                    disabled
-                  >
-                    Delete image
-                  </button>
+                      Mark as completed
+                    </button>
+                    <button
+                      className="w3-button w3-red w3-margin-right"
+                      onClick={() => props.deleteImage(im.get('id'))}
+                      disabled
+                    >
+                      Delete image
+                    </button>
+                  </div>
                 </div>
               </div>
             </li>

@@ -114,7 +114,7 @@ class HomePage extends React.Component {
               <select
                 id="subjectInput"
                 ref={(r) => { this.inputs.subjectInput = r; }}
-                className="w3-input w3-border"
+                className="w3-input w3-border select-style"
               >
                 <option value="maths">Maths</option>
                 <option value="physics">Physics</option>
@@ -128,7 +128,7 @@ class HomePage extends React.Component {
               <select
                 id="difficultyInput"
                 ref={(r) => { this.inputs.difficultyInput = r; }}
-                className="w3-input w3-border"
+                className="w3-input w3-border select-style"
               >
                 <option value="0">GCSE level or below</option>
                 <option value="1">A-level</option>

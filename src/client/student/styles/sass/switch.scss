@@ -1,0 +1,21 @@
+.switch {
+  span {
+    position: relative;
+    top: -11px;
+    margin-right: 20px;
+  }
+  .grapheel-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    &:hover {
+      border: 2px solid #aaa;
+    }
+    &:checked {
+      background-color: #2196F3;
+    }
+  }
+}
