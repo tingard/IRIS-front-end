@@ -26,7 +26,11 @@ const store = createStore(
     cards: cardReducer,
     messages: messageReducer,
   }),
-  applyMiddleware(thunkMiddleware, loggerMiddleware),
+  process.env.NODE_ENV === 'production' ? (
+    applyMiddleware(thunkMiddleware)
+  ) : (
+    applyMiddleware(thunkMiddleware, loggerMiddleware)
+  ),
 );
 
 const App = () => [

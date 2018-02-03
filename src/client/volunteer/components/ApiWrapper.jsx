@@ -6,28 +6,35 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 class ApiWrapper extends React.Component {
   componentDidMount() {
-    console.log(`Notifcation permission: ${Notification.permission} ${Notification.permission === 'granted' ? '😁' : ''}`);
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/volunteer-service-worker.js')
+        .then((swReg) => {
+          console.log('Service Worker is registered', swReg);
+          this.props.passSwRegistrationToAPI(swReg);
+          this.props.subscribeToPushNotifications();
+        })
+        .catch((error) => {
+          console.error('Service Worker Error', error);
+        });
+    }
     if (!('Notification' in window)) {
-      console.log('This browser does not support desktop notification');
+      console.warn('This browser does not support desktop notification');
     } else if (
       (Notification.permission !== 'denied' || Notification.permission === 'default') &&
       Notification.permission !== 'granted'
     ) {
-      console.log('here');
       Notification.requestPermission((permission) => {
         // If the user accepts, let's create a notification
         if (permission === 'granted') {
           /* eslint-disable no-unused-vars */
           const notification = new Notification('This is what notifications look like!');
+          this.props.subscribeToPushNotifications();
           /* eslint-enable no-unused-vars */
         }
       });
     }
   }
   render() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/volunteer-service-worker.js');
-    }
     if (this.props.messages.get('state').get('isStale') && !this.props.messages.get('state').get('isFetching')) {
       this.props.getMessages();
     }
@@ -63,6 +70,8 @@ ApiWrapper.propTypes = {
   getMessages: PropTypes.func,
   getImages: PropTypes.func,
   getUserDetails: PropTypes.func,
+  passSwRegistrationToAPI: PropTypes.func,
+  subscribeToPushNotifications: PropTypes.func,
   children: PropTypes.oneOfType(
     [
       PropTypes.arrayOf(PropTypes.node),

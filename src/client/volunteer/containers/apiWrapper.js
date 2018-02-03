@@ -1,6 +1,12 @@
 import { connect } from 'react-redux';
 import ApiWrapper from '../components/ApiWrapper';
-import { getMessages, getUserDetails, getImages } from '../actions';
+import {
+  getMessages,
+  getUserDetails,
+  getImages,
+  passSwRegistrationToAPI,
+  subscribeToPushNotifications,
+} from '../actions';
 
 
 const mapStateToProps = state => ({
@@ -13,6 +19,8 @@ const mapDispatchToProps = dispatch => ({
   getMessages: () => dispatch(getMessages()),
   getUserDetails: () => dispatch(getUserDetails()),
   getImages: () => dispatch(getImages()),
+  passSwRegistrationToAPI: swReg => dispatch(passSwRegistrationToAPI(swReg)),
+  subscribeToPushNotifications: () => dispatch(subscribeToPushNotifications()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApiWrapper);

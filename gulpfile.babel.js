@@ -55,9 +55,7 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
-gulp.task('default', ['lint'], () => (
-  gulp.start('compile')
-));
+gulp.task('default', ['lint'], () => gulp.start('compile'));
 
 gulp.task('compile', ['clean'], () => ((
   gulp.start('sass-styles'),
