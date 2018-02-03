@@ -103,3 +103,27 @@ export const messages = {
 };
 export const getMessages = fetch(messages.get);
 export const sendMessage = fetch(messages.send);
+
+export const serviceWorker = {
+  register: {
+    name: 'REGISTER_SERVICE_WORKER',
+    sendRequest: swRegistration => ({ type: 'REGISTER_SERVICE_WORKER', swRegistration }),
+    success: res => ({ type: 'REGISTER_SERVICE_WORKER_SUCCESS', res }),
+    failure: error => ({ type: 'REGISTER_SERVICE_WORKER_FAILURE', error }),
+  },
+  subscribe: {
+    name: 'SUBSCRIBE_TO_PUSH_NOTIFCATIONS',
+    sendRequest: swRegistration => ({ type: 'SUBSCRIBE_TO_PUSH_NOTIFCATIONS', swRegistration }),
+    success: res => ({ type: 'SUBSCRIBE_TO_PUSH_NOTIFCATIONS_SUCCESS', res }),
+    failure: error => ({ type: 'SUBSCRIBE_TO_PUSH_NOTIFCATIONS_FAILURE', error }),
+  },
+  unsubscribe: {
+    name: 'UNSUBSCRIBE_FROM_PUSH_NOTIFCATIONS',
+    sendRequest: swRegistration => ({ type: 'UNSUBSCRIBE_FROM_PUSH_NOTIFCATIONS', swRegistration }),
+    success: res => ({ type: 'UNSUBSCRIBE_FROM_PUSH_NOTIFCATIONS_SUCCESS', res }),
+    failure: error => ({ type: 'UNSUBSCRIBE_FROM_PUSH_NOTIFCATIONS_FAILURE', error }),
+  },
+};
+export const passSwRegistrationToAPI = fetch(serviceWorker.register);
+export const subscribeToPushNotifications = fetch(serviceWorker.subscribe);
+export const unsubscribeFromPushNotifications = fetch(serviceWorker.unsubscribe);
