@@ -16,6 +16,10 @@ class ApiWrapper extends React.Component {
         .catch((error) => {
           console.error('Service Worker Error', error);
         });
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        console.log('service worker said', event);
+        this.props.handlePushMessage(event.data);
+      });
     }
     if (!('Notification' in window)) {
       console.warn('This browser does not support desktop notification');
@@ -72,6 +76,7 @@ ApiWrapper.propTypes = {
   getUserDetails: PropTypes.func,
   passSwRegistrationToAPI: PropTypes.func,
   subscribeToPushNotifications: PropTypes.func,
+  handlePushMessage: PropTypes.func,
   children: PropTypes.oneOfType(
     [
       PropTypes.arrayOf(PropTypes.node),
