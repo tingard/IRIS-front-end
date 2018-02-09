@@ -1,41 +1,33 @@
 /* eslint-disable no-restricted-globals */
 // Some code taken from https://github.com/google-developer-training/pwa-training-labs.git
 require('../../../offline-page-service-worker');
+const genNotificationFromStatus = require('./genNotificationFromStatus');
+
+async function sendStatus(status) {
+  // Exit early if we don't have access to the client.
+  // Eg, if it's cross-origin.
+  console.log('sending status');
+  // Send a message to the client.
+  self.clients.matchAll().catch(() => []).then(
+    l => l.map(client => client.postMessage(status)),
+  );
+}
 
 self.addEventListener('push', (e) => {
-  let body;
-  console.log(e);
+  let msg;
   if (e.data) {
-    body = e.data.text();
+    msg = JSON.parse(e.data.text());
+    console.log(msg);
   } else {
-    body = 'IRIS has new data!';
+    msg = { status: 'NO_STATUS', message: 'IRIS has new data!' };
   }
-
-  const options = [
-    'From IRIS:',
-    {
-      body,
-      icon: 'images/irisProposed_withoutBackground_small.png',
-      vibrate: [100, 50, 100],
-      data: {
-        dateOfArrival: Date.now(),
-        primaryKey: 1,
-      },
-      actions: [
-        {
-          action: 'explore',
-          title: 'Go to the site',
-        },
-        {
-          action: 'close',
-          title: 'Close the notification',
-        },
-      ],
-    },
-  ];
-  e.waitUntil(
-    self.registration.showNotification(...options),
-  );
+  console.log(genNotificationFromStatus(msg)[1]);
+  e.waitUntil(sendStatus(msg));
+  if (msg.shouldNotify) {
+    e.waitUntil(
+      self.registration.showNotification(...genNotificationFromStatus(msg)),
+    );
+  }
 });
 
 self.addEventListener('notificationclose', (e) => {
@@ -45,14 +37,36 @@ self.addEventListener('notificationclose', (e) => {
 });
 
 self.addEventListener('notificationclick', (e) => {
-  const { notification } = e;
-  const { action } = e.action;
-
-  if (action === 'close') {
-    notification.close();
+  if (e.action === 'close') {
+    e.notification.close();
+  } else if (e.action === 'view') {
+    e.waitUntil(
+      self.clients.matchAll().then((clients) => {
+        let found = false;
+        for (let i = 0; i < clients.length; i += 1) {
+          if (clients[i].url === e.notification.data.url) {
+          // We already have a window to use, focus it.
+            found = true;
+            clients[i].focus();
+            break;
+          }
+        }
+        if (!found) {
+          if (clients.length) {
+            console.log(e.notification.data.url);
+            clients[0].navigate(e.notification.data.url);
+          }
+        }
+      }).then(() => e.notification.close()),
+    );
   } else {
-    self.clients.openWindow('/#/');
-    notification.close();
+    e.waitUntil(
+      self.clients.matchAll().then((clients) => {
+        if (clients.length) {
+          clients[0].focus();
+        }
+      }).then(() => e.notification.close()),
+    );
   }
   // TODO close all notifications when one is clicked
 });
