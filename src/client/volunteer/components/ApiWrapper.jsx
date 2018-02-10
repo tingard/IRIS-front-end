@@ -9,7 +9,6 @@ class ApiWrapper extends React.Component {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/volunteer-service-worker.js')
         .then((swReg) => {
-          console.log('Service Worker is registered', swReg);
           this.props.passSwRegistrationToAPI(swReg);
           this.props.subscribeToPushNotifications();
         })
@@ -17,13 +16,13 @@ class ApiWrapper extends React.Component {
           console.error('Service Worker Error', error);
         });
       navigator.serviceWorker.addEventListener('message', (event) => {
-        console.log('service worker said', event);
         this.props.handlePushMessage(event.data);
       });
     }
     if (!('Notification' in window)) {
       console.warn('This browser does not support desktop notification');
     } else if (
+      this.props.user.browserNotifications &&
       (Notification.permission !== 'denied' || Notification.permission === 'default') &&
       Notification.permission !== 'granted'
     ) {

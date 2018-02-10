@@ -11,6 +11,8 @@ const initialState = Map({
   state: new StateRecord({ isStale: true }),
   name: '',
   email: '',
+  emailNotifications: false,
+  browserNotifications: false,
   activeSince: '',
   submittedImages: 0,
 });

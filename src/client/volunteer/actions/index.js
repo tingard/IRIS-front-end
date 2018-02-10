@@ -36,6 +36,8 @@ export const handlePushMessage = (msg) => {
   switch (msg.status) {
     case 'NEW_MESSAGE':
       return getMessages();
+    case 'NEW_IMAGE':
+      return getImages();
     default:
       return () => false;
   }
