@@ -81,9 +81,12 @@ gulp.task('move-manifest', () => (
 ));
 
 gulp.task('move-serviceworkers', () => ((
-  // gulp.src(paths.studentServiceWorker)
-  //   .pipe(rename(paths.studentServiceWorkerOut))
-  //   .pipe(gulp.dest(paths.distDir)),
+  gulp.src(paths.studentServiceWorker)
+    .pipe(webpackStream({
+      output: { filename: paths.studentServiceWorkerOut },
+      plugins: [new UglifyJsPlugin()],
+    }))
+    .pipe(gulp.dest(paths.distDir)),
   gulp.src(paths.volunteerServiceWorker)
     .pipe(webpackStream({
       output: { filename: paths.volunteerServiceWorkerOut },
