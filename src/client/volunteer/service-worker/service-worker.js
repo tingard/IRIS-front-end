@@ -30,12 +30,6 @@ self.addEventListener('push', (e) => {
   }
 });
 
-self.addEventListener('notificationclose', (e) => {
-  const { notification } = e;
-  const { primaryKey } = notification.data;
-  console.log(`Closed notification: ${primaryKey}`);
-});
-
 self.addEventListener('notificationclick', (e) => {
   if (e.action === 'close') {
     e.notification.close();
@@ -53,8 +47,8 @@ self.addEventListener('notificationclick', (e) => {
         }
         if (!found) {
           if (clients.length) {
-            console.log(e.notification.data.url);
             clients[0].navigate(e.notification.data.url);
+            clients[0].focus();
           }
         }
       }).then(() => e.notification.close()),

@@ -127,3 +127,13 @@ export const serviceWorker = {
 export const passSwRegistrationToAPI = fetch(serviceWorker.register);
 export const subscribeToPushNotifications = fetch(serviceWorker.subscribe);
 export const unsubscribeFromPushNotifications = fetch(serviceWorker.unsubscribe);
+
+export const handlePushMessage = (msg) => {
+  console.log('>>> handling push message', msg);
+  switch (msg.status) {
+    case 'NEW_MESSAGE':
+      return getMessages();
+    default:
+      return () => false;
+  }
+};
