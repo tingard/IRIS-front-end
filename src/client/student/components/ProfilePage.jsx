@@ -147,6 +147,14 @@ class ProfilePage extends React.Component {
         </div>
         <div className="w3-row">
           <button
+            className="logout-button w3-button w3-border w3-round w3-bar w3-hover-black"
+            onClick={this.props.logout}
+          >
+            Logout
+          </button>
+        </div>
+        <div className="w3-row">
+          <button
             disabled
             className="delete-acc-button w3-button w3-border w3-round w3-bar w3-hover-black"
           >
@@ -169,6 +177,7 @@ ProfilePage.propTypes = {
     isFetching: PropTypes.bool,
   }),
   // setUserDetails: PropTypes.func,
+  logout: PropTypes.func,
 };
 
 export default ProfilePage;

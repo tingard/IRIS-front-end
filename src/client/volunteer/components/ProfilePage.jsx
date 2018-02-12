@@ -79,6 +79,14 @@ const ProfilePage = (props) => {
         </div>
         <div className="w3-row">
           <button
+            className="logout-button w3-button w3-border w3-round w3-bar w3-hover-black"
+            onClick={props.logout}
+          >
+            Logout
+          </button>
+        </div>
+        <div className="w3-row">
+          <button
             disabled
             className="delete-acc-button w3-button w3-border w3-round w3-bar w3-hover-black"
           >
@@ -106,5 +114,6 @@ ProfilePage.propTypes = {
       computerScience: PropTypes.number,
     }),
   }),
+  logout: PropTypes.func,
 };
 export default ProfilePage;

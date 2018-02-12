@@ -32,6 +32,11 @@ const userReducer = (state = initialState, action) => {
         );
     case 'GET_USER_DETAILS_FAILURE':
       return state; // .set('state', state.get('state').set('isFetching', false));
+    case 'LOGOUT_SUCCESS':
+      /* eslint-disable no-restricted-globals */
+      location.reload();
+      /* eslint-enable no-restricted-globals */
+      return state;
     default:
       return state;
   }
