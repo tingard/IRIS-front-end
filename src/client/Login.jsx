@@ -6,6 +6,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
+    this.shouldFormSubmit = this.shouldFormSubmit.bind(this);
     this.state = {
       // isLoggedIn: false,
       // user: {},
@@ -22,6 +23,9 @@ class Login extends React.Component {
       this.passwordInput.value = '';
       this.setState({ didFailLogin: true });
     });
+  }
+  shouldFormSubmit(e) {
+    if (e.key === 'Enter') this.login();
   }
   render() {
     return (
@@ -67,6 +71,7 @@ class Login extends React.Component {
                 ref={(r) => { this.emailInput = r; }}
                 className={`w3-input ${this.state.didFailLogin ? 'w3-border-red' : ''}`}
                 type="email"
+                onKeyPress={this.shouldFormSubmit}
               />
             </label>
           </div>
@@ -78,6 +83,7 @@ class Login extends React.Component {
                 ref={(r) => { this.passwordInput = r; }}
                 className={`w3-input ${this.state.didFailLogin ? 'w3-border-red' : ''}`}
                 type="password"
+                onKeyPress={this.shouldFormSubmit}
               />
             </label>
           </div>

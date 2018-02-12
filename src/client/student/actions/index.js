@@ -48,10 +48,17 @@ export const userDetails = {
     success: res => ({ type: 'CHANGE_PASSWORD_SUCCESS', res }),
     failure: error => ({ type: 'CHANGE_PASSWORD_ERROR', error }),
   },
+  logout: {
+    name: 'LOGOUT',
+    sendRequest: () => ({ type: 'LOGOUT' }),
+    success: res => ({ type: 'LOGOUT_SUCCESS', res }),
+    failure: error => ({ type: 'LOGOUT_FAILURE', error }),
+  },
 };
 export const getUserDetails = fetch(userDetails.get);
 export const setUserDetails = fetch(userDetails.set);
 export const changeUserPassword = fetch(userDetails.changePassword);
+export const logout = fetch(userDetails.logout);
 
 // SECTION: Image uploading / editing
 export const images = {

@@ -47,6 +47,11 @@ const userReducer = (state = initialState, action) => {
       return state.mergeDeep(action.details);
     case 'SET_USER_DETAILS_SUCCESS':
       return state;
+    case 'LOGOUT_SUCCESS':
+      /* eslint-disable no-restricted-globals */
+      location.reload();
+      /* eslint-enable no-restricted-globals */
+      return state;
     default:
       return state;
   }
