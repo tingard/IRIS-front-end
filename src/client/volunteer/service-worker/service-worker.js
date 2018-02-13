@@ -23,11 +23,9 @@ self.addEventListener('push', (e) => {
   }
   console.log(genNotificationFromStatus(msg)[1]);
   e.waitUntil(sendStatus(msg));
-  if (msg.shouldNotify) {
-    e.waitUntil(
-      self.registration.showNotification(...genNotificationFromStatus(msg)),
-    );
-  }
+  e.waitUntil(
+    self.registration.showNotification(...genNotificationFromStatus(msg)),
+  );
 });
 
 self.addEventListener('notificationclick', (e) => {

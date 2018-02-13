@@ -18,11 +18,11 @@ const domain = config.HOST;
 
 if (process.env.NODE_ENV === 'production') {
   app.get('/*', (req, res, next) => {
-    console.log(req.secure);
+    console.log(req);
     if (!req.secure) {
       console.log('Not secure, forwarding to https');
       // res.redirect(`https://${req.headers.host}${req.url}`);
-      next(false);
+      next();
     } else {
       next();
     }

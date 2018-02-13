@@ -42,7 +42,7 @@
     "enzyme": "^3.3.0",
     "express": "^4.14.0",
     "file-loader": "^1.1.6",
-    "grapheel-iris-client-api": "1.5.2",
+    "grapheel-iris-client-api": "1.5.3",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-concat": "^2.6.1",
