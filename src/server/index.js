@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === 'production') {
     if (!req.secure) {
       console.log('Not secure, forwarding to https');
       res.redirect(`https://${req.headers.host}${req.url}`);
+      next(false);
     } else {
       next();
     }
@@ -39,6 +40,7 @@ app.get('/client-bundle.js.gz', (req, res, next) => {
   next();
 });
 app.get('/', (req, res) => {
+  console.log('>>> Recieved get request to "/"');
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });
 
