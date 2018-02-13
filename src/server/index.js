@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
     console.log(req.secure);
     if (!req.secure) {
       console.log('Not secure, forwarding to https');
-      res.redirect(`https://${req.headers.host}${req.url}`);
+      // res.redirect(`https://${req.headers.host}${req.url}`);
       next(false);
     } else {
       next();
