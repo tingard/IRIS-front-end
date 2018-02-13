@@ -18,7 +18,9 @@ const domain = config.HOST;
 
 if (process.env.NODE_ENV === 'production') {
   app.get('/*', (req, res, next) => {
+    console.log(req.secure);
     if (!req.secure) {
+      console.log('Not secure, forwarding to https');
       res.redirect(`https://${req.headers.host}${req.url}`);
     } else {
       next();
@@ -27,6 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get('/client-bundle.js', (req, res, next) => {
+  console.log('Forwarding to gzipped client bundle');
   req.url += '.gz';
   next();
 });

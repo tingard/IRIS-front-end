@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import ClientAPI from 'grapheel-iris-client-api';
 import Login from './Login';
 import SignUp from './sign-up';
@@ -59,9 +59,9 @@ class IRISApp extends React.Component {
         <Switch>
           <Route path="/sign-up" render={p => <SignUp api={this.api} {...p} />} />;
           <Route exact path="/" render={p => <Login api={this.api} login={this.login} {...p} />} />
+          <Route render={() => <Redirect to="/" />} />} />
         </Switch>
       );
-      // <Route render={() => <Redirect to="/" />} />} />
     }
     return (
       <HashRouter>
