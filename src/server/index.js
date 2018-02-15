@@ -18,27 +18,32 @@ const domain = config.HOST;
 
 if (process.env.NODE_ENV === 'production') {
   app.get('/*', (req, res, next) => {
-    console.log('x-forwarded-proto', req['x-forwarded-proto']);
+    console.log('is a secure connection?', req.secure, req.header('x-forwarded-proto'));
     next();
   });
 }
 
-app.get('/client-bundle.js', (req, res, next) => {
+app.get(/\/client-bundle\.js(\.map)?/, (req, res, next) => {
   req.url += '.gz';
   next();
 });
 
-app.get('/client-bundle.js.gz', (req, res, next) => {
+app.get(/\/client-bundle\.js(\.map)?\.gz/, (req, res, next) => {
   res.set('Content-Encoding', 'gzip');
   res.set('Content-Type', 'application/javascript');
   next();
 });
+
 app.get('/', (req, res) => {
-  console.log('>>> Recieved get request to "/"');
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });
 
 app.use(express.static(path.join(__dirname, '../../dist')));
+
+app.get('/*', (req, r, next) => {
+  console.log('got request to', req.path);
+  next();
+});
 
 app.listen(port, domain, (err) => {
   if (err) {

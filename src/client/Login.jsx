@@ -19,9 +19,13 @@ class Login extends React.Component {
       this.utypeSelect.value,
       this.emailInput.value,
       this.passwordInput.value,
-    ).then(() => {
-      this.passwordInput.value = '';
-      this.setState({ didFailLogin: true });
+    ).then((r) => {
+      console.log(r);
+      if (!r.success) {
+        this.passwordInput.value = '';
+        this.setState({ didFailLogin: true });
+      }
+      return r;
     });
   }
   shouldFormSubmit(e) {

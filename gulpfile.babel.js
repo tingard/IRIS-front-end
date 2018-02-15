@@ -57,12 +57,14 @@ if (process.env.NODE_ENV === 'production') {
 
 gulp.task('default', ['lint'], () => gulp.start('compile'));
 
-gulp.task('compile', ['clean'], () => ((
-  gulp.start('sass-styles'),
-  gulp.start('move-manifest'),
-  gulp.start('move-serviceworkers'),
-  gulp.start('webpack')
-)));
+gulp.task('compile', ['clean'], () => (
+  Promise.all([
+    gulp.start('sass-styles'),
+    gulp.start('move-manifest'),
+    gulp.start('move-serviceworkers'),
+    gulp.start('webpack'),
+  ])
+));
 
 gulp.task('lint', () =>
   gulp.src([
@@ -134,10 +136,9 @@ gulp.task('start-dev', ['default'], () => {
       // point to test database in .env file
     },
   });
-
   nodemon({
     script: paths.serverEntryPoint,
-    ext: 'js scss jsx svg',
+    ext: 'js scss jsx',
     watch: ['src'], // this doesn't seem to be working as expected
     tasks: ['default'],
   });
