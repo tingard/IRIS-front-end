@@ -8,10 +8,6 @@ const ImagesPage = (props) => {
   const getLen = im => props.messages.filter(
     m => m.get('image').get('id') === im.get('id'),
   ).size;
-  console.log(
-    props.images.sort((i, j) => (i.get('uploadDate') > j.get('uploadDate') ? 1 : -1))
-      .map(i => i.get('uploadDate')).toArray(),
-  );
   return (
     <div className="w3-container">
       <h1>Your Images</h1>

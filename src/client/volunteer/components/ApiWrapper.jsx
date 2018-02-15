@@ -18,6 +18,18 @@ class ApiWrapper extends React.Component {
       navigator.serviceWorker.addEventListener('message', (event) => {
         this.props.handlePushMessage(event.data);
       });
+      this.timers = {};
+    } else {
+      // There is no service worker, do things the old fashioned way!
+      console.log('No service workers allowed. Polling the API once a minute instead.');
+      const getMessagesTimer = setInterval(1000 * 60, this.props.getMessages);
+      const getImagesTimer = setInterval(1000 * 60, this.props.getImages);
+      const getUserDetailsTimer = setInterval(1000 * 60, this.props.getUserDetails);
+      this.timers = {
+        getMessagesTimer,
+        getImagesTimer,
+        getUserDetailsTimer,
+      };
     }
     if (!('Notification' in window)) {
       console.warn('This browser does not support desktop notification');
@@ -36,6 +48,9 @@ class ApiWrapper extends React.Component {
         }
       });
     }
+  }
+  componentWillUnmount() {
+    Object.values(this.timers).map(t => clearInterval(t));
   }
   render() {
     if (this.props.messages.get('state').get('isStale') && !this.props.messages.get('state').get('isFetching')) {
