@@ -18,25 +18,19 @@ const domain = config.HOST;
 
 if (process.env.NODE_ENV === 'production') {
   app.get('/*', (req, res, next) => {
-    console.log(req);
-    if (!req.secure) {
-      console.log('Not secure, forwarding to https');
-      // res.redirect(`https://${req.headers.host}${req.url}`);
-      next();
-    } else {
-      next();
-    }
+    console.log('x-forwarded-proto', req['x-forwarded-proto']);
+    next();
   });
 }
 
 app.get('/client-bundle.js', (req, res, next) => {
-  console.log('Forwarding to gzipped client bundle');
   req.url += '.gz';
   next();
 });
 
 app.get('/client-bundle.js.gz', (req, res, next) => {
   res.set('Content-Encoding', 'gzip');
+  res.set('Content-Type', 'application/javascript');
   next();
 });
 app.get('/', (req, res) => {
