@@ -33,7 +33,7 @@ class Login extends React.Component {
   }
   render() {
     return (
-      <div className="w3-container">
+      <div className="w3-container" style={{ maxWidth: '1000px', margin: 'auto' }}>
         <section role="group" aria-labelledby="login-section-header">
           <h1 id="login-section-header">Login to IRIS</h1>
           <div role="status">
