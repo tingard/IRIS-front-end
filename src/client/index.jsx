@@ -4,7 +4,6 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import ClientAPI from 'grapheel-iris-client-api';
 import Login from './Login';
 import ForgotPassword from './forgot-password';
-// import ResetPassword from './forgot-password/reset-password';
 import SignUp from './sign-up';
 import VolunteerApp from './volunteer';
 import StudentApp from './student';
@@ -64,12 +63,12 @@ class IRISApp extends React.Component {
           <Route
             exact
             path="/forgotten"
-            render={p => <ForgotPassword api={this.api} login={this.login} {...p} />}
+            render={p => <ForgotPassword api={this.api} {...p} />}
           />
           <Route
             exact
-            path="/forgotten/:forgotID"
-            render={p => <Redirect to="/" {...p} />}
+            path="/forgotten/:id"
+            render={p => <ForgotPassword api={this.api} {...p} />}
           />
           <Route render={() => <Redirect to="/" />} />} />
         </Switch>
