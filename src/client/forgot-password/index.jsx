@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import LinkExpiredAlert from './link-expired-alert';
 import SuccessfulResetLinkAlert from './successful-reset-link-alert';
 import NotRegisteredUserAlert from './not-registered-user-alert';
@@ -18,6 +19,22 @@ class ForgotPassword extends React.Component {
       isResetLink: props.match.params.id || false,
       linkHasExpired: false,
     };
+  }
+  componentWillReceiveProps(newProps) {
+    if (this.state.isResetLink !== newProps.match.params.id || false) {
+      if (this.passwordInput) {
+        this.passwordInput.value = '';
+      }
+      this.setState({
+        isNotRegitsteredUser: false,
+        isValidEmail: true,
+        invalidPassword: false,
+        didSuccessfullyRequest: false,
+        didSuccessfullySetPassword: false,
+        isResetLink: newProps.match.params.id || false,
+        linkHasExpired: false,
+      });
+    }
   }
   setNewPassword() {
     if (this.passwordInput.value === '') {
@@ -95,7 +112,7 @@ class ForgotPassword extends React.Component {
           <div role="status">
             { this.state.linkHasExpired ? (
               <LinkExpiredAlert
-                onClose={() => this.setState({ didSuccessfullyRequest: false })}
+                onClose={() => this.setState({ linkHasExpired: false })}
               />
             ) : null }
           </div>
@@ -145,13 +162,18 @@ class ForgotPassword extends React.Component {
               </label>
             </div>
           ) : null }
-          <button
-            className="w3-button w3-border w3-margin-top"
-            disabled={this.state.linkHasExpired}
-            onClick={this.submit}
-          >
-            { this.state.isResetLink ? 'Set new pasword' : 'Send me a reset link' }
-          </button>
+          <div className="w3-row w3-margin-top">
+            <button
+              className="w3-button w3-border"
+              disabled={this.state.linkHasExpired}
+              onClick={this.submit}
+            >
+              { this.state.isResetLink ? 'Set new pasword' : 'Send me a reset link' }
+            </button>
+            <span className="w3-margin-left">
+              <Link to="/">Go back to login</Link>
+            </span>
+          </div>
           <div role="status">
             {this.state.isNotRegitsteredUser ?
               <NotRegisteredUserAlert
@@ -166,7 +188,7 @@ class ForgotPassword extends React.Component {
               }
               {this.state.didSuccessfullySetPassword ?
                 <SuccessfulPasswordResetAlert
-                  onClose={() => this.setState({ didSuccessfullyRequest: false })}
+                  onClose={() => this.setState({ didSuccessfullySetPassword: false })}
                 /> : null
               }
             </div>

@@ -91,7 +91,17 @@ class Login extends React.Component {
               />
             </label>
           </div>
-          <button className="w3-button w3-border w3-margin-top" onClick={this.login}>Login</button>
+          <div className="w3-row w3-margin-top">
+            <button
+              className="w3-button w3-border"
+              onClick={this.login}
+            >
+              Login
+            </button>
+            <span className="w3-margin-left">
+              <Link to="/forgotten">Forgotten password?</Link>
+            </span>
+          </div>
         </section>
         <section role="group" aria-labelledby="sign-up-section-header">
           <h1 id="sign-up-section-header">Sign up to IRIS</h1>
