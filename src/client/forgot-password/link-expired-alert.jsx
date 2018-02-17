@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const LinkExpiredAlert = ({ onClose }) => (
   <div
@@ -14,7 +15,7 @@ const LinkExpiredAlert = ({ onClose }) => (
       Whoops, this link has expired or already been used!
     </p>
     <p>
-      Click <a href="/forgotten" rel="nofollow">here</a> to request a new one.
+      Click <Link to="/forgotten">here</Link> to request a new one.
     </p>
     <button
       className="w3-display-topright w3-button"
