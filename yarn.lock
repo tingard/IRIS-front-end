@@ -3139,9 +3139,9 @@ graceful-fs@~1.2.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-1.2.3.tgz#15a4806a57547cb2d2dbf27f42e89a8c3451b364"
 
-grapheel-iris-client-api@^1.5.6:
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/grapheel-iris-client-api/-/grapheel-iris-client-api-1.5.6.tgz#d9297288f65f7e62ac56f0c2a36215e5077a1901"
+grapheel-iris-client-api@^1.5.7:
+  version "1.5.7"
+  resolved "https://registry.yarnpkg.com/grapheel-iris-client-api/-/grapheel-iris-client-api-1.5.7.tgz#5650d6ade1193d3901e532ca2b494cdb4aa41628"
   dependencies:
     jest "^22.0.4"
     jsonwebtoken "^8.0.0"
