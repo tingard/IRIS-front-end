@@ -17,7 +17,13 @@ const MessagesPage = (props) => {
       <h1 id="messages-header">{props.isFiltered ? 'Messages for your image' : 'Your Messages' }</h1>
       {
         props.messages.size > 0 ? (
-          <ul style={{ listStyle: 'none', paddingLeft: 0 }} aria-label="Messages list" role="grid">
+          <ul
+            style={{ listStyle: 'none', paddingLeft: 0 }}
+            aria-label="Messages list"
+            role="grid"
+            aria-live="polite"
+            aria-relevant="additions removals"
+          >
             {
               props.messages.map(m => <li key={m.get('id')} role="row"><Message {...m.toObject()} /></li>)
             }

@@ -26,7 +26,7 @@ class ConversationPage extends Component {
     this.input.value = '';
   }
   render() {
-    if (this.props.isFetching) return <div>Loading spinner</div>;
+    if (this.props.isStale && this.props.isFetching) return <div>Loading spinner</div>;
     if (this.props.message.get('messageChain').size === 0) {
       return <Redirect to="/messages" />;
     }
@@ -55,7 +55,7 @@ class ConversationPage extends Component {
               </label>
               <select
                 aria-labelledby="message-order-selector-label"
-                className="w3-select"
+                className="w3-select select-style"
                 name="message-order-selector"
                 onChange={this.setOrder}
                 ref={(r) => { this.messageOrderSelector = r; }}
@@ -130,6 +130,7 @@ class ConversationPage extends Component {
 ConversationPage.propTypes = {
   id: PropTypes.string,
   isFetching: PropTypes.bool,
+  isStale: PropTypes.bool,
   message: ImmutablePropTypes.contains({
     messageChain: ImmutablePropTypes.listOf(
       ImmutablePropTypes.contains({
