@@ -21,13 +21,13 @@ class ConversationPage extends Component {
   }
   sendMessage() {
     this.props.sendMessage(
-      { messageId: this.props.id, message: this.input.value },
+      { messageId: this.props._id, message: this.input.value },
     );
     this.input.value = '';
   }
   render() {
     if (this.props.isStale && this.props.isFetching) return <div>Loading spinner</div>;
-    if (this.props.message.get('messageChain').size === 0) {
+    if (this.props.message.get('messages').size === 0) {
       return <Redirect to="/messages" />;
     }
     // breaks for two equal dates, is this a problem?
@@ -36,10 +36,10 @@ class ConversationPage extends Component {
     ) : (
       (m1, m2) => (m1.get('sendDate') > m2.get('sendDate') ? 1 : -1)
     );
-    const sortedMessages = this.props.message.get('messageChain').sort(sortFunction);
-    if (this.props.id !== null) {
-      const m = this.props.message.get('messageChain')
-        .get(this.props.message.get('messageChain').size - 1);
+    const sortedMessages = this.props.message.get('messages').sort(sortFunction);
+    if (this.props._id !== null) {
+      const m = this.props.message.get('messages')
+        .get(this.props.message.get('messages').size - 1);
       return (
         <div className="w3-container">
           <div className="w3-boder-left w3-panel">
@@ -71,7 +71,7 @@ class ConversationPage extends Component {
             >
               {
                 sortedMessages.map((msg, i) => (
-                  <li key={`${this.props.id}-${i}`} role="listitem">
+                  <li key={`${this.props._id}-${i}`} role="listitem">
                     <p>
                       <span className="message-dt">
                         {capitalize(moment(msg.get('sendDate')).fromNow())}
@@ -128,11 +128,11 @@ class ConversationPage extends Component {
 }
 
 ConversationPage.propTypes = {
-  id: PropTypes.string,
+  _id: PropTypes.string,
   isFetching: PropTypes.bool,
   isStale: PropTypes.bool,
   message: ImmutablePropTypes.contains({
-    messageChain: ImmutablePropTypes.listOf(
+    messages: ImmutablePropTypes.listOf(
       ImmutablePropTypes.contains({
         message: PropTypes.string,
       }),

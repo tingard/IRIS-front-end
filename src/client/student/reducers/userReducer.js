@@ -24,8 +24,6 @@ const userReducer = (state = initialState, action) => {
     case 'GET_USER_DETAILS_SUCCESS':
       // potentially many changes, so simply gonna update things here
       return state.mergeDeep(action.res.student)
-        .set('id', action.res.student._id)
-        .remove('_id')
         .set(
           'state',
           state.get('state')

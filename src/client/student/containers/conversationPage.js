@@ -6,15 +6,16 @@ import MessageChainPage from '../components/ConversationPage';
 
 const mapStateToProps = (state, ownProps) => {
   const m = state.messages.get('messages').filter(
-    i => i.get('id') === ownProps.match.params.messageID,
+    i => i.get('_id') === ownProps.match.params.messageID,
   );
+  console.log('m', m);
   const r = {
-    id: m.size ? m.get(0).get('id') : null,
+    _id: m.size ? m.get(0).get('_id') : null,
     user: state.user,
     isFetching: state.messages.get('state').get('isFetching'),
     message: m.size ? m.get(0) : Map({}),
   };
-  console.log(r); return r;
+  return r;
 };
 
 const mapDispatchToProps = dispatch => ({

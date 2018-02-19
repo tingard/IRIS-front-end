@@ -38,16 +38,18 @@ class ProfilePage extends React.Component {
   }
   saveProfile() {
     this.props.setUserDetails({
-      id: this.props.id,
-      name: this.state.name,
-      email: this.state.email,
-      bio: this.state.bio,
-      emailNotifications: this.state.notificationPrefs.email,
-      browserNotifications: this.state.notificationPrefs.browser,
+      id: this.props._id,
+      details: {
+        name: this.state.name,
+        email: this.state.email,
+        bio: this.state.bio,
+        emailNotifications: this.state.notificationPrefs.email,
+        browserNotifications: this.state.notificationPrefs.browser,
+      },
     });
   }
   render() {
-    if (this.props.state.get('isFetching')) {
+    if (this.props.state.get('isFetching') && this.props.state.get('isStale')) {
       return <div>Connecting to the IRIS database...</div>;
     }
     return (
@@ -160,7 +162,7 @@ class ProfilePage extends React.Component {
 }
 
 ProfilePage.propTypes = {
-  id: PropTypes.string,
+  _id: PropTypes.string,
   name: PropTypes.string,
   email: PropTypes.string,
   bio: PropTypes.string,
