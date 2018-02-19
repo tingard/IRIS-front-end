@@ -18,7 +18,7 @@ const ImagesPage = (props) => {
           ) : 'You don\'t have any images on IRIS'
         }
       </section>
-      <section aria-live="polite" aria-relevant="additions removals">
+      <section aria-live="polite">
         <ul style={{ listStyle: 'none', paddingLeft: 0 }} aria-label="List of images on IRIS" role="grid">
           {props.images.sort((i, j) => (i.get('uploadDate') < j.get('uploadDate') ? 1 : -1)).map(im => (
             <li key={`${im.get('id')}`} role="row">

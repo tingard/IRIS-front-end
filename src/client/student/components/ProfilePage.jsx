@@ -13,6 +13,7 @@ class ProfilePage extends React.Component {
       name: props.name,
       email: props.email,
       bio: props.bio || '',
+      emailIsValid: /\S+@\S+\.\S+/.test(props.email) && props.email !== '',
       notificationPrefs: {
         email: props.emailNotifications,
         browser: props.browserNotifications,
@@ -20,18 +21,10 @@ class ProfilePage extends React.Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      name: nextProps.name,
-      email: nextProps.email,
-      bio: nextProps.bio || '',
-      emailIsValid: true,
-      notificationPrefs: {
-        email: nextProps.emailNotifications || false,
-        browser: nextProps.browserNotifications || false,
-      },
-    });
+    console.log('Received props', this.state, nextProps);
   }
   update() {
+    // called on input box change to update values properly
     this.setState({
       name: this.nameInput.value,
       email: this.emailInput.value,
@@ -44,15 +37,14 @@ class ProfilePage extends React.Component {
     });
   }
   saveProfile() {
-    console.log(this.state);
-    // TODO: this needs a studentID with it!
-    // this.props.setUserDetails({
-    //   name: this.state.name,
-    //   email: this.state.email,
-    //   bio: this.state.bio,
-    //   emailNotifications: this.state.notificationPrefs.email,
-    //   browserNotifications: this.state.notificationPrefs.browser,
-    // });
+    this.props.setUserDetails({
+      id: this.props.id,
+      name: this.state.name,
+      email: this.state.email,
+      bio: this.state.bio,
+      emailNotifications: this.state.notificationPrefs.email,
+      browserNotifications: this.state.notificationPrefs.browser,
+    });
   }
   render() {
     if (this.props.state.get('isFetching')) {
@@ -168,6 +160,7 @@ class ProfilePage extends React.Component {
 }
 
 ProfilePage.propTypes = {
+  id: PropTypes.string,
   name: PropTypes.string,
   email: PropTypes.string,
   bio: PropTypes.string,
@@ -176,7 +169,7 @@ ProfilePage.propTypes = {
   state: ImmutablePropTypes.contains({
     isFetching: PropTypes.bool,
   }),
-  // setUserDetails: PropTypes.func,
+  setUserDetails: PropTypes.func,
   logout: PropTypes.func,
 };
 

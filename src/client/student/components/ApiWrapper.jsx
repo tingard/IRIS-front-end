@@ -5,6 +5,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 // watches for stale things and updates accordingly
 class ApiWrapper extends React.Component {
   componentDidMount() {
+    this.timers = [];
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/student-service-worker.js')
         .then((swReg) => {
@@ -17,12 +18,11 @@ class ApiWrapper extends React.Component {
       navigator.serviceWorker.addEventListener('message', (event) => {
         this.props.handlePushMessage(event.data);
       });
-      this.timers = [];
     } else {
       // There is no service worker, do things the old fashioned way!
       console.log('No service workers allowed. Polling the API once a minute instead.');
-      const getMessagesTimer = setInterval(this.props.getMessages, 1000 * 60);
-      const getImagesTimer = setInterval(this.props.getImages, 1000 * 60);
+      const getMessagesTimer = setInterval(this.props.getMessages, 1000 * 120);
+      const getImagesTimer = setInterval(this.props.getImages, 1000 * 120);
       // TODO: should poll for user details?
       // const getUserDetailsTimer = setInterval(this.props.getUserDetails, 1000 * 60);
       this.timers = {
@@ -31,21 +31,23 @@ class ApiWrapper extends React.Component {
         // getUserDetailsTimer,
       };
     }
-    if (!('Notification' in window)) {
-      console.warn('This browser does not support desktop notification');
-    } else if (
-      (Notification.permission !== 'denied' || Notification.permission === 'default') &&
-      Notification.permission !== 'granted'
-    ) {
-      Notification.requestPermission((permission) => {
-        // If the user accepts, let's create a notification
-        if (permission === 'granted') {
-          /* eslint-disable no-unused-vars */
-          const notification = new Notification('This is what notifications look like!');
-          this.props.subscribeToPushNotifications();
-          /* eslint-enable no-unused-vars */
-        }
-      });
+    if (this.props.user.get('browserNotifications')) {
+      if (!('Notification' in window)) {
+        console.warn('This browser does not support desktop notification');
+      } else if (
+        (Notification.permission !== 'denied' || Notification.permission === 'default') &&
+        Notification.permission !== 'granted'
+      ) {
+        Notification.requestPermission((permission) => {
+          // If the user accepts, let's create a notification
+          if (permission === 'granted') {
+            /* eslint-disable no-unused-vars */
+            const notification = new Notification('This is what notifications look like!');
+            this.props.subscribeToPushNotifications();
+            /* eslint-enable no-unused-vars */
+          }
+        });
+      }
     }
   }
   componentWillUnmount() {
