@@ -6,7 +6,7 @@ import moment from 'moment';
 /* eslint-disable no-sequences */
 const ImagesPage = (props) => {
   const getLen = im => props.messages.filter(
-    m => m.get('image').get('id') === im.get('id'),
+    m => m.get('image').get('_id') === im.get('_id'),
   ).size;
   return (
     <div className="w3-container">
@@ -35,7 +35,7 @@ const ImagesPage = (props) => {
                   <div className="w3-btn-bar">
                     {getLen(im) !== 0 ? (
                       <Link
-                        to={`/images/messages/${im.get('id')}`}
+                        to={`/images/messages/${im.get('_id')}`}
                         className="w3-button w3-light-blue w3-margin-right"
                       >
                         See replies
@@ -43,14 +43,14 @@ const ImagesPage = (props) => {
                     ) : null}
                     <button
                       className="w3-button w3-green w3-margin-right"
-                      onClick={() => props.markImageAsDone(im.get('id'))}
+                      onClick={() => props.markImageAsDone(im.get('_id'))}
                       disabled
                     >
                       Mark as completed
                     </button>
                     <button
                       className="w3-button w3-red w3-margin-right"
-                      onClick={() => props.deleteImage(im.get('id'))}
+                      onClick={() => props.deleteImage(im.get('_id'))}
                       disabled
                     >
                       Delete image
@@ -69,7 +69,7 @@ const ImagesPage = (props) => {
 ImagesPage.propTypes = {
   images: ImmutablePropTypes.listOf(
     ImmutablePropTypes.contains({
-      id: PropTypes.string,
+      _id: PropTypes.string,
       note: PropTypes.string,
       uploadDate: PropTypes.string,
       replyChains: ImmutablePropTypes.listOf(PropTypes.string),
@@ -78,8 +78,11 @@ ImagesPage.propTypes = {
   /* eslint-disable react/no-unused-prop-types */
   messages: ImmutablePropTypes.listOf(
     ImmutablePropTypes.contains({
-      messageChain: ImmutablePropTypes.list,
-      imageId: PropTypes.string,
+      messages: ImmutablePropTypes.list,
+      image: ImmutablePropTypes.contains({
+        _id: PropTypes.string,
+      }),
+      _id: PropTypes.string,
     }),
   ),
   /* eslint-enable react/no-unused-prop-types */

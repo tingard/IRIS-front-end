@@ -11,6 +11,33 @@ const initialState = Map({
   messages: List([]),
 });
 
+// // Example message chain
+// {
+//   _id: '',
+//   student: { _id: '', name: 'Test-student-name', bio: '' },
+//   volunteer: { _id: '', name: 'Test-volunteer-name' },
+//   image: {
+//     _id: '',
+//     difficulty: 1,
+//     note: 'Falcon Heavy',
+//     question: 'Was this awesome?',
+//     url: 'https://...',
+//   },
+//   __v: 0,
+//   flagged: false,
+//   markedAsDeleted: false,
+//   startDate: '2018-02-19T21:26:05.433Z',
+//   messages: [
+//     {
+//       message: 'test-image-reply',
+//       fromId: '',
+//       fromType: 'volunteer',
+//       _id: '',
+//       sendDate: '2018-02-19T21:26:05.434Z',
+//     },
+//   ],
+// };
+
 const messageReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SEND_MESSAGE_SUCCESS':

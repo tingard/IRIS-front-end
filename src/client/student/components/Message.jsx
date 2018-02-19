@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 const Message = (props) => {
-  const m = props.messageChain.get(props.messageChain.size - 1);
+  const m = props.messages.get(props.messages.size - 1);
   return (
     <div role="gridcell" aria-live="polite" className="w3-border-left w3-panel">
       <div role="group">
@@ -18,7 +18,7 @@ const Message = (props) => {
           <span>{m.get('fromType') === 'student' ? ' You said:' : ' They said:'} {m.get('message')}</span>
         </p>
         <Link
-          to={`/messages/${props.id}`}
+          to={`/messages/${props._id}`}
         >
           Read all messages in this conversation
         </Link>
@@ -28,11 +28,11 @@ const Message = (props) => {
 };
 
 Message.propTypes = {
-  id: PropTypes.string,
+  _id: PropTypes.string,
   image: ImmutablePropTypes.contains({
     note: PropTypes.string,
   }),
-  messageChain: ImmutablePropTypes.listOf(
+  messages: ImmutablePropTypes.listOf(
     ImmutablePropTypes.contains({
       message: PropTypes.string,
     }),

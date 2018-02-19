@@ -20,7 +20,7 @@ class ApiWrapper extends React.Component {
       });
     } else {
       // There is no service worker, do things the old fashioned way!
-      console.log('No service workers allowed. Polling the API once a minute instead.');
+      console.log('No service workers allowed. Polling the API instead.');
       const getMessagesTimer = setInterval(this.props.getMessages, 1000 * 120);
       const getImagesTimer = setInterval(this.props.getImages, 1000 * 120);
       // TODO: should poll for user details?

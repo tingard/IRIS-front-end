@@ -60,9 +60,16 @@ class HomePage extends React.Component {
   }
   render() {
     if (
-      this.props.user.get('state').get('isFetching') ||
-      this.props.messages.get('state').get('isFetching') ||
-      this.props.images.get('state').get('isFetching')
+      (
+        this.props.user.get('state').get('isFetching') &&
+        this.props.user.get('state').get('isStale')
+      ) || (
+        this.props.messages.get('state').get('isFetching') &&
+        this.props.messages.get('state').get('isStale')
+      ) || (
+        this.props.images.get('state').get('isFetching') &&
+        this.props.images.get('state').get('isStale')
+      )
     ) {
       return <div>Loading spinner</div>;
     }

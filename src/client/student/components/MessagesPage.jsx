@@ -5,7 +5,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Message from './Message';
 
 const MessagesPage = (props) => {
-  if (!props.isFiltered) {
+  if (!props.isFiltered || props.invalidId) {
     return <Redirect to="/images" />;
   }
   if (props.isFetching) return <div>Loading Spinner</div>;
@@ -25,7 +25,7 @@ const MessagesPage = (props) => {
             aria-relevant="additions removals"
           >
             {
-              props.messages.map(m => <li key={m.get('id')} role="row"><Message {...m.toObject()} /></li>)
+              props.messages.map(m => <li key={m.get('_id')} role="row"><Message {...m.toObject()} /></li>)
             }
           </ul>
         ) : (
@@ -39,9 +39,10 @@ const MessagesPage = (props) => {
 MessagesPage.propTypes = {
   isFetching: PropTypes.bool,
   isFiltered: PropTypes.bool,
+  invalidId: PropTypes.bool,
   messages: ImmutablePropTypes.listOf(
     ImmutablePropTypes.contains({
-      id: PropTypes.string,
+      _id: PropTypes.string,
       messageChain: ImmutablePropTypes.listOf(
         ImmutablePropTypes.contains({
           message: PropTypes.string,
