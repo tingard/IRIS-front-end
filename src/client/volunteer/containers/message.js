@@ -3,7 +3,7 @@ import Message from '../components/Message';
 import { sendMessage } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
-  // messageChain is messageChain if given else filter using messageID
+  // messages is messages if given else filter using messageID
   const r = {
     message: ownProps.message,
     pendingMessages: state.messages.get('pendingMessages'),

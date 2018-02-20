@@ -24,7 +24,7 @@ class CardPage extends React.Component {
   }
   sendMessage() {
     this.props.sendMessage({
-      imageId: this.props.card.get('id'),
+      imageId: this.props.card.get('_id'),
       message: this.textarea.value,
     });
     this.props.history.push('/');
@@ -91,7 +91,7 @@ class CardPage extends React.Component {
 CardPage.propTypes = {
   // user: PropTypes.object,
   card: ImmutablePropTypes.contains({
-    id: PropTypes.string,
+    _id: PropTypes.string,
     url: PropTypes.string,
     question: PropTypes.string,
   }),

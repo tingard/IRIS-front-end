@@ -57,7 +57,7 @@ const ProfilePage = (props) => {
                     value={props.user.get('levels').get(s[0]).toString()}
                     onChange={v => props.setUserDetails(
                       {
-                        id: props.user.get('id'),
+                        id: props.user.get('_id'),
                         details: { levels: { [`${s[0]}`]: parseInt(v.value, 10) } },
                       },
                     )}
@@ -101,6 +101,7 @@ const ProfilePage = (props) => {
 
 ProfilePage.propTypes = {
   user: ImmutablePropTypes.contains({
+    _id: PropTypes.string,
     name: PropTypes.string,
     emailNotifications: PropTypes.bool,
     browserNotifications: PropTypes.bool,

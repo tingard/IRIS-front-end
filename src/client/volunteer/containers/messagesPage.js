@@ -7,8 +7,8 @@ const mapStateToProps = (state) => {
       'messages',
       state.messages.get('messages')
         .sort(
-          m => m.get('messageChain').get(
-            m.get('messageChain').size - 1,
+          m => m.get('messages').get(
+            m.get('messages').size - 1,
           ).get('sendDate'),
         ).reverse(),
     ),

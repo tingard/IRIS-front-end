@@ -21,7 +21,7 @@ class MessagesPage extends React.Component {
     }
     const routerMessageID = this.props.match.params.messageID || false;
     const selectedMessage = routerMessageID ?
-      this.props.messages.get('messages').filter(m => m.get('id') === routerMessageID).get(0)
+      this.props.messages.get('messages').filter(m => m.get('_id') === routerMessageID).get(0)
       : this.props.messages.get('messages').get(0);
     if (routerMessageID && !selectedMessage) {
       return <Redirect to="/messages" />;
@@ -42,12 +42,12 @@ class MessagesPage extends React.Component {
           <MediaQuery minWidth={601}>
             {/* That's not been scaled down */}
             <div className="w3-col m4 message-page-navigation">
-              {this.props.messages.get('messages').map(m => <MessagePreview key={m.get('id')} {...m.toObject()} />)}
+              {this.props.messages.get('messages').map(m => <MessagePreview key={m.get('_id')} {...m.toObject()} />)}
             </div>
           </MediaQuery>
           :
           <div className="w3-col m4 message-page-navigation">
-            {this.props.messages.get('messages').map(m => <MessagePreview key={m.get('id')} {...m.toObject()} />)}
+            {this.props.messages.get('messages').map(m => <MessagePreview key={m.get('_id')} {...m.toObject()} />)}
           </div>
         }
         {/* Load the content panel only if the screen is big
@@ -74,7 +74,7 @@ MessagesPage.propTypes = {
   messages: ImmutablePropTypes.contains({
     messages: ImmutablePropTypes.listOf(
       ImmutablePropTypes.contains({
-        id: PropTypes.string,
+        _id: PropTypes.string,
       }),
     ),
     isFetching: PropTypes.bool,

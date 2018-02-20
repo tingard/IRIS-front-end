@@ -5,7 +5,7 @@ import { sendMessage } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
   card: state.cards.get('cards').filter(
-    c => c.get('id') === ownProps.match.params.cardId,
+    c => c.get('_id') === ownProps.match.params.cardId,
   ).get(0),
   cardState: state.cards.get('state'),
   user: state.user,

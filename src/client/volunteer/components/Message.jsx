@@ -24,7 +24,7 @@ class Message extends React.Component {
   }
   sendMessage() {
     this.props.sendMessage(
-      { messageId: this.props.message.get('id'), message: this.input.value },
+      { messageId: this.props.message.get('_id'), message: this.input.value },
     );
     this.input.value = '';
   }
@@ -42,13 +42,13 @@ class Message extends React.Component {
               />
             </div>
           </div>
-          {this.props.message.get('messageChain').map(
+          {this.props.message.get('messages').map(
             (m, i) => (
               m.get('fromType') === 'volunteer' ? (
                 <div
                   className="w3-row"
                   style={{ marginBottom: '30px' }}
-                  key={`${this.props.message.get('id')}-${i}`}
+                  key={`${this.props.message.get('_id')}-${i}`}
                 >
                   <div className="message-page-message from-me">
                     <div
@@ -63,7 +63,7 @@ class Message extends React.Component {
                 <div
                   className="w3-row"
                   style={{ marginBottom: '30px' }}
-                  key={`${this.props.message.get('id')}-${i}`}
+                  key={`${this.props.message.get('_id')}-${i}`}
                 >
                   <div className="message-page-message from-them">
                     <div
@@ -77,7 +77,7 @@ class Message extends React.Component {
               )
             ),
           )}
-          {this.props.pendingMessages.filter(m => m.get('chainId') === this.props.message.get('id'))
+          {this.props.pendingMessages.filter(m => m.get('chainId') === this.props.message.get('_id'))
             .map((m, i) => (
               <div className="w3-row" key={`pending-messages-${i}`}>
                 <div
@@ -121,7 +121,7 @@ Message.propTypes = {
     sendMessageDidFail: PropTypes.bool,
   }),
   message: ImmutablePropTypes.contains({
-    id: PropTypes.string,
+    _id: PropTypes.string,
     message: PropTypes.string,
     image: ImmutablePropTypes.contains({
       url: PropTypes.string,

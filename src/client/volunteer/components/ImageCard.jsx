@@ -18,7 +18,7 @@ function prettify(propertyName) {
 
 
 const ImageCard = props => (
-  <Link to={`/cards/${props.id}`}>
+  <Link to={`/cards/${props._id}`}>
     <div className={`grapheel-image-card w3-card-4 w3-animate-bottom ${props.subject}-card`}>
       <div className="image-card-level">
         <span
@@ -49,7 +49,7 @@ ImageCard.propTypes = {
   subject: PropTypes.string,
   difficulty: PropTypes.number,
   user: PropTypes.object,
-  id: PropTypes.string,
+  _id: PropTypes.string,
 };
 
 export default ImageCard;
