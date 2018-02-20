@@ -59,7 +59,7 @@ class HomePage extends React.Component {
           parseFloat(this.state.selectedLevel) >= parseFloat(card.get('difficulty'))
         ),
     ).map(
-      card => <ImageCard {...card.toObject()} key={card.get('id')} user={this.props.user} />,
+      card => <ImageCard {...card.toObject()} key={card.get('_id')} user={this.props.user} />,
     );
 
     return (

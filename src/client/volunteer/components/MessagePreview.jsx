@@ -5,9 +5,9 @@ import moment from 'moment';
 import { NavLink } from 'react-router-dom';
 
 const MessagePreview = (props) => {
-  const lastMessageDate = props.messageChain.get(props.messageChain.size - 1).get('sendDate');
+  const lastMessageDate = props.messages.get(props.messages.size - 1).get('sendDate');
   return (
-    <NavLink to={`/messages/${props.id}`}>
+    <NavLink to={`/messages/${props._id}`}>
       <div className="w3-row w3-display-container">
         <div className="w3-container message-page-message-preview">
           <div className="w3-col s4 message-preview-image">
@@ -18,7 +18,7 @@ const MessagePreview = (props) => {
             <div className="row">
               <span className="message-preview-message">
                 {`${
-                  props.messageChain.get(props.messageChain.size - 1)
+                  props.messages.get(props.messages.size - 1)
                   .get('message').slice(0, 25).trim()}...`}
               </span>
             </div>
@@ -36,11 +36,11 @@ const MessagePreview = (props) => {
 };
 
 MessagePreview.propTypes = {
-  id: PropTypes.string,
+  _id: PropTypes.string,
   image: ImmutablePropTypes.contains({
     url: PropTypes.string,
   }),
-  messageChain: ImmutablePropTypes.listOf(
+  messages: ImmutablePropTypes.listOf(
     ImmutablePropTypes.contains({
       message: PropTypes.string,
     }),
