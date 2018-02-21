@@ -43,7 +43,7 @@ MessagesPage.propTypes = {
   messages: ImmutablePropTypes.listOf(
     ImmutablePropTypes.contains({
       _id: PropTypes.string,
-      messageChain: ImmutablePropTypes.listOf(
+      messages: ImmutablePropTypes.listOf(
         ImmutablePropTypes.contains({
           message: PropTypes.string,
         }),

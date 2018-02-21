@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import { sendMessage } from '../actions';
 
-import MessageChainPage from '../components/ConversationPage';
+import ConversationPage from '../components/ConversationPage';
 
 const mapStateToProps = (state, ownProps) => {
   const m = state.messages.get('messages').filter(
@@ -22,4 +22,4 @@ const mapDispatchToProps = dispatch => ({
   sendMessage: m => dispatch(sendMessage(m)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessageChainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ConversationPage);
