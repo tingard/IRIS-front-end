@@ -12,6 +12,7 @@ import MessagesPage from './containers/messagesPage';
 import ConversationPage from './containers/conversationPage';
 import ImagesPage from './containers/imagesPage';
 import ProfilePage from './containers/profilePage';
+import FeedbackPage from './components/FeedbackPage';
 
 import userReducer from './reducers/userReducer';
 import messagesReducer from './reducers/messagesReducer';
@@ -46,7 +47,7 @@ const App = () => (
               render={p => <MessagesPage filterByImage {...p} />}
             />
             <Route exact path="/profile" component={ProfilePage} />
-
+            <Route exact path="/feedback" render={p => <FeedbackPage {...p} />} />
             <Route component={HomePage} />
           </Switch>
         </section>

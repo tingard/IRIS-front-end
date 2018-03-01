@@ -24,6 +24,25 @@ const ProfilePage = (props) => {
   if (props.user.get('state').get('isFetching')) return <FullPageSpinner />;
   return (
     <div className="profile-page">
+      <div className="w3-padding-16">
+        <div className="w3-row w3-card-2">
+          <div className="w3-panel">
+            <p>
+              IRIS is currently in a testing stage, and we value your feedback. Please email us
+              at <a href="mailto:contact@grapheel.com">contact@grapheel.com</a> or use our GitHub
+              issue tracker to leave comments, bug reports or feature suggestions!
+            </p>
+            <a
+              href="https://github.com/grapheel/iris"
+              rel="noopener noreferrer nofollow"
+              target="_blank"
+              className="w3-button w3-border w3-round w3-cyan w3-hover-black"
+            >
+              Go to issue tracker
+            </a>
+          </div>
+        </div>
+      </div>
       <div className="row">
         <div className="w3-card-2 w3-container">
           <div className="w3-row">

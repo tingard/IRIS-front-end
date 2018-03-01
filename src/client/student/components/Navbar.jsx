@@ -17,6 +17,9 @@ const Navbar = () => (
     <NavLink to="/profile" className="w3-bar-item w3-button" activeStyle={activeStyle}>
       Profile
     </NavLink>
+    <NavLink to="/feedback" className="w3-bar-item w3-button" activeStyle={activeStyle}>
+      Leave feedback
+    </NavLink>
   </nav>
 );
 
