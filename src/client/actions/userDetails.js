@@ -30,3 +30,5 @@ export const logout = {
   success: res => ({ type: 'LOGOUT_SUCCESS', res }),
   failure: error => ({ type: 'LOGOUT_FAILURE', error }),
 };
+
+export const dismissUpdateAlert = { type: 'DISMISS_SUCCESSFUL_UPDATE_ALERT' };

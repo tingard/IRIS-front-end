@@ -17,6 +17,7 @@ const fetch = fetchWrapper(api);
 export const getUserDetails = fetch(userDetails.get);
 export const setUserDetails = fetch(userDetails.set);
 export const changeUserPassword = fetch(userDetails.changePassword);
+export const { dismissUpdateAlert } = userDetails;
 export const logout = fetch(userDetails.logout);
 
 // SECTION: Image viewing / replying

@@ -5,6 +5,7 @@ const StateRecord = new Record({
   isFetching: false,
   isStale: false,
   updateDidFail: false,
+  updateDidSucceed: false,
 });
 
 const initialState = Map({
@@ -46,7 +47,15 @@ const userReducer = (state = initialState, action) => {
     case 'SET_USER_DETAILS':
       return state.mergeDeep(action.details);
     case 'SET_USER_DETAILS_SUCCESS':
-      return state;
+      return state.set(
+        'state',
+        state.get('state').set('updateDidSucceed', true),
+      );
+    case 'DISMISS_SUCCESSFUL_UPDATE_ALERT':
+      return state.set(
+        'state',
+        state.get('state').set('updateDidSucceed', false),
+      );
     case 'LOGOUT_SUCCESS':
       /* eslint-disable no-restricted-globals */
       location.reload();
