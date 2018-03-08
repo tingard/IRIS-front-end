@@ -13,6 +13,8 @@ const fetch = fetchWrapper(api);
 // SECTION: User details fetching / setting
 export const getUserDetails = fetch(userDetails.get);
 export const setUserDetails = fetch(userDetails.set);
+export const { dismissUpdateAlert } = userDetails;
+
 export const changeUserPassword = fetch(userDetails.changePassword);
 export const logout = fetch(userDetails.logout);
 

@@ -172,6 +172,7 @@ ProfilePage.propTypes = {
     isFetching: PropTypes.bool,
   }),
   setUserDetails: PropTypes.func,
+  // dismissUpdateAlert: PropTypes.func,
   logout: PropTypes.func,
 };
 
