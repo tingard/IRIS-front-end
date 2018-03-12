@@ -1,10 +1,14 @@
 /* eslint-disable no-console, no-param-reassign, array-callback-return, no-shadow */
 const express = require('express');
 const path = require('path');
+const helmet = require('helmet');
 
 const config = require('./config');
 
 const app = express();
+console.log('helmeting');
+app.use(helmet());
+
 const port = config.PORT;
 const domain = config.HOST;
 // -----------------------------------------------------------------------------
