@@ -55,7 +55,7 @@ class Message extends React.Component {
                       className="w3-display-container"
                       data-deltat={`${moment(m.get('sendDate')).fromNow()}`}
                     >
-                      <p>{m.get('message')}</p>
+                      <p className="mf-disable">{m.get('message')}</p>
                     </div>
                   </div>
                 </div>
@@ -70,7 +70,7 @@ class Message extends React.Component {
                       className="w3-display-container"
                       data-deltat={`${moment(m.get('sendDate')).fromNow()}`}
                     >
-                      <p>{m.get('message')}</p>
+                      <p className="mf-disable">{m.get('message')}</p>
                     </div>
                   </div>
                 </div>
@@ -87,7 +87,7 @@ class Message extends React.Component {
                     className={`from-me w3-display-right ${messageSendFailed}`}
                     data-deltat={`${moment(m.get('sendDate')).fromNow()}`}
                   >
-                    <p>{m.get('message')}</p>
+                    <p className="mf-disable">{m.get('message')}</p>
                     { this.props.messagesState.get('sendMessageDidFail') ? (
                       <span className="fail-message w3-display-left">Did not send</span>
                     ) : null }

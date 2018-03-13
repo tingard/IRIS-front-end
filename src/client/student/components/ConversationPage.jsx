@@ -47,22 +47,22 @@ class ConversationPage extends Component {
             <p>
               <em>
                 {`"${this.props.message.get('image').get('note')}"`}
-              </em>, most recent message {moment(m.get('sendDate')).fromNow()}:
+              </em>, most recent message <span className="mf-disable">{moment(m.get('sendDate')).fromNow()}</span>:
             </p>
             <div className="w3-margin" role="group">
               <label htmlFor="message-order-selector" id="message-order-selector-label">
                 Change message order
+                <select
+                  aria-labelledby="message-order-selector-label"
+                  className="w3-select select-style"
+                  name="message-order-selector"
+                  onChange={this.setOrder}
+                  ref={(r) => { this.messageOrderSelector = r; }}
+                >
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                </select>
               </label>
-              <select
-                aria-labelledby="message-order-selector-label"
-                className="select-style"
-                name="message-order-selector"
-                onChange={this.setOrder}
-                ref={(r) => { this.messageOrderSelector = r; }}
-              >
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
-              </select>
             </div>
             <ul
               role="list"
@@ -73,13 +73,13 @@ class ConversationPage extends Component {
                 sortedMessages.map((msg, i) => (
                   <li key={`${this.props._id}-${i}`} role="listitem">
                     <p>
-                      <span className="message-dt">
+                      <span className="message-dt mf-disable">
                         {capitalize(moment(msg.get('sendDate')).fromNow())}
                       </span>
                       <span className="message-from-who">
                         {msg.get('fromType') === 'student' ? ' you said: ' : ' they said: '}
                       </span>
-                      <span className="message-content">
+                      <span className="message-content mf-disable">
                         {msg.get('message')}
                       </span>
                     </p>

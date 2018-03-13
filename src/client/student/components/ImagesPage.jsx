@@ -12,11 +12,13 @@ const ImagesPage = (props) => {
     <div className="w3-container">
       <h1>Your Images</h1>
       <section>
-        {
-          props.images.size > 0 ? (
-            `You currently have ${props.images.size > 0 ? props.images.size : 'any'} images on IRIS`
-          ) : 'You don\'t have any images on IRIS'
-        }
+        <span className="mf-disable">
+          {
+            props.images.size > 0 ? (
+              `You currently have ${props.images.size > 0 ? props.images.size : 'any'} images on IRIS`
+            ) : 'You don\'t have any images on IRIS'
+          }
+        </span>
       </section>
       <section aria-live="polite">
         <ul style={{ listStyle: 'none', paddingLeft: 0 }} aria-label="List of images on IRIS" role="grid">
@@ -24,11 +26,9 @@ const ImagesPage = (props) => {
             <li key={`${im.get('id')}`} role="row">
               <div className="w3-panel w3-border-left" role="gridcell">
                 <p>
-                  Image with note: <em>{`"${im.get('note')}"`}</em>,
-                  uploaded {moment(im.get('uploadDate')).fromNow()},
-                  has {
-                    getLen(im) !== 1 ? `${getLen(im)} replies` : `${getLen(im)} reply`
-                  }
+                  Image with note: <em className="mf-disable">{`"${im.get('note')}"`}</em>,
+                  uploaded <span className="mf-disable">{moment(im.get('uploadDate')).fromNow()}</span>,
+                  has <span className="mf-disable">{getLen(im) !== 1 ? `${getLen(im)} replies` : `${getLen(im)} reply`}</span>
                 </p>
                 <div className="w3-panel" role="group" aria-label="action buttons">
                   <span className="w3-margin-right">Actions:</span>
