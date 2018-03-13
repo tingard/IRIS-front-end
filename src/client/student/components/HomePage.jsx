@@ -145,6 +145,7 @@ class HomePage extends React.Component {
           </form>
           <button
             className="w3-button w3-green w3-panel"
+            id="submitButton"
             ref={(r) => { this.submitBtn = r; }}
             onClick={this.formShouldSubmit}
             disabled={!this.state.inputsAreComplete}
