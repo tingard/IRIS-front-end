@@ -11,11 +11,13 @@ const Message = (props) => {
       <div role="group">
         <p>
           For your image tagged:
-          <em>{` "${props.image.get('note')}"`}</em>,
+          <em className="mf-disable">{` "${props.image.get('note')}"`}</em>,
         </p>
         <p>
-          <span>Most recent message {moment(m.get('sendDate')).fromNow()}.</span>
-          <span>{m.get('fromType') === 'student' ? ' You said:' : ' They said:'} {m.get('message')}</span>
+          Most recent message <span className="mf-disable">{moment(m.get('sendDate')).fromNow()}</span>.
+        </p>
+        <p className="mf-disable">
+          {m.get('fromType') === 'student' ? 'You said:' : 'They said:'} {m.get('message')}
         </p>
         <Link
           to={`/messages/${props._id}`}
