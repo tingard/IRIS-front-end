@@ -6,7 +6,7 @@ const StateRecord = new Record({
   updateDidFail: false,
 });
 
-const initialState = Map({
+export const initialState = Map({
   state: new StateRecord({ isStale: true }),
   lastUpdated: null,
   images: List([]),

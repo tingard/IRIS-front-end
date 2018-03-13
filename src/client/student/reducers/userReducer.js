@@ -7,7 +7,7 @@ const StateRecord = new Record({
   updateDidFail: false,
 });
 
-const initialState = Map({
+export const initialState = Map({
   state: new StateRecord({ isStale: true }),
   name: '',
   email: '',

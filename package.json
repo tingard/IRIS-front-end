@@ -19,11 +19,13 @@
   },
   "devDependencies": {
     "assert": "^1.4.1",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "expect": "^22.4.0",
     "husky": "^0.14.3",
     "jest": "^22.1.4",
     "jest-cli": "^22.1.4"
@@ -68,6 +70,7 @@
     "react-select": "^1.0.0-rc.10",
     "react-spinners": "^0.2.5",
     "react-stripe-elements": "^1.4.0",
+    "react-test-renderer": "^16.2.0",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
@@ -82,6 +85,7 @@
     ]
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/src/enzymeConfiguration.js",
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
     }

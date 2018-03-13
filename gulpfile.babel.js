@@ -8,7 +8,6 @@ import env from 'gulp-env';
 import sass from 'gulp-sass';
 import concat from 'gulp-concat';
 import gzip from 'gulp-gzip';
-// import rename from 'gulp-rename';
 import del from 'del';
 import webpackStream from 'webpack-stream';
 import webpack from 'webpack';
