@@ -55,7 +55,7 @@ class ConversationPage extends Component {
               </label>
               <select
                 aria-labelledby="message-order-selector-label"
-                className="w3-select select-style"
+                className="select-style"
                 name="message-order-selector"
                 onChange={this.setOrder}
                 ref={(r) => { this.messageOrderSelector = r; }}
