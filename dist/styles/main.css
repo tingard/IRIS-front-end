@@ -1,3 +1,7 @@
+.student-app .profile-page .change-pwd-button{margin-top:30px;background-color:#6c90be;color:#fff}.student-app .profile-page .delete-acc-button{margin-top:30px;background-color:#e55;color:#fff}#profile-page-email-input.invalid{border:1px solid #faa !important}#profile-page-email-input.invalid::after{content:'invalid'}#profile-page-bio-input{display:block;width:100%;resize:'none'}
+
+.switch span{position:relative;top:-11px;margin-right:20px}.switch .grapheel-checkbox{-webkit-appearance:none;appearance:none;width:30px;height:30px;border:1px solid #ccc;border-radius:7px}.switch .grapheel-checkbox:hover{border:2px solid #aaa}.switch .grapheel-checkbox:checked{background-color:#2196F3}
+
 .select-style{width:100%;border:1px solid #ddd;background:url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50%;-moz-appearance:none;-webkit-appearance:none;appearance:none;border-radius:3px;height:50px;padding-left:20px;color:#555}.select-style:focus{border:1px solid #ddd;color:#000}.select-style.large{height:100px}.select-style>option::after{content:" - Remember this"}
 
 p{line-height:2.0;color:#333}label.sign-up-question{display:block;padding-top:10px}
@@ -17,7 +21,3 @@ p{line-height:2.0;color:#333}label.sign-up-question{display:block;padding-top:10
 textarea.styled{width:600px;height:120px;border:3px solid #cccccc;padding:5px;font-family:Tahoma, sans-serif;background-image:url(bg.gif);background-position:bottom right;background-repeat:no-repeat}
 
 .volunteer-app .profile-page .change-pwd-button{margin-top:30px;background-color:#6c90be;color:#fff}.volunteer-app .profile-page .delete-acc-button{margin-top:30px;background-color:#e55;color:#fff}.volunteer-app .profile-page .logout-button{margin-top:30px;background-color:#eee}
-
-.student-app .profile-page .change-pwd-button{margin-top:30px;background-color:#6c90be;color:#fff}.student-app .profile-page .delete-acc-button{margin-top:30px;background-color:#e55;color:#fff}#profile-page-email-input.invalid{border:1px solid #faa !important}#profile-page-email-input.invalid::after{content:'invalid'}#profile-page-bio-input{display:block;width:100%;resize:'none'}
-
-.switch span{position:relative;top:-11px;margin-right:20px}.switch .grapheel-checkbox{-webkit-appearance:none;appearance:none;width:30px;height:30px;border:1px solid #ccc;border-radius:7px}.switch .grapheel-checkbox:hover{border:2px solid #aaa}.switch .grapheel-checkbox:checked{background-color:#2196F3}
