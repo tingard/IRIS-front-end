@@ -1,7 +1,6 @@
 /* eslint-disable prefer-arrow-callback, func-names */
 import React from 'react';
 import { shallow } from 'enzyme';
-import expect from 'expect';
 import ProfilePage from '../ProfilePage';
 import { initialState as userState } from '../../reducers/userReducer';
 // import { initialState as messagesState } from '../../reducers/messagesReducer';
@@ -17,4 +16,6 @@ describe('The Student ProfilePage', function () {
   it('should render correctly', function () {
     expect(component.exists()).toBe(true);
   });
+  it('should display the correct profile information');
+  it('should send off profile updates correctly');
 });
