@@ -69,13 +69,10 @@
     flex-grow: 2;
     padding: 10px;
     height: 150px;
+    text-align: center;
     .image-card-image {
-      width: 100%;
+      max-width: 100%;
       height: 100%;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-color: #fff;
     }
   }
   .image-card-message {
