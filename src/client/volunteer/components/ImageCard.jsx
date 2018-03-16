@@ -30,11 +30,7 @@ const ImageCard = props => (
         </span>
       </div>
       <div className="image-card-image-wrapper">
-        <div
-          className="image-card-image"
-          style={{ backgroundImage: `url(${props.url})` }}
-          alt=""
-        />
+        <img src={props.url} className="image-card-image" alt="This is being described" />
       </div>
       <div className="image-card-message">
         {props.question.length > 60 ? `${props.question.slice(0, 50)}...` : props.question}

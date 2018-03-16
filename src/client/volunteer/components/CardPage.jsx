@@ -36,11 +36,7 @@ class CardPage extends React.Component {
           <div className="w3-col m6">
             <div className="w3-row">
               <div className="w3-panel card-page-image-wrapper">
-                <div
-                  className="card-page-image"
-                  style={{ backgroundImage: `url(${this.props.card.get('url')})` }}
-                  alt=""
-                />
+                <img src={this.props.card.get('url')} className="card-page-image" alt="this is being described" />
               </div>
             </div>
             <div className="w3-row" style={{ marginBottom: '10px' }}>
