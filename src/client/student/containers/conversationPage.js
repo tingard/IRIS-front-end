@@ -8,7 +8,6 @@ const mapStateToProps = (state, ownProps) => {
   const m = state.messages.get('messages').filter(
     i => i.get('_id') === ownProps.match.params.messageID,
   );
-  console.log('m', m);
   const r = {
     _id: m.size ? m.get(0).get('_id') : null,
     user: state.user,

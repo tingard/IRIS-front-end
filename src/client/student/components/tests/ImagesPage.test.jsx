@@ -1,7 +1,6 @@
 /* eslint-disable prefer-arrow-callback, func-names */
 import React from 'react';
 import { shallow } from 'enzyme';
-import expect from 'expect';
 import ImagesPage from '../ImagesPage';
 import { initialState as userState } from '../../reducers/userReducer';
 import { initialState as messagesState } from '../../reducers/messagesReducer';
@@ -25,7 +24,5 @@ describe('The Student ImagesPage', function () {
     expect(component.exists()).toBe(true);
   });
 });
-
-// TODO: Should have no images
-// TODO: Test with images
-// TODO: Test image controls (buttons)
+it('should show images correctly');
+it('should fire off events correctly');

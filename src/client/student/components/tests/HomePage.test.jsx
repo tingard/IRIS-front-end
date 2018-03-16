@@ -1,7 +1,6 @@
 /* eslint-disable prefer-arrow-callback, func-names */
 import React from 'react';
 import { shallow } from 'enzyme';
-import expect from 'expect';
 import HomePage from '../HomePage';
 import { initialState as userState } from '../../reducers/userReducer';
 import { initialState as messagesState } from '../../reducers/messagesReducer';
@@ -47,7 +46,7 @@ describe('The Student HomePage', function () {
   it('should have a submit button', function () {
     expect(component.find('#submitButton').length).toEqual(1);
   });
-  // TODO: test loading spinner
-  // TODO: test when user info present
-  // TODO: spy on image upload and form data (sinon?)
+  it('should show the loading spinner when needed');
+  it('should correctly display user information');
+  it('should correctly create the image upload form data');
 });

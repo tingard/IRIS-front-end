@@ -1,7 +1,6 @@
 /* eslint-disable prefer-arrow-callback, func-names */
 import React from 'react';
 import { shallow } from 'enzyme';
-import expect from 'expect';
 import MessagesPage from '../MessagesPage';
 // import { initialState as userState } from '../../reducers/userReducer';
 import { initialState as messagesState } from '../../reducers/messagesReducer';
@@ -26,7 +25,5 @@ describe('The Student MessagesPage', function () {
     expect(component.exists()).toBe(true);
   });
 });
-
-// TODO: check number of messages
-// TODO: check message contents (date and message)
-// TODO: check each message has a link
+it('should display messages correctly');
+it('should link to conversations correctly');
