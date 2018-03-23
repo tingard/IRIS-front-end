@@ -112,7 +112,7 @@ class ProfilePage extends React.Component {
               Your email:
               <input
                 id="profile-page-email-input"
-                className={`mf-disable w3-input w3-border w3-round ${this.state.emailIsValid ? '' : 'invalid'}`}
+                className={`no-mouseflow w3-input w3-border w3-round ${this.state.emailIsValid ? '' : 'invalid'}`}
                 type="email"
                 ref={(r) => { this.emailInput = r; }}
                 value={this.state.email}
@@ -128,7 +128,11 @@ class ProfilePage extends React.Component {
                   <div className="w3-col s3">
                     <p style={{ textAlign: 'right', paddingRight: '5px' }}>{s[1]}:</p>
                   </div>
-                  <div className="w3-col s9 mf-disable" style={{ paddingTop: '8px' }}>
+                  <div
+                    className="w3-col s9"
+                    style={{ paddingTop: '8px' }}
+                    mf-data-replace={`${s[0]} level select`}
+                  >
                     <Select
                       id={`profile-page-${s[0]}-level`}
                       value={this.props.user.get('levels').get(s[0]).toString()}
@@ -148,7 +152,7 @@ class ProfilePage extends React.Component {
               <span>Email Notifications:</span>
               <input
                 type="checkbox"
-                className="grapheel-checkbox"
+                className="grapheel-checkbox no-mouseflow"
                 id="profile-page-email-notifications"
                 ref={(r) => { this.emailNotifications = r; }}
                 checked={this.state.notificationPrefs.email}
@@ -161,7 +165,7 @@ class ProfilePage extends React.Component {
               <span>Browser Notifications:</span>
               <input
                 type="checkbox"
-                className="grapheel-checkbox"
+                className="grapheel-checkbox no-mouseflow"
                 id="profile-page-browser-notifications"
                 ref={(r) => { this.browserNotifications = r; }}
                 checked={this.state.notificationPrefs.browser}
