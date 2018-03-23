@@ -16,7 +16,7 @@ const MessagePreview = (props) => {
           <div className="w3-col s8">
             {/*  Teaser of message */}
             <div className="row">
-              <span className="message-preview-message">
+              <span className="message-preview-message mf-disable">
                 {`${
                   props.messages.get(props.messages.size - 1)
                   .get('message').slice(0, 25).trim()}...`}
@@ -24,7 +24,7 @@ const MessagePreview = (props) => {
             </div>
             {/*  Time since last message */}
             <div className="row">
-              <span className="message-preview-time">
+              <span className="message-preview-time mf-disable">
                 {moment(lastMessageDate).fromNow()}
               </span>
             </div>

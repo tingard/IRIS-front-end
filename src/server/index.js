@@ -6,7 +6,6 @@ const helmet = require('helmet');
 const config = require('./config');
 
 const app = express();
-console.log('helmeting');
 app.use(helmet());
 
 const port = config.PORT;
