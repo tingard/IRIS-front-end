@@ -5,6 +5,7 @@ import LinkExpiredAlert from './link-expired-alert';
 import SuccessfulResetLinkAlert from './successful-reset-link-alert';
 import NotRegisteredUserAlert from './not-registered-user-alert';
 import SuccessfulPasswordResetAlert from './successful-password-reset-alert';
+import IrisButton from '../commonResources/IrisButton';
 
 class ForgotPassword extends React.Component {
   constructor(props) {
@@ -163,13 +164,12 @@ class ForgotPassword extends React.Component {
             </div>
           ) : null }
           <div className="w3-row w3-margin-top">
-            <button
-              className="w3-button w3-border"
+            <IrisButton
               disabled={this.state.linkHasExpired}
               onClick={this.submit}
-            >
-              { this.state.isResetLink ? 'Set new pasword' : 'Send me a reset link' }
-            </button>
+              type="action"
+              text={this.state.isResetLink ? 'Set new pasword' : 'Send me a reset link'}
+            />
             <span className="w3-margin-left">
               <Link to="/">Go back to login</Link>
             </span>

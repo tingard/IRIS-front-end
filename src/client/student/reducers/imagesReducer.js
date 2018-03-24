@@ -34,6 +34,30 @@ const imagesReducer = (state = initialState, action) => {
           .set('isFetching', false)
           .set('isStale', true),
       );
+    case 'EDIT_IMAGE':
+      if (action.payload.details.markedAsDeleted) {
+        return state.set(
+          'images',
+          state.get('images').delete(
+            state.get('images').findIndex(
+              item => item.get('_id') === action.payload.imageId,
+            ),
+          ),
+        );
+      }
+      return state.set('images', state.get('images').update(
+        state.get('images').findIndex(item => item.get('_id') === action.payload.imageId),
+        (item) => {
+          let i = item;
+          Object.entries(action.payload.details).forEach(
+            ([k, v]) => { i = i.set(k, v); return i; },
+          );
+          return i;
+        },
+      ));
+    case 'EDIT_IMAGE_FAILURE':
+      console.error('Could not update image', action);
+      return state;
     default:
       return state;
   }

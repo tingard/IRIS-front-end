@@ -13,7 +13,7 @@ export const upload = {
   // this is broad: use to change details about image, hide or mark as answered
 export const edit = {
   name: 'EDIT_IMAGE',
-  sendRequest: (id, details) => ({ type: 'EDIT_IMAGE', id, details }),
+  sendRequest: ({ imageId, details }) => ({ type: 'EDIT_IMAGE', payload: { imageId, details } }),
   success: res => ({ type: 'EDIT_IMAGE_SUCCESS', res }),
   failure: error => ({ type: 'EDIT_IMAGE_FAILURE', error }),
 };

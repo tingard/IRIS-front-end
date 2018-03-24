@@ -13,7 +13,7 @@ const FeedbackPage = () => (
         href="https://github.com/grapheel/iris"
         rel="noopener noreferrer nofollow"
         target="_blank"
-        className="w3-button w3-border w3-round w3-cyan w3-hover-black"
+        className="iris-button action"
       >
         Go to issue tracker
       </a>
