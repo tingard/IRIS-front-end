@@ -1,6 +1,6 @@
 /* eslint-disable prefer-arrow-callback, func-names */
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import HomePage from '../HomePage';
 import { initialState as userState } from '../../reducers/userReducer';
 import { initialState as messagesState } from '../../reducers/messagesReducer';
@@ -9,7 +9,7 @@ import { initialState as imagesState } from '../../reducers/imagesReducer';
 describe('The Student HomePage', function () {
   let component;
   beforeEach(function () {
-    component = shallow(
+    component = mount(
       <HomePage user={userState} messages={messagesState} images={imagesState} />,
     );
   });
@@ -44,6 +44,7 @@ describe('The Student HomePage', function () {
     });
   });
   it('should have a submit button', function () {
+    console.log(component.find('#submitButton').map(i => i.html()));
     expect(component.find('#submitButton').length).toEqual(1);
   });
   it('should show the loading spinner when needed');

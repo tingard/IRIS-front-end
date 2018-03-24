@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import IrisButton from '../../commonResources/IrisButton';
 
 const isValidEmail = v => /\S+@\S+\.\S+/.test(v) || v === '';
 
@@ -124,36 +125,38 @@ class ProfilePage extends React.Component {
           </div>
         </div>
         <div className="w3-padding-16">
-          <button
-            className="w3-button w3-green w3-round w3-bar"
+          <IrisButton
+            className="w3-bar"
             onClick={this.saveProfile}
-          >
-            Save profile
-          </button>
+            type="primary"
+            text="Save Profile"
+          />
         </div>
-        <div className="w3-row">
-          <button
-            disabled
-            className="change-pwd-button w3-button w3-border w3-round w3-bar w3-hover-black"
-          >
-            Change Password
-          </button>
-        </div>
-        <div className="w3-row">
-          <button
-            className="logout-button w3-button w3-border w3-round w3-bar w3-hover-black"
+        <div className="w3-padding-16">
+          <IrisButton
+            className="w3-bar"
             onClick={this.props.logout}
-          >
-            Logout
-          </button>
+            type="secondary"
+            text="Logout"
+          />
         </div>
-        <div className="w3-row">
-          <button
+        <div className="w3-padding-16">
+          <IrisButton
+            className="w3-bar"
+            onClick={() => null}
             disabled
-            className="delete-acc-button w3-button w3-border w3-round w3-bar w3-hover-black"
-          >
-            Delete Account
-          </button>
+            type="secondary"
+            text="Change Password"
+          />
+        </div>
+        <div className="w3-padding-16">
+          <IrisButton
+            className="w3-bar"
+            onClick={() => null}
+            disabled
+            type="delete"
+            text="Delete account"
+          />
         </div>
         <div className="w3-row w3-padding-48" />
       </div>

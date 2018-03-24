@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 
+import IrisButton from '../commonResources/IrisButton';
 import RegisterStripeCard from './registerStripeCard';
 
 const wrapQuestion = (q, htmlFor) => (
@@ -87,7 +88,8 @@ class AboutStudent extends React.Component {
         style={{ zIndex: 1, backgroundColor: 'white' }}
       >
         <h3 className="w3-padding-16 w3-margin-bottom" style={{ maxWidth: '80vw', margin: 'auto' }}>
-          We look forward to helping you! Fill in your details below and we'll get things underway.
+          <span>We look forward to being able to help you!</span>
+          <span>Fill in your details below and we'll get things underway.</span>
         </h3>
         <section role="region" aria-label="basic information">
           <div className="w3-row w3-margin-bottom" role="group" aria-label="Tell us your name">
@@ -209,13 +211,12 @@ class AboutStudent extends React.Component {
           </div>
         </section>
         <div className="w3-row">
-          <button
+          <IrisButton
             disabled={!this.state.allFieldsDone}
-            className="w3-input w3-margin-top w3-button w3-green"
             onClick={this.registerUser}
-          >
-            Sign up to IRIS!
-          </button>
+            className="w3-input w3-margin-top"
+            text="Sign up to IRIS!"
+          />
         </div>
         <div className="w3-row w3-padding-16">
           <Link to="/sign-up">Go Back</Link>

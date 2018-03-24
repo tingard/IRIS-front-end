@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import IrisButton from './commonResources/IrisButton';
 
 class Login extends React.Component {
   constructor(props) {
@@ -92,12 +93,10 @@ class Login extends React.Component {
             </label>
           </div>
           <div className="w3-row w3-margin-top">
-            <button
-              className="w3-button w3-border"
+            <IrisButton
               onClick={this.login}
-            >
-              Login
-            </button>
+              text="Login"
+            />
             <span className="w3-margin-left">
               <Link to="/forgotten">Forgotten password?</Link>
             </span>

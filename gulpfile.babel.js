@@ -17,8 +17,8 @@ import webpackConfig from './webpack.config.babel';
 const paths = {
   allSrcJs: './src/**/*.js?(x)',
   clientSrcJs: 'src/client/**/*.js?(x)',
-  clientSrcScss: 'src/client/*/styles/sass/*.scss',
-  clientSrcCss: 'src/client/*/styles/css/',
+  clientSrcScss: 'src/client/**/*.scss',
+  clientSrcCss: 'src/client/**/*.css',
   distCssFile: 'dist/styles/',
   distManifestFile: 'dist/manifest.json',
   serverSrcJs: 'src/server/**/*.js?(x)',

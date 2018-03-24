@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import IrisButton from '../../commonResources/IrisButton';
 // import Modal from './Modal';
 
 // TODO: Upload form should be a modal which users are guided through
@@ -89,7 +90,7 @@ class HomePage extends React.Component {
                 accept="image/*"
                 id="imageInput"
                 ref={(r) => { this.inputs.imageInput = r; }}
-                className="w3-input"
+                className="w3-input w3-round w3-border"
                 onChange={this.checkIfInputsComplete}
               />
             </label>
@@ -101,7 +102,7 @@ class HomePage extends React.Component {
                 id="questionInput"
                 autoComplete="off"
                 ref={(r) => { this.inputs.questionInput = r; }}
-                className="w3-input w3-border"
+                className="w3-input w3-border w3-round"
                 onChange={this.checkIfInputsComplete}
               />
             </label>
@@ -112,7 +113,7 @@ class HomePage extends React.Component {
                 name="note"
                 id="noteInput"
                 ref={(r) => { this.inputs.noteInput = r; }}
-                className="w3-input w3-border"
+                className="w3-input w3-border w3-round"
                 onChange={this.checkIfInputsComplete}
               />
             </label>
@@ -143,15 +144,18 @@ class HomePage extends React.Component {
               </select>
             </label>
           </form>
-          <button
-            className="w3-button w3-green w3-panel"
+          <div>
+            <p>
+              {!this.state.inputsAreComplete ? 'Not all fields are filled in!' : null}
+            </p>
+          </div>
+          <IrisButton
+            type="primary"
             id="submitButton"
-            ref={(r) => { this.submitBtn = r; }}
             onClick={this.formShouldSubmit}
             disabled={!this.state.inputsAreComplete}
-          >
-            Submit image
-          </button>
+            text="Submit image"
+          />
           <div role="alert">
             {this.state.successDialogActive ? (
               <div

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import ImagesPage from '../components/ImagesPage';
+import { editImage } from '../actions';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -9,9 +10,16 @@ const mapStateToProps = state => ({
 });
 
 // TODO: actually use dispatch here
-const mapDispatchToProps = () => ({
-  markImageAsDone: (i) => { console.log('Marking as done:', i); },
-  deleteImage: (i) => { console.log('Deleting image:', i); },
+const mapDispatchToProps = dispatch => ({
+  markImageAsDone: i => (
+    dispatch(editImage({ imageId: i, details: { markedAsCompleted: true } }))
+  ),
+  makeImageActive: i => (
+    dispatch(editImage({ imageId: i, details: { markedAsCompleted: false } }))
+  ),
+  deleteImage: i => (
+    dispatch(editImage({ imageId: i, details: { markedAsDeleted: true } }))
+  ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ImagesPage);

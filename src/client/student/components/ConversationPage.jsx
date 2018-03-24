@@ -89,12 +89,8 @@ class ConversationPage extends Component {
             </ul>
             <div className="w3-row w3-padding-16">
               <div className="w3-col s12">
-                <h3>
-                  <label htmlFor="questionInput">
-                    Send a message:
-                  </label>
-                </h3>
-                <p>
+                <label htmlFor="questionInput">
+                  <h3> Send a message: </h3>
                   <input
                     type="text"
                     name="question"
@@ -103,7 +99,7 @@ class ConversationPage extends Component {
                     ref={(r) => { this.input = r; }}
                     className="w3-input w3-border"
                   />
-                </p>
+                </label>
                 <p>
                   <button
                     className="w3-btn w3-green"
