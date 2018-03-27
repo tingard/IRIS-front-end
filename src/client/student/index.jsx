@@ -13,6 +13,7 @@ import ConversationPage from './containers/conversationPage';
 import ImagesPage from './containers/imagesPage';
 import ProfilePage from './containers/profilePage';
 import FeedbackPage from './components/FeedbackPage';
+import ConfirmEmailPage from './containers/confirmEmailPage';
 
 import userReducer from './reducers/userReducer';
 import messagesReducer from './reducers/messagesReducer';
@@ -48,6 +49,7 @@ const App = () => (
             />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/feedback" render={p => <FeedbackPage {...p} />} />
+            <Route exact path="/confirm/:id" component={ConfirmEmailPage} />
             <Route component={HomePage} />
           </Switch>
         </section>

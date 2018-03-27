@@ -44,6 +44,12 @@
   &.computerScience-card {
     @include colorBorder(#f0f);
   }
+  &.psychology-card {
+    @include colorBorder(#9800ff);
+  }
+  &.finance-card {
+    @include colorBorder(#a7db1a);
+  }
   @media screen and (max-width: $phone-width) {
     width: 300px;
     height: 400px;

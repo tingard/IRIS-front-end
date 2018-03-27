@@ -2,8 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Select from 'react-select';
-
 import FullPageSpinner from './FullPageSpinner';
 import ImageCard from './ImageCard';
 // import AlertHolder from './AlertHolder';
@@ -17,6 +15,8 @@ const filters = {
     { value: 'chemistry', label: 'Chemistry students' },
     { value: 'maths', label: 'Maths students' },
     { value: 'computerScience', label: 'Computer Science students' },
+    { value: 'psychology', label: 'Psychology' },
+    { value: 'finance', label: 'Finance' },
   ],
   level: [
     { value: '4', label: 'Any level' },
@@ -36,11 +36,13 @@ class HomePage extends React.Component {
     this.handleLevelChange = this.handleLevelChange.bind(this);
     this.handleSubjectChange = this.handleSubjectChange.bind(this);
   }
-  handleLevelChange(val) {
-    this.setState({ selectedLevel: val.value });
+  handleLevelChange(e) {
+    console.log('level change', e.target.value);
+    this.setState({ selectedLevel: e.target.value });
   }
-  handleSubjectChange(val) {
-    this.setState({ selectedSubject: val.value });
+  handleSubjectChange(e) {
+    console.log('subject change', e.target.value);
+    this.setState({ selectedSubject: e.target.value });
   }
   render() {
     if (this.props.cards.get('state').get('isFetching') || this.props.user.get('isFetching')) {
@@ -61,28 +63,43 @@ class HomePage extends React.Component {
     ).map(
       card => <ImageCard {...card.toObject()} key={card.get('_id')} user={this.props.user} />,
     );
-
     return (
       <div>
         <div className="main-page-topmessage">
           {/* TODO: alert holder here, tie visibility to state and pass function to hide */}
           <label htmlFor="subject-filter-dropdown">
             <p>I feel like helping</p>
-            <Select
+            <select
+              id="subjectInput"
               name="subject-filter-dropdown"
-              value={this.state.selectedSubject}
+              className="w3-input w3-border select-style"
               onChange={this.handleSubjectChange}
-              options={filters.subject}
-            />
+            >
+              {
+                filters.subject.map(
+                  ({ value, label }) => (
+                    <option value={value} key={`subjectInput-${value}`}>{label}</option>
+                  ),
+                )
+              }
+            </select>
           </label>
           <label htmlFor="level-filter-dropdown">
             <p>at (or below)</p>
-            <Select
+            <select
+              id="levelInput"
               name="level-filter-dropdown"
-              value={this.state.selectedLevel}
+              className="w3-input w3-border select-style"
               onChange={this.handleLevelChange}
-              options={filters.level}
-            />
+            >
+              {
+                filters.level.map(
+                  ({ value, label }) => (
+                    <option value={value} key={`levelInput-${value}`}>{label}</option>
+                  ),
+                )
+              }
+            </select>
           </label>
         </div>
         <div className="cardHolder">
@@ -114,6 +131,8 @@ HomePage.propTypes = {
       chemistry: PropTypes.number,
       maths: PropTypes.number,
       computerScience: PropTypes.number,
+      psychology: PropTypes.number,
+      finance: PropTypes.number,
     }),
     state: ImmutablePropTypes.contains({
       isFetching: PropTypes.bool,

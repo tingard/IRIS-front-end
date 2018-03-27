@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:medium');
-.app {
-  div, p, span, h1, h2, h3, h4, h5, h6 {
-    font-family: 'Raleway', sans-serif;
-  }
-}
+$mint-color: #87eeb4;
+$red-color: #f24d36;
+
+$primaryButton: ( text: #ffffff, normal: #68d698, hover: #428760, border: #33724f );
+$secondaryButton: ( text: #ffffff, normal: #6eb5c1, hover: #427882, border: #2d5960 );
+$actionButton: ( text: #ffffff, normal: #ad1313, hover: #7f0f0f, border: #ad1313 );
+$deleteButton: ( text: #110000, normal: #fff2f2, hover: #ffe2e2, border: #ad1313 );
