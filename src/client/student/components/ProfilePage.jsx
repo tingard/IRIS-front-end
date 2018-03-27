@@ -19,6 +19,7 @@ class ProfilePage extends React.Component {
         email: props.emailNotifications,
         browser: props.browserNotifications,
       },
+      shouldShowSavedProfileAlert: true,
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -38,6 +39,7 @@ class ProfilePage extends React.Component {
     });
   }
   saveProfile() {
+    this.setState({ shouldShowSavedProfileAlert: true });
     this.props.setUserDetails({
       id: this.props._id,
       details: {
@@ -85,7 +87,7 @@ class ProfilePage extends React.Component {
           </div>
           <div className="w3-padding-16">
             <label htmlFor="profile-page-bio-input">
-              Tell us about you: (Visible to Volunteers)
+              Tell us about you: (visible to volunteers)
               <textarea
                 id="profile-page-bio-input"
                 ref={(r) => { this.bioInput = r; }}
@@ -132,6 +134,24 @@ class ProfilePage extends React.Component {
             text="Save Profile"
           />
         </div>
+        {this.props.state.get('updateDidSucceed') ? (
+          <div
+            className="w3-panel w3-round w3-card-4 w3-display-container"
+            role="group"
+            aria-labelledby="upload-image-success-header"
+            aria-atomic="true"
+          >
+            <h3 id="upload-image-success-header">Profile has been saved</h3>
+            <p>Image has been successfully uploaded to IRIS</p>
+            <button
+              onClick={this.props.dismissUpdateAlert}
+              className="w3-button w3-display-topright"
+              aria-label="Close this message"
+            >
+              &times;
+            </button>
+          </div>
+        ) : null}
         <div className="w3-padding-16">
           <IrisButton
             className="w3-bar"
@@ -175,7 +195,7 @@ ProfilePage.propTypes = {
     isFetching: PropTypes.bool,
   }),
   setUserDetails: PropTypes.func,
-  // dismissUpdateAlert: PropTypes.func,
+  dismissUpdateAlert: PropTypes.func,
   logout: PropTypes.func,
 };
 

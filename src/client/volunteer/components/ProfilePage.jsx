@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Select from 'react-select';
+// import Select from 'react-select';
 import moment from 'moment';
 import FullPageSpinner from './FullPageSpinner';
+import IrisButton from '../../commonResources/IrisButton';
+
 
 const isValidEmail = v => /\S+@\S+\.\S+/.test(v) || v === '';
 
@@ -13,6 +15,8 @@ const subjects = [
   ['chemistry', 'Chemistry'],
   ['maths', 'Maths'],
   ['computerScience', 'Computer Science'],
+  ['psychology', 'Psychology'],
+  ['finance', 'Finance'],
 ];
 const level = [
   { value: '0', label: 'None' },
@@ -24,11 +28,13 @@ const level = [
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
+    this.getDefaultLevelSelect = this.getDefaultLevelSelect.bind(this);
     this.update = this.update.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
     this.state = {
       name: this.props.user.get('name'),
       email: this.props.user.get('email'),
+      bio: this.props.user.get('bio') || '',
       emailIsValid: isValidEmail(this.props.user.get('email')),
       notificationPrefs: {
         email: this.props.user.get('emailNotifications') || false,
@@ -36,13 +42,20 @@ class ProfilePage extends React.Component {
       },
     };
   }
+  getDefaultLevelSelect(s) {
+    console.log(this.props.user.get('levels').get(s[0]).toString());
+    if (this.props.user.get('levels').get(s[0])) {
+      return this.props.user.get('levels').get(s[0]).toString();
+    }
+    return '0';
+  }
   update() {
     console.log('updating');
     // called on input box change to update values properly
     this.setState({
       email: this.emailInput.value,
       emailIsValid: isValidEmail(this.emailInput.value),
-      // bio: this.bioInput.value,
+      bio: this.bioInput.value,
       notificationPrefs: {
         email: this.emailNotifications.checked,
         browser: this.browserNotifications.checked,
@@ -55,7 +68,7 @@ class ProfilePage extends React.Component {
         id: this.props.user.get('_id'),
         details: {
           email: this.state.email,
-          // bio: this.state.bio,
+          bio: this.state.bio,
           emailNotifications: this.state.notificationPrefs.email,
           browserNotifications: this.state.notificationPrefs.browser,
         },
@@ -80,7 +93,7 @@ class ProfilePage extends React.Component {
                 href="https://github.com/grapheel/iris"
                 rel="noopener noreferrer nofollow"
                 target="_blank"
-                className="w3-button w3-border w3-round w3-cyan w3-hover-black"
+                className="iris-button action"
               >
                 Go to issue tracker
               </a>
@@ -121,6 +134,20 @@ class ProfilePage extends React.Component {
             </label>
           </div>
           <div className="w3-padding-16">
+            <label htmlFor="profile-page-bio-input">
+              Tell us about you: (visible to students you message)
+              <textarea
+                id="profile-page-bio-input"
+                ref={(r) => { this.bioInput = r; }}
+                className="w3-border w3-round"
+                rows={5}
+                value={this.state.bio}
+                placeholder="What do you study? Where?"
+                onChange={() => this.update()}
+              />
+            </label>
+          </div>
+          <div className="w3-padding-16">
             <h3>User levels</h3>
             {subjects.map(s => (
               <label htmlFor={`profile-page-${s[0]}-level`} key={`profile-page-${s[0]}-level`}>
@@ -130,18 +157,27 @@ class ProfilePage extends React.Component {
                   </div>
                   <div
                     className="w3-col s9"
-                    style={{ paddingTop: '8px' }}
+                    style={{ paddingTop: '5px' }}
                     mf-data-replace={`${s[0]} level select`}
                   >
-                    <Select
+                    <select
                       id={`profile-page-${s[0]}-level`}
-                      value={this.props.user.get('levels').get(s[0]).toString()}
-                      onChange={v => this.props.setUserDetails({
+                      name={`profile-page-${s[0]}-level`}
+                      className="w3-input w3-border select-style"
+                      value={this.getDefaultLevelSelect(s)}
+                      onChange={e => this.props.setUserDetails({
                         id: this.props.user.get('_id'),
-                        details: { levels: { [`${s[0]}`]: parseInt(v.value, 10) } },
+                        details: { levels: { [`${s[0]}`]: parseInt(e.target.value, 10) } },
                       })}
-                      options={level}
-                    />
+                    >
+                      {
+                        level.map(
+                          ({ value, label }) => (
+                            <option value={value} key={`subjectInput-${value}`}>{label}</option>
+                          ),
+                        )
+                      }
+                    </select>
                   </div>
                 </div>
               </label>
@@ -174,12 +210,12 @@ class ProfilePage extends React.Component {
             </label>
           </div>
           <div className="w3-padding-16">
-            <button
-              className="w3-button w3-green w3-round w3-bar"
+            <IrisButton
+              className="w3-bar"
               onClick={this.saveProfile}
-            >
-              Save profile
-            </button>
+              type="primary"
+              text="Save Profile"
+            />
           </div>
           { this.props.user.get('state').get('updateDidSucceed') &&
             <div
@@ -199,29 +235,31 @@ class ProfilePage extends React.Component {
               </button>
             </div>
           }
-          <div className="w3-row">
-            <button
-              disabled
-              className="change-pwd-button w3-button w3-border w3-round w3-bar w3-hover-black"
-            >
-              Change Password
-            </button>
-          </div>
-          <div className="w3-row">
-            <button
-              className="logout-button w3-button w3-border w3-round w3-bar w3-hover-black"
+          <div className="w3-padding-16">
+            <IrisButton
+              className="w3-bar"
               onClick={this.props.logout}
-            >
-              Logout
-            </button>
+              type="secondary"
+              text="Logout"
+            />
           </div>
-          <div className="w3-row">
-            <button
+          <div className="w3-padding-16">
+            <IrisButton
+              className="w3-bar"
+              onClick={() => null}
               disabled
-              className="delete-acc-button w3-button w3-border w3-round w3-bar w3-hover-black"
-            >
-              Delete Account
-            </button>
+              type="secondary"
+              text="Change Password"
+            />
+          </div>
+          <div className="w3-padding-16">
+            <IrisButton
+              className="w3-bar"
+              onClick={() => null}
+              disabled
+              type="delete"
+              text="Delete account"
+            />
           </div>
           <div className="w3-row w3-padding-48" />
         </div>

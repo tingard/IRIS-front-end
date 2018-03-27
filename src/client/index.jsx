@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import ClientAPI from 'grapheel-iris-client-api';
 import Login from './Login';
 import ForgotPassword from './forgot-password';
+import ConfirmEmailPage from './commonResources/ConfirmEmailPage';
 import SignUp from './sign-up';
 import VolunteerApp from './volunteer';
 import StudentApp from './student';
@@ -12,6 +13,7 @@ class IRISApp extends React.Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
+    this.confirmEmail = this.confirmEmail.bind(this);
     this.api = new ClientAPI();
     this.state = {
       isLoggedIn: false,
@@ -43,6 +45,10 @@ class IRISApp extends React.Component {
       },
     );
   }
+  confirmEmail(id) {
+    return this.api.handle({ name: 'CONFIRM_EMAIL' }, id)
+      .then(r => ({ res: { success: r.success } }));
+  }
   render() {
     let innerComponent;
     if (this.state.isLoggedIn && this.state.user.type) {
@@ -69,6 +75,16 @@ class IRISApp extends React.Component {
             exact
             path="/forgotten/:id"
             render={p => <ForgotPassword api={this.api} {...p} />}
+          />
+          <Route
+            exact
+            path="/confirm/:id"
+            render={p => (
+              <ConfirmEmailPage
+                confirmEmail={this.confirmEmail}
+                {...p}
+              />
+            )}
           />
           <Route render={() => <Redirect to="/" />} />} />
         </Switch>

@@ -77,7 +77,7 @@ class HomePage extends React.Component {
     return (
       <div className="w3-container w3-animate-opacity">
         <h1>Welcome back, <span className="mf-disable">{this.props.user.get('name')}</span></h1>
-        <section>
+        <section className="w3-padding-16">
           <h3 id="upload-image-section-header">Upload an Image:</h3>
           <form
             onSubmit={(e) => { e.preventDefault(); return false; }}
@@ -129,6 +129,8 @@ class HomePage extends React.Component {
                 <option value="chemistry">Chemistry</option>
                 <option value="biology">Biology</option>
                 <option value="computerScience">Computer Science</option>
+                <option value="psychology">Psychology</option>
+                <option value="finance">Finance</option>
               </select>
             </label>
             <label htmlFor="difficultyInput" className="w3-panel">

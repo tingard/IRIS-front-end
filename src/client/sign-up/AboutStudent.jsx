@@ -36,6 +36,7 @@ class AboutStudent extends React.Component {
     this.state = {
       isValidEmail: true,
       allFieldsDone: false,
+      payForOwnLicence: false,
       user: {},
     };
     this.stripe = new Stripe('pk_test_dkKtfYjdT6PXQKYtNseZmkPb');
@@ -54,7 +55,7 @@ class AboutStudent extends React.Component {
       this.emailInput.value !== '' &&
       this.nameInput.value !== '' &&
       this.state.isValidEmail &&
-      !!(this.state.user.cardToken || false)
+      (!this.state.payForOwnLicence || !!(this.state.user.cardToken || false))
     );
     this.setState({
       allFieldsDone,
@@ -63,6 +64,7 @@ class AboutStudent extends React.Component {
         email: this.emailInput.value,
         pwd: this.passwordInput.value,
         cardToken: this.state.user.cardToken,
+        licenceId: '',
       },
       cardLinkStatusDismissed: false,
     });
@@ -159,62 +161,104 @@ class AboutStudent extends React.Component {
             (don't worry, we'll never charge you more than you signed up for)
           </p>
         </section>
-        <section role="region" label="payment information">
-          <div className="w3-row w3-margin-bottom" role="group" aria-label="Your payment details">
-            <h3 className="w3-padding-16 w3-margin-bottom" style={{ maxWidth: '80vw', margin: 'auto' }}>
-              Add payment details
-            </h3>
-            <MediaQuery minWidth={601}>
-              {
-                m => (
-                  m ? (
-                    <div style={{ margin: 'auto', width: '70vw' }}>
-                      <RegisterStripeCard
-                        stripe={this.stripe}
-                        registerCard={this.registerCard}
-                        user={this.state.user}
-                      />
-                    </div>
-                  ) : (
-                    <div>
-                      <RegisterStripeCard
-                        stripe={this.stripe}
-                        user={this.state.user}
-                        registerCard={this.registerCard}
-                      />
-                    </div>
-                  )
-                )
-              }
-            </MediaQuery>
-          </div>
-          <div role="status">
-            {
-              ((this.state.user.cardToken || false) && !this.state.cardLinkStatusDismissed) ? (
-                <div
-                  className={'w3-panel w3-border w3-round ' +
-                    'w3-border-green w3-animate-right w3-display-container'}
-                  aria-describedby="invalid-login-alert"
+        <section
+          className="w3-row"
+          style={{ maxWidth: '80vw', margin: 'auto' }}
+          role="region"
+          label="Payment information"
+        >
+          <h3
+            className="w3-padding-16 w3-margin-bottom"
+            style={{ maxWidth: '80vw', margin: 'auto' }}
+          >
+            Add payment details
+          </h3>
+          <label className="switch" htmlFor="pay-for-own-licence-checkbox">
+            <span>I am paying for my own IRIS subscription:</span>
+            <input
+              type="checkbox"
+              className="grapheel-checkbox no-mouseflow"
+              id="pay-for-own-licence-checkbox"
+              name="pay-for-own-licence-checkbox"
+              ref={(r) => { this.ownLicenceCheckbox = r; }}
+              checked={this.state.payForOwnLicence}
+              onChange={e => this.setState(
+                { payForOwnLicence: e.target.checked },
+                this.checkFields,
+              )}
+            />
+          </label>
+          { this.state.payForOwnLicence ? (
+            <React.Fragment>
+              <div
+                className="w3-row w3-margin-bottom"
+                role="group"
+                aria-label="Your payment details"
+              >
+                <h3
+                  className="w3-padding-16 w3-margin-bottom"
+                  style={{ maxWidth: '80vw', margin: 'auto' }}
                 >
-                  <h3 id="card-successfully-linked">Card successfully linked</h3>
-                  <p>This card will be linked to your account</p>
-                  <button
-                    className="w3-display-topright w3-button"
-                    onClick={() => this.setState({ cardLinkStatusDismissed: true })}
-                    aria-label="Close"
-                  >
-                    x
-                  </button>
-                </div>
-              ) : null
-            }
-          </div>
+                  Add payment details
+                </h3>
+                <MediaQuery minWidth={601}>
+                  {
+                    m => (
+                      m ? (
+                        <div style={{ margin: 'auto', width: '70vw' }}>
+                          <RegisterStripeCard
+                            stripe={this.stripe}
+                            registerCard={this.registerCard}
+                            user={this.state.user}
+                          />
+                        </div>
+                      ) : (
+                        <div>
+                          <RegisterStripeCard
+                            stripe={this.stripe}
+                            user={this.state.user}
+                            registerCard={this.registerCard}
+                          />
+                        </div>
+                      )
+                    )
+                  }
+                </MediaQuery>
+              </div>
+              <div role="status">
+                {
+                  ((this.state.user.cardToken || false) && !this.state.cardLinkStatusDismissed) ? (
+                    <div
+                      className={'w3-panel w3-border w3-round ' +
+                        'w3-border-green w3-animate-right w3-display-container'}
+                      aria-describedby="invalid-login-alert"
+                    >
+                      <h3 id="card-successfully-linked">Card successfully linked</h3>
+                      <p>This card will be linked to your account</p>
+                      <button
+                        className="w3-display-topright w3-button"
+                        onClick={() => this.setState({ cardLinkStatusDismissed: true })}
+                        aria-label="Close"
+                      >
+                        x
+                      </button>
+                    </div>
+                  ) : null
+                }
+              </div>
+            </React.Fragment>
+          ) : (
+            <p>
+              During the beta, feel free to test the card input system, or uncheck
+              the "paying for own subscription" checkbox to continue.
+            </p>
+          )}
         </section>
         <div className="w3-row">
           <IrisButton
             disabled={!this.state.allFieldsDone}
             onClick={this.registerUser}
-            className="w3-input w3-margin-top"
+            className="w3-margin-top w3-bar"
             text="Sign up to IRIS!"
           />
         </div>

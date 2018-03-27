@@ -23,6 +23,8 @@ const initialState = Map({
     chemistry: 1,
     maths: 1,
     computerScience: 1,
+    psychology: 1,
+    finance: 1,
     other: 1,
   }),
 });

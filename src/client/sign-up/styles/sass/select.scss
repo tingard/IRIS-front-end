@@ -17,6 +17,9 @@
   &.large {
     height: 100px;
   }
+  &.invalid {
+    border-color: #ad1313;
+  }
   &>option::after {
     content: " - Remember this";
 }

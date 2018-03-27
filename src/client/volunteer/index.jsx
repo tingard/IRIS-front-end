@@ -43,6 +43,11 @@ const App = () => [
           <Route path="/profile" component={ProfilePage} />
           <Route path="/messages/:messageID?" component={MessagesPage} />
           <Route path="/cards/:cardId" component={CardPage} />
+          <Route
+            exact
+            path="/confirm/:id"
+            render={(p) => { console.log(p); return <p>HI!</p>; }}
+          />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </section>

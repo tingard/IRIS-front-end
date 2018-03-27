@@ -167,7 +167,7 @@ class ForgotPassword extends React.Component {
             <IrisButton
               disabled={this.state.linkHasExpired}
               onClick={this.submit}
-              type="action"
+              type="primary"
               text={this.state.isResetLink ? 'Set new pasword' : 'Send me a reset link'}
             />
             <span className="w3-margin-left">

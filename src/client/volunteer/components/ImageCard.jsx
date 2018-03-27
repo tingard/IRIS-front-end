@@ -17,27 +17,32 @@ function prettify(propertyName) {
 }
 
 
-const ImageCard = props => (
-  <Link to={`/cards/${props._id}`}>
-    <div className={`grapheel-image-card w3-card-4 w3-animate-bottom ${props.subject}-card`}>
-      <div className="image-card-level">
-        <span
-          className={`user-level-${
-            props.user.get('levels').get(props.subject) > props.difficulty ? 'above' : 'below'
-          }`}
-        >
-          {`${difficulties[parseInt(props.difficulty, 10)]} ${prettify(props.subject)}`}
-        </span>
+const ImageCard = (props) => {
+  const regExp = /res.cloudinary.com\/(.*?)\/image\/upload\/(.*?)$/i;
+  const match = regExp.exec(props.url);
+  const imgUrl = `https://res.cloudinary.com/${match[1]}/c_scale,w_200/${match[2]}`;
+  return (
+    <Link to={`/cards/${props._id}`}>
+      <div className={`grapheel-image-card w3-card-4 w3-animate-bottom ${props.subject}-card`}>
+        <div className="image-card-level">
+          <span
+            className={`user-level-${
+              props.user.get('levels').get(props.subject) > props.difficulty ? 'above' : 'below'
+            }`}
+          >
+            {`${difficulties[parseInt(props.difficulty, 10)]} ${prettify(props.subject)}`}
+          </span>
+        </div>
+        <div className="image-card-image-wrapper">
+          <img src={imgUrl} className="image-card-image" alt="This is being described" />
+        </div>
+        <div className="image-card-message">
+          {props.question.length > 60 ? `${props.question.slice(0, 50)}...` : props.question}
+        </div>
       </div>
-      <div className="image-card-image-wrapper">
-        <img src={props.url} className="image-card-image" alt="This is being described" />
-      </div>
-      <div className="image-card-message">
-        {props.question.length > 60 ? `${props.question.slice(0, 50)}...` : props.question}
-      </div>
-    </div>
-  </Link>
-);
+    </Link>
+  );
+};
 
 ImageCard.propTypes = {
   question: PropTypes.string,

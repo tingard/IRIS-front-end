@@ -33,7 +33,7 @@ class Message extends React.Component {
     return (
       <div className="message-page-messages-box">
         <div className="w3-row messages-box" ref={(r) => { this.messagesBox = r; }}>
-          <div className="w3-row message-image-box">
+          <div className="w3-row message-image-box w3-padding-16">
             <div className="w3-display-container">
               <img
                 className="w3-display-middle"

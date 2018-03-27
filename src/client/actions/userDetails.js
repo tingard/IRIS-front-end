@@ -10,12 +10,6 @@ export const set = {
   success: res => ({ type: 'SET_USER_DETAILS_SUCCESS', res }),
   failure: error => ({ type: 'SET_USER_DETAILS_FAILURE', error }),
 };
-export const setLevels = {
-  name: 'SET_USER_LEVELS',
-  sendRequest: details => ({ type: 'SET_USER_LEVELS', details }),
-  success: res => ({ type: 'SET_USER_LEVELS_SUCCESS', res }),
-  failure: error => ({ type: 'SET_USER_LEVELS_FAILURE', error }),
-};
 export const changePassword = {
   name: 'CHANGE_PASSWORD',
   sendRequest: ({ oldPassword, newPassword }) => (
@@ -29,6 +23,13 @@ export const logout = {
   sendRequest: () => ({ type: 'LOGOUT' }),
   success: res => ({ type: 'LOGOUT_SUCCESS', res }),
   failure: error => ({ type: 'LOGOUT_FAILURE', error }),
+};
+
+export const confirmEmail = {
+  name: 'CONFIRM_EMAIL',
+  sendRequest: id => ({ type: 'CONFIRM_EMAIL', id }),
+  success: res => ({ type: 'CONFIRM_EMAIL_SUCCESS', res }),
+  failure: error => ({ type: 'CONFIRM_EMAIL_FAILURE', error }),
 };
 
 export const dismissUpdateAlert = { type: 'DISMISS_SUCCESSFUL_UPDATE_ALERT' };

@@ -6,7 +6,6 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-console.log(dismissUpdateAlert);
 const mapDispatchToProps = dispatch => ({
   setUserDetails: payload => dispatch(setUserDetails(payload)),
   dismissUpdateAlert: () => dispatch(dismissUpdateAlert),
