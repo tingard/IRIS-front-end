@@ -7,10 +7,9 @@
   "license": "MIT",
   "scripts": {
     "fast-lint": "eslint \"./src/**/*.js?(x)\" -c ./package.json",
-    "start-dev": "gulp start-dev",
     "postinstall": "gulp compile",
-    "compile": "gulp",
     "start": "gulp start",
+    "start-static": "node src/server/index.js",
     "lint": "gulp lint",
     "jest": "jest",
     "test": "gulp lint && jest",

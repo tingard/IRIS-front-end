@@ -163,4 +163,5 @@ const start = gulp.parallel(lint, watch, gulp.series(compile, runServer));
 
 exports.start = start;
 exports.compile = compile;
+exports.lint = lint;
 exports.watch = watch;
