@@ -1,6 +1,11 @@
 {
   "short_name": "IRIS",
   "name": "Grapheel IRIS",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#555",
+  "orientation": "portrait",
+  "start_url": "index.html?launcher=true",
   "icons": [
     {
       "src": "images/irisProposed_withoutBackground_small.png",
@@ -17,9 +22,5 @@
       "type": "image/png",
       "sizes": "960x960"
     }
-  ],
-  "background_color": "#fff",
-  "theme_color": "#555",
-  "orientation": "portrait",
-  "start_url": "index.html?launcher=true"
+  ]
 }
