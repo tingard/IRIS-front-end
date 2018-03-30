@@ -21,7 +21,7 @@ const paths = {
   src: {
     js: './src/**/*.js?(x)',
     manifest: 'src/manifest.json',
-    serviceWorkers: '*service-worker.js',
+    serviceWorkers: '**/*service-worker.js',
     offlinePageServiceWorker: 'src/offline-page-service-worker.js',
     client: {
       scss: 'src/client/**/*.scss',
@@ -60,20 +60,8 @@ if (process.env.NODE_ENV === 'production') {
     webpackConfig.plugins = plugs
   );
 }
-
-gulp.task('default', ['lint'], () => gulp.start('compile'));
-
-gulp.task('compile', ['clean'], () => (
-  Promise.all([
-    gulp.start('sass-styles'),
-    gulp.start('move-manifest'),
-    gulp.start('move-serviceworkers'),
-    gulp.start('webpack'),
-  ])
-));
-
-gulp.task('lint', () =>
-  gulp.src([
+function lint() {
+  return gulp.src([
     paths.src.js,
     paths.gulpfile,
     paths.webpackfile,
@@ -81,87 +69,69 @@ gulp.task('lint', () =>
     .pipe(lec())
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError()),
-);
+    .pipe(eslint.failAfterError());
+}
 
-gulp.task('move-manifest', () => (
-  gulp.src(paths.src.manifest).pipe(gulp.dest(paths.dist.dir))
-));
+function clean() {
+  return del([
+    paths.dist.clientBundle,
+    paths.dist.css,
+    paths.dist.manifest,
+    `${paths.dist.dir}/${paths.dist.studentServiceWorker}`,
+    `${paths.dist.dir}/${paths.dist.volunteerServiceWorker}`,
+  ]);
+}
 
-gulp.task('move-student-sw', () => (
-  gulp.src(paths.src.client.studentServiceWorker).pipe(webpackStream({
-    output: { filename: paths.dist.studentServiceWorker },
-    plugins: [new UglifyJsPlugin()],
-  })).pipe(gulp.dest(paths.dist.dir))
-));
-
-gulp.task('move-volunteer-sw', () => (
-  gulp.src(paths.src.client.volunteerServiceWorker).pipe(webpackStream({
-    output: { filename: paths.dist.volunteerServiceWorker },
-    plugins: [new UglifyJsPlugin()],
-  })).pipe(gulp.dest(paths.dist.dir))
-));
-
-gulp.task('move-serviceworkers', ['move-student-sw', 'move-volunteer-sw']);
-
-gulp.task('clean', () => del([
-  paths.dist.clientBundle,
-  paths.dist.css,
-  paths.dist.manifest,
-  `${paths.dist.dir}/${paths.dist.studentServiceWorker}`,
-  `${paths.dist.dir}/${paths.dist.volunteerServiceWorker}`,
-]));
-
-gulp.task('webpack', () => (
-  gulp.src(paths.src.client.entryPoint)
+function doWebpack() {
+  return gulp.src(paths.src.client.entryPoint)
     .pipe(webpackStream(webpackConfig))
     .pipe(gzip())
-    .pipe(gulp.dest(paths.dist.dir))
-));
+    .pipe(gulp.dest(paths.dist.dir));
+}
 
-gulp.task('sass-styles', () => (
-  Promise.all([
-    gulp.src(paths.src.client.scss)
-      .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-      .pipe(concat('main.css'))
-      .pipe(gulp.dest(paths.dist.css)),
-    gulp.src(paths.reactSelectCSS)
-      .pipe(gulp.dest(paths.dist.css)),
-  ])
-));
+function moveReactSelect() {
+  return gulp.src(paths.reactSelectCSS)
+    .pipe(gulp.dest(paths.dist.css));
+}
 
-gulp.task('watch', () => (
-  Promise.all([
-    gulp.watch([paths.src.js, `!${paths.src.serviceWorkers}`], ['webpack']),
-    gulp.watch(paths.src.client.scss, ['sass-styles']),
-    gulp.watch(paths.src.manifest, ['move-manifest']),
-    gulp.watch(paths.src.client.studentServiceWorker, ['move-student-sw']),
-    gulp.watch(paths.src.client.volunteerServiceWorker, ['move-volunteer-sw']),
-  ])
-));
+function sassStyles() {
+  return gulp.src(paths.src.client.scss)
+    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+    .pipe(concat('main.css'))
+    .pipe(gulp.dest(paths.dist.css));
+}
+function moveManifest() {
+  return gulp.src(paths.src.manifest).pipe(gulp.dest(paths.dist.dir));
+}
+function moveStudentSw() {
+  return gulp.src(paths.src.client.studentServiceWorker).pipe(webpackStream({
+    output: { filename: paths.dist.studentServiceWorker },
+    plugins: [new UglifyJsPlugin()],
+  })).pipe(gulp.dest(paths.dist.dir));
+}
+function moveVolunteerSw() {
+  return gulp.src(paths.src.client.volunteerServiceWorker).pipe(webpackStream({
+    output: { filename: paths.dist.volunteerServiceWorker },
+    plugins: [new UglifyJsPlugin()],
+  })).pipe(gulp.dest(paths.dist.dir));
+}
 
-gulp.task(
-  'start',
-  ['default', 'watch'],
-  () => {
-    env({
-      file: '.env',
-      type: 'ini',
-      vars: {
-        // any variables you want to overwrite in dev
-        mode: 'development',
-        PORT: '5000',
-        // point to test database in .env file
-      },
-    });
-    nodemon({
-      script: paths.src.server.entryPoint,
-      ignore: ['*'],
-    });
-  },
+const watchWebpack = () => gulp.watch([paths.src.js, `!${paths.src.serviceWorkers}`], doWebpack);
+const watchSass = () => gulp.watch(paths.src.client.scss, sassStyles);
+const watchManifest = () => gulp.watch(paths.src.manifest, moveManifest);
+const watchStudentSw = () => gulp.watch(
+  [paths.src.offlinePageServiceWorker, paths.src.client.studentServiceWorker],
+  moveStudentSw,
+);
+const watchVolunteerSw = () => gulp.watch(
+  [paths.src.offlinePageServiceWorker, paths.src.client.volunteerServiceWorker],
+  moveVolunteerSw,
+);
+const watch = gulp.parallel(
+  watchWebpack, watchSass, watchManifest, watchStudentSw, watchVolunteerSw,
 );
 
-gulp.task('start-dev', ['default'], () => {
+function runServer() {
   env({
     file: '.env',
     type: 'ini',
@@ -172,10 +142,25 @@ gulp.task('start-dev', ['default'], () => {
       // point to test database in .env file
     },
   });
-  nodemon({
+  return nodemon({
     script: paths.src.server.entryPoint,
-    ext: 'js scss jsx',
-    watch: ['src'], // this doesn't seem to be working as expected
-    tasks: ['default'],
+    ignore: ['*'],
   });
-});
+}
+
+const build = gulp.parallel(
+  moveReactSelect,
+  sassStyles,
+  moveManifest,
+  moveStudentSw,
+  moveVolunteerSw,
+  doWebpack,
+);
+
+const compile = gulp.series(clean, build);
+
+const start = gulp.parallel(lint, watch, gulp.series(compile, runServer));
+
+exports.start = start;
+exports.compile = compile;
+exports.watch = watch;
