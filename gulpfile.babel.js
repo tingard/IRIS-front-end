@@ -15,27 +15,34 @@ import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import webpackConfig from './webpack.config.babel';
 
 const paths = {
-  allSrcJs: './src/**/*.js?(x)',
-  clientSrcJs: 'src/client/**/*.js?(x)',
-  clientSrcScss: 'src/client/**/*.scss',
-  clientSrcCss: 'src/client/**/*.css',
-  distCssFile: 'dist/styles/',
-  distManifestFile: 'dist/manifest.json',
-  serverSrcJs: 'src/server/**/*.js?(x)',
-  sharedSrcJs: 'src/shared/**/*.js?(x)',
-  clientEntryPoint: 'src/client/index.jsx',
-  serverEntryPoint: 'src/server/index.js',
-  clientBundle: 'dist/client-bundle.js?(.map)',
-  manifestFile: 'src/manifest.json',
-  offlinePageServiceWorker: 'src/offline-page-service-worker.js',
-  gulpFile: 'gulpfile.babel.js',
-  webpackFile: 'webpack.config.babel.js',
-  studentServiceWorker: 'src/client/student/service-worker/service-worker.js',
-  studentServiceWorkerOut: 'student-service-worker.js',
-  volunteerServiceWorker: 'src/client/volunteer/service-worker/service-worker.js',
-  volunteerServiceWorkerOut: 'volunteer-service-worker.js',
-  distDir: 'dist',
+  gulpfile: 'gulpfile.babel.js',
+  webpackfile: 'webpack.config.babel.js',
   reactSelectCSS: 'node_modules/react-select/dist/react-select.css',
+  src: {
+    js: './src/**/*.js?(x)',
+    manifest: 'src/manifest.json',
+    serviceWorkers: '*service-worker.js',
+    offlinePageServiceWorker: 'src/offline-page-service-worker.js',
+    client: {
+      scss: 'src/client/**/*.scss',
+      css: 'src/client/**/*.css',
+      entryPoint: 'src/client/index.jsx',
+      studentServiceWorker: 'src/client/student/service-worker/service-worker.js',
+      volunteerServiceWorker: 'src/client/volunteer/service-worker/service-worker.js',
+    },
+    server: {
+      js: 'src/server/**/*.js?(x)',
+      entryPoint: 'src/server/index.js',
+    },
+  },
+  dist: {
+    dir: 'dist',
+    css: 'dist/styles/',
+    manifest: 'dist/manifest.json',
+    clientBundle: 'dist/client-bundle.js?(.map)',
+    studentServiceWorker: 'student-service-worker.js',
+    volunteerServiceWorker: 'volunteer-service-worker.js',
+  },
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -67,9 +74,9 @@ gulp.task('compile', ['clean'], () => (
 
 gulp.task('lint', () =>
   gulp.src([
-    paths.allSrcJs,
-    paths.gulpFile,
-    paths.webpackFile,
+    paths.src.js,
+    paths.gulpfile,
+    paths.webpackfile,
   ])
     .pipe(lec())
     .pipe(eslint())
@@ -78,50 +85,80 @@ gulp.task('lint', () =>
 );
 
 gulp.task('move-manifest', () => (
-  gulp.src(paths.manifestFile).pipe(gulp.dest(paths.distDir))
+  gulp.src(paths.src.manifest).pipe(gulp.dest(paths.dist.dir))
 ));
 
-gulp.task('move-serviceworkers', () => ((
-  gulp.src(paths.studentServiceWorker)
-    .pipe(webpackStream({
-      output: { filename: paths.studentServiceWorkerOut },
-      plugins: [new UglifyJsPlugin()],
-    }))
-    .pipe(gulp.dest(paths.distDir)),
-  gulp.src(paths.volunteerServiceWorker)
-    .pipe(webpackStream({
-      output: { filename: paths.volunteerServiceWorkerOut },
-      plugins: [new UglifyJsPlugin()],
-    }))
-    .pipe(gulp.dest(paths.distDir))
-)));
+gulp.task('move-student-sw', () => (
+  gulp.src(paths.src.client.studentServiceWorker).pipe(webpackStream({
+    output: { filename: paths.dist.studentServiceWorker },
+    plugins: [new UglifyJsPlugin()],
+  })).pipe(gulp.dest(paths.dist.dir))
+));
+
+gulp.task('move-volunteer-sw', () => (
+  gulp.src(paths.src.client.volunteerServiceWorker).pipe(webpackStream({
+    output: { filename: paths.dist.volunteerServiceWorker },
+    plugins: [new UglifyJsPlugin()],
+  })).pipe(gulp.dest(paths.dist.dir))
+));
+
+gulp.task('move-serviceworkers', ['move-student-sw', 'move-volunteer-sw']);
 
 gulp.task('clean', () => del([
-  paths.clientBundle,
-  paths.distCssFile,
-  paths.distManifestFile,
-  `${paths.distDir}/${paths.studentServiceWorkerOut}`,
-  `${paths.distDir}/${paths.volunteerServiceWorkerOut}`,
+  paths.dist.clientBundle,
+  paths.dist.css,
+  paths.dist.manifest,
+  `${paths.dist.dir}/${paths.dist.studentServiceWorker}`,
+  `${paths.dist.dir}/${paths.dist.volunteerServiceWorker}`,
 ]));
 
 gulp.task('webpack', () => (
-  gulp.src(paths.clientEntryPoint)
+  gulp.src(paths.src.client.entryPoint)
     .pipe(webpackStream(webpackConfig))
     .pipe(gzip())
-    .pipe(gulp.dest(paths.distDir))
+    .pipe(gulp.dest(paths.dist.dir))
 ));
 
-gulp.task('sass-styles', () => {
-  gulp.src(paths.clientSrcScss)
-    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-    .pipe(concat('main.css'))
-    .pipe(gulp.dest(paths.distCssFile));
-  return gulp.src(paths.reactSelectCSS)
-    .pipe(gulp.dest(paths.distCssFile));
-});
+gulp.task('sass-styles', () => (
+  Promise.all([
+    gulp.src(paths.src.client.scss)
+      .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+      .pipe(concat('main.css'))
+      .pipe(gulp.dest(paths.dist.css)),
+    gulp.src(paths.reactSelectCSS)
+      .pipe(gulp.dest(paths.dist.css)),
+  ])
+));
 
-gulp.task('watch', ['default'], () => (
-  gulp.watch([paths.allSrcJs, paths.clientSrcScss], ['default'])),
+gulp.task('watch', () => (
+  Promise.all([
+    gulp.watch([paths.src.js, `!${paths.src.serviceWorkers}`], ['webpack']),
+    gulp.watch(paths.src.client.scss, ['sass-styles']),
+    gulp.watch(paths.src.manifest, ['move-manifest']),
+    gulp.watch(paths.src.client.studentServiceWorker, ['move-student-sw']),
+    gulp.watch(paths.src.client.volunteerServiceWorker, ['move-volunteer-sw']),
+  ])
+));
+
+gulp.task(
+  'start',
+  ['default', 'watch'],
+  () => {
+    env({
+      file: '.env',
+      type: 'ini',
+      vars: {
+        // any variables you want to overwrite in dev
+        mode: 'development',
+        PORT: '5000',
+        // point to test database in .env file
+      },
+    });
+    nodemon({
+      script: paths.src.server.entryPoint,
+      ignore: ['*'],
+    });
+  },
 );
 
 gulp.task('start-dev', ['default'], () => {
@@ -136,7 +173,7 @@ gulp.task('start-dev', ['default'], () => {
     },
   });
   nodemon({
-    script: paths.serverEntryPoint,
+    script: paths.src.server.entryPoint,
     ext: 'js scss jsx',
     watch: ['src'], // this doesn't seem to be working as expected
     tasks: ['default'],
