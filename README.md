@@ -28,7 +28,7 @@ installable via nvm or any other node version manager.
 
 Navigate to your IRIS directory, then `yarn install` will install dependencies
 
-The best way to get started is to run `yarn start-dev`, which will start a server using nodemon to watch for file changes and perform linting and compiling automagically.
+The best way to get started is to run `yarn start`, which will start a server using nodemon to watch for file changes and perform linting and compiling automagically.
 
 Other running options can be used, check `package.json` for the list.
 
@@ -42,7 +42,7 @@ gulpfile.babel.js.
 
 ### Tests
 
-Each component should have a `<comp>.spec.jsx` test file, we use Jest to test, but the syntax is very similar to Mocha. More info on Jest can be found [here](https://github.com/verekia/js-stack-from-scratch/blob/master/tutorial/02-babel-es6-eslint-flow-jest-husky.md#readme).
+Each component should have a `<comp>.spec.jsx` test file, we use Jest and Enzyme to test, but the syntax is very similar to Mocha. More info on Jest can be found [here](https://github.com/verekia/js-stack-from-scratch/blob/master/tutorial/02-babel-es6-eslint-flow-jest-husky.md#readme).
 
 #### Testing best practises:
  - be explicit with descriptions of what the test does
@@ -55,14 +55,6 @@ To run all tests use `yarn test`
 <!-- should be common to all READMEs of IRIS -->
 
 IRIS has two main components: an API and a separate front-end. The API is written using Express and run on Node, and a different Express server provides the React frontend to users.
-
-### API
-
-
-### React Frontend
-
-#### Volunteer Side
-#### Student side
 
 ## Contributing
 
