@@ -15,8 +15,8 @@ const filters = {
     { value: 'chemistry', label: 'Chemistry students' },
     { value: 'maths', label: 'Maths students' },
     { value: 'computerScience', label: 'Computer Science students' },
-    { value: 'psychology', label: 'Psychology' },
-    { value: 'finance', label: 'Finance' },
+    { value: 'psychology', label: 'Psychology students' },
+    { value: 'finance', label: 'Finance students' },
   ],
   level: [
     { value: '4', label: 'Any level' },
