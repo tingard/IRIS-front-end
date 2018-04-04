@@ -20,9 +20,9 @@ const filters = {
   ],
   level: [
     { value: '4', label: 'Any level' },
-    { value: '1', label: 'GCSE level' },
-    { value: '2', label: 'A-level' },
-    { value: '3', label: 'Degree level' },
+    { value: '1', label: 'Primary school' },
+    { value: '2', label: 'Secondary school' },
+    { value: '3', label: 'University level' },
   ],
 };
 

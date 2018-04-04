@@ -140,9 +140,9 @@ class HomePage extends React.Component {
                 ref={(r) => { this.inputs.difficultyInput = r; }}
                 className="w3-input w3-border select-style"
               >
-                <option value="0">GCSE level or below</option>
-                <option value="1">A-level</option>
-                <option value="2">Degree Level</option>
+                <option value="0">Primary school or below</option>
+                <option value="1">Secondary school</option>
+                <option value="2">University level</option>
               </select>
             </label>
           </form>
