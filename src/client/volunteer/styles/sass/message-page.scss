@@ -26,8 +26,10 @@
     border-bottom: 1px solid #ccc;
     .message-preview-image {
       height: 100%;
+      text-align: center;
       img {
-        height: 40px;
+        // height: 40px;
+        max-width: 100px;
         border-radius: 10px;
       }
     }

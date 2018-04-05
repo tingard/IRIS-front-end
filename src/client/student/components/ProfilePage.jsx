@@ -19,7 +19,7 @@ class ProfilePage extends React.Component {
         email: props.emailNotifications,
         browser: props.browserNotifications,
       },
-      shouldShowSavedProfileAlert: true,
+      // shouldShowSavedProfileAlert: true,
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -39,7 +39,7 @@ class ProfilePage extends React.Component {
     });
   }
   saveProfile() {
-    this.setState({ shouldShowSavedProfileAlert: true });
+    // this.setState({ shouldShowSavedProfileAlert: true });
     this.props.setUserDetails({
       id: this.props._id,
       details: {
