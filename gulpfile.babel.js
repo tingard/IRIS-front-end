@@ -60,6 +60,7 @@ if (process.env.NODE_ENV === 'production') {
     webpackConfig.plugins = plugs
   );
 }
+
 function lint() {
   return gulp.src([
     paths.src.js,
@@ -116,7 +117,13 @@ function moveVolunteerSw() {
   })).pipe(gulp.dest(paths.dist.dir));
 }
 
-const watchWebpack = () => gulp.watch([paths.src.js, `!${paths.src.serviceWorkers}`], doWebpack);
+// const watchWebpack2 = () => gulp.watch([paths.src.js, `!${paths.src.serviceWorkers}`], doWebpack)
+function watchWebpack() {
+  return gulp.src(paths.src.client.entryPoint)
+    .pipe(webpackStream(Object.assign({ watch: true }, webpackConfig)))
+    .pipe(gzip())
+    .pipe(gulp.dest(paths.dist.dir));
+}
 const watchSass = () => gulp.watch(paths.src.client.scss, sassStyles);
 const watchManifest = () => gulp.watch(paths.src.manifest, moveManifest);
 const watchStudentSw = () => gulp.watch(
@@ -154,12 +161,21 @@ const build = gulp.parallel(
   moveManifest,
   moveStudentSw,
   moveVolunteerSw,
-  doWebpack,
 );
 
-const compile = gulp.series(clean, build);
+const compile = gulp.series(clean, gulp.parallel(build, doWebpack));
 
-const start = gulp.parallel(lint, watch, gulp.series(compile, runServer));
+const start = gulp.parallel(
+  lint,
+  watch,
+  gulp.series(
+    gulp.series(
+      clean,
+      build,
+    ),
+    runServer,
+  ),
+);
 
 exports.start = start;
 exports.compile = compile;
