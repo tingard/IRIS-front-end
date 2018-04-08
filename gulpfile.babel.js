@@ -17,7 +17,6 @@ import webpackConfig from './webpack.config.babel';
 const paths = {
   gulpfile: 'gulpfile.babel.js',
   webpackfile: 'webpack.config.babel.js',
-  reactSelectCSS: 'node_modules/react-select/dist/react-select.css',
   src: {
     js: './src/**/*.js?(x)',
     manifest: 'src/manifest.json',
@@ -90,11 +89,6 @@ function doWebpack() {
     .pipe(gulp.dest(paths.dist.dir));
 }
 
-function moveReactSelect() {
-  return gulp.src(paths.reactSelectCSS)
-    .pipe(gulp.dest(paths.dist.css));
-}
-
 function sassStyles() {
   return gulp.src(paths.src.client.scss)
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
@@ -156,7 +150,6 @@ function runServer() {
 }
 
 const build = gulp.parallel(
-  moveReactSelect,
   sassStyles,
   moveManifest,
   moveStudentSw,

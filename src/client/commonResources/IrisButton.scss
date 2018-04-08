@@ -40,6 +40,9 @@
   &.secondary {
     @include buttonStyle($secondaryButton);
   }
+  &.tertiary {
+    @include buttonStyle($tertiaryButton);
+  }
   &.action {
     @include buttonStyle($actionButton);
   }

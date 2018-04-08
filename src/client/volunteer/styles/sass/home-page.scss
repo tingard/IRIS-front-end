@@ -6,10 +6,18 @@
 }
 
 .cardHolder {
+  @media screen and (min-width: $medium-width) {
+    padding: 0 10%;
+  }
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 20px;
+}
+.main-page-topmessage {
+  @media screen and (min-width: $medium-width) {
+    padding: 0 10%;
+  }
 }
 .grapheel-image-card {
   background-color: #fff;
