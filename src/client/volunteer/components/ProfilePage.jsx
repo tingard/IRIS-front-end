@@ -6,7 +6,6 @@ import moment from 'moment';
 import FullPageSpinner from './FullPageSpinner';
 import IrisButton from '../../commonResources/IrisButton';
 
-
 const isValidEmail = v => /\S+@\S+\.\S+/.test(v) || v === '';
 
 const subjects = [
