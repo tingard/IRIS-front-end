@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import MessagesPage from '../components/MessagesPage';
+import DescriptionsPage from '../components/DescriptionsPage';
 
 const mapStateToProps = (state, ownProps) => {
   let messages;
@@ -28,4 +28,4 @@ const mapStateToProps = (state, ownProps) => {
   return r;
 };
 
-export default connect(mapStateToProps)(MessagesPage);
+export default connect(mapStateToProps)(DescriptionsPage);

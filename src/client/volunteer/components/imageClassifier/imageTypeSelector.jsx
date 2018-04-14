@@ -4,24 +4,24 @@ import IrisButton from '../../../commonResources/IrisButton';
 
 const ImageTypeSelector = props => (
   <div className="w3-container card-panel-right-pane">
-    <h4 className="w3-margin-bottom">This would best be described</h4>
+    <h4 className="w3-margin-bottom">What template would you like to use?</h4>
     <IrisButton
       className="w3-bar w3-margin-top w3-margin-bottom"
       onClick={() => props.onSelect('graph')}
       type="primary"
-      text="As a graph"
+      text="A graph"
     />
     <IrisButton
       className="w3-bar w3-margin-top w3-margin-bottom"
       onClick={() => props.onSelect('table')}
       type="primary"
-      text="Using a table"
+      text="A table"
     />
     <IrisButton
       className="w3-bar w3-margin-top w3-margin-bottom"
       onClick={() => props.onSelect('other')}
       type="secondary"
-      text="Some other way"
+      text="No template"
     />
   </div>
 );

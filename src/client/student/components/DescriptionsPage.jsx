@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Message from './Message';
+import Description from './Description';
 
-const MessagesPage = (props) => {
+const DescriptionsPage = (props) => {
   if (!props.isFiltered || props.invalidId) {
     return <Redirect to="/images" />;
   }
@@ -14,7 +14,12 @@ const MessagesPage = (props) => {
       aria-labelledby="messages-header"
       className="w3-container w3-animate-opacity"
     >
-      <h1 id="messages-header">{props.isFiltered ? 'Messages for your image' : 'Your Messages' }</h1>
+      <h1 id="messages-header">{(
+          props.isFiltered ?
+            `Descriptions for your image tagged ${props.messages.get(0).get('image').get('note')}` :
+            'Your Messages'
+        )}
+      </h1>
       {
         props.messages.size > 0 ? (
           <ul
@@ -25,18 +30,22 @@ const MessagesPage = (props) => {
             aria-relevant="additions removals"
           >
             {
-              props.messages.map(m => <li key={m.get('_id')} role="row"><Message {...m.toObject()} /></li>)
+              props.messages.map(m => (
+                <li key={m.get('_id')} role="row">
+                  <Description {...m.toObject()} acceptDescription={props.acceptDescription} />
+                </li>
+              ))
             }
           </ul>
         ) : (
-          <p>{'You don\'t have any messages right now'}</p>
+          <p>{'This image doesn\'t have any descriptions yet'}</p>
         )
       }
     </main>
   );
 };
 
-MessagesPage.propTypes = {
+DescriptionsPage.propTypes = {
   isFetching: PropTypes.bool,
   isFiltered: PropTypes.bool,
   invalidId: PropTypes.bool,
@@ -50,6 +59,7 @@ MessagesPage.propTypes = {
       ),
     }),
   ),
+  acceptDescription: PropTypes.func,
 };
 
-export default MessagesPage;
+export default DescriptionsPage;

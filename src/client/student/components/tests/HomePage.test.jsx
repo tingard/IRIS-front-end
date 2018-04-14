@@ -44,7 +44,6 @@ describe('The Student HomePage', function () {
     });
   });
   it('should have a submit button', function () {
-    console.log(component.find('#submitButton').map(i => i.html()));
     expect(component.find('#submitButton').length).toEqual(1);
   });
   it('should show the loading spinner when needed');

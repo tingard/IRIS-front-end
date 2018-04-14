@@ -8,7 +8,7 @@ import { createLogger } from 'redux-logger';
 import Navbar from './components/Navbar';
 import ApiWrapper from './containers/apiWrapper';
 import HomePage from './containers/homePage';
-import MessagesPage from './containers/messagesPage';
+import DescriptionsPage from './containers/descriptionsPage';
 import ConversationPage from './containers/conversationPage';
 import ImagesPage from './containers/imagesPage';
 import ProfilePage from './containers/profilePage';
@@ -39,13 +39,13 @@ const App = () => (
       <ApiWrapper>
         <section className="student-app content-section">
           <Switch>
-            <Route exact path="/messages" render={p => <MessagesPage {...p} />} />
+            <Route exact path="/messages" render={p => <DescriptionsPage {...p} />} />
             <Route exact path="/messages/:messageID" render={p => <ConversationPage {...p} />} />
             <Route exact path="/images" component={ImagesPage} />
             <Route
               exact
-              path="/images/messages/:imageId"
-              render={p => <MessagesPage filterByImage {...p} />}
+              path="/images/descriptions/:imageId"
+              render={p => <DescriptionsPage filterByImage {...p} />}
             />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/feedback" render={p => <FeedbackPage {...p} />} />

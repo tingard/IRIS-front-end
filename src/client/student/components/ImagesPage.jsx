@@ -55,10 +55,10 @@ const ImagesPage = (props) => {
                         <div className="w3-btn-bar">
                           {getReplyLen(im) !== 0 ? (
                             <Link
-                              to={`/images/messages/${im.get('_id')}`}
+                              to={`/images/descriptions/${im.get('_id')}`}
                               className="w3-margin-right iris-button primary"
                             >
-                              See replies
+                              See descriptions
                             </Link>
                           ) : null}
                           <IrisButton
@@ -118,10 +118,10 @@ const ImagesPage = (props) => {
                         <div className="w3-btn-bar">
                           {getReplyLen(im) !== 0 ? (
                             <Link
-                              to={`/images/messages/${im.get('_id')}`}
+                              to={`/images/descriptions/${im.get('_id')}`}
                               className="w3-margin-right iris-button primary"
                             >
-                              See replies
+                              See descriptions
                             </Link>
                           ) : null}
                           <IrisButton
