@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import ImageDescription from './../../commonResources/imageDescription';
 
 class Message extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      help: false,
-    };
     this.scrollToEndMessage = this.scrollToEndMessage.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
   }
@@ -42,7 +40,10 @@ class Message extends React.Component {
               />
             </div>
           </div>
-          {this.props.message.get('messages').map(
+          <div className="w3-row w3-padding-16">
+            <ImageDescription classification={this.props.message.get('classification')} />
+          </div>
+          {this.props.message.get('messages').rest().map(
             (m, i) => (
               m.get('fromType') === 'volunteer' ? (
                 <div

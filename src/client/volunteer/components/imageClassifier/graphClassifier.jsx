@@ -30,16 +30,15 @@ class GraphClassifier extends React.Component {
               onChange={e => this.setState({ xAxis: e.target.checked })}
             />
           </label>
-          { this.state.xAxis ? (
-            <input
-              id="graph-classifier-x-axis-input"
-              className="w3-input w3-border w3-round"
-              type="text"
-              placeholder="What is the x-axis label?"
-              value={this.state.xAxisValue}
-              onChange={e => this.setState({ xAxisValue: e.target.value })}
-            />
-          ) : null}
+          <input
+            id="graph-classifier-x-axis-input"
+            className="w3-input w3-border w3-round"
+            type="text"
+            disabled={!this.state.xAxis}
+            placeholder="What is the x-axis label?"
+            value={this.state.xAxisValue}
+            onChange={e => this.setState({ xAxisValue: e.target.value })}
+          />
         </div>
         <div className="w3-row w3-padding-16">
           <label className="switch" htmlFor="graph-classifier-y-axis">
@@ -52,16 +51,15 @@ class GraphClassifier extends React.Component {
               onChange={e => this.setState({ yAxis: e.target.checked })}
             />
           </label>
-          { this.state.yAxis ? (
-            <input
-              id="graph-classifier-y-axis-input"
-              className="w3-input w3-border w3-round"
-              type="text"
-              placeholder="What is the y-axis label?"
-              value={this.state.yAxisValue}
-              onChange={e => this.setState({ yAxisValue: e.target.value })}
-            />
-          ) : null}
+          <input
+            id="graph-classifier-y-axis-input"
+            className="w3-input w3-border w3-round"
+            type="text"
+            disabled={!this.state.yAxis}
+            placeholder="What is the y-axis label?"
+            value={this.state.yAxisValue}
+            onChange={e => this.setState({ yAxisValue: e.target.value })}
+          />
         </div>
         <div className="w3-row w3-padding-16">
           <label className="switch" htmlFor="graph-classifier-title">
@@ -74,16 +72,15 @@ class GraphClassifier extends React.Component {
               onChange={e => this.setState({ title: e.target.checked })}
             />
           </label>
-          { this.state.title ? (
-            <input
-              id="graph-classifier-title-input"
-              className="w3-input w3-border w3-round"
-              type="text"
-              placeholder="What is the title?"
-              value={this.state.titleValue}
-              onChange={e => this.setState({ titleValue: e.target.value })}
-            />
-          ) : null}
+          <input
+            id="graph-classifier-title-input"
+            className="w3-input w3-border w3-round"
+            type="text"
+            disabled={!this.state.title}
+            placeholder="What is the title?"
+            value={this.state.titleValue}
+            onChange={e => this.setState({ titleValue: e.target.value })}
+          />
         </div>
         <div className="w3-row w3-padding-16">
           <label className="switch" htmlFor="graph-classifier-about">

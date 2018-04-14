@@ -133,7 +133,7 @@ class GraphClassifier extends React.Component {
         </div>
         <IrisButton
           className="w3-bar w3-margin-top"
-          onClick={() => this.props.onComplete(this.compileTable())}
+          onClick={() => this.props.onComplete({ value: this.compileTable() })}
           type="primary"
           text="Finish"
         />

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import ClientAPI from 'grapheel-iris-client-api';
 import Login from './Login';
 import ForgotPassword from './forgot-password';
@@ -86,7 +86,7 @@ class IRISApp extends React.Component {
               />
             )}
           />
-          <Route render={() => <Redirect to="/" />} />} />
+          <Route render={() => <p>You need to login to see this page!</p>} />} />
         </Switch>
       );
     }

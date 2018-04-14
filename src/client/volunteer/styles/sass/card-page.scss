@@ -19,28 +19,34 @@
   background-color: #555;
   color: white;
   border-radius: 5px;
-}
-.classifier-textarea {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 0.5em;
-}
-#image-classifier-table {
-  .table-size-picker {
-    width: 30%;
-    display: inline;
-    margin-left: 10px;
-  }
-  .table {
-    overflow-x: scroll;
-    display: grid;
-    input {
-      border: 0.5px solid #ddd;
+  input {
+    &:disabled {
+      background-color: #ddd;
+      color: #444;
     }
-    .header {
-      font-weight: bold;
-      text-align: center;
-      background-color: #eee;
+  }
+  .classifier-textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+  }
+  #image-classifier-table {
+    .table-size-picker {
+      width: 30%;
+      display: inline;
+      margin-left: 10px;
+    }
+    .table {
+      overflow-x: scroll;
+      display: grid;
+      input {
+        border: 0.5px solid #ddd;
+      }
+      .header {
+        font-weight: bold;
+        text-align: center;
+        background-color: #eee;
+      }
     }
   }
 }
