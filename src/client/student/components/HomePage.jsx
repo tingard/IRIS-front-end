@@ -76,8 +76,12 @@ class HomePage extends React.Component {
     }
     return (
       <div className="w3-container w3-animate-opacity">
-        <h1>Welcome back, <span className="mf-disable">{this.props.user.get('name')}</span></h1>
-        <section className="w3-padding-16">
+        <h1 id="welcome-message">Welcome back, <span className="mf-disable">{this.props.user.get('name')}</span></h1>
+        <section
+          className="w3-padding-16"
+          role="form"
+          aria-labelledby="upload-image-section-header"
+        >
           <h3 id="upload-image-section-header">Upload an Image:</h3>
           <form
             onSubmit={(e) => { e.preventDefault(); return false; }}

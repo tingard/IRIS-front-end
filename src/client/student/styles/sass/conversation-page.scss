@@ -1,0 +1,45 @@
+@mixin messageStyle() {
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  width: 50vw;
+  min-width: 200px;
+  margin-bottom: 10px;
+  .message-info {
+    color: #555;
+    padding: 5px 20px;
+    font-size: 0.5em;
+  }
+  .message-content{
+    padding: 5px 20px;
+  }
+}
+.messages-container {
+  list-style: 'none';
+  padding-left: 0;
+}
+#student-conversation-page {
+  .messages-container {
+    display: flex;
+    flex-direction: column;
+  }
+  li.message {
+    display: block;
+    &.from-me {
+      align-self: end;
+      -webkit-align-self: flex-end;
+      div.message-box {
+        @include messageStyle();
+        align-self: end;
+        background-color: #fafaff;
+        border-color: #cce;
+      }
+    }
+    &.from-them {
+      div.message-box {
+        @include messageStyle();
+        background-color: #fafafa;
+        border-color: #ccc;
+      }
+    }
+  }
+}
