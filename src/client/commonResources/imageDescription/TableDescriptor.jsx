@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const GraphDescriptor = props => (
   <React.Fragment>
-    <h4>Table details:</h4>
+    <h3>Table details:</h3>
     <table className="iris-table-description" dangerouslySetInnerHTML={{ __html: props.value }} />
   </React.Fragment>
 );

@@ -18,9 +18,18 @@ const Description = (props) => {
         <p>
           Received <span className="mf-disable">{moment(props.startDate).fromNow()}</span>.
         </p>
-        <p className="mf-disable">
-          {m.get('fromType') === 'student' ? 'You said:' : 'They said:'} {m.get('message')}
-        </p>
+        {props.messages.size > 1 ?
+          <p className="mf-disable">
+            This conversation has&nbsp;
+            <span className="mf-disable">
+              {Math.max(props.messages.size - 1, 0)} message{props.messages.size > 2 ? 's. ' : '. '}
+            </span>
+            Most recent message&nbsp;
+            <span className="mf-disable">
+              {moment(m.get('sendDate')).fromNow()}
+            </span>
+          </p> : ''
+        }
         <IrisButton
           className="w3-margin-right"
           onClick={() => props.acceptDescription(props._id)}

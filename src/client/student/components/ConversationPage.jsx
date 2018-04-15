@@ -50,80 +50,94 @@ class ConversationPage extends Component {
       const m = this.props.message.get('messages')
         .get(this.props.message.get('messages').size - 1);
       return (
-        <div className="w3-container">
+        <div id="student-conversation-page" className="w3-container">
           <div className="w3-boder-left w3-panel">
-            <h2>For your image tagged:</h2>
-            <p>
-              <em>
-                {`"${this.props.message.get('image').get('note')}"`}
-              </em>, most recent message <span className="mf-disable">{moment(m.get('sendDate')).fromNow()}</span>:
-            </p>
-            <div className="w3-margin" role="group">
-              <label htmlFor="message-order-selector" id="message-order-selector-label">
-                Change message order
-                <select
-                  aria-labelledby="message-order-selector-label"
-                  className="w3-select select-style"
-                  name="message-order-selector"
-                  onChange={this.setOrder}
-                  ref={(r) => { this.messageOrderSelector = r; }}
-                >
-                  <option value="newest">Newest First</option>
-                  <option value="oldest">Oldest First</option>
-                </select>
-              </label>
-            </div>
-            <div className="w3-row w3-padding-16">
+            <h2>For your image tagged {`"${this.props.message.get('image').get('note')}"`}</h2>
+            <section className="w3-row w3-padding-16" role="group">
               <ImageDescription classification={this.props.message.get('classification')} />
-            </div>
-            <ul
-              role="list"
-              aria-label={`Messages ordered by ${this.state.messageOrder} first`}
-              style={{ listStyle: 'none', paddingLeft: 0 }}
-            >
-              {
-                sortedMessages.map((msg, i) => (
-                  <li key={`${this.props._id}-${i}`} role="listitem">
-                    <p>
-                      <span className="message-dt mf-disable">
-                        {capitalize(moment(msg.get('sendDate')).fromNow())}
-                      </span>
-                      <span className="message-from-who">
-                        {msg.get('fromType') === 'student' ? ' you said: ' : ' they said: '}
-                      </span>
-                      <span className="message-content mf-disable">
-                        {msg.get('message')}
-                      </span>
-                    </p>
-                  </li>
-                ))
-              }
-            </ul>
-            <div className="w3-row w3-padding-16">
-              <div className="w3-col s12">
-                <label htmlFor="questionInput">
-                  <h3> Send a message: </h3>
-                  <input
-                    type="text"
-                    name="question"
-                    id="questionInput"
-                    placeholder="Type a message"
-                    ref={(r) => { this.input = r; }}
-                    className="w3-input w3-border"
-                  />
+            </section>
+            <section>
+              <h3>Messages:</h3>
+              <p>
+                 Most recent message <span className="mf-disable">{moment(m.get('sendDate')).fromNow()}</span>:
+              </p>
+              <div className="w3-margin" role="group">
+                <label htmlFor="message-order-selector" id="message-order-selector-label">
+                  Change message order
+                  <select
+                    aria-labelledby="message-order-selector-label"
+                    className="select-style"
+                    name="message-order-selector"
+                    onChange={this.setOrder}
+                    ref={(r) => { this.messageOrderSelector = r; }}
+                  >
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                  </select>
                 </label>
-                <IrisButton
-                  className="w3-margin-right w3-margin-top"
-                  onClick={this.sendMessage}
-                  type="primary"
-                  text="Send"
-                />
               </div>
-            </div>
+              <ul
+                role="list"
+                aria-label={`Messages ordered by ${this.state.messageOrder} first`}
+                className="w3-container messages-container"
+              >
+                {
+                  sortedMessages.map((msg, i) => (
+                    <li
+                      key={`${this.props._id}-${i}`}
+                      role="listitem"
+                      className={`message ${msg.get('fromType') === 'student' ? 'from-me' : 'from-them'}`}
+                    >
+                      <div className="message-box">
+                        <div className="message-info">
+                          <span className="message-dt mf-disable">
+                            {capitalize(moment(msg.get('sendDate')).fromNow())}
+                          </span>
+                          <span className="message-from-who">
+                            {msg.get('fromType') === 'student' ? ' you said: ' : ' they said: '}
+                          </span>
+                        </div>
+                        <div className="message-content mf-disable">
+                          {msg.get('message')}
+                        </div>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ul>
+              <div className="w3-row w3-padding-16">
+                <div className="w3-col s12">
+                  <label htmlFor="questionInput">
+                    <h5> Send a message: </h5>
+                    <input
+                      type="text"
+                      name="question"
+                      id="questionInput"
+                      placeholder="Type a message"
+                      ref={(r) => { this.input = r; }}
+                      className="w3-input w3-border"
+                      onKeyPress={(e) => { if (e.key === 'Enter' && !e.ctrlKey) this.sendMessage(); }}
+                    />
+                  </label>
+                  <IrisButton
+                    className="w3-margin-right w3-margin-top"
+                    onClick={this.sendMessage}
+                    type="primary"
+                    text="Send"
+                  />
+                </div>
+              </div>
+            </section>
           </div>
-          <div className="w3-row w3-padding-16">
+          <div className="w3-row w3-container w3-padding-16">
+            <Link
+              to={`/images/descriptions/${this.props.message.get('image').get('_id')}`}
+              className="iris-button secondary w3-margin-right"
+            >
+              Go back to other descriptions of this image
+            </Link>
             <Link to="/images" className="iris-button secondary">
-              Go back to messages
+              Go back to images
             </Link>
           </div>
           <div className="w3-padding-16" />

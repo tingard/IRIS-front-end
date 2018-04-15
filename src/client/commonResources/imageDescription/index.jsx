@@ -11,7 +11,12 @@ const ImageDescription = (props) => {
     case 'table':
       return <TableDescriptor {...props.classification.get('imageDetails').toObject()} />;
     case 'other':
-      return <p>{props.classification.get('imageDetails').get('value')}</p>;
+      return (
+        <React.Fragment>
+          <h3>Image Details</h3>
+          <p>{props.classification.get('imageDetails').get('value')}</p>
+        </React.Fragment>
+      );
     default:
       return '';
   }
