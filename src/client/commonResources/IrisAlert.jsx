@@ -2,9 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const IrisAlert = props => (
-  <div className={`iris-alert ${props.type} w3-display-container`}>
+  <div
+    className={`iris-alert ${props.type} w3-display-container`}
+    role="alert"
+    aria-label={props.title}
+  >
     <button
       onClick={props.onClose}
+      aria-label="close"
       className="w3-button w3-medium w3-display-topright"
     >
       &times;
