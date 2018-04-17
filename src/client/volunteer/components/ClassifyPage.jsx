@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 // import Select from 'react-select';
 import ImageClassifier from '../containers/imageClassifier';
 
-const CardPage = props => (
+const ClassifyPage = props => (
   props.card != null ? (
     <div className="w3-container">
       <div className="w3-row">
@@ -38,7 +38,7 @@ const CardPage = props => (
   )
 );
 
-CardPage.propTypes = {
+ClassifyPage.propTypes = {
   // user: PropTypes.object,
   card: ImmutablePropTypes.contains({
     _id: PropTypes.string,
@@ -50,4 +50,4 @@ CardPage.propTypes = {
   }),
 };
 
-export default CardPage;
+export default ClassifyPage;

@@ -10,6 +10,7 @@ import ApiWrapper from './containers/apiWrapper';
 import HomePage from './containers/homePage';
 import DescriptionsPage from './containers/descriptionsPage';
 import ConversationPage from './containers/conversationPage';
+import AcceptDescriptionPage from './containers/acceptDescriptionPage';
 import ImagesPage from './containers/imagesPage';
 import ProfilePage from './containers/profilePage';
 import FeedbackPage from './components/FeedbackPage';
@@ -46,6 +47,11 @@ const App = () => (
               exact
               path="/images/descriptions/:imageId"
               render={p => <DescriptionsPage filterByImage {...p} />}
+            />
+            <Route
+              exact
+              path="/images/descriptions/:imageId/:messageId"
+              render={p => <AcceptDescriptionPage {...p} />}
             />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/feedback" render={p => <FeedbackPage {...p} />} />

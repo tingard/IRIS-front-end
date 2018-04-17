@@ -1,0 +1,16 @@
+.iris-alert {
+  border: 1px  solid #888;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 0 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  &.info {
+    border-color: #88f;
+  }
+  &.warning {
+    border-color: #f88;
+  }
+  &.success {
+    border-color: #8f8;
+  }
+}

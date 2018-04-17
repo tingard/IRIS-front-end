@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import IrisButton from '../../commonResources/IrisButton';
 import ImageDescription from '../../commonResources/imageDescription';
 
 const Description = (props) => {
   const m = props.messages.get(props.messages.size - 1);
-  console.log(props.messages.size);
   return (
     <div role="gridcell" aria-live="polite" className="w3-border-left w3-panel">
       <div role="group">
@@ -30,12 +28,12 @@ const Description = (props) => {
             </span>
           </p> : ''
         }
-        <IrisButton
-          className="w3-margin-right"
-          onClick={() => props.acceptDescription(props._id)}
-          type="primary"
-          text="Accept this description"
-        />
+        <Link
+          to={`/images/descriptions/${props.image.get('_id')}/${props._id}`}
+          className="w3-margin-right iris-button primary"
+        >
+          Accept this description
+        </Link>
         <Link
           to={`/messages/${props._id}`}
           className="w3-margin-right iris-button secondary"
@@ -54,8 +52,10 @@ Description.propTypes = {
       message: PropTypes.string,
     }),
   ),
+  image: ImmutablePropTypes.contains({
+    _id: PropTypes.string,
+  }),
   startDate: PropTypes.string,
-  acceptDescription: PropTypes.func,
   classification: PropTypes.object,
 };
 

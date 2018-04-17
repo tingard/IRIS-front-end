@@ -10,8 +10,7 @@ const DescriptionsPage = (props) => {
   }
   if (props.isFetching) return <div>Loading Spinner</div>;
   return (
-    <main
-      aria-labelledby="messages-header"
+    <div
       className="w3-container w3-animate-opacity"
     >
       <h1 id="messages-header">{(
@@ -24,7 +23,7 @@ const DescriptionsPage = (props) => {
         props.messages.size > 0 ? (
           <ul
             style={{ listStyle: 'none', paddingLeft: 0 }}
-            aria-label="Messages list"
+            aria-label="Descriptions list"
             role="grid"
             aria-live="polite"
             aria-relevant="additions removals"
@@ -41,7 +40,7 @@ const DescriptionsPage = (props) => {
           <p>{'This image doesn\'t have any descriptions yet'}</p>
         )
       }
-    </main>
+    </div>
   );
 };
 

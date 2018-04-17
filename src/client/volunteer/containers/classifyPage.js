@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import CardPage from '../components/CardPage';
+import ClassifyPage from '../components/ClassifyPage';
 import { sendMessage } from '../actions';
 
 
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
   sendMessage: m => dispatch(sendMessage(m)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ClassifyPage);

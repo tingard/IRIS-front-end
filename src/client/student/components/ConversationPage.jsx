@@ -45,6 +45,11 @@ class ConversationPage extends Component {
     ) : (
       (m1, m2) => (m1.get('sendDate') > m2.get('sendDate') ? 1 : -1)
     );
+    const ratingValues = [
+      'not at all helpful',
+      'a little helpful',
+      'very helpful',
+    ];
     const sortedMessages = this.props.message.get('messages').rest().sort(sortFunction);
     if (this.props._id !== null) {
       const m = this.props.message.get('messages')
@@ -52,7 +57,9 @@ class ConversationPage extends Component {
       return (
         <div id="student-conversation-page" className="w3-container">
           <div className="w3-boder-left w3-panel">
-            <h2>For your image tagged {`"${this.props.message.get('image').get('note')}"`}</h2>
+            <h2>
+              {`For your image tagged "${this.props.message.get('image').get('note')}"`}
+            </h2>
             <section className="w3-row w3-padding-16" role="group">
               <ImageDescription classification={this.props.message.get('classification')} />
             </section>
@@ -105,41 +112,59 @@ class ConversationPage extends Component {
                   ))
                 }
               </ul>
-              <div className="w3-row w3-padding-16">
-                <div className="w3-col s12">
-                  <label htmlFor="questionInput">
-                    <h5> Send a message: </h5>
-                    <input
-                      type="text"
-                      name="question"
-                      id="questionInput"
-                      placeholder="Type a message"
-                      ref={(r) => { this.input = r; }}
-                      className="w3-input w3-border"
-                      onKeyPress={(e) => { if (e.key === 'Enter' && !e.ctrlKey) this.sendMessage(); }}
+              {this.props.message.get('markedAsCompleted') ? null : (
+                <div className="w3-row w3-padding-16">
+                  <div className="w3-col s12">
+                    <label htmlFor="questionInput">
+                      <h4> Send a message: </h4>
+                      <input
+                        type="text"
+                        name="question"
+                        id="questionInput"
+                        placeholder="Type a message"
+                        ref={(r) => { this.input = r; }}
+                        className="w3-input w3-border"
+                        onKeyPress={(e) => { if (e.key === 'Enter' && !e.ctrlKey) this.sendMessage(); }}
+                      />
+                    </label>
+                    <IrisButton
+                      className="w3-margin-right w3-margin-top"
+                      onClick={this.sendMessage}
+                      type="secondary"
+                      text="Send"
                     />
-                  </label>
-                  <IrisButton
-                    className="w3-margin-right w3-margin-top"
-                    onClick={this.sendMessage}
-                    type="primary"
-                    text="Send"
-                  />
+                  </div>
                 </div>
-              </div>
+              )}
             </section>
           </div>
-          <div className="w3-row w3-container w3-padding-16">
-            <Link
-              to={`/images/descriptions/${this.props.message.get('image').get('_id')}`}
-              className="iris-button secondary w3-margin-right"
-            >
-              Go back to other descriptions of this image
-            </Link>
-            <Link to="/images" className="iris-button secondary">
-              Go back to images
-            </Link>
-          </div>
+          {this.props.message.get('markedAsCompleted') ? (
+            <div className="w3-row w3-container">
+              <p>You accepted this message and rated the description {ratingValues[this.props.message.get('rating')]}</p>
+            </div>
+          ) : (
+            <div className="w3-row w3-container">
+              <p>
+                If the volunteer has answered your question, please accept their response!
+                This will close this conversation window.
+              </p>
+              <Link
+                to={`/images/descriptions/${this.props.message.get('image').get('_id')}/${this.props.message.get('_id')}`}
+                className="iris-button primary w3-margin-right"
+              >
+                Accept this description
+              </Link>
+              <Link
+                to={`/images/descriptions/${this.props.message.get('image').get('_id')}`}
+                className="w3-margin-right iris-button tertiary"
+              >
+                Descriptions of this image
+              </Link>
+              <Link to="/images" className="iris-button tertiary">
+                Your images
+              </Link>
+            </div>
+          )}
           <div className="w3-padding-16" />
         </div>
       );

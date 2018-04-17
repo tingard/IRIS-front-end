@@ -27,6 +27,7 @@ export const editImage = fetch(images.edit);
 // SECTION: Messaging
 export const getMessages = fetch(messages.get);
 export const sendMessage = fetch(messages.send);
+export const acceptDescription = fetch(messages.accept);
 
 // SECTION: Service worker
 export const passSwRegistrationToAPI = fetch(serviceWorker.register);
