@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../commonResources/IrisButton';
+import IrisAlert from '../../commonResources/IrisAlert';
 
 const isValidEmail = v => /\S+@\S+\.\S+/.test(v) || v === '';
 
@@ -23,7 +24,16 @@ class ProfilePage extends React.Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    console.log('Received props', this.state, nextProps);
+    this.state = {
+      name: nextProps.name,
+      email: nextProps.email,
+      bio: nextProps.bio || this.state.bio,
+      emailIsValid: /\S+@\S+\.\S+/.test(nextProps.email) && nextProps.email !== '',
+      notificationPrefs: {
+        email: nextProps.emailNotifications,
+        browser: nextProps.browserNotifications,
+      },
+    };
   }
   update() {
     // called on input box change to update values properly
@@ -134,24 +144,16 @@ class ProfilePage extends React.Component {
             text="Save Profile"
           />
         </div>
-        {this.props.state.get('updateDidSucceed') ? (
-          <div
-            className="w3-panel w3-round w3-card-4 w3-display-container"
-            role="group"
-            aria-labelledby="upload-image-success-header"
-            aria-atomic="true"
-          >
-            <h3 id="upload-image-success-header">Profile has been saved</h3>
-            <p>Image has been successfully uploaded to IRIS</p>
-            <button
-              onClick={this.props.dismissUpdateAlert}
-              className="w3-button w3-display-topright"
-              aria-label="Close this message"
-            >
-              &times;
-            </button>
-          </div>
-        ) : null}
+        <div role="alert">
+          {this.props.state.get('updateDidSucceed') ? (
+            <IrisAlert
+              title="Profile has been saved"
+              message="Your profile has been saved!"
+              type="success"
+              onClose={this.props.dismissUpdateAlert}
+            />
+          ) : null}
+        </div>
         <div className="w3-padding-16">
           <IrisButton
             className="w3-bar"
@@ -193,6 +195,7 @@ ProfilePage.propTypes = {
   browserNotifications: PropTypes.bool,
   state: ImmutablePropTypes.contains({
     isFetching: PropTypes.bool,
+    updateDidSucceed: PropTypes.bool,
   }),
   setUserDetails: PropTypes.func,
   dismissUpdateAlert: PropTypes.func,
