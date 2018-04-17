@@ -6,11 +6,10 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   setUserDetails: payload => dispatch(setUserDetails(payload)),
   dismissUpdateAlert: () => dispatch(dismissUpdateAlert),
-  logout: () => dispatch(logout()),
-
+  logout: () => dispatch(logout()).then(() => ownProps.history.push('/')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

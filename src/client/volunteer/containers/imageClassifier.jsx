@@ -4,7 +4,9 @@ import ImageClassifier from '../components/imageClassifier';
 import { replyImage } from '../actions';
 
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state, ownProps) => ({
+  push: ownProps.push,
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   classifyImage: m => dispatch(

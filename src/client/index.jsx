@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import ClientAPI from 'grapheel-iris-client-api';
 import Login from './Login';
 import ForgotPassword from './forgot-password';
+import UnauthorisedPage from './UnauthorisedPage';
 import ConfirmEmailPage from './commonResources/ConfirmEmailPage';
 import SignUp from './sign-up';
 import VolunteerApp from './volunteer';
@@ -86,7 +87,7 @@ class IRISApp extends React.Component {
               />
             )}
           />
-          <Route render={() => <p>You need to login to see this page!</p>} />} />
+          <Route render={p => <UnauthorisedPage {...p} />} />
         </Switch>
       );
     }

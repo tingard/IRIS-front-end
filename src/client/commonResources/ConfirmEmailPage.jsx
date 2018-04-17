@@ -29,30 +29,19 @@ class ConfirmEmailPage extends React.Component {
       );
   }
   render() {
-    const dialog = this.state.successfulConfirmation ? (
-      <React.Fragment>
-        <p>Thanks for confirming your email, you can now use IRIS fully!</p>
-        <Link to="/" className="iris-button primary">
-          Go to the IRIS HomePage
-        </Link>
-      </React.Fragment>
-    ) : (
-      <React.Fragment>
-        <p>
-          Something went wrong and we couldn't confirm your email,
-          please email us and we will help fix this issue!
-        </p>
-        <a
-          href="mailto:contact@grapheel.com?subject=Problem%20creating%20account"
-          className="iris-button action w3-margin-right"
+    if (this.state.waitingForConfirmation) {
+      return (
+        <div
+          className="w3-container"
+          style={{ maxWidth: '1000px', margin: 'auto', paddingTop: '40px' }}
         >
-          Email contact@grapheel.com
-        </a>
-        <Link to="/" className="iris-button primary">
-          Go to the IRIS HomePage
-        </Link>
-      </React.Fragment>
-    );
+          <h1>Confirm Email</h1>
+          <div role="status" className="w3-padding-16">
+            <p>Confirming your email on the server, please wait</p>
+          </div>
+        </div>
+      );
+    }
     return (
       <div
         className="w3-container"
@@ -60,11 +49,30 @@ class ConfirmEmailPage extends React.Component {
       >
         <h1>Confirm Email</h1>
         <div role="status" className="w3-padding-16">
-          {
-            this.state.waitingForConfirmation ? (
-              <p>Confirming your email on the server, please wait</p>
-            ) : dialog
-          }
+          {this.state.successfulConfirmation ? (
+            <React.Fragment>
+              <p>Thanks for confirming your email, you can now use IRIS fully!</p>
+              <Link to="/" className="iris-button primary">
+                Go to the IRIS HomePage
+              </Link>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <p>
+                Something went wrong and we couldn't confirm your email,
+                please email us and we will help fix this issue!
+              </p>
+              <a
+                href="mailto:contact@grapheel.com?subject=Problem%20creating%20account"
+                className="iris-button action w3-margin-right"
+              >
+                Email contact@grapheel.com
+              </a>
+              <Link to="/" className="iris-button primary">
+                Go to the IRIS HomePage
+              </Link>
+            </React.Fragment>
+          )}
         </div>
       </div>
     );

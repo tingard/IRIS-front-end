@@ -10,3 +10,12 @@ export const send = {
   success: res => ({ type: 'SEND_MESSAGE_SUCCESS', res }),
   failure: error => ({ type: 'SEND_MESSAGE_FAILURE', error }),
 };
+export const accept = {
+  name: 'ACCEPT_MESSAGE',
+  sendRequest: ({ messageId, rating }) => ({
+    type: 'ACCEPT_MESSAGE',
+    payload: { messageId, rating },
+  }),
+  success: res => ({ type: 'ACCEPT_MESSAGE_SUCCESS', res }),
+  failure: error => ({ type: 'ACCEPT_MESSAGE_FAILURE', error }),
+};

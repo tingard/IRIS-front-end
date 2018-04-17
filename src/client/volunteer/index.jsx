@@ -5,12 +5,13 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
+// import ConfirmEmailPage from '../commonResources/ConfirmEmailPage';
 import ApiWrapper from './containers/apiWrapper';
 import homePage from './containers/homePage';
 import Navbar from './components/Navbar';
 import MessagesPage from './containers/messagesPage';
 import ProfilePage from './containers/profilePage';
-import CardPage from './containers/cardPage';
+import ClassifyPage from './containers/classifyPage';
 
 import userReducer from './reducers/userReducer';
 import messageReducer from './reducers/messageReducer';
@@ -42,11 +43,11 @@ const App = () => [
           <Route exact path="/" component={homePage} />
           <Route path="/profile" component={ProfilePage} />
           <Route path="/messages/:messageID?" component={MessagesPage} />
-          <Route path="/cards/:cardId" component={CardPage} />
+          <Route path="/cards/:cardId" component={ClassifyPage} />
           <Route
             exact
             path="/confirm/:id"
-            render={(p) => { console.log(p); return <p>HI!</p>; }}
+            render={(p) => { console.log(p); return <p>Confirmed email</p>; }}
           />
           <Route render={() => <Redirect to="/" />} />
         </Switch>

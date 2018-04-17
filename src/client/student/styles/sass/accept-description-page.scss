@@ -1,0 +1,13 @@
+.accept-description-page {
+  #rating-input {
+    &.bad {
+      border-color: #cc0000!important;
+    }
+    &.okay {
+      border-color:  #e6e600!important;
+    }
+    &.good {
+      border-color: #00b300!important;
+    }
+  }
+}
