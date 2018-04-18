@@ -1,15 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import moment from 'moment';
-import IrisButton from '../../commonResources/IrisButton';
+import ImageDetails from './ImageDetails';
 
 /* eslint-disable no-sequences */
 const ImagesPage = (props) => {
-  const getReplyLen = im => props.messages.filter(
-    m => m.get('image').get('_id') === im.get('_id'),
-  ).size;
   const activeImages = props.images.filter(i => i.get('markedAsCompleted') === false)
     .sort((i, j) => (i.get('uploadDate') < j.get('uploadDate') ? 1 : -1));
   const completedImages = props.images.filter(i => i.get('markedAsCompleted') === true)
@@ -38,50 +33,15 @@ const ImagesPage = (props) => {
               >
                 {activeImages.map(im => (
                   <li key={`${im.get('_id')}`} role="row">
-                    <div className="w3-panel w3-border-left" role="gridcell">
-                      <p>
-                        Image with note: <em className="mf-disable">{`"${im.get('note')}"`}</em>,
-                        uploaded <span className="mf-disable">{moment(im.get('uploadDate')).fromNow()}</span>,
-                        has
-                        <span className="mf-disable">
-                          {getReplyLen(im) !== 1 ?
-                            ` ${getReplyLen(im)} replies` :
-                            ` ${getReplyLen(im)} reply`
-                          }
-                        </span>
-                      </p>
-                      <div className="w3-panel" role="group" aria-label="action buttons">
-                        <span className="w3-margin-right">Actions:</span>
-                        <div className="w3-btn-bar">
-                          {getReplyLen(im) !== 0 ? (
-                            <Link
-                              to={`/images/descriptions/${im.get('_id')}`}
-                              className="w3-margin-right iris-button primary"
-                            >
-                              See descriptions
-                            </Link>
-                          ) : null}
-                          <IrisButton
-                            className="w3-margin-right"
-                            onClick={() => {
-                              console.log('marking as completed', im.get('_id'));
-                              props.markImageAsDone(im.get('_id'));
-                            }}
-                            type="secondary"
-                            text="Mark as completed"
-                          />
-                          <IrisButton
-                            className="w3-margin-right"
-                            onClick={() => {
-                              console.log('marking as deleted', im.get('_id'));
-                              props.deleteImage(im.get('_id'));
-                            }}
-                            type="delete"
-                            text="Delete image"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    <ImageDetails
+                      messages={props.messages.filter(
+                        m => m.get('image').get('_id') === im.get('_id'),
+                      )}
+                      image={im}
+                      isActive
+                      toggleActive={props.markImageAsDone}
+                      deleteImage={props.deleteImage}
+                    />
                   </li>
                 ))}
               </ul>
@@ -101,50 +61,14 @@ const ImagesPage = (props) => {
               >
                 {completedImages.map(im => (
                   <li key={`${im.get('_id')}`} role="row">
-                    <div className="w3-panel w3-border-left" role="gridcell">
-                      <p>
-                        Image with note: <em className="mf-disable">{`"${im.get('note')}"`}</em>,
-                        uploaded <span className="mf-disable">{moment(im.get('uploadDate')).fromNow()}</span>,
-                        has
-                        <span className="mf-disable">
-                          {getReplyLen(im) !== 1 ?
-                            ` ${getReplyLen(im)} replies` :
-                            ` ${getReplyLen(im)} reply`
-                          }
-                        </span>
-                      </p>
-                      <div className="w3-panel" role="group" aria-label="action buttons">
-                        <span className="w3-margin-right">Actions:</span>
-                        <div className="w3-btn-bar">
-                          {getReplyLen(im) !== 0 ? (
-                            <Link
-                              to={`/images/descriptions/${im.get('_id')}`}
-                              className="w3-margin-right iris-button primary"
-                            >
-                              See descriptions
-                            </Link>
-                          ) : null}
-                          <IrisButton
-                            className="w3-margin-right"
-                            type="secondary"
-                            onClick={() => {
-                              console.log('marking as active', im.get('_id'));
-                              props.makeImageActive(im.get('_id'));
-                            }}
-                            text="Show to volunteers"
-                          />
-                          <IrisButton
-                            className="w3-margin-right"
-                            onClick={() => {
-                              console.log('marking as deleted', im.get('_id'));
-                              props.deleteImage(im.get('_id'));
-                            }}
-                            type="delete"
-                            text="Delete image"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    <ImageDetails
+                      messages={props.messages.filter(
+                        m => m.get('image').get('_id') === im.get('_id'),
+                      )}
+                      image={im}
+                      toggleActive={props.makeImageActive}
+                      deleteImage={props.deleteImage}
+                    />
                   </li>
                 ))}
               </ul>

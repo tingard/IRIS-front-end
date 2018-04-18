@@ -5,6 +5,7 @@ import moment from 'moment';
 import { Link, Redirect } from 'react-router-dom';
 import ImageDescription from '../../commonResources/imageDescription';
 import IrisButton from '../../commonResources/IrisButton';
+import ratingValues from '../../values/ratingValues';
 
 const capitalize = s => `${s.charAt(0).toUpperCase()}${s.slice(1)}`;
 
@@ -45,11 +46,6 @@ class ConversationPage extends Component {
     ) : (
       (m1, m2) => (m1.get('sendDate') > m2.get('sendDate') ? 1 : -1)
     );
-    const ratingValues = [
-      'not at all helpful',
-      'a little helpful',
-      'very helpful',
-    ];
     const sortedMessages = this.props.message.get('messages').rest().sort(sortFunction);
     if (this.props._id !== null) {
       const m = this.props.message.get('messages')
@@ -140,7 +136,7 @@ class ConversationPage extends Component {
           </div>
           {this.props.message.get('markedAsCompleted') ? (
             <div className="w3-row w3-container">
-              <p>You accepted this message and rated the description {ratingValues[this.props.message.get('rating')]}</p>
+              <p>You accepted this message and rated the description {ratingValues[this.props.message.get('rating')].text}</p>
             </div>
           ) : (
             <div className="w3-row w3-container">
