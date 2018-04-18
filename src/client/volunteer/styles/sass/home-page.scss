@@ -81,12 +81,15 @@
   }
   .image-card-image-wrapper {
     flex-grow: 2;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     padding: 10px;
     height: 150px;
     text-align: center;
     .image-card-image {
       max-width: 100%;
-      height: 100%;
+      flex-grow: 0;
     }
   }
   .image-card-message {

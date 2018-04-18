@@ -4,10 +4,11 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import IrisButton from '../../commonResources/IrisButton';
+import resizeCloudinaryImage from '../../commonResources/resizeCloudinaryImage';
 
 const ImageDetails = props => (
   <div className="w3-panel w3-border w3-round w3-card-2 image-details" role="gridcell">
-    <img src={props.image.get('url')} alt={props.image.get('note')} />
+    <img src={resizeCloudinaryImage(props.image.get('url'), 200)} alt={props.image.get('note')} />
     <div>
       <p>
           Image with note: <em className="mf-disable">{`"${props.image.get('note')}"`}</em>,
