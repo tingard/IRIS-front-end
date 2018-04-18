@@ -10,7 +10,7 @@ const ImagesPage = (props) => {
   const completedImages = props.images.filter(i => i.get('markedAsCompleted') === true)
     .sort((i, j) => (i.get('uploadDate') < j.get('uploadDate') ? 1 : -1));
   return (
-    <div className="w3-container">
+    <div className="w3-container iris-narrow-page">
       <h1>Your Images</h1>
       <section role="status">
         <span className="mf-disable">

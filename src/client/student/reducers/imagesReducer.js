@@ -49,8 +49,8 @@ const imagesReducer = (state = initialState, action) => {
         state.get('images').findIndex(item => item.get('_id') === action.payload.imageId),
         (item) => {
           let i = item;
-          Object.entries(action.payload.details).forEach(
-            ([k, v]) => { i = i.set(k, v); return i; },
+          Object.keys(action.payload.details).forEach(
+            (k) => { i = i.set(k, action.payload.details[k]); return i; },
           );
           return i;
         },

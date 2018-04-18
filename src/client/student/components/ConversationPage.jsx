@@ -124,7 +124,6 @@ class ConversationPage extends Component {
                       />
                     </label>
                     <IrisButton
-                      className="w3-margin-right w3-margin-top"
                       onClick={this.sendMessage}
                       type="secondary"
                       text="Send"
