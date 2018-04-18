@@ -38,14 +38,11 @@ const messageReducer = (state = initialState, action) => {
         pendingMessages: [],
       }).set('state', state.get('state').set('isStale', false).set('isFetching', false));
     case 'REPLY_IMAGE':
-      console.log('Sending reply to server...');
       return state;
     case 'REPLY_IMAGE_SUCCESS':
-      console.log('you have replied to an image!!');
-      return state;
+      return state.set('state', state.get('state').set('isStale', true));
     case 'SEND_MESSAGE':
       // SEND_MESSAGE is triggered on image reply too, so catch that here somewhere
-      console.log(action);
       if (action.message.messageId || false) {
         return state.set(
           'pendingMessages',

@@ -15,12 +15,10 @@ class ImageClassifier extends React.Component {
     };
   }
   onComplete(details) {
-    console.log(this.state.imageType, details);
-    console.log(this.props);
     this.props.classifyImage({ imageType: this.state.imageType, details })
       .then(
         (res) => {
-          console.log(res);
+          console.log(res.success);
           this.props.push('/');
         },
       );

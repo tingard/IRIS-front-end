@@ -22,6 +22,10 @@ const cardReducer = (state = initialState, action) => {
         cards: action.res.images,
         state: state.get('state').set('isStale', false).set('isFetching', false),
       });
+    case 'REPLY_IMAGE':
+      return state.set('cards', state.get('cards').filter(
+        card => card.get('_id') !== action.formData.imageId,
+      ));
     default:
       return state;
   }

@@ -20,11 +20,10 @@ class ProfilePage extends React.Component {
         email: props.emailNotifications,
         browser: props.browserNotifications,
       },
-      // shouldShowSavedProfileAlert: true,
     };
   }
   componentWillReceiveProps(nextProps) {
-    this.state = {
+    this.setState({
       name: nextProps.name,
       email: nextProps.email,
       bio: nextProps.bio || this.state.bio,
@@ -33,10 +32,9 @@ class ProfilePage extends React.Component {
         email: nextProps.emailNotifications,
         browser: nextProps.browserNotifications,
       },
-    };
+    });
   }
   update() {
-    // called on input box change to update values properly
     this.setState({
       name: this.nameInput.value,
       email: this.emailInput.value,
@@ -49,7 +47,6 @@ class ProfilePage extends React.Component {
     });
   }
   saveProfile() {
-    // this.setState({ shouldShowSavedProfileAlert: true });
     this.props.setUserDetails({
       id: this.props._id,
       details: {
