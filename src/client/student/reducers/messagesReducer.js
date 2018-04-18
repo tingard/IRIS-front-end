@@ -54,6 +54,8 @@ const messageReducer = (state = initialState, action) => {
           .set('isFetching', false)
           .set('isStale', false),
       );
+    case 'ACCEPT_MESSAGE_SUCCESS':
+      return state.set('state', state.get('state').set('isStale', true));
     default:
       return state;
   }

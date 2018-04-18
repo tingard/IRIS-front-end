@@ -58,6 +58,8 @@ const imagesReducer = (state = initialState, action) => {
     case 'EDIT_IMAGE_FAILURE':
       console.error('Could not update image', action);
       return state;
+    case 'ACCEPT_MESSAGE_SUCCESS':
+      return state.set('state', state.get('state').set('isStale', true));
     default:
       return state;
   }

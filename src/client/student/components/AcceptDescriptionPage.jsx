@@ -29,11 +29,10 @@ class AcceptDescriptionPage extends React.Component {
         },
       )
       .catch(
-        e => console.warn('accepting description failed', e),
+        e => ((console.warn('accepting description failed', e), Promise.reject(e))),
       );
   }
   render() {
-    console.log('AcceptDescriptionPage props', this.props);
     if (this.props.isFetching || this.props.message === null) {
       return <p>Loading...</p>;
     }
