@@ -1,4 +1,5 @@
-@import 'size-constants';
+@import '../../../commonResources/size-constants';
+
 .content-section {
   padding: 0 40px;
   @media screen and (max-width: $medium-width) {

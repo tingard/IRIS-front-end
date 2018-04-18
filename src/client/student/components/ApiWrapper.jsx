@@ -51,7 +51,7 @@ class ApiWrapper extends React.Component {
     }
   }
   componentWillUnmount() {
-    Object.values(this.timers).map(t => clearInterval(t));
+    Object.keys(this.timers).map(key => clearInterval(this.timers[key]));
   }
   render() {
     if (this.props.messages.get('state').get('isStale') && !this.props.messages.get('state').get('isFetching')) {

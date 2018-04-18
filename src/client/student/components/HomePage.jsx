@@ -75,7 +75,7 @@ class HomePage extends React.Component {
       return <div>Loading spinner</div>;
     }
     return (
-      <div className="w3-container w3-animate-opacity">
+      <div className="w3-container w3-animate-opacity iris-narrow-page">
         <h1 id="welcome-message">Welcome back, <span className="mf-disable">{this.props.user.get('name')}</span></h1>
         <section
           className="w3-padding-16"

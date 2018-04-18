@@ -63,7 +63,7 @@ class ProfilePage extends React.Component {
       return <div>Connecting to the IRIS database...</div>;
     }
     return (
-      <div className="w3-container w3-animate-opacity">
+      <div className="w3-container w3-animate-opacity iris-narrow-page">
         <div className="w3-panel">
           <h1>Your Profile:</h1>
           <div className="w3-padding-16">
@@ -133,50 +133,40 @@ class ProfilePage extends React.Component {
             </label>
           </div>
         </div>
-        <div className="w3-padding-16">
-          <IrisButton
-            className="w3-bar"
-            onClick={this.saveProfile}
-            type="primary"
-            text="Save Profile"
+        <IrisButton
+          className="w3-bar"
+          onClick={this.saveProfile}
+          type="primary"
+          text="Save Profile"
+        />
+        {this.props.state.get('updateDidSucceed') ? (
+          <IrisAlert
+            title="Profile has been saved"
+            message="Your profile has been saved!"
+            type="success"
+            onClose={this.props.dismissUpdateAlert}
           />
-        </div>
-        <div role="alert">
-          {this.props.state.get('updateDidSucceed') ? (
-            <IrisAlert
-              title="Profile has been saved"
-              message="Your profile has been saved!"
-              type="success"
-              onClose={this.props.dismissUpdateAlert}
-            />
-          ) : null}
-        </div>
-        <div className="w3-padding-16">
-          <IrisButton
-            className="w3-bar"
-            onClick={this.props.logout}
-            type="secondary"
-            text="Logout"
-          />
-        </div>
-        <div className="w3-padding-16">
-          <IrisButton
-            className="w3-bar"
-            onClick={() => null}
-            disabled
-            type="secondary"
-            text="Change Password"
-          />
-        </div>
-        <div className="w3-padding-16">
-          <IrisButton
-            className="w3-bar"
-            onClick={() => null}
-            disabled
-            type="delete"
-            text="Delete account"
-          />
-        </div>
+        ) : null}
+        <IrisButton
+          className="w3-bar"
+          onClick={this.props.logout}
+          type="secondary"
+          text="Logout"
+        />
+        <IrisButton
+          className="w3-bar"
+          onClick={() => null}
+          disabled
+          type="secondary"
+          text="Change Password"
+        />
+        <IrisButton
+          className="w3-bar"
+          onClick={() => null}
+          disabled
+          type="delete"
+          text="Delete account"
+        />
         <div className="w3-row w3-padding-48" />
       </div>
     );

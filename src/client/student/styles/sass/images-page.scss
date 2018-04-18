@@ -1,0 +1,12 @@
+.image-details {
+  display: flex;
+  flex-wrap: wrap;
+  img {
+    max-height: 150px;
+    margin: 10px auto;
+  }
+  div {
+    margin: 0 10px;
+    flex-grow: 6
+  }
+}
