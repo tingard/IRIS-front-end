@@ -51,15 +51,22 @@ class GraphClassifier extends React.Component {
         cell = `<${tag}>${value}</${tag}>`;
         if (rowN === 0) {
           cell = `<tr>${cell}`;
+          if (tag === 'th') {
+            cell = `<thead>${cell}`;
+          } else if (i === this.state.hasHeaders * this.state.nCols) {
+            cell = `<tbody>${cell}`;
+          }
         }
         if (rowN === this.state.nCols - 1) {
           cell = `${cell}</tr>`;
+          if (tag === 'th') {
+            cell = `${cell}</thead>`;
+          }
         }
         return cell;
       },
     );
-    console.log(out);
-    return out.join('');
+    return `${out.join('')}</tbody>`;
   }
   render() {
     console.log(this.inputVals);
@@ -90,11 +97,12 @@ class GraphClassifier extends React.Component {
         <h3>Construct your table:</h3>
         <div className="w3-row w3-padding-16" id="image-classifier-table">
           <div className="w3-row w3-margin-bottom">
-            <label>
+            <label htmlFor="classifier-table-column-picker">
               <span>Number of columns:</span>
               <input
                 type="number"
                 className="w3-input w3-border w3-round table-size-picker"
+                id="classifier-table-column-picker"
                 min="1"
                 max="5"
                 value={this.state.nCols}
@@ -103,10 +111,11 @@ class GraphClassifier extends React.Component {
             </label>
           </div>
           <div className="w3-row w3-margin-bottom">
-            <label>
+            <label htmlFor="classifier-table-row-picker">
               <span>Number of rows:</span>
               <input
                 className="w3-input w3-border w3-round table-size-picker"
+                id="classifier-table-row-picker"
                 type="number"
                 min="2"
                 max="10"
