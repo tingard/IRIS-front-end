@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import resizeCloudinaryImage from '../../commonResources/resizeCloudinaryImage';
 
 const difficulties = [
   'GCSE Level',
@@ -18,9 +19,7 @@ function prettify(propertyName) {
 
 
 const ImageCard = (props) => {
-  const regExp = /res.cloudinary.com\/(.*?)\/image\/upload\/(.*?)$/i;
-  const match = regExp.exec(props.url);
-  const imgUrl = `https://res.cloudinary.com/${match[1]}/c_scale,w_200/${match[2]}`;
+  const imgUrl = resizeCloudinaryImage(props.url, 200);
   return (
     <Link to={`/cards/${props._id}`}>
       <div className={`grapheel-image-card w3-card-4 w3-animate-bottom ${props.subject}-card`}>
