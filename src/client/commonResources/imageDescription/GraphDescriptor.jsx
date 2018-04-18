@@ -16,7 +16,7 @@ const GraphDescriptor = (props) => {
     <React.Fragment>
       <h3>Graph details:</h3>
       <table className="iris-table-description">
-        {rows}
+        <tbody>{rows}</tbody>
       </table>
       <p>
         {props.plotDescription.length > 0 ? ` ${props.plotDescription}` : ''}
