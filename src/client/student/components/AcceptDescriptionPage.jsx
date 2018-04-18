@@ -4,12 +4,13 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../commonResources/IrisButton';
 import ImageDescription from '../../commonResources/imageDescription';
 import IrisAlert from '../../commonResources/IrisAlert';
+import ratingValues from '../../values/ratingValues';
 
 class AcceptDescriptionPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rating: 4,
+      rating: 2,
       didError: false,
     };
     this.acceptDescription = this.acceptDescription.bind(this);
@@ -19,10 +20,12 @@ class AcceptDescriptionPage extends React.Component {
       .then(
         (m) => {
           console.log(m);
-          if (m.error) {
-            console.log(m.error.success);
+          if (m.error && !m.error.success) {
             this.setState({ didError: !m.error.success });
+            return m;
           }
+          this.props.history.push(`/images/descriptions/${this.props.message.get('image').get('_id')}`);
+          return m;
         },
       )
       .catch(
@@ -30,12 +33,13 @@ class AcceptDescriptionPage extends React.Component {
       );
   }
   render() {
+    console.log('AcceptDescriptionPage props', this.props);
     if (this.props.isFetching || this.props.message === null) {
       return <p>Loading...</p>;
     }
     let level;
-    level = this.state.rating > 1 ? 'okay' : 'bad';
-    level = this.state.rating > 3 ? 'good' : level;
+    level = this.state.rating > 0 ? 'okay' : 'bad';
+    level = this.state.rating > 1 ? 'good' : level;
     return (
       <div className="w3-container accept-description-page">
         <h1>Accept description</h1>
@@ -55,23 +59,25 @@ class AcceptDescriptionPage extends React.Component {
               value={this.state.rating}
               onChange={e => this.setState({ rating: e.target.value })}
             >
-              <option value="0">This didn't help at all</option>
-              <option value="1">little helpful</option>
-              <option value="2">Perfect, I got all the help I needed</option>
+              {ratingValues.map(
+                rating => (
+                  <option key={`rating-${rating.value}`} value={rating.value}>
+                    {rating.text}
+                  </option>
+                ),
+              )}
             </select>
           </label>
           <IrisButton
             text="Submit"
             onClick={this.acceptDescription}
           />
-          <div role="alert">
-            {this.state.didError ? <IrisAlert
-              title="Whoops, something went wrong..."
-              message="Please try again later!"
-              type="warning"
-              onClose={() => this.setState({ didError: false })}
-            /> : null}
-          </div>
+          {this.state.didError ? <IrisAlert
+            title="Whoops, something went wrong..."
+            message="Please try again later!"
+            type="warning"
+            onClose={() => this.setState({ didError: false })}
+          /> : null}
         </section>
       </div>
     );
@@ -84,6 +90,9 @@ AcceptDescriptionPage.propTypes = {
     classification: ImmutablePropTypes.contains({
       imageType: PropTypes.string,
     }),
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }),
   acceptDescription: PropTypes.func,
 };

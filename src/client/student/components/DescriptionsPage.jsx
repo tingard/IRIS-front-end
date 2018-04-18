@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Description from './Description';
 
@@ -40,6 +40,12 @@ const DescriptionsPage = (props) => {
           <p>{'This image doesn\'t have any descriptions yet'}</p>
         )
       }
+      <Link
+        to="/images"
+        className="w3-margin-top"
+      >
+        Back to images
+      </Link>
     </div>
   );
 };
