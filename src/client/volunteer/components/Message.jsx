@@ -113,7 +113,7 @@ class Message extends React.Component {
           ) : (
             <React.Fragment>
               <input
-                className="w3-input"
+                className="w3-input w3-boder w3-round"
                 type="text"
                 disabled={this.props.message.get('markedAsCompleted')}
                 ref={(r) => { this.input = r; }}

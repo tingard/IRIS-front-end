@@ -145,7 +145,8 @@ function runServer() {
   });
   return nodemon({
     script: paths.src.server.entryPoint,
-    ignore: ['*'],
+    watch: [paths.src.server.js],
+    // ignore: ['*'],
   });
 }
 

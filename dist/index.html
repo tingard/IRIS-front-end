@@ -38,9 +38,42 @@
       gtag('js', new Date());
       gtag('config', 'UA-102556390-2');
     </script>
+    <style>
+    #server-placeholder {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    #server-placeholder h1 {
+      padding: 0 20px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    </style>
   </head>
   <body>
-    <div class="app"></div>
+    <div class="app">
+      <div id="server-placeholder">
+        <h1>Waiting for IRIS...</h1>
+        <picture>
+          <source
+            type="image/png"
+            srcset="/images/irisProposed_withoutBackground_small.png 100w,
+                    /images/irisProposed_withoutBackground_300x300.png 300w"
+            sizes="(max-width: 800px) 100px,
+                   200px"
+          />
+          <img
+            src="/images/irisProposed_withoutBackground_small.png"
+            alt="The logo of IRIS, a human iris and pupil coloured in a rainbow.
+            A white greek gamma is overalid in the center"
+          >
+        </picture>
+      </div>
+    </div>
     <script type="text/javascript" src="/client-bundle.js"></script>
   </body>
 
