@@ -22,13 +22,16 @@
 .grapheel-navbar {
   height: 80px;
   width: 100%;
-  padding-left: 10vw;
-  padding-right: 10vw;
   background-color: #fefefe;
   margin-bottom: 20px;
   box-shadow: 0 5px 3px 0 rgba(0,0,0,0.1);
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  @media screen and (min-width: $phone-width) {
+    justify-content: space-around;
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
   div a { // this is going to be a button
     padding: 0 10px;
     display: flex;

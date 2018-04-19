@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ClientAPI from 'grapheel-iris-client-api';
 import Login from './Login';
 import ForgotPassword from './forgot-password';
@@ -20,6 +20,7 @@ class IRISApp extends React.Component {
       isLoggedIn: false,
       user: {},
     };
+    this.supportsHistory = 'pushState' in window.history;
   }
   componentDidMount() {
     this.api.init().then(
@@ -54,13 +55,13 @@ class IRISApp extends React.Component {
     let innerComponent;
     if (this.state.isLoggedIn && this.state.user.type) {
       innerComponent = (
-        <HashRouter>
+        <BrowserRouter forceRefresh={!this.supportsHistory}>
           {
             this.state.user.type === 'volunteer' ?
               <VolunteerApp /> :
               <StudentApp />
           }
-        </HashRouter>
+        </BrowserRouter>
       );
     } else {
       innerComponent = (
@@ -92,9 +93,9 @@ class IRISApp extends React.Component {
       );
     }
     return (
-      <HashRouter>
+      <BrowserRouter forceRefresh={!this.supportsHistory}>
         {innerComponent}
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
