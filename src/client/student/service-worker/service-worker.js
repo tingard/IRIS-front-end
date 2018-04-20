@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 // Some code taken from https://github.com/google-developer-training/pwa-training-labs.git
-require('../../../offline-page-service-worker');
+require('../../common-resources/offline-page-service-worker');
 const genNotificationFromStatus = require('./genNotificationFromStatus');
 
 async function sendStatus(status) {

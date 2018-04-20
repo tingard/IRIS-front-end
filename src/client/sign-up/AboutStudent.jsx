@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 
-import IrisButton from '../commonResources/IrisButton';
+import IrisButton from '../common-resources/IrisButton';
 import RegisterStripeCard from './registerStripeCard';
 
 const wrapQuestion = (q, htmlFor) => (

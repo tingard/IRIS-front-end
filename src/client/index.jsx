@@ -5,7 +5,7 @@ import ClientAPI from 'grapheel-iris-client-api';
 import Login from './Login';
 import ForgotPassword from './forgot-password';
 import UnauthorisedPage from './UnauthorisedPage';
-import ConfirmEmailPage from './commonResources/ConfirmEmailPage';
+import ConfirmEmailPage from './common-resources/ConfirmEmailPage';
 import SignUp from './sign-up';
 import VolunteerApp from './volunteer';
 import StudentApp from './student';

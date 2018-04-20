@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import resizeCloudinaryImage from '../../commonResources/resizeCloudinaryImage';
+import resizeCloudinaryImage from '../../common-resources/resizeCloudinaryImage';
 
 const difficulties = [
   'GCSE Level',

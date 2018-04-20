@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import ImageDescription from './../../commonResources/imageDescription';
-import IrisAlert from './../../commonResources/IrisAlert';
-import IrisButton from './../../commonResources/IrisButton';
+import ImageDescription from './../../common-resources/imageDescription';
+import IrisAlert from './../../common-resources/IrisAlert';
+import IrisButton from './../../common-resources/IrisButton';
 
 class Message extends React.Component {
   constructor(props) {

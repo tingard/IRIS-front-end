@@ -21,7 +21,7 @@ const paths = {
     js: './src/**/*.js?(x)',
     manifest: 'src/manifest.json',
     serviceWorkers: '**/*service-worker.js',
-    offlinePageServiceWorker: 'src/offline-page-service-worker.js',
+    offlinePageServiceWorker: 'src/client/common-resources/offline-page-service-worker.js',
     client: {
       scss: 'src/client/**/*.scss',
       css: 'src/client/**/*.css',

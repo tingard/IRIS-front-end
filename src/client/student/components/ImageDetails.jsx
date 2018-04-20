@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import IrisButton from '../../commonResources/IrisButton';
-import resizeCloudinaryImage from '../../commonResources/resizeCloudinaryImage';
+import IrisButton from '../../common-resources/IrisButton';
+import resizeCloudinaryImage from '../../common-resources/resizeCloudinaryImage';
 
 const ImageDetails = props => (
   <div className="w3-panel w3-border w3-round w3-card-2 image-details" role="gridcell">

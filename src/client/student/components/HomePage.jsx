@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import IrisButton from '../../commonResources/IrisButton';
+import IrisButton from '../../common-resources/IrisButton';
 // import Modal from './Modal';
 
 // TODO: Upload form should be a modal which users are guided through

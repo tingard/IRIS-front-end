@@ -1,5 +1,5 @@
-@import '../../../commonResources/color-scheme';
-@import '../../../commonResources/size-constants';
+@import '../../../common-resources/color-scheme';
+@import '../../../common-resources/size-constants';
 
 @mixin color-transition($time) {
   transition: $time;
