@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-// import ConfirmEmailPage from '../commonResources/ConfirmEmailPage';
+// import ConfirmEmailPage from '../common-resources/ConfirmEmailPage';
 import ApiWrapper from './containers/apiWrapper';
 import homePage from './containers/homePage';
 import Navbar from './components/Navbar';

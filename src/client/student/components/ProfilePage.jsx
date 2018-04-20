@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import IrisButton from '../../commonResources/IrisButton';
-import IrisAlert from '../../commonResources/IrisAlert';
+import IrisButton from '../../common-resources/IrisButton';
+import IrisAlert from '../../common-resources/IrisAlert';
 
 const isValidEmail = v => /\S+@\S+\.\S+/.test(v) || v === '';
 

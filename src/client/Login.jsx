@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import IrisButton from './commonResources/IrisButton';
+import IrisButton from './common-resources/IrisButton';
 
 class Login extends React.Component {
   constructor(props) {

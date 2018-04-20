@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ConfirmEmailPage from '../../commonResources/ConfirmEmailPage';
+import ConfirmEmailPage from '../../common-resources/ConfirmEmailPage';
 
 import { confirmEmail } from '../actions';
 

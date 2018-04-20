@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
-import IrisButton from '../../../commonResources/IrisButton';
+import IrisButton from '../../../common-resources/IrisButton';
 
 class GraphClassifier extends React.Component {
   constructor(props) {
