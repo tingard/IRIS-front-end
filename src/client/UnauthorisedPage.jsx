@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IrisButton from './commonResources/IrisButton';
+import IrisButton from './common-resources/IrisButton';
 
 const UnauthorisedPage = props => (
   <div

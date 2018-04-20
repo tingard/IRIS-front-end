@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 import ratingValues from '../../values/ratingValues';
-import ImageDescription from '../../commonResources/imageDescription';
+import ImageDescription from '../../common-resources/imageDescription';
 
 const Description = (props) => {
   const m = props.messages.get(props.messages.size - 1);

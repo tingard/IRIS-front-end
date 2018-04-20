@@ -4,7 +4,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 // import Select from 'react-select';
 import moment from 'moment';
 import FullPageSpinner from './FullPageSpinner';
-import IrisButton from '../../commonResources/IrisButton';
+import IrisButton from '../../common-resources/IrisButton';
+import IrisAlert from '../../common-resources/IrisAlert';
 
 const isValidEmail = v => /\S+@\S+\.\S+/.test(v) || v === '';
 
@@ -41,15 +42,25 @@ class ProfilePage extends React.Component {
       },
     };
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      name: nextProps.user.get('name'),
+      email: nextProps.user.get('email'),
+      bio: nextProps.user.get('bio') || '',
+      emailIsValid: isValidEmail(nextProps.user.get('email')),
+      notificationPrefs: {
+        email: nextProps.user.get('emailNotifications') || false,
+        browser: nextProps.user.get('browserNotifications') || false,
+      },
+    });
+  }
   getDefaultLevelSelect(s) {
-    console.log(this.props.user.get('levels').get(s[0]).toString());
     if (this.props.user.get('levels').get(s[0])) {
       return this.props.user.get('levels').get(s[0]).toString();
     }
     return '0';
   }
   update() {
-    console.log('updating');
     // called on input box change to update values properly
     this.setState({
       email: this.emailInput.value,
@@ -217,22 +228,12 @@ class ProfilePage extends React.Component {
             />
           </div>
           { this.props.user.get('state').get('updateDidSucceed') &&
-            <div
-              className="w3-panel w3-border w3-round
-                w3-border-green w3-animate-right w3-display-container"
-              aria-describedby="profile-did-update-alert"
-            >
-              <p id="profile-did-update-alert">
-                Succesfully updated profile!
-              </p>
-              <button
-                className="w3-display-topright w3-button"
-                onClick={this.props.dismissUpdateAlert}
-                aria-label="Close"
-              >
-                x
-              </button>
-            </div>
+            <IrisAlert
+              title="Saved"
+              message="Succesfully updated profile!"
+              type="success"
+              onClose={this.props.dismissUpdateAlert}
+            />
           }
           <div className="w3-padding-16">
             <IrisButton

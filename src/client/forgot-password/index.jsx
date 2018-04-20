@@ -5,7 +5,7 @@ import LinkExpiredAlert from './link-expired-alert';
 import SuccessfulResetLinkAlert from './successful-reset-link-alert';
 import NotRegisteredUserAlert from './not-registered-user-alert';
 import SuccessfulPasswordResetAlert from './successful-password-reset-alert';
-import IrisButton from '../commonResources/IrisButton';
+import IrisButton from '../common-resources/IrisButton';
 
 class ForgotPassword extends React.Component {
   constructor(props) {
