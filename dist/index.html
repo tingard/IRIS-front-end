@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- scripts -->
-    <script src="3"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript">
       window._mfq = window._mfq || [];
       (function() {
@@ -31,7 +31,7 @@
         document.getElementsByTagName("head")[0].appendChild(mf);
       })();
     </script>
-    <script async src="3"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102556390-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -52,23 +52,13 @@
       margin-bottom: 50px;
       text-align: center;
     }
-    /*
-      Set the color of the icon
-    */
-    svg {
-      zoom: 2;
-    }
-    svg path,
-    svg rect{
-      fill: #f24d36;
-    }
     </style>
   </head>
   <body>
     <div class="app">
       <div id="server-placeholder">
         <h1>Waiting for IRIS...</h1>
-        <!--picture>
+        <picture>
           <source
             type="image/png"
             srcset="/images/irisProposed_withoutBackground_small.png 100w,
@@ -77,32 +67,14 @@
                    200px"
           />
           <img
-            src="3"
+            src="/images/irisProposed_withoutBackground_small.png"
             alt="The logo of IRIS, a human iris and pupil coloured in a rainbow.
             A white greek gamma is overalid in the center"
           >
-        </picture-->
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-           width="50px" height="30px" viewBox="0 0 42 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-          <rect x="0" y="0" width="12" height="40" fill="#333" rx="3" ry="3">
-            <animate attributeName="opacity" attributeType="XML"
-              values="1; .2; 1"
-              begin="0s" dur="1s" repeatCount="indefinite" />
-          </rect>
-          <rect x="15" y="0" width="12" height="40" fill="#333" rx="3" ry="3">
-            <animate attributeName="opacity" attributeType="XML"
-              values="1; .2; 1"
-              begin="0.2s" dur="1s" repeatCount="indefinite" rx="3" ry="3" />
-          </rect>
-          <rect x="30" y="0" width="12" height="40" fill="#333" rx="3" ry="3">
-            <animate attributeName="opacity" attributeType="XML"
-              values="1; .2; 1"
-              begin="0.3s" dur="1s" repeatCount="indefinite" rx="3" ry="3" />
-          </rect>
-        </svg>
+        </picture>
       </div>
     </div>
-    <script type="text/javascript" src="3"></script>
+    <script type="text/javascript" src="/client-bundle.js"></script>
   </body>
 
 </html>
