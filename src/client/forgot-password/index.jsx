@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import LinkExpiredAlert from './link-expired-alert';
-import SuccessfulResetLinkAlert from './successful-reset-link-alert';
-import NotRegisteredUserAlert from './not-registered-user-alert';
-import SuccessfulPasswordResetAlert from './successful-password-reset-alert';
 import IrisButton from '../common-resources/IrisButton';
+import IrisAlert from '../common-resources/IrisAlert';
 
 class ForgotPassword extends React.Component {
   constructor(props) {
@@ -112,7 +109,9 @@ class ForgotPassword extends React.Component {
           </h1>
           <div role="status">
             { this.state.linkHasExpired ? (
-              <LinkExpiredAlert
+              <IrisAlert
+                title="Invalid password reset link!"
+                text="Whoops, this link has expired or already been used!"
                 onClose={() => this.setState({ linkHasExpired: false })}
               />
             ) : null }
@@ -176,20 +175,30 @@ class ForgotPassword extends React.Component {
           </div>
           <div role="status">
             {this.state.isNotRegitsteredUser ?
-              <NotRegisteredUserAlert
+              <IrisAlert
+                title="Invalid email"
+                text="This email is not registered on IRIS for this user type"
+                type="warning"
                 onClose={() => this.setState({ isNotRegitsteredUser: false })}
               /> : null
             }
             <div role="status">
               {this.state.didSuccessfullyRequest ?
-                <SuccessfulResetLinkAlert
+                <IrisAlert
+                  title="Okay, check your email!"
+                  text="Succesfully generated a password reset link, check your email!"
+                  type="success"
                   onClose={() => this.setState({ didSuccessfullyRequest: false })}
                 /> : null
               }
               {this.state.didSuccessfullySetPassword ?
-                <SuccessfulPasswordResetAlert
+                <IrisAlert
+                  title="Okay, check your email!"
+                  text="Succesfully set new password!"
+                  type="success"
                   onClose={() => this.setState({ didSuccessfullySetPassword: false })}
-                /> : null
+                />
+ : null
               }
             </div>
           </div>
