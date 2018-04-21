@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import IrisButton from './common-resources/IrisButton';
+import IrisAlert from './common-resources/IrisAlert';
 
 class Login extends React.Component {
   constructor(props) {
@@ -39,32 +40,25 @@ class Login extends React.Component {
           <h1 id="login-section-header">Login to IRIS</h1>
           <div role="status">
             {this.state.didFailLogin ?
-              <div
-                className={'w3-panel w3-border w3-round ' +
-                  'w3-border-red w3-animate-right w3-display-container'}
-                aria-describedby="invalid-login-alert"
-              >
-                <p id="invalid-login-alert">Invalid username or password</p>
-                <button
-                  className="w3-display-topright w3-button"
-                  onClick={() => this.setState({ didFailLogin: false })}
-                  aria-label="Close"
-                >
-                  x
-                </button>
-              </div> : null
+              <IrisAlert
+                title="That's not right..."
+                message="Invalid username or password"
+                type="warning"
+                onClose={() => this.setState({ didFailLogin: false })}
+              /> : null
             }
           </div>
           <div className="w3-row w3-margin-bottom">
             <label htmlFor="login-utype-select">
-              I am a
+              I am...
               <select
                 id="login-utype-select"
                 className="w3-input select-style"
                 ref={(r) => { this.utypeSelect = r; }}
               >
-                <option value="volunteer">Sighted volunteer</option>
-                <option value="student">VIP Student</option>
+                <option value="volunteer">A sighted volunteer</option>
+                <option value="student">A VIP Student</option>
+                <option value="licence-owner">Managing licences for others</option>
               </select>
             </label>
           </div>

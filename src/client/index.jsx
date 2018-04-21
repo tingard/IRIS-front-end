@@ -9,6 +9,7 @@ import ConfirmEmailPage from './common-resources/ConfirmEmailPage';
 import SignUp from './sign-up';
 import VolunteerApp from './volunteer';
 import StudentApp from './student';
+import LicenceOwnerApp from './licence-owner';
 
 class IRISApp extends React.Component {
   constructor(props) {
@@ -54,13 +55,24 @@ class IRISApp extends React.Component {
   render() {
     let innerComponent;
     if (this.state.isLoggedIn && this.state.user.type) {
+      let appType = null;
+      switch (this.state.user.type) {
+        case 'volunteer':
+          appType = <VolunteerApp />;
+          break;
+        case 'student':
+          appType = <StudentApp />;
+          break;
+        case 'licencer':
+          appType = <LicenceOwnerApp />;
+          break;
+        default:
+          console.warn('Detected an invalid user type');
+          appType = <p>Invalid user type</p>;
+      }
       innerComponent = (
         <BrowserRouter forceRefresh={!this.supportsHistory}>
-          {
-            this.state.user.type === 'volunteer' ?
-              <VolunteerApp /> :
-              <StudentApp />
-          }
+          {appType}
         </BrowserRouter>
       );
     } else {

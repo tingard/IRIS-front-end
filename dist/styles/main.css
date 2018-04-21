@@ -2,7 +2,7 @@
 
 @import url("https://fonts.googleapis.com/css?family=Raleway:medium");.app div,.app p,.app span,.app h1,.app h2,.app h3,.app h4,.app h5,.app h6{font-family:'Raleway', sans-serif}.iris-narrow-page{max-width:1200px;margin:auto}
 
-.iris-alert{border:1px  solid #888;border-radius:10px;margin:20px 0;padding:0 10px;box-shadow:0 4px 8px 0 rgba(0,0,0,0.1),0 6px 20px 0 rgba(0,0,0,0.1)}.iris-alert.info{border-color:#58f}.iris-alert.warning{border-color:#a33}.iris-alert.success{border-color:#3a3}
+.iris-alert{border:1px  solid #888;border-radius:10px;margin:20px 0;padding:0 10px;box-shadow:0 4px 8px 0 rgba(0,0,0,0.1),0 6px 20px 0 rgba(0,0,0,0.1)}.iris-alert.info{border-color:#58f}.iris-alert.warning{border-color:#d44}.iris-alert.success{border-color:#3a3}
 
 .switch span{position:relative;top:-11px;margin-right:20px}.switch .grapheel-checkbox{-webkit-appearance:none;appearance:none;width:30px;height:30px;border:1px solid #ccc;border-radius:7px}.switch .grapheel-checkbox:hover{border:2px solid #aaa}.switch .grapheel-checkbox:checked{background-color:#2196F3}
 
