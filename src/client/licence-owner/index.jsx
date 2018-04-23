@@ -23,7 +23,7 @@ const store = createStore(
 const App = () => (
   <Provider store={store}>
     <div id="modal-root">
-      <section className="student-app content-section">
+      <section className="licence-owner-app content-section">
         <Switch>
           <Route component={HomePage} />
         </Switch>
