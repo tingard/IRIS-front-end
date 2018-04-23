@@ -53,12 +53,26 @@ function doWebpackWrapper(entry, watch = false) {
   return doWebpack;
 }
 
-function sassStyles() {
-  return gulp.src(paths.src.client.scss)
-    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-    .pipe(concat('main.css'))
-    .pipe(gulp.dest(paths.dist.css));
+function sassStyles_() {
+  const sassFlow = (src, name) => {
+    function doSass() {
+      return gulp.src(src)
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(concat(`${name}.css`))
+        .pipe(gulp.dest(paths.dist.css));
+    }
+    Object.defineProperty(doSass, 'name', { value: `doSass_${name || 'undefined'}` });
+    return doSass;
+  };
+  return gulp.parallel(
+    sassFlow(paths.src.client.main.scss, 'main'),
+    sassFlow(paths.src.client.volunteer.scss, 'volunteer'),
+    sassFlow(paths.src.client.student.scss, 'student'),
+    sassFlow(paths.src.client.licenceOwner.scss, 'licence-owner'),
+  );
 }
+
+const sassStyles = sassStyles_();
 
 function moveManifest() {
   return gulp.src(paths.src.manifest).pipe(gulp.dest(paths.dist.dir));
@@ -102,7 +116,7 @@ function lint() {
   ])
     .pipe(lec())
     .pipe(eslint())
-    .pipe(eslint.format('checkstyle'))
+    .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 }
 
