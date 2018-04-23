@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -33,7 +34,7 @@ const store = createStore(
   applyMiddleware(thunkMiddleware, loggerMiddleware),
 );
 
-const App = () => (
+const StudentApp = () => (
   <Provider store={store}>
     <div id="modal-root">
       <Navbar />
@@ -64,4 +65,7 @@ const App = () => (
   </Provider>
 );
 
-export default App;
+ReactDOM.render(
+  <StudentApp />
+  , document.querySelector('.app'),
+);

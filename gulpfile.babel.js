@@ -13,36 +13,7 @@ import webpackStream from 'webpack-stream';
 import webpack from 'webpack';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import webpackConfig from './webpack.config.babel';
-
-const paths = {
-  gulpfile: 'gulpfile.babel.js',
-  webpackfile: 'webpack.config.babel.js',
-  src: {
-    js: './src/**/*.js?(x)',
-    manifest: 'src/manifest.json',
-    serviceWorkers: '**/*service-worker.js',
-    offlinePageServiceWorker: 'src/client/common-resources/offline-page-service-worker.js',
-    client: {
-      scss: 'src/client/**/*.scss',
-      css: 'src/client/**/*.css',
-      entryPoint: 'src/client/index.jsx',
-      studentServiceWorker: 'src/client/student/service-worker/service-worker.js',
-      volunteerServiceWorker: 'src/client/volunteer/service-worker/service-worker.js',
-    },
-    server: {
-      js: 'src/server/**/*.js?(x)',
-      entryPoint: 'src/server/index.js',
-    },
-  },
-  dist: {
-    dir: 'dist',
-    css: 'dist/styles/',
-    manifest: 'dist/manifest.json',
-    clientBundle: 'dist/client-bundle.js?(.map)',
-    studentServiceWorker: 'student-service-worker.js',
-    volunteerServiceWorker: 'volunteer-service-worker.js',
-  },
-};
+import paths from './gulp-paths';
 
 if (process.env.NODE_ENV === 'production') {
   webpackConfig.devtool = false;
@@ -60,18 +31,6 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
-function lint() {
-  return gulp.src([
-    paths.src.js,
-    paths.gulpfile,
-    paths.webpackfile,
-  ])
-    .pipe(lec())
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-}
-
 function clean() {
   return del([
     paths.dist.clientBundle,
@@ -82,11 +41,16 @@ function clean() {
   ]);
 }
 
-function doWebpack() {
-  return gulp.src(paths.src.client.entryPoint)
-    .pipe(webpackStream(webpackConfig))
-    .pipe(gzip())
-    .pipe(gulp.dest(paths.dist.dir));
+function doWebpackWrapper(entry, watch = false) {
+  const wc = Object.assign({}, webpackConfig);
+  wc.watch = watch;
+  function doWebpack() {
+    return gulp.src(paths.src.client.main.entryPoint)
+      .pipe(webpackStream(wc))
+      .pipe(gzip())
+      .pipe(gulp.dest(paths.dist.dir));
+  }
+  return doWebpack;
 }
 
 function sassStyles() {
@@ -95,15 +59,18 @@ function sassStyles() {
     .pipe(concat('main.css'))
     .pipe(gulp.dest(paths.dist.css));
 }
+
 function moveManifest() {
   return gulp.src(paths.src.manifest).pipe(gulp.dest(paths.dist.dir));
 }
+
 function moveStudentSw() {
   return gulp.src(paths.src.client.studentServiceWorker).pipe(webpackStream({
     output: { filename: paths.dist.studentServiceWorker },
     plugins: [new UglifyJsPlugin()],
   })).pipe(gulp.dest(paths.dist.dir));
 }
+
 function moveVolunteerSw() {
   return gulp.src(paths.src.client.volunteerServiceWorker).pipe(webpackStream({
     output: { filename: paths.dist.volunteerServiceWorker },
@@ -111,44 +78,38 @@ function moveVolunteerSw() {
   })).pipe(gulp.dest(paths.dist.dir));
 }
 
-// const watchWebpack2 = () => gulp.watch([paths.src.js, `!${paths.src.serviceWorkers}`], doWebpack)
-function watchWebpack() {
-  return gulp.src(paths.src.client.entryPoint)
-    .pipe(webpackStream(Object.assign({ watch: true }, webpackConfig)))
-    .pipe(gzip())
-    .pipe(gulp.dest(paths.dist.dir));
-}
 const watchSass = () => gulp.watch(paths.src.client.scss, sassStyles);
+
 const watchManifest = () => gulp.watch(paths.src.manifest, moveManifest);
+
 const watchStudentSw = () => gulp.watch(
   [paths.src.offlinePageServiceWorker, paths.src.client.studentServiceWorker],
   moveStudentSw,
 );
+
 const watchVolunteerSw = () => gulp.watch(
   [paths.src.offlinePageServiceWorker, paths.src.client.volunteerServiceWorker],
   moveVolunteerSw,
 );
-const watch = gulp.parallel(
-  watchWebpack, watchSass, watchManifest, watchStudentSw, watchVolunteerSw,
-);
 
-function runServer() {
-  env({
-    file: '.env',
-    type: 'ini',
-    vars: {
-      // any variables you want to overwrite in dev
-      mode: 'development',
-      PORT: '5000',
-      // point to test database in .env file
-    },
-  });
-  return nodemon({
-    script: paths.src.server.entryPoint,
-    watch: [paths.src.server.js],
-    // ignore: ['*'],
-  });
+/* ------------------------------- Main tasks ------------------------------- */
+
+function lint() {
+  return gulp.src([
+    paths.src.js,
+    paths.gulpfile,
+    paths.webpackfile,
+  ])
+    .pipe(lec())
+    .pipe(eslint())
+    .pipe(eslint.format('checkstyle'))
+    .pipe(eslint.failAfterError());
 }
+
+const watch = gulp.parallel(
+  doWebpackWrapper(paths.src.client.main.entryPoint, true),
+  watchSass, watchManifest, watchStudentSw, watchVolunteerSw,
+);
 
 const build = gulp.parallel(
   sassStyles,
@@ -157,7 +118,28 @@ const build = gulp.parallel(
   moveVolunteerSw,
 );
 
-const compile = gulp.series(clean, gulp.parallel(build, doWebpack));
+const compile = gulp.series(
+  clean,
+  gulp.parallel(
+    build,
+    doWebpackWrapper(paths.src.client.main.entryPoint, false),
+  ),
+);
+
+function runServer() {
+  env({
+    file: '.env',
+    type: 'ini',
+    vars: {
+      mode: 'development',
+      PORT: '5000',
+    },
+  });
+  return nodemon({
+    script: paths.src.server.entryPoint,
+    watch: [paths.src.server.js],
+  });
+}
 
 const start = gulp.parallel(
   lint,
