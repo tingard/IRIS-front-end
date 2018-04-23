@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
@@ -35,34 +35,40 @@ const store = createStore(
 );
 
 const StudentApp = () => (
-  <Provider store={store}>
-    <div id="modal-root">
-      <Navbar />
-      <ApiWrapper>
-        <section className="student-app content-section">
-          <Switch>
-            <Route exact path="/messages" render={p => <DescriptionsPage {...p} />} />
-            <Route exact path="/messages/:messageID" render={p => <ConversationPage {...p} />} />
-            <Route exact path="/images" component={ImagesPage} />
-            <Route
-              exact
-              path="/images/descriptions/:imageId"
-              render={p => <DescriptionsPage filterByImage {...p} />}
-            />
-            <Route
-              exact
-              path="/images/descriptions/:imageId/:messageId"
-              render={p => <AcceptDescriptionPage {...p} />}
-            />
-            <Route exact path="/profile" component={ProfilePage} />
-            <Route exact path="/feedback" render={p => <FeedbackPage {...p} />} />
-            <Route exact path="/confirm/:id" component={ConfirmEmailPage} />
-            <Route component={HomePage} />
-          </Switch>
-        </section>
-      </ApiWrapper>
-    </div>
-  </Provider>
+  <BrowserRouter forceRefresh={!('pushState' in window.history)}>
+    <Provider store={store}>
+      <div id="modal-root">
+        <Navbar />
+        <ApiWrapper>
+          <section className="student-app content-section">
+            <Switch>
+              <Route exact path="/student/messages" render={p => <DescriptionsPage {...p} />} />
+              <Route
+                exact
+                path="/student/messages/:messageID"
+                render={p => <ConversationPage {...p} />}
+              />
+              <Route exact path="/student/images" component={ImagesPage} />
+              <Route
+                exact
+                path="/student/images/descriptions/:imageId"
+                render={p => <DescriptionsPage filterByImage {...p} />}
+              />
+              <Route
+                exact
+                path="/student/images/descriptions/:imageId/:messageId"
+                render={p => <AcceptDescriptionPage {...p} />}
+              />
+              <Route exact path="/student/profile" component={ProfilePage} />
+              <Route exact path="/student/feedback" render={p => <FeedbackPage {...p} />} />
+              <Route exact path="/student/confirm/:id" component={ConfirmEmailPage} />
+              <Route component={HomePage} />
+            </Switch>
+          </section>
+        </ApiWrapper>
+      </div>
+    </Provider>
+  </BrowserRouter>
 );
 
 ReactDOM.render(
