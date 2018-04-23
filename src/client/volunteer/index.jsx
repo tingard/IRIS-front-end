@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -34,7 +35,7 @@ const store = createStore(
   ),
 );
 
-const App = () => [
+const VolunteerApp = () => [
   <Navbar key="iris-volunteer-navbar" />,
   <Provider store={store} key="iris-volunteer-provider">
     <ApiWrapper>
@@ -56,4 +57,7 @@ const App = () => [
   </Provider>,
 ];
 
-export default App;
+ReactDOM.render(
+  <VolunteerApp />
+  , document.querySelector('.app'),
+);

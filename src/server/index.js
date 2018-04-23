@@ -7,6 +7,8 @@ const config = require('./config');
 
 const app = express();
 app.use(helmet());
+app.set('views', './src/server/views');
+app.set('view engine', 'pug');
 
 const port = config.PORT;
 const domain = config.HOST;
@@ -19,15 +21,31 @@ const domain = config.HOST;
 // serve up compiled static assets if we're in production mode
 // app.use(express.static(path.join(__dirname, '../../dist')));
 
-app.get(/\/client-bundle\.js(\.map)?/, (req, res, next) => {
+app.get(/\/.*?-bundle\.js(\.map)?/, (req, res, next) => {
   req.url += '.gz';
   next();
 });
 
-app.get(/\/client-bundle\.js(\.map)?\.gz/, (req, res, next) => {
+app.get(/\/.*?-bundle\.js(\.map)?\.gz/, (req, res, next) => {
   res.set('Content-Encoding', 'gzip');
   res.set('Content-Type', 'application/javascript');
   next();
+});
+
+app.get('/iris', (req, res) => {
+  res.render('index', { clientBundleSource: 'iris-bundle.js' });
+});
+
+app.get('/student', (req, res) => {
+  res.render('index', { clientBundleSource: 'student-bundle.js' });
+});
+
+app.get('/volunteer', (req, res) => {
+  res.render('index', { clientBundleSource: 'volunteer-bundle.js' });
+});
+
+app.get('/licence-owner', (req, res) => {
+  res.render('index', { clientBundleSource: 'licence-owner-bundle.js' });
 });
 
 app.use(express.static(path.join(__dirname, '../../dist')));
