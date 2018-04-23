@@ -1,2 +1,32 @@
+@import '../../common-resources/base';
+@import '../../common-resources/color-scheme';
+@import '../../common-resources/common-style';
+@import '../../common-resources/size-constants';
 @import '../../common-resources/IrisButton';
 @import '../../common-resources/IrisAlert';
+
+@import './login';
+
+body {
+  background-color: #eee;
+  overflow: auto;
+}
+
+input.grapheel-input {
+  // border: 1px solid #eee;
+  padding: 10px 10px;
+  margin: 10px 0;
+  display: block;
+  width: calc(100% - 17px);
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #DDDDDD;
+  -webkit-transition: all 0.10s ease-in-out;
+  -moz-transition: all 0.10s ease-in-out;
+  -ms-transition: all 0.10s ease-in-out;
+  -o-transition: all 0.10s ease-in-out;
+  &:focus {
+    box-shadow: 0 0 5px $mint-color;
+    border-color: $mint-color
+  }
+}

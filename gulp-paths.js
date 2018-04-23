@@ -9,7 +9,7 @@ const paths = {
     client: {
       main: {
         entryPoint: 'src/client/main/index.jsx',
-        scss: 'src/client/main/**/*.scss',
+        scss: 'src/client/main/styles/index.scss',
         css: 'src/client/main/**/*.css',
       },
       volunteer: {
