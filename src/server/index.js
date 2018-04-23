@@ -32,31 +32,31 @@ app.get(/\/.*?-bundle\.js(\.map)?\.gz/, (req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
+app.get(/\/((login.*)?|(create.*))$/, (req, res) => {
   res.render(
     'index',
-    { clientBundleSource: 'main-bundle.js', styleSource: '/styles/main.css' },
+    { clientBundleSource: '/main-bundle.js', styleSource: '/styles/main.css' },
   );
 });
 
 app.get('/student', (req, res) => {
   res.render(
     'index',
-    { clientBundleSource: 'student-bundle.js', styleSource: '/styles/student.css' },
+    { clientBundleSource: '/student-bundle.js', styleSource: '/styles/student.css' },
   );
 });
 
 app.get('/volunteer', (req, res) => {
   res.render(
     'index',
-    { clientBundleSource: 'volunteer-bundle.js', styleSource: '/styles/volunteer.css' },
+    { clientBundleSource: '/volunteer-bundle.js', styleSource: '/styles/volunteer.css' },
   );
 });
 
 app.get('/licence-owner', (req, res) => {
   res.render(
     'index',
-    { clientBundleSource: 'licence-owner-bundle.js', styleSource: '/styles/licence-owner.css' },
+    { clientBundleSource: '/licence-owner-bundle.js', styleSource: '/styles/licence-owner.css' },
   );
 });
 
