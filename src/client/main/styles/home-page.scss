@@ -2,4 +2,62 @@
   width: 100vw;
   min-height: 100vh;
   background-color: #eee;
+  p {
+    font-size: 1.2em;
+  }
+  h1, h2, h3 {
+    text-align: center;
+  }
+  .call-to-action {
+    overflow-y: hidden;
+    text-align: center;
+    padding: 150px 0;
+    margin-bottom: 20px;
+    background-color: #333;
+    color: white;
+    h1, h2, h3, h4, p, span {
+      text-shadow: 0px 3px 5px #111;
+    }
+  }
+  .column-info-panel {
+    p, h1, h2, h3 {
+      text-align: center;
+    }
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    @media screen and (min-width: $medium-width) {
+      display: grid;
+      grid-column-gap: 10px;
+      &.three-column {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+          "header1 header2 header3"
+          "content1 content2 content3"
+          "action1 action2 action3";
+      }
+      &.two-column {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "header1 header2"
+          "content1 content2"
+          "action1 action2";
+      }
+
+      @for $i from 1 to 4 {
+        .grid-header#{$i} { grid-area: header#{$i}; align-self: start; }
+        .grid-content#{$i} { grid-area: content#{$i}; align-self: start; }
+        .grid-action#{$i} { grid-area: action#{$i}; align-self: start; }
+      }
+      a {
+        justify-self: center
+      }
+    }
+  }
+  .spacer { margin: 50px 0; }
+  .spacer-small { margin: 25px 0; }
+  .hline { border-top: 1px solid #ccc }
+  .home-page-graph {
+    zoom: 0.3;
+  }
 }
