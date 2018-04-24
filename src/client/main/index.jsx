@@ -17,7 +17,7 @@ class MainApp extends React.Component {
     };
   }
   componentDidMount() {
-    console.log('main app mounted');
+    console.log('main app mounted 2');
     this.api = new ClientAPI();
     this.api.init()
       .then(
