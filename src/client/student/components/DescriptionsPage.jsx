@@ -41,7 +41,7 @@ const DescriptionsPage = (props) => {
         )
       }
       <Link
-        to="/images"
+        to="/student/images"
         className="w3-margin-top"
       >
         Back to images
