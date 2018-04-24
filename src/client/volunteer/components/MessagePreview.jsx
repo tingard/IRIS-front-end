@@ -10,7 +10,7 @@ const MessagePreview = (props) => {
   const match = regExp.exec(props.image.get('url'));
   const imgUrl = `https://res.cloudinary.com/${match[1]}/c_scale,w_100/${match[2]}`;
   return (
-    <NavLink to={`/messages/${props._id}`}>
+    <NavLink to={`/volunteer/messages/${props._id}`}>
       <div className="w3-row w3-display-container">
         <div className="w3-container message-page-message-preview">
           <div className="w3-col s4 message-preview-image">

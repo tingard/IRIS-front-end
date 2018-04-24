@@ -116,7 +116,7 @@ class ProfilePage extends React.Component {
               <div className="w3-col s4">
                 <div style={{ padding: '10px', textAlign: 'center' }}>
                   <img
-                    src="images/irisProposed_withoutBackground_small.png"
+                    src="/images/irisProposed_withoutBackground_small.png"
                     className="mf-disable"
                     alt="user badge"
                     width={100}

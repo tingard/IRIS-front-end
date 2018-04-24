@@ -21,7 +21,7 @@ function prettify(propertyName) {
 const ImageCard = (props) => {
   const imgUrl = resizeCloudinaryImage(props.url, 200);
   return (
-    <Link to={`/cards/${props._id}`}>
+    <Link to={`/volunteer/cards/${props._id}`}>
       <div className={`grapheel-image-card w3-card-4 w3-animate-bottom ${props.subject}-card`}>
         <div className="image-card-level">
           <span
