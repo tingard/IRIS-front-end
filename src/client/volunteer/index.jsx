@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
@@ -37,25 +37,29 @@ const store = createStore(
 
 const VolunteerApp = () => (
   <BrowserRouter forceRefresh={!('pushState' in window.history)}>
-    <Navbar key="iris-volunteer-navbar" />,
-    <Provider store={store} key="iris-volunteer-provider">
-      <ApiWrapper>
-        <section className="volunteer-app content-section">
-          <Switch>
-            <Route exact path="/" component={homePage} />
-            <Route path="/profile" component={ProfilePage} />
-            <Route path="/messages/:messageID?" component={MessagesPage} />
-            <Route path="/cards/:cardId" component={ClassifyPage} />
-            <Route
-              exact
-              path="/confirm/:id"
-              render={(p) => { console.log(p); return <p>Confirmed email</p>; }}
-            />
-            <Route render={() => <Redirect to="/" />} />
-          </Switch>
-        </section>
-      </ApiWrapper>
-    </Provider>
+    <Route
+      path="/volunteer"
+      render={props => [
+        <Navbar {...props} key="iris-volunteer-navbar" />,
+        <Provider store={store} key="iris-volunteer-provider">
+          <ApiWrapper>
+            <section className="volunteer-app content-section">
+              <Switch>
+                <Route exact path="/volunteer" component={homePage} />
+                <Route path="/volunteer/profile" component={ProfilePage} />
+                <Route path="/volunteer/messages/:messageID?" component={MessagesPage} />
+                <Route path="/volunteer/cards/:cardId" component={ClassifyPage} />
+                <Route
+                  exact
+                  path="/volunteer/confirm/:id"
+                  render={(p) => { console.log(p); return <p>Confirmed email</p>; }}
+                />
+              </Switch>
+            </section>
+          </ApiWrapper>
+        </Provider>,
+    ]}
+    />
   </BrowserRouter>
 );
 
