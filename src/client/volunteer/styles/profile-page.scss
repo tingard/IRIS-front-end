@@ -1,0 +1,18 @@
+.profile-page {
+  @media screen and (min-width: $medium-width) {
+    padding: 0 10%;
+  }
+  #profile-page-email-input {
+    &.invalid {
+      border: 1px solid #faa !important;
+      &::after {
+        content: 'invalid';
+      }
+    }
+  }
+  #profile-page-bio-input {
+    display: block;
+    width: 100%;
+    resize: none;
+  }
+}

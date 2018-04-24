@@ -1,6 +1,3 @@
-@import '../../../common-resources/color-scheme';
-@import '../../../common-resources/size-constants';
-
 @mixin color-transition($time) {
   transition: $time;
   transition-timing-function: ease-in-out;

@@ -19,7 +19,7 @@ class ImageClassifier extends React.Component {
       .then(
         (res) => {
           console.log(res.success);
-          this.props.push('/');
+          this.props.push('/volunteer');
         },
       );
   }

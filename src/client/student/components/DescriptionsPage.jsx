@@ -6,7 +6,7 @@ import Description from './Description';
 
 const DescriptionsPage = (props) => {
   if (!props.isFiltered || props.invalidId) {
-    return <Redirect to="/images" />;
+    return <Redirect to="/volunteer/images" />;
   }
   if (props.isFetching) return <div>Loading Spinner</div>;
   return (

@@ -164,7 +164,7 @@ class ConversationPage extends Component {
         </div>
       );
     }
-    return <Redirect to="/messages" />;
+    return <Redirect to="/volunteer/messages" />;
   }
 }
 

@@ -14,7 +14,7 @@ const paths = {
       },
       volunteer: {
         entryPoint: 'src/client/volunteer/index.jsx',
-        scss: 'src/client/volunteer/**/*.scss',
+        scss: 'src/client/volunteer/styles/index.scss',
         css: 'src/client/volunteer/**/*.css',
         serviceWorker: 'src/client/volunteer/service-worker/service-worker.js',
       },
