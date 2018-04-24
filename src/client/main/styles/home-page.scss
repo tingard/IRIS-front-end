@@ -26,31 +26,33 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    @media screen and (min-width: $medium-width) {
-      display: grid;
-      grid-column-gap: 10px;
-      &.three-column {
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-areas:
-          "header1 header2 header3"
-          "content1 content2 content3"
-          "action1 action2 action3";
-      }
-      &.two-column {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-          "header1 header2"
-          "content1 content2"
-          "action1 action2";
-      }
+    @supports (display: grid) {
+      @media screen and (min-width: $medium-width) {
+        display: grid;
+        grid-column-gap: 10px;
+        &.three-column {
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-areas:
+            "header1 header2 header3"
+            "content1 content2 content3"
+            "action1 action2 action3";
+        }
+        &.two-column {
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas:
+            "header1 header2"
+            "content1 content2"
+            "action1 action2";
+        }
 
-      @for $i from 1 to 4 {
-        .grid-header#{$i} { grid-area: header#{$i}; align-self: start; }
-        .grid-content#{$i} { grid-area: content#{$i}; align-self: start; }
-        .grid-action#{$i} { grid-area: action#{$i}; align-self: start; }
-      }
-      a {
-        justify-self: center
+        @for $i from 1 to 4 {
+          .grid-header#{$i} { grid-area: header#{$i}; align-self: start; }
+          .grid-content#{$i} { grid-area: content#{$i}; align-self: start; }
+          .grid-action#{$i} { grid-area: action#{$i}; align-self: start; }
+        }
+        a {
+          justify-self: center
+        }
       }
     }
   }
