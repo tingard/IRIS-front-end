@@ -20,7 +20,7 @@ const paths = {
       },
       student: {
         entryPoint: 'src/client/student/index.jsx',
-        scss: 'src/client/student/**/*.scss',
+        scss: 'src/client/student/styles/index.scss',
         css: 'src/client/student/**/*.css',
         serviceWorker: 'src/client/student/service-worker/service-worker.js',
       },

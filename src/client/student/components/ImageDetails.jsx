@@ -25,7 +25,7 @@ const ImageDetails = props => (
         <div className="w3-btn-bar">
           {props.messages.size !== 0 ? (
             <Link
-              to={`/images/descriptions/${props.image.get('_id')}`}
+              to={`/student/images/descriptions/${props.image.get('_id')}`}
               className="w3-margin-right iris-button primary"
               role="button"
               tabIndex="0"

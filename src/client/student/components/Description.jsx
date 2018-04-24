@@ -37,13 +37,13 @@ const Description = (props) => {
         ) : (
           <React.Fragment>
             <Link
-              to={`/images/descriptions/${props.image.get('_id')}/${props._id}`}
+              to={`/student/images/descriptions/${props.image.get('_id')}/${props._id}`}
               className="w3-margin-right iris-button primary"
             >
               Accept this description
             </Link>
             <Link
-              to={`/messages/${props._id}`}
+              to={`/student/messages/${props._id}`}
               className="w3-margin-right iris-button secondary"
             >
               {props.messages.size > 1 ? 'Read all messages in this conversation' : 'Ask a question about this description'}
@@ -52,10 +52,10 @@ const Description = (props) => {
         )}
         {props.markedAsCompleted && props.messages.size > 1 ? (
           <Link
-            to={`/messages/${props._id}`}
+            to={`/student/messages/${props._id}`}
             className="w3-margin-right iris-button secondary"
           >
-            View the conversation for this
+            View the conversation for this image
           </Link>
         ) : null}
       </div>

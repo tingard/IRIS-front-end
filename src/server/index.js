@@ -39,7 +39,7 @@ app.get(/\/((login.*)?|(create.*))$/, (req, res) => {
   );
 });
 
-app.get(/\/student.*$/, (req, res) => {
+app.get(/\/student(\/.*)?$/, (req, res) => {
   res.render(
     'index',
     { clientBundleSource: '/student-bundle.js', styleSource: '/styles/student.css' },
@@ -53,7 +53,7 @@ app.get(/\/volunteer(\/.*)?$/, (req, res) => {
   );
 });
 
-app.get('/licence-owner.*', (req, res) => {
+app.get(/\/licence-owner(\/.*)?$/, (req, res) => {
   res.render(
     'index',
     { clientBundleSource: '/licence-owner-bundle.js', styleSource: '/styles/licence-owner.css' },

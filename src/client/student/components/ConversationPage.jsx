@@ -34,7 +34,7 @@ class ConversationPage extends Component {
       return (
         <div className="w3-container">
           <p>You don't have any messages with that Id!</p>
-          <Link to="/images" className="w3-button w3-border iris-button primary">
+          <Link to="/student/images" className="w3-button w3-border iris-button primary">
             Go back to your images
           </Link>
         </div>
@@ -144,18 +144,18 @@ class ConversationPage extends Component {
                 This will close this conversation window.
               </p>
               <Link
-                to={`/images/descriptions/${this.props.message.get('image').get('_id')}/${this.props.message.get('_id')}`}
+                to={`/student/images/descriptions/${this.props.message.get('image').get('_id')}/${this.props.message.get('_id')}`}
                 className="iris-button primary w3-margin-right"
               >
                 Accept this description
               </Link>
               <Link
-                to={`/images/descriptions/${this.props.message.get('image').get('_id')}`}
+                to={`/student/images/descriptions/${this.props.message.get('image').get('_id')}`}
                 className="w3-margin-right iris-button tertiary"
               >
                 Descriptions of this image
               </Link>
-              <Link to="/images" className="iris-button tertiary">
+              <Link to="/student/images" className="iris-button tertiary">
                 Your images
               </Link>
             </div>
