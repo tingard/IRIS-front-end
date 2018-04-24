@@ -11,7 +11,6 @@ export const fetchWrapper = api => (
       (dispatch) => {
         // make sure we have auth loaded in
         api.loadTokenFromStorage();
-        console.log(api.state);
         if (!api.state.user.type) {
           window.location.replace('/login/volunteer');
         }
