@@ -34,7 +34,7 @@ const ClassifyPage = props => (
       </div>
     </div>
   ) : (
-    <Redirect to="/" />
+    <Redirect to="/volunteer" />
   )
 );
 

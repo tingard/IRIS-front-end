@@ -1,0 +1,26 @@
+@import '../../common-resources/base';
+@import '../../common-resources/color-scheme';
+@import '../../common-resources/common-style';
+@import '../../common-resources/size-constants';
+@import '../../common-resources/IrisButton';
+@import '../../common-resources/IrisAlert';
+@import '../../common-resources/select';
+@import '../../common-resources/switch';
+@import '../../common-resources/imageDescription/tableDescriptor';
+
+@import './home-page.scss';
+@import './card-page.scss';
+@import './profile-page.scss';
+@import './message-page.scss';
+@import './loading-page.scss';
+@import './navbar.scss';
+
+.content-section {
+  padding: 0 40px;
+  @media screen and (max-width: $medium-width) {
+    padding: 0 20px;
+  }
+  @media screen and (max-width: $phone-width) {
+    padding: 0 10px;
+  }
+}

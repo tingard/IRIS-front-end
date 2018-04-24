@@ -4,4 +4,4 @@
 
 .image-details{display:flex;flex-wrap:wrap}.image-details img{max-height:150px;margin:10px auto}.image-details div{margin:0 10px;flex-grow:6}
 
-#profile-page-email-input.invalid{border:1px solid #faa !important}#profile-page-email-input.invalid::after{content:'invalid'}#profile-page-bio-input{display:block;width:100%;resize:'none'}
+#profile-page-email-input.invalid{border:1px solid #faa !important}#profile-page-email-input.invalid::after{content:'invalid'}#profile-page-bio-input{display:block;width:100%;resize:none}

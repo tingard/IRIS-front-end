@@ -1,6 +1,3 @@
-@import '../../../common-resources/color-scheme';
-@import '../../../common-resources/size-constants';
-
 @mixin colorBorder($color) {
   border-color: $color;
 }

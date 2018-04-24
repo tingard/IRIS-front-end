@@ -24,7 +24,7 @@ class MessagesPage extends React.Component {
       this.props.messages.get('messages').filter(m => m.get('_id') === routerMessageID).get(0)
       : this.props.messages.get('messages').get(0);
     if (routerMessageID && !selectedMessage) {
-      return <Redirect to="/messages" />;
+      return <Redirect to="/volunteer/messages" />;
     } else if (!selectedMessage) {
       return (
         <div className="w3-container w3-panel">
