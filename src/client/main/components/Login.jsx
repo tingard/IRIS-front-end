@@ -47,6 +47,7 @@ class Login extends React.Component {
           Login
         </button>
         <Link to={`/create/${this.props.type}`}>Create an account</Link>
+        <Link to="/">IRIS home</Link>
       </div>
     );
   }
