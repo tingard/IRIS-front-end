@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import Login from './Login';
 import SelectPage from './SelectPage';
@@ -22,7 +23,7 @@ class LoginPage extends Component {
           render={p => (<Login
             type="student"
             title="Student"
-            onLogin={this.onLogin}
+            onLogin={this.props.onLogin}
             {...p}
           />)}
         />
@@ -33,7 +34,7 @@ class LoginPage extends Component {
             <Login
               type="volunteer"
               title="Volunteer"
-              onLogin={this.onLogin}
+              onLogin={this.props.onLogin}
               {...p}
             />
           )}
@@ -45,7 +46,7 @@ class LoginPage extends Component {
             <Login
               type="licence-owner"
               title="Licence Manager"
-              onLogin={this.onLogin}
+              onLogin={this.props.onLogin}
               {...p}
             />
           )}
@@ -61,5 +62,9 @@ class LoginPage extends Component {
     );
   }
 }
+
+LoginPage.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
 
 export default LoginPage;
