@@ -6,10 +6,12 @@ const HomePage = () => (
   <div id="iris-home-page">
     <div className="call-to-action">
       <div className="iris-narrow-page">
-        <h1><em><q>A picture is worth a thousand words</q></em></h1>
-        <p>
+        <h1 style={{ fontSize: '2em' }}>
+          <em><q>A picture is worth a thousand words</q></em>
+        </h1>
+        <h1>
           Let's make IRIS worth ten thousand pictures.
-        </p>
+        </h1>
         <Link
           className="iris-button action"
           to="/login"
