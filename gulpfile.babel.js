@@ -57,7 +57,7 @@ function sassStyles_() {
   const sassFlow = (src, name) => {
     function doSass() {
       return gulp.src(src)
-        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({}).on('error', sass.logError))
         .pipe(concat(`${name}.css`))
         .pipe(gulp.dest(paths.dist.css));
     }

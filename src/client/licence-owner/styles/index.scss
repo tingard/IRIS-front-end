@@ -7,3 +7,10 @@
 @import '../../common-resources/select';
 @import '../../common-resources/switch';
 @import '../../common-resources/imageDescription/tableDescriptor';
+
+@import './home-page';
+
+body {
+  background-color: #eee;
+  color: white;
+}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 // import Select from 'react-select';
 import moment from 'moment';
-import FullPageSpinner from './FullPageSpinner';
+import FullPageSpinner from '../../common-resources/FullPageSpinner';
 import IrisButton from '../../common-resources/IrisButton';
 import IrisAlert from '../../common-resources/IrisAlert';
 
