@@ -1,16 +1,12 @@
 @import '../../common-resources/size-constants';
 
-@mixin entry-animation() {
-  animation: pulse 0.5s;
-  animation-fill-mode: both;
-  @keyframes pulse {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes slideUp {
+  0% { transform: translate(0, 30px); }
+  100% { transform: translate(0, 0); }
 }
 .home-page {
   margin-top: 20px;
@@ -32,7 +28,10 @@
     padding: 10px;
     border: 1px solid #eee;
     box-shadow: 0px 5px 4px #ccc;
-    @include entry-animation();
+    animation:
+      fadeIn 0.3s,
+      slideUp 0.3s;
+    animation-fill-mode: both;
     @media screen and (max-width: $medium-width) {
       margin: 10px;
     }
@@ -45,19 +44,19 @@
       grid-area: imageFeed;
       border-radius: 20px;
       background-color: #fff;
-      animation-delay: 0.2s;
+      animation-delay: 0.1s;
     }
     &.contact-us {
       grid-area: contact;
       border-radius: 20px;
       background-color: #fff;
-      animation-delay: 0.4s;
+      animation-delay: 0.2s;
     }
     &.feedback {
       grid-area: feedback;
       border-radius: 20px;
       background-color: #fff;
-      animation-delay: 0.6s;
+      animation-delay: 0.3s;
     }
   }
 }

@@ -2,6 +2,7 @@
 export const userDetails = require('./userDetails');
 export const images = require('./images');
 export const messages = require('./messages');
+export const licences = require('./licences');
 export const serviceWorker = require('./service-worker');
 
 export const fetchWrapper = api => (
