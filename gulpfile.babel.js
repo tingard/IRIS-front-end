@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
 
 function clean() {
   return del([
-    paths.dist.clientBundle,
+    paths.dist.bundles,
     paths.dist.css,
     paths.dist.manifest,
     `${paths.dist.dir}/${paths.dist.studentServiceWorker}`,
@@ -48,7 +48,7 @@ function doWebpackWrapper(entry, watch = false) {
     return gulp.src(paths.src.client.main.entryPoint)
       .pipe(webpackStream(wc))
       .pipe(gzip())
-      .pipe(gulp.dest(paths.dist.dir));
+      .pipe(gulp.dest(paths.dist.bundles));
   }
   return doWebpack;
 }

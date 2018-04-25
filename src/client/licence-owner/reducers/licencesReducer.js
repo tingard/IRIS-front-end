@@ -1,0 +1,23 @@
+import { Map, Record } from 'immutable';
+
+const StateRecord = new Record({
+  isFetching: false,
+  isStale: false,
+});
+
+export const initialState = Map({
+  state: new StateRecord({ isStale: true }),
+  licences: new Map(),
+});
+
+const licenceReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'UPDATE_LICENCE':
+    case 'PURCHASE_LICENCE':
+      return state;
+    default:
+      return state;
+  }
+};
+
+export default licenceReducer;
