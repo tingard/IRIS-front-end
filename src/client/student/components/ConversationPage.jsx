@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Link, Redirect } from 'react-router-dom';
 import ImageDescription from '../../common-resources/imageDescription';
 import IrisButton from '../../common-resources/IrisButton';
-import ratingValues from '../../values/ratingValues';
+import ratingValues from '../../common-resources/ratingValues';
 
 const capitalize = s => `${s.charAt(0).toUpperCase()}${s.slice(1)}`;
 

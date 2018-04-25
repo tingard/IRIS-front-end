@@ -1,4 +1,4 @@
-// index.js
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StripeProvider } from 'react-stripe-elements';
@@ -14,9 +14,7 @@ const RegisterStripeCard = props => (
 );
 
 RegisterStripeCard.propTypes = {
-  /* eslint-disable react/forbid-prop-types */
-  stripe: PropTypes.object,
-  /* eslint-enable react/forbid-prop-types */
+  stripe: PropTypes.object.isRequired,
 };
 
 export default RegisterStripeCard;

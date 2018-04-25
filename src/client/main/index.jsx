@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ClientAPI from 'grapheel-iris-client-api';
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
+import SignUpPage from './components/sign-up';
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -15,10 +16,10 @@ class MainApp extends React.Component {
         type: false,
       },
     };
+    this.api = new ClientAPI();
   }
   componentDidMount() {
     console.log('main app mounted 2');
-    this.api = new ClientAPI();
     this.api.init()
       .then(
         (result) => {
@@ -45,6 +46,7 @@ class MainApp extends React.Component {
     );
   }
   render() {
+    console.log(this.api);
     return (
       <Router>
         <Fragment>
@@ -66,26 +68,8 @@ class MainApp extends React.Component {
             component={HomePage}
           />
           <Route
-            exact
-            path="/create"
-            render={p => (
-              <div className="iris-narrow-page">
-                <h1>Create an account</h1>
-                <p>Choose a type!</p>
-              </div>
-            )}
-          />
-          <Route
-            path="/create/:utype"
-            render={p => (
-              <div className="iris-narrow-page">
-                <h1>
-                  {['student', 'volunteer', 'licence-owner'].indexOf(p.match.params.utype) >= 0 ?
-                    `Create a ${p.match.params.utype} account` : 'Create an account'}
-                </h1>
-                <p>this functionality isn't implemented yet</p>
-              </div>
-            )}
+            path="/create/:utype?"
+            render={p => <SignUpPage api={this.api} {...p} />}
           />
         </Fragment>
       </Router>

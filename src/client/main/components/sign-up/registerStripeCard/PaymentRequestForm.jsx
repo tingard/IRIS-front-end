@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectStripe, PaymentRequestButtonElement } from 'react-stripe-elements';
@@ -52,7 +53,7 @@ class PaymentRequestForm extends React.Component {
 }
 
 PaymentRequestForm.propTypes = {
-  stripe: PropTypes.object,
+  stripe: PropTypes.object.isRequired,
 };
 
 export default injectStripe(PaymentRequestForm);

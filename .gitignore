@@ -3,6 +3,7 @@ npm-debug.log
 yarn-error.log
 lib
 dist/bundles
+dist/styles/
 #yarn.lock
 .yarnclean
 *.tgz
