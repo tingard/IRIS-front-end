@@ -8,6 +8,7 @@ export default {
     main: './src/client/main/index.jsx',
     student: './src/client/student/index.jsx',
     volunteer: './src/client/volunteer/index.jsx',
+    'licence-owner': './src/client/licence-owner/index.jsx',
   },
   devtool: 'cheap-source-map',
   module: {
