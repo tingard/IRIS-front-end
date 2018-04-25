@@ -28,9 +28,9 @@ class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-  user: ImmutablePropTypes.contains({
-    name: PropTypes.string.isRequired,
-  }),
+  // user: ImmutablePropTypes.contains({
+  //   name: PropTypes.string.isRequired,
+  // }),
   licences: ImmutablePropTypes.contains({
     licences: ImmutablePropTypes.listOf(
       ImmutablePropTypes.contains({

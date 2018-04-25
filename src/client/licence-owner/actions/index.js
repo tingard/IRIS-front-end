@@ -1,5 +1,11 @@
 import ClientAPI from 'grapheel-iris-client-api';
-import { fetchWrapper, serviceWorker, messages, userDetails, images } from '../../actions';
+import {
+  fetchWrapper,
+  serviceWorker,
+  userDetails,
+  images,
+  licences,
+} from '../../actions';
 // -----------------------------------------------------------------------------
 // List of all actions used in the student app, could be broken into sub-files
 // -----------------------------------------------------------------------------
@@ -23,8 +29,8 @@ export const logout = fetch(userDetails.logout);
 export const getImages = fetch(images.get);
 
 // SECTION: Licences
-export const getLicences = fetch(messages.get);
-export const updateLicences = fetch(messages.get);
+export const getLicences = fetch(licences.get);
+export const updateLicences = fetch(licences.get);
 
 // SECTION: Service worker
 export const passSwRegistrationToAPI = fetch(serviceWorker.register);

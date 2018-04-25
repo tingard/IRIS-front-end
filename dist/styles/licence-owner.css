@@ -1,3 +1,15 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes slideUp {
+  0% {
+    transform: translate(0, 30px); }
+  100% {
+    transform: translate(0, 0); } }
+
 .home-page {
   margin-top: 20px; }
   @supports (display: grid) {
@@ -14,14 +26,8 @@
     padding: 10px;
     border: 1px solid #eee;
     box-shadow: 0px 5px 4px #ccc;
-    animation: pulse 0.5s;
+    animation: fadeIn 0.3s, slideUp 0.3s;
     animation-fill-mode: both; }
-
-@keyframes pulse {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
     @media screen and (max-width: 1000px) {
       .home-page .panel {
         margin: 10px; } }
@@ -33,17 +39,17 @@
       grid-area: imageFeed;
       border-radius: 20px;
       background-color: #fff;
-      animation-delay: 0.2s; }
+      animation-delay: 0.1s; }
     .home-page .panel.contact-us {
       grid-area: contact;
       border-radius: 20px;
       background-color: #fff;
-      animation-delay: 0.4s; }
+      animation-delay: 0.2s; }
     .home-page .panel.feedback {
       grid-area: feedback;
       border-radius: 20px;
       background-color: #fff;
-      animation-delay: 0.6s; }
+      animation-delay: 0.3s; }
 
 @import url("https://fonts.googleapis.com/css?family=Raleway:medium");
 .app div, .app p, .app span, .app h1, .app h2, .app h3, .app h4, .app h5, .app h6 {
@@ -210,6 +216,18 @@ table.iris-table-description {
     table.iris-table-description th p {
       padding-left: 10px; }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes slideUp {
+  0% {
+    transform: translate(0, 30px); }
+  100% {
+    transform: translate(0, 0); } }
+
 .home-page {
   margin-top: 20px; }
   @supports (display: grid) {
@@ -226,14 +244,8 @@ table.iris-table-description {
     padding: 10px;
     border: 1px solid #eee;
     box-shadow: 0px 5px 4px #ccc;
-    animation: pulse 0.5s;
+    animation: fadeIn 0.3s, slideUp 0.3s;
     animation-fill-mode: both; }
-
-@keyframes pulse {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
     @media screen and (max-width: 1000px) {
       .home-page .panel {
         margin: 10px; } }
@@ -245,17 +257,17 @@ table.iris-table-description {
       grid-area: imageFeed;
       border-radius: 20px;
       background-color: #fff;
-      animation-delay: 0.2s; }
+      animation-delay: 0.1s; }
     .home-page .panel.contact-us {
       grid-area: contact;
       border-radius: 20px;
       background-color: #fff;
-      animation-delay: 0.4s; }
+      animation-delay: 0.2s; }
     .home-page .panel.feedback {
       grid-area: feedback;
       border-radius: 20px;
       background-color: #fff;
-      animation-delay: 0.6s; }
+      animation-delay: 0.3s; }
 
 body {
   background-color: #eee;

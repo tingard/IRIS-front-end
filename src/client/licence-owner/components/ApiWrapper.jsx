@@ -49,17 +49,34 @@ class ApiWrapper extends React.Component {
     //     });
     //   }
     // }
-  }
-  componentWillUnmount() {
-    // Object.keys(this.timers).map(key => clearInterval(this.timers[key]));
-  }
-  render() {
+    console.log('ApiWrapper mounted');
     if (this.props.licences.get('state').get('isStale') && !this.props.licences.get('state').get('isFetching')) {
       this.props.getImages();
     }
     if (this.props.user.get('state').get('isStale') && !this.props.user.get('state').get('isFetching')) {
       this.props.getUserDetails();
     }
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log('hi there');
+    const shouldFetch = state => state.get('isStale') && !state.get('isFetching');
+    const licenceState = nextProps.licences.get('state');
+    const userState = nextProps.user.get('state');
+    const imagesState = nextProps.images.get('state');
+    if (shouldFetch(licenceState)) {
+      nextProps.getLicences();
+    }
+    if (shouldFetch(userState)) {
+      nextProps.getUserDetails();
+    }
+    if (shouldFetch(imagesState)) {
+      nextProps.getImages();
+    }
+  }
+  componentWillUnmount() {
+    // Object.keys(this.timers).map(key => clearInterval(this.timers[key]));
+  }
+  render() {
     return <div id="api-watcher">{this.props.children}</div>;
   }
 }
@@ -77,9 +94,16 @@ ApiWrapper.propTypes = {
       isFetching: PropTypes.bool,
     }),
   }),
+  images: ImmutablePropTypes.contains({
+    state: ImmutablePropTypes.contains({
+      isStale: PropTypes.bool,
+      isFetching: PropTypes.bool,
+    }),
+  }),
   // getMessages: PropTypes.func,
   getImages: PropTypes.func,
   getUserDetails: PropTypes.func,
+  getLicences: PropTypes.func,
   // passSwRegistrationToAPI: PropTypes.func,
   // subscribeToPushNotifications: PropTypes.func,
   // handlePushMessage: PropTypes.func,
