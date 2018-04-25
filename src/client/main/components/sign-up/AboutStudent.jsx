@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
-
-import IrisButton from '../common-resources/IrisButton';
+import IrisAlert from '../../../common-resources/IrisAlert';
+import IrisButton from '../../../common-resources/IrisButton';
 import RegisterStripeCard from './registerStripeCard';
 
 const wrapQuestion = (q, htmlFor) => (
@@ -90,8 +90,7 @@ class AboutStudent extends React.Component {
         style={{ zIndex: 1, backgroundColor: 'white' }}
       >
         <h3 className="w3-padding-16 w3-margin-bottom" style={{ maxWidth: '80vw', margin: 'auto' }}>
-          <span>We look forward to being able to help you!</span>
-          <span>Fill in your details below and we'll get things underway.</span>
+          We look forward to being able to help you!
         </h3>
         <section role="region" aria-label="basic information">
           <div className="w3-row w3-margin-bottom" role="group" aria-label="Tell us your name">
@@ -225,27 +224,13 @@ class AboutStudent extends React.Component {
                   }
                 </MediaQuery>
               </div>
-              <div role="status">
-                {
-                  ((this.state.user.cardToken || false) && !this.state.cardLinkStatusDismissed) ? (
-                    <div
-                      className={'w3-panel w3-border w3-round ' +
-                        'w3-border-green w3-animate-right w3-display-container'}
-                      aria-describedby="invalid-login-alert"
-                    >
-                      <h3 id="card-successfully-linked">Card successfully linked</h3>
-                      <p>This card will be linked to your account</p>
-                      <button
-                        className="w3-display-topright w3-button"
-                        onClick={() => this.setState({ cardLinkStatusDismissed: true })}
-                        aria-label="Close"
-                      >
-                        x
-                      </button>
-                    </div>
-                  ) : null
-                }
-              </div>
+              {((this.state.user.cardToken || false) && !this.state.cardLinkStatusDismissed) ? (
+                <IrisAlert
+                  title="Card successfully linked"
+                  message="This card will be linked to your account"
+                  type="success"
+                  onClose={() => this.setState({ cardLinkStatusDismissed: true })}
+                />) : null}
             </React.Fragment>
           ) : (
             <p>
@@ -263,7 +248,7 @@ class AboutStudent extends React.Component {
           />
         </div>
         <div className="w3-row w3-padding-16">
-          <Link to="/sign-up">Go Back</Link>
+          <Link to="/create">Go Back</Link>
         </div>
       </div>
     );

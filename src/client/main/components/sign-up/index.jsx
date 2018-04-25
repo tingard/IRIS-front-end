@@ -5,8 +5,7 @@ import UtypeSelect from './UtypeSelect';
 import AboutVolunteer from './AboutVolunteer';
 import AboutStudent from './AboutStudent';
 
-const irisAltText = 'IRIS\'s logo, a rainbow coloured eye pupil with a greek gamma overlaid on it';
-class Login extends React.Component {
+class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
     this.api = props.api;
@@ -26,31 +25,32 @@ class Login extends React.Component {
         <h1 className="w3-center w3-padding-16">
           <img
             src="/images/irisProposed_withoutBackground_small.png"
-            alt={irisAltText}
+            alt="IRIS\'s logo, a rainbow coloured eye pupil with a greek gamma overlaid on it'"
             width="80px"
           />
           Sign up to IRIS
         </h1>
         <Switch>
-          <Route exact path="/sign-up" component={UtypeSelect} />
+          <Route exact path="/create" component={UtypeSelect} />
           <Route
             exact
-            path="/sign-up/volunteer"
+            path="/create/volunteer"
             render={p => <AboutVolunteer onComplete={this.onComplete} {...p} />}
           />
           <Route
             exact
-            path="/sign-up/student"
+            path="/create/student"
             render={p => <AboutStudent onComplete={this.onComplete} {...p} />}
           />
+          <Route path="/" render={() => <p>Not found</p>} />
         </Switch>
       </div>
     );
   }
 }
 
-Login.propTypes = {
-  api: PropTypes.object,
+SignUpPage.propTypes = {
+  api: PropTypes.object.isRequired,
 };
 
-export default Login;
+export default SignUpPage;

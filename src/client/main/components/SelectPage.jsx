@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Login = () => (
+const SelectPage = () => (
   <div className="login-container" key="select-page">
     <Link
       className="login-option"
@@ -53,4 +53,4 @@ const Login = () => (
   </div>
 );
 
-export default Login;
+export default SelectPage;

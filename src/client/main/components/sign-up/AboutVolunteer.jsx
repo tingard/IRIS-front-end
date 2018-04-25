@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
-import IrisButton from '../common-resources/IrisButton';
+import IrisButton from '../../../common-resources/IrisButton';
 
 const wrapQuestion = (q, htmlFor) => (
   <MediaQuery minWidth={601}>
@@ -161,7 +161,7 @@ class AboutVolunteer extends React.Component {
           />
         </div>
         <div className="w3-row w3-padding-16">
-          <Link to="/sign-up">Go Back</Link>
+          <Link to="/create">Go Back</Link>
         </div>
       </div>
     );

@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../common-resources/IrisButton';
 import ImageDescription from '../../common-resources/imageDescription';
 import IrisAlert from '../../common-resources/IrisAlert';
-import ratingValues from '../../values/ratingValues';
+import ratingValues from '../../common-resources/ratingValues';
 
 class AcceptDescriptionPage extends React.Component {
   constructor(props) {

@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import ratingValues from '../../values/ratingValues';
+import ratingValues from '../../common-resources/ratingValues';
 import ImageDescription from '../../common-resources/imageDescription';
 
 const Description = (props) => {

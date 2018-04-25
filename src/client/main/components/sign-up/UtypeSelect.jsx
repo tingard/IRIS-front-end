@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import IrisButton from '../common-resources/IrisButton';
+import { Link } from 'react-router-dom';
+import IrisButton from '../../../common-resources/IrisButton';
 
 class UtypeSelect extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class UtypeSelect extends React.Component {
   }
   handleChange() {
     if (this.select.value !== 'none') {
-      this.props.history.push(`/sign-up/${this.select.value}`);
+      this.props.history.push(`/create/${this.select.value}`);
     } else {
       this.setState({ alertInvalidSelection: true });
     }
@@ -65,6 +66,7 @@ class UtypeSelect extends React.Component {
                 className="w3-bar"
               />
             </div>
+            <Link to="/" style={{ float: 'right' }}>IRIS home</Link>
           </div>
         </div>
       </div>
@@ -74,7 +76,7 @@ class UtypeSelect extends React.Component {
 
 UtypeSelect.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func,
+    push: PropTypes.func.isRequired,
   }),
 };
 
