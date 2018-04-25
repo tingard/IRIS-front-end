@@ -34,27 +34,14 @@
       border-width: 3px;
     }
   }
-  &.physics-card {
-    @include colorBorder(#ffff00);
-  }
-  &.chemistry-card {
-    @include colorBorder(#00f);
-  }
-  &.biology-card {
-    @include colorBorder(#0f0);
-  }
-  &.maths-card {
-    @include colorBorder(#000);
-  }
-  &.computerScience-card {
-    @include colorBorder(#f0f);
-  }
-  &.psychology-card {
-    @include colorBorder(#9800ff);
-  }
-  &.finance-card {
-    @include colorBorder(#a7db1a);
-  }
+  &.physics-card { @include colorBorder(map-get($physics-color, background)) }
+  &.chemistry-card { @include colorBorder(map-get($chemistry-color, background)) }
+  &.biology-card { @include colorBorder(map-get($biology-color, background)) }
+  &.maths-card { @include colorBorder(map-get($maths-color, background)) }
+  &.computerScience-card { @include colorBorder(map-get($computer-science-color, background)) }
+  &.psychology-card { @include colorBorder(map-get($psychology-color, background)) }
+  &.finance-card { @include colorBorder(map-get($finance-color, background)) }
+
   @media screen and (max-width: $phone-width) {
     width: 300px;
     height: 400px;
