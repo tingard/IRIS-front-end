@@ -4,6 +4,7 @@ yarn-error.log
 lib
 dist/bundles
 dist/styles/
+dist/*-service-worker.js
 #yarn.lock
 .yarnclean
 *.tgz
