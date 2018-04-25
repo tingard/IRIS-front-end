@@ -7,7 +7,7 @@ const activeStyle = {
 };
 
 const Navbar = () => (
-  <nav className="w3-container w3-bar iris-narrow-page" role="navigation">
+  <nav className="iris-narrow-page" role="navigation">
     <NavLink to="/student" className="w3-bar-item w3-button" exact activeStyle={activeStyle}>
       Home
     </NavLink>

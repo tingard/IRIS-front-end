@@ -1,9 +1,9 @@
 import React from 'react';
 
 const FeedbackPage = () => (
-  <div className="w3-container">
+  <div className="w3-container iris-narrow-page">
     <h1>Leave Feedback</h1>
-    <div className="w3-panel">
+    <div>
       <p>
         IRIS is currently in a testing stage, and we value your feedback. Please email us
         at <a href="mailto:contact@grapheel.com">contact@grapheel.com</a> or use our GitHub
