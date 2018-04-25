@@ -7,6 +7,7 @@ const paths = {
     serviceWorkers: '**/*service-worker.js',
     offlinePageServiceWorker: 'src/client/common-resources/offline-page-service-worker.js',
     client: {
+      scss: 'src/client/**/*.scss',
       main: {
         entryPoint: 'src/client/main/index.jsx',
         scss: 'src/client/main/styles/index.scss',
@@ -26,7 +27,6 @@ const paths = {
         scss: 'src/client/licence-owner/**/*.scss',
         serviceWorker: 'src/client/student/licence-owner/service-worker.js',
       },
-      scss: 'src/client/styles/index.scss',
       entryPoint: 'src/client/index.jsx',
       studentServiceWorker: 'src/client/student/service-worker/service-worker.js',
       volunteerServiceWorker: 'src/client/volunteer/service-worker/service-worker.js',

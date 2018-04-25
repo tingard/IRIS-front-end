@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import FullPageSpinner from './FullPageSpinner';
+import FullPageSpinner from '../../common-resources/FullPageSpinner';
 import ImageCard from './ImageCard';
 // import AlertHolder from './AlertHolder';
 

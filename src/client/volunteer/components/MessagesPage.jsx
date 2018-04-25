@@ -5,7 +5,7 @@ import MediaQuery from 'react-responsive';
 import { Redirect } from 'react-router-dom';
 import Message from '../containers/message';
 import MessagePreview from '../components/MessagePreview';
-import FullPageSpinner from './FullPageSpinner';
+import FullPageSpinner from '../../common-resources/FullPageSpinner';
 
 class MessagesPage extends React.Component {
   constructor(props) {

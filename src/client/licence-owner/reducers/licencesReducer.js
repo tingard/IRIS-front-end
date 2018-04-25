@@ -1,4 +1,4 @@
-import { Map, Record } from 'immutable';
+import { List, Map, Record } from 'immutable';
 
 const StateRecord = new Record({
   isFetching: false,
@@ -7,10 +7,10 @@ const StateRecord = new Record({
 
 export const initialState = Map({
   state: new StateRecord({ isStale: true }),
-  licences: new Map(),
+  licences: new List([]),
 });
 
-const licenceReducer = (state = initialState, action) => {
+const licencesReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_LICENCE':
     case 'PURCHASE_LICENCE':
@@ -20,4 +20,4 @@ const licenceReducer = (state = initialState, action) => {
   }
 };
 
-export default licenceReducer;
+export default licencesReducer;
