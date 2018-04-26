@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 // import Select from 'react-select';
 import moment from 'moment';
-import FullPageSpinner from '../../common-resources/FullPageSpinner';
+import IrisLoader from '../../common-resources/IrisLoader';
 import IrisButton from '../../common-resources/IrisButton';
 import IrisAlert from '../../common-resources/IrisAlert';
 
@@ -88,7 +88,7 @@ class ProfilePage extends React.Component {
     }
   }
   render() {
-    if (this.props.user.get('state').get('isFetching')) return <FullPageSpinner />;
+    if (this.props.user.get('state').get('isFetching')) return <IrisLoader />;
     return (
       <div className="profile-page">
         <div className="w3-padding-16">

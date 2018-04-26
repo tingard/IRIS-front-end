@@ -5,7 +5,7 @@ import MediaQuery from 'react-responsive';
 import { Redirect } from 'react-router-dom';
 import Message from '../containers/message';
 import MessagePreview from '../components/MessagePreview';
-import FullPageSpinner from '../../common-resources/FullPageSpinner';
+import IrisLoader from '../../common-resources/IrisLoader';
 
 class MessagesPage extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class MessagesPage extends React.Component {
   }
   render() {
     if (this.props.messages.get('state').get('isFetching') && this.props.messages.get('messages').size === 0) {
-      return <FullPageSpinner />;
+      return <IrisLoader />;
     }
     const routerMessageID = this.props.match.params.messageID || false;
     const selectedMessage = routerMessageID ?
