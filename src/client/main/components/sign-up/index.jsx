@@ -24,7 +24,7 @@ class SignUpPage extends React.Component {
       <div className="w3-container w3-display-container sign-up-sheet" style={{ minHeight: '100vh' }}>
         <h1 className="w3-center w3-padding-16">
           <img
-            src="/images/irisProposed_withoutBackground_small.png"
+            src="/images/irisProposed_withoutBackground_100x100.png"
             alt="IRIS\'s logo, a rainbow coloured eye pupil with a greek gamma overlaid on it'"
             width="80px"
           />
