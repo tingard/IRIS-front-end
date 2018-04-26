@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import FullPageSpinner from '../../common-resources/FullPageSpinner';
+import IrisLoader from '../../common-resources/IrisLoader';
 import ImageCard from './ImageCard';
 // import AlertHolder from './AlertHolder';
 
@@ -46,7 +46,7 @@ class HomePage extends React.Component {
   }
   render() {
     if (this.props.cards.get('state').get('isFetching') || this.props.user.get('isFetching')) {
-      return <FullPageSpinner />;
+      return <IrisLoader />;
     }
     const cardListGood = this.props.cards.get('cards').filter(
       card => this.props.user.get('levels').get(card.get('subject')) > card.get('difficulty'),

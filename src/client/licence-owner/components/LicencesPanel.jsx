@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import FullPageSpinner from '../../common-resources/FullPageSpinner';
+import IrisLoader from '../../common-resources/IrisLoader';
 import Licence from './Licence';
 
 const LicencesPanel = ({ state, licences }) => (
   <div className="panel licences">
-    {state.get('isStale') ? <FullPageSpinner /> : (
+    {state.get('isStale') ? <IrisLoader /> : (
       <React.Fragment>
         <h1>Welcome back, {this.props.user.get('name')}</h1>
         <h2>Your Licences</h2>

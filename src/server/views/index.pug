@@ -48,6 +48,8 @@ html(
       }
       #loading-spinner {
         padding: 70px 0;
+        display: flex;
+        justify-content: center;
       }
       @keyframes spin {
         0% { transform: rotate(0deg); }
@@ -59,7 +61,7 @@ html(
         border-radius:100%;
         border: 2px solid #58b580;
         position: absolute;
-        margin: -50px;
+        margin-top: -50px;
         animation: up 2s, colorCycle 2s;
         animation-iteration-count: infinite;
         transition:2s;
@@ -82,37 +84,37 @@ html(
       #loading-circle2{
         width:90px;
         height:90px;
-        margin: -45px;
+        margin-top: -45px;
         animation-delay:-.3s;
       }
       #loading-circle3{
         width:80px;
         height:80px;
-        margin: -40px;
+        margin-top: -40px;
         animation-delay:-.6s;
       }
       #loading-circle4{
         width:70px;
         height:70px;
-        margin: -35px;
+        margin-top: -35px;
         animation-delay:-.9s;
       }
       #loading-circle5{
         width: 60px;
         height: 60px;
-        margin: -30px;
+        margin-top: -30px;
         animation-delay:-1.2s;
       }
       #loading-circle6{
         width: 50px;
         height: 50px;
-        margin: -25px;
+        margin-top: -25px;
         animation-delay:-1.5s;
       }
       #loading-circle7{
         width: 40px;
         height: 40px;
-        margin: -20px;
+        margin-top: -20px;
         animation-delay:-1.8s;
       }
     body
@@ -130,5 +132,5 @@ html(
             div(id="loading-circle7" class="loading-circle")
       script(
         type="text/javascript"
-        foo=clientBundleSource
+        src=clientBundleSource
       )
