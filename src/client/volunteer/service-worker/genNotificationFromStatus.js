@@ -2,7 +2,7 @@ function genNotificationFromStatus(pushMessage) {
   const options = ['From IRIS'];
   const template = {
     body: pushMessage.message ? pushMessage.message : 'IRIS has new data!',
-    icon: 'images/irisProposed_withoutBackground_small.png',
+    icon: 'images/irisProposed_withoutBackground_100x100.png',
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),

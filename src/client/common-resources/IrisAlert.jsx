@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const IrisAlert = props => (
   <div
     className={`iris-alert ${props.type} w3-display-container`}
-    role="alert"
+    role="alertdialog"
     aria-label={props.title}
   >
     <button
