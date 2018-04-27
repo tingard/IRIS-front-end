@@ -5,6 +5,7 @@ import ClientAPI from 'grapheel-iris-client-api';
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
 import SignUpPage from './components/sign-up';
+import ForgotPassword from './forgot-password';
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -70,6 +71,10 @@ class MainApp extends React.Component {
           <Route
             path="/create/:utype?"
             render={p => <SignUpPage api={this.api} {...p} />}
+          />
+          <Route
+            path="/forgotten/:id?"
+            render={p => <ForgotPassword api={this.api} {...p} />}
           />
         </Fragment>
       </Router>

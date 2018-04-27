@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import IrisButton from '../common-resources/IrisButton';
-import IrisAlert from '../common-resources/IrisAlert';
+import IrisButton from '../../common-resources/IrisButton';
+import IrisAlert from '../../common-resources/IrisAlert';
 
 class ForgotPassword extends React.Component {
   constructor(props) {

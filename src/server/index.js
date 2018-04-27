@@ -32,7 +32,7 @@ app.get(/\/.*?-bundle\.js(\.map)?\.gz/, (req, res, next) => {
   next();
 });
 
-app.get(/\/((login.*)?|(create.*))$/, (req, res) => {
+app.get(/\/((login.*)?|(create.*)|(forgotten.*))$/, (req, res) => {
   res.render(
     'index',
     { clientBundleSource: '/bundles/main-bundle.js', styleSource: '/styles/main.css' },

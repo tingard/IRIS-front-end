@@ -94,14 +94,17 @@ class Login extends React.Component {
           value={this.state.password}
           onChange={e => this.setState({ password: e.target.value })}
         />
+        <Link to="/forgotten">Forgotten password?</Link>
         <button
           className="iris-button primary"
           onClick={this.onLogin}
         >
           Login
         </button>
-        <Link to={`/create/${this.props.type}`}>Create an account</Link>
-        <Link to="/">IRIS home</Link>
+        <div>
+          <Link to={`/create/${this.props.type}`}>Create an account</Link>&nbsp;
+          <Link to="/">IRIS home</Link>
+        </div>
       </div>
     );
   }
