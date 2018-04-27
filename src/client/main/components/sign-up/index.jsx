@@ -10,9 +10,6 @@ class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
     this.api = props.api;
-    this.state = {
-      selectedUsertype: 'student',
-    };
     this.onComplete = this.onComplete.bind(this);
   }
   onComplete(payload) {
@@ -23,14 +20,13 @@ class SignUpPage extends React.Component {
   render() {
     return (
       <div className="w3-container w3-display-container sign-up-sheet" style={{ minHeight: '100vh' }}>
-        <h1 className="w3-center w3-padding-16">
+        <div className="w3-center w3-padding-16">
           <img
             src="/images/irisProposed_withoutBackground_100x100.png"
             alt="IRIS\'s logo, a rainbow coloured eye pupil with a greek gamma overlaid on it'"
             width="80px"
           />
-          Sign up to IRIS
-        </h1>
+        </div>
         <Switch>
           <Route exact path="/create" component={UtypeSelect} />
           <Route
