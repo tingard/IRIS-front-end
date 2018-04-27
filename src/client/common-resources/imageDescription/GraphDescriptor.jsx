@@ -18,9 +18,11 @@ const GraphDescriptor = (props) => {
       <table className="iris-table-description">
         <tbody>{rows}</tbody>
       </table>
-      <p>
-        {props.plotDescription.length > 0 ? ` ${props.plotDescription}` : ''}
-      </p>
+      {props.plotDescription.length > 0 ?
+        props.plotDescription.split(/\n/g).map(
+          (paragraph, i) => <p key={i}>{paragraph}</p>,
+        ) :
+      ''}
     </React.Fragment>
   );
 };
