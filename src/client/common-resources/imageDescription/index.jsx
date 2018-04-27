@@ -14,7 +14,11 @@ const ImageDescription = (props) => {
       return (
         <React.Fragment>
           <h3>Image Details</h3>
-          <p>{props.classification.get('imageDetails').get('value')}</p>
+          {props.classification.get('imageDetails').get('value').length > 0 ?
+            props.classification.get('imageDetails').get('value').split(/\n/g).map(
+              (paragraph, i) => <p key={i}>{paragraph}</p>,
+            ) :
+          ''}
         </React.Fragment>
       );
     default:
