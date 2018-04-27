@@ -46,7 +46,9 @@ const HomePage = () => (
         </p>
       </div>
       <div className="spacer hline" />
-      <h2>How can we help?</h2>
+    </section>
+    <section aria-labelledby="home-page-how-can-we-help" className="iris-narrow-page">
+      <h2 id="home-page-how-can-we-help">How can we help?</h2>
       <div className="spacer-small" />
       <div className="column-info-panel two-column">
         <h3 className="grid-header1">For visually impaired students</h3>
@@ -76,21 +78,20 @@ const HomePage = () => (
         </Link>
       </div>
       <div className="spacer hline" />
-      <section aria-label="call for volunteers" className="column-info-panel">
-        <h2>We need volunteers!</h2>
-        <p>
-          If you are a sighted volunteer who wishes to help describe images for
-          visually impaired students (and have a little experience with sciency-pictures)
-          we'd love to have you on board.
-        </p>
-        <Link
-          to="/create/volunteer"
-          className="iris-button action"
-        >
-            Sign up as a volunteer
-        </Link>
-      </section>
-      <div className="spacer-small" />
+    </section>
+    <section aria-label="call for volunteers" className="column-info-panel">
+      <h2>We need volunteers!</h2>
+      <p>
+        If you are a sighted volunteer who wishes to help describe images for
+        visually impaired students (and have a little experience with sciency-pictures)
+        we'd love to have you on board.
+      </p>
+      <Link
+        to="/create/volunteer"
+        className="iris-button action"
+      >
+          Sign up as a volunteer
+      </Link>
     </section>
     <div className="spacer" />
   </div>
