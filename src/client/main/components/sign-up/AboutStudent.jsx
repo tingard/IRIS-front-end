@@ -99,7 +99,7 @@ class AboutStudent extends React.Component {
               <input
                 id="name-input"
                 placeholder="Albert Einstein"
-                className="w3-input w3-border w3-round"
+                className="grapheel-input"
                 ref={(r) => { this.nameInput = r; }}
                 aria-label="Type your name here"
                 onChange={this.checkFields}
@@ -117,7 +117,7 @@ class AboutStudent extends React.Component {
                 id="email-input"
                 type="email"
                 placeholder="You'll use this to login"
-                className={`w3-input w3-border ${this.state.isValidEmail ? '' : 'w3-border-red'} w3-round`}
+                className={`grapheel-input ${this.state.isValidEmail ? '' : 'invalid'}`}
                 ref={(r) => { this.emailInput = r; }}
                 onChange={this.validateEmail}
               />
@@ -134,7 +134,7 @@ class AboutStudent extends React.Component {
                 id="password-input"
                 type="password"
                 placeholder="Type a password"
-                className="w3-input w3-border w3-round"
+                className="grapheel-input"
                 ref={(r) => { this.passwordInput = r; }}
                 onChange={this.checkFields}
                 onKeyPress={e => (e.key === 'Enter' ? this.registerUser() : null)}

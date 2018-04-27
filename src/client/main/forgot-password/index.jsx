@@ -121,7 +121,7 @@ class ForgotPassword extends React.Component {
               I am a
               <select
                 id="resetPwd-utype-select"
-                className="w3-input select-style"
+                className="select-style"
                 ref={(r) => { this.utypeSelect = r; }}
                 disabled={this.state.linkHasExpired}
               >
@@ -136,7 +136,7 @@ class ForgotPassword extends React.Component {
               <input
                 id="resetPwd-email-input"
                 type="email"
-                className={`w3-input ${!this.state.isValidEmail ? 'w3-border-red' : ''}`}
+                className={`grapheel-input ${!this.state.isValidEmail ? 'w3-border-red' : ''}`}
                 ref={(r) => { this.emailInput = r; }}
                 disabled={this.state.linkHasExpired}
               />
@@ -152,7 +152,7 @@ class ForgotPassword extends React.Component {
                 <input
                   id="resetPwd-password-input"
                   type="password"
-                  className={`w3-input ${this.state.invalidPassword ? 'w3-border-red' : ''}`}
+                  className={`grapheel-input ${this.state.invalidPassword ? 'w3-border-red' : ''}`}
                   ref={(r) => { this.passwordInput = r; }}
                   disabled={this.state.linkHasExpired}
                 />
