@@ -23,6 +23,7 @@ class UtypeSelect extends React.Component {
       { value: 'none', label: 'I\'m a...' },
       { value: 'student', label: 'I\'m a student' },
       { value: 'volunteer', label: 'I\'m a volunteer' },
+      { value: 'licence-owner', label: 'I want to buy IRIS licences for others' },
     ];
 
     return (

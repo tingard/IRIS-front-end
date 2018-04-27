@@ -33,4 +33,14 @@ input.grapheel-input {
     box-shadow: 0 0 5px $mint-color;
     border-color: $mint-color
   }
+  &.invalid {
+    border: 1px solid lighten($red-color, 30%);
+    &::after {
+      content: "Invalid email address!";
+    }
+    &:focus {
+      box-shadow: 0 0 5px $red-color;
+      border-color: $red-color
+    }
+  }
 }
