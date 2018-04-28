@@ -55,7 +55,7 @@ app.get(/\/licence-owner(\/\??#?.*)?$/, (req, res) => {
 
 app.use(express.static(path.join(__dirname, '../../dist')));
 
-app.get(/\/((login.*)?|(create.*)|(forgotten.*))$/, (req, res) => {
+app.get(/\/((login.*)?|(create.*)|(forgotten.*|[?#].*?))$/, (req, res) => {
   res.render(
     'index',
     { clientBundleSource: '/bundles/main-bundle.js', styleSource: '/styles/main.css' },
