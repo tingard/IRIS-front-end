@@ -32,21 +32,21 @@ app.get(/\/.*?-bundle\.js(\.map)?\.gz/, (req, res, next) => {
   next();
 });
 
-app.get(/\/student(\/\??#?.*)?$/, (req, res) => {
+app.get(/^\/student(\/\??#?.*)?$/, (req, res) => {
   res.render(
     'index',
     { clientBundleSource: '/bundles/student-bundle.js', styleSource: '/styles/student.css' },
   );
 });
 
-app.get(/\/volunteer(\/\??#?.*)?$/, (req, res) => {
+app.get(/^\/volunteer(\/\??#?.*)?$/, (req, res) => {
   res.render(
     'index',
     { clientBundleSource: '/bundles/volunteer-bundle.js', styleSource: '/styles/volunteer.css' },
   );
 });
 
-app.get(/\/licence-owner(\/\??#?.*)?$/, (req, res) => {
+app.get(/^\/licence-owner(\/\??#?.*)?$/, (req, res) => {
   res.render(
     'index',
     { clientBundleSource: '/bundles/licence-owner-bundle.js', styleSource: '/styles/licence-owner.css' },
@@ -55,7 +55,7 @@ app.get(/\/licence-owner(\/\??#?.*)?$/, (req, res) => {
 
 app.use(express.static(path.join(__dirname, '../../dist')));
 
-app.get(/\/((login.*)?|(create.*)|(forgotten.*|[?#].*?))$/, (req, res) => {
+app.get(/^\/((login.*)?|(create.*)|(forgotten.*|[?#].*?))$/, (req, res) => {
   res.render(
     'index',
     { clientBundleSource: '/bundles/main-bundle.js', styleSource: '/styles/main.css' },
