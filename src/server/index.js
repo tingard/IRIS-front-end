@@ -62,6 +62,10 @@ app.get(/^\/((login.*)?|(create.*)|(forgotten.*|[?#].*?))$/, (req, res) => {
   );
 });
 
+app.get('/wp-login.php', (req, res) => {
+  res.status(404).send('<p>Looks like you\'ve taken a wrong turn!</p>');
+});
+
 app.get('/*', (req, res) => {
   res.redirect('/');
 });
