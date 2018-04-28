@@ -5,7 +5,7 @@
   "background_color": "#fff",
   "theme_color": "#555",
   "orientation": "portrait",
-  "start_url": "index.html?launcher=true",
+  "start_url": "?launcher=true",
   "icons": [
     {
       "src": "images/irisProposed_withoutBackground_100x100.png",
