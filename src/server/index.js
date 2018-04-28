@@ -32,13 +32,6 @@ app.get(/\/.*?-bundle\.js(\.map)?\.gz/, (req, res, next) => {
   next();
 });
 
-app.get(/\/((login.*)|(create.*)|(forgotten.*))?(\?#?.*?)?$/, (req, res) => {
-  res.render(
-    'index',
-    { clientBundleSource: '/bundles/main-bundle.js', styleSource: '/styles/main.css' },
-  );
-});
-
 app.get(/\/student(\/\??#?.*)?$/, (req, res) => {
   res.render(
     'index',
@@ -62,8 +55,15 @@ app.get(/\/licence-owner(\/\??#?.*)?$/, (req, res) => {
 
 app.use(express.static(path.join(__dirname, '../../dist')));
 
+app.get(/\/((login.*)?|(create.*)|(forgotten.*))$/, (req, res) => {
+  res.render(
+    'index',
+    { clientBundleSource: '/bundles/main-bundle.js', styleSource: '/styles/main.css' },
+  );
+});
+
 app.get('/*', (req, res) => {
-  res.send('<h1>Not Found</h1>');
+  res.redirect('/');
 });
 
 
