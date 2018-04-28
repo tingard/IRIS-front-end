@@ -2,6 +2,7 @@
   "short_name": "IRIS",
   "name": "Grapheel IRIS",
   "display": "standalone",
+  "description": "The app that helps visually impaired students gain access to visual STEM data",
   "background_color": "#fff",
   "theme_color": "#555",
   "orientation": "portrait",
