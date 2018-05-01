@@ -4,6 +4,7 @@ import HomePage from '../components/HomePage';
 
 const mapStateToProps = state => ({
   user: state.user,
+  images: state.images,
 });
 
 export default connect(mapStateToProps)(HomePage);

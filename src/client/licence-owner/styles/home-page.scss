@@ -9,18 +9,28 @@
   100% { transform: translate(0, 0); }
 }
 .home-page {
-  margin-top: 20px;
   @supports (display: grid) {
-    @media screen and (min-width: $medium-width) {
-      min-height: 100vh;
+    @media screen and (min-width: $phone-width) {
+      margin: 20px;
+      min-height: calc(100vh - 40px);
       display: grid;
       grid-column-gap: 10px;
       grid-row-gap: 10px;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-areas:
-        "licences licences imageFeed"
-        "licences licences imageFeed"
-        "contact feedback imageFeed";
+      @media screen and (min-width: $medium-width) {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+          "licences licences imageFeed"
+          "licences licences imageFeed"
+          "contact feedback imageFeed";
+      }
+      @media screen and (max-width: $medium-width) and (min-width: $phone-width) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "licences licences"
+          "licences licences"
+          "imageFeed imageFeed"
+          "contact feedback";
+      }
     }
   }
   .panel {
@@ -32,7 +42,7 @@
       fadeIn 0.3s,
       slideUp 0.3s;
     animation-fill-mode: both;
-    @media screen and (max-width: $medium-width) {
+    @media screen and (max-width: $phone-width) {
       margin: 10px;
     }
     &.licences {
@@ -46,14 +56,14 @@
       background-color: #fff;
       animation-delay: 0.1s;
     }
-    &.contact-us {
-      grid-area: contact;
+    &.feedback {
+      grid-area: feedback;
       border-radius: 20px;
       background-color: #fff;
       animation-delay: 0.2s;
     }
-    &.feedback {
-      grid-area: feedback;
+    &.contact-us {
+      grid-area: contact;
       border-radius: 20px;
       background-color: #fff;
       animation-delay: 0.3s;
