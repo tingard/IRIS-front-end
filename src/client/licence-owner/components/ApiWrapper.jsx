@@ -49,24 +49,22 @@ class ApiWrapper extends React.Component {
     //     });
     //   }
     // }
-    console.log('ApiWrapper mounted');
-    if (this.props.licences.get('state').get('isStale') && !this.props.licences.get('state').get('isFetching')) {
-      this.props.getImages();
-    }
-    if (this.props.user.get('state').get('isStale') && !this.props.user.get('state').get('isFetching')) {
-      this.props.getUserDetails();
-    }
+    const shouldFetch = state => state.get('isStale') && !state.get('isFetching');
+
+    const userState = this.props.user.get('state');
+    console.log('userState:', userState.toObject());
+    const imagesState = this.props.user.get('state');
+    if (shouldFetch(userState)) this.props.getUserDetails();
+    if (shouldFetch(imagesState)) this.props.getImages();
   }
   componentWillReceiveProps(nextProps) {
-    console.log('hi there');
     const shouldFetch = state => state.get('isStale') && !state.get('isFetching');
-    const licenceState = nextProps.licences.get('state');
+
     const userState = nextProps.user.get('state');
     const imagesState = nextProps.images.get('state');
-    if (shouldFetch(licenceState)) {
-      nextProps.getLicences();
-    }
+    console.log('userState 2:', userState.toObject());
     if (shouldFetch(userState)) {
+      console.log(userState.toObject());
       nextProps.getUserDetails();
     }
     if (shouldFetch(imagesState)) {
@@ -82,12 +80,6 @@ class ApiWrapper extends React.Component {
 }
 
 ApiWrapper.propTypes = {
-  licences: ImmutablePropTypes.contains({
-    state: ImmutablePropTypes.contains({
-      isStale: PropTypes.bool,
-      isFetching: PropTypes.bool,
-    }),
-  }),
   user: ImmutablePropTypes.contains({
     state: ImmutablePropTypes.contains({
       isStale: PropTypes.bool,
@@ -103,7 +95,6 @@ ApiWrapper.propTypes = {
   // getMessages: PropTypes.func,
   getImages: PropTypes.func,
   getUserDetails: PropTypes.func,
-  getLicences: PropTypes.func,
   // passSwRegistrationToAPI: PropTypes.func,
   // subscribeToPushNotifications: PropTypes.func,
   // handlePushMessage: PropTypes.func,

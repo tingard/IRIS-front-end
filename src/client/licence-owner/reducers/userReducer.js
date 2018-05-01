@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { Map, Record } from 'immutable';
+import { Map, List, Record } from 'immutable';
 
 const StateRecord = new Record({
   isFetching: false,
@@ -8,12 +8,17 @@ const StateRecord = new Record({
 
 export const initialState = Map({
   state: new StateRecord({ isStale: true }),
-  name: '',
+  _id: '',
+  emailVerified: false,
+  emailNotifications: true,
+  browserNotifications: true,
+  creationDate: '',
+  students: new List([]),
+  licences: new List([]),
   email: '',
-  emailNotifications: false,
-  browserNotifications: false,
-  activeSince: '',
+  name: '',
 });
+
 
 const userReducer = (state = initialState, action) => {
   let midState;
@@ -22,7 +27,7 @@ const userReducer = (state = initialState, action) => {
       return state.set('state', state.get('state').set('isFetching', true));
     case 'GET_USER_DETAILS_SUCCESS':
       // potentially many changes, so simply gonna update things here
-      return state.mergeDeep(action.res.student)
+      return state.mergeDeep(action.res.licenceOwner)
         .set(
           'state',
           state.get('state')

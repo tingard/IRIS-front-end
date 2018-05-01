@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import ApiWrapper from '../components/ApiWrapper';
 import {
   getUserDetails,
-  getLicences,
   getImages,
   passSwRegistrationToAPI,
   subscribeToPushNotifications,
@@ -12,11 +11,9 @@ import {
 const mapStateToProps = state => ({
   user: state.user,
   images: state.images,
-  licences: state.licences,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getLicences: () => dispatch(getLicences()),
   getUserDetails: () => dispatch(getUserDetails()),
   getImages: () => dispatch(getImages()),
   passSwRegistrationToAPI: swReg => dispatch(passSwRegistrationToAPI(swReg)),
