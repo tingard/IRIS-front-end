@@ -4,6 +4,9 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import IrisLoader from '../../common-resources/IrisLoader';
 import LicencesPanel from './LicencesPanel';
+import ImagePanel from './ImagePanel';
+import ContactPanel from './ContactPanel';
+import FeedbackPanel from './FeedbackPanel';
 
 class HomePage extends React.Component {
   componentDidMount() {
@@ -13,20 +16,17 @@ class HomePage extends React.Component {
       return <IrisLoader />;
     }
     return (
-      <section className="w3-container home-page">
+      <section className="home-page">
         <LicencesPanel
           licences={this.props.user.get('licences')}
           state={this.props.user.get('state')}
         />
-        <div className="panel image-feed">
-          <h2>Your image feed</h2>
-        </div>
-        <div className="panel feedback">
-          <h2>Feedback</h2>
-        </div>
-        <div className="panel contact-us">
-          <h2>Contact Us</h2>
-        </div>
+        <ImagePanel
+          state={this.props.images.get('state')}
+          images={this.props.images.get('images')}
+        />
+        <FeedbackPanel />
+        <ContactPanel />
       </section>
     );
   }
@@ -34,6 +34,10 @@ class HomePage extends React.Component {
 
 HomePage.propTypes = {
   user: ImmutablePropTypes.contains({
+    state: ImmutablePropTypes.contains({
+      isStale: PropTypes.bool.isRequired,
+      isFetching: PropTypes.bool.isRequired,
+    }),
     name: PropTypes.string.isRequired,
     licences: ImmutablePropTypes.contains({
       licences: ImmutablePropTypes.listOf(
@@ -42,6 +46,19 @@ HomePage.propTypes = {
         }),
       ),
     }),
+  }),
+  images: ImmutablePropTypes.contains({
+    state: ImmutablePropTypes.contains({
+      isStale: PropTypes.bool.isRequired,
+      isFetching: PropTypes.bool.isRequired,
+    }),
+    images: ImmutablePropTypes.listOf(
+      ImmutablePropTypes.contains({
+        url: PropTypes.string.isRequired,
+        note: PropTypes.string.isRequired,
+        question: PropTypes.string.isRequired,
+      }),
+    ),
   }),
 };
 
