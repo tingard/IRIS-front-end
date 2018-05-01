@@ -8,7 +8,6 @@ const LicencesPanel = ({ state, licences }) => (
   <div className="panel licences">
     {state.get('isStale') ? <IrisLoader /> : (
       <React.Fragment>
-        <h1>Welcome back, {this.props.user.get('name')}</h1>
         <h2>Your Licences</h2>
         {licences.map(
           licence => <Licence key={licence.get('_id')} licence={licence} />,
@@ -29,4 +28,7 @@ LicencesPanel.propTypes = {
   ),
 };
 
-export default LicencesPanel;
+export default (props) => {
+  console.log(props);
+  return <LicencesPanel {...props} />;
+};

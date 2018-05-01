@@ -7,14 +7,22 @@ const StateRecord = new Record({
 
 export const initialState = Map({
   state: new StateRecord({ isStale: true }),
+  _id: '',
+  emailVerified: false,
+  emailNotifications: true,
+  browserNotifications: true,
+  creationDate: '',
+  students: new List([]),
   licences: new List([]),
+  email: '',
+  name: '',
 });
 
 const licencesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'UPDATE_LICENCE':
     case 'PURCHASE_LICENCE':
-      return state;
+    case 'CANCEL_LICENCE':
+    case 'LINK_LICENCE':
     default:
       return state;
   }
