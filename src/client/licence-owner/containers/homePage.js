@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import HomePage from '../components/HomePage';
+import HomePage from '../components/HomePage/index';
 // import { uploadImage, getImages } from '../actions';
 
 const mapStateToProps = state => ({

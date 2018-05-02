@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import IrisLoader from '../../common-resources/IrisLoader';
+import IrisLoader from '../../../common-resources/IrisLoader';
 import LicencesPanel from './LicencesPanel';
 import ImagePanel from './ImagePanel';
 import ContactPanel from './ContactPanel';
@@ -20,10 +20,12 @@ class HomePage extends React.Component {
         <LicencesPanel
           licences={this.props.user.get('licences')}
           state={this.props.user.get('state')}
+          history={this.props.history}
         />
         <ImagePanel
           state={this.props.images.get('state')}
           images={this.props.images.get('images')}
+          history={this.props.history}
         />
         <FeedbackPanel />
         <ContactPanel />
@@ -60,6 +62,8 @@ HomePage.propTypes = {
       }),
     ),
   }),
+  /* eslint-disable react/forbid-prop-types */
+  history: PropTypes.object.isRequired,
 };
 
 export default HomePage;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import IrisLoader from '../../common-resources/IrisLoader';
+import IrisLoader from '../../../common-resources/IrisLoader';
 import ImageDetails from './ImageDetails';
 
 const ImagePanel = props => (
@@ -14,10 +14,20 @@ const ImagePanel = props => (
         ) : (
           <React.Fragment>
             <p>This is a list of all images uploaded by your students</p>
-            <ul>
-              {props.images.map(
-                image => <ImageDetails key={image.get('_id')} image={image} />,
-              )}
+            <ul id="licence-owner-images-list">
+              {props.images
+                .sort(image => image.get('uploadDate'))
+                .reverse()
+                .map(
+                  image => (
+                    <ImageDetails
+                      key={image.get('_id')}
+                      image={image}
+                      history={props.history}
+                    />
+                  ),
+                )
+              }
             </ul>
           </React.Fragment>
         )}
@@ -36,6 +46,8 @@ ImagePanel.propTypes = {
     isStale: PropTypes.bool.isRequired,
     isFetching: PropTypes.bool.isRequired,
   }),
+  /* eslint-disable react/forbid-prop-types */
+  history: PropTypes.object.isRequired,
 };
 
 export default ImagePanel;
