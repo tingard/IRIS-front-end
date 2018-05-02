@@ -70,6 +70,7 @@
     "react-router-redux": "next",
     "react-spinners": "^0.2.5",
     "react-stripe-elements": "^1.4.0",
+    "react-swipeable": "^4.2.1",
     "react-test-renderer": "^16.2.0",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
@@ -84,7 +85,7 @@
       "react"
     ]
   },
-  "engines" : {
+  "engines": {
     "node": "~8.1.2",
     "npm": "~6.0.0",
     "yarn": "~1.6.0"

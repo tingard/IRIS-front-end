@@ -44,7 +44,7 @@ const VolunteerApp = () => (
           <Navbar {...props} key="iris-volunteer-navbar" />,
           <Provider store={store} key="iris-volunteer-provider">
             <ApiWrapper>
-              <section className="volunteer-app content-section">
+              <section className="volunteer-app">
                 <Switch>
                   <Route exact path="/volunteer" component={homePage} />
                   <Route path="/volunteer/profile" component={ProfilePage} />

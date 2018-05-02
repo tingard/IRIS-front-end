@@ -27,30 +27,38 @@ class ImageClassifier extends React.Component {
     switch (this.state.imageType) {
       case 'graph':
         return (
-          <GraphClassifier
-            onComplete={this.onComplete}
-            onCancel={() => this.setState({ imageType: null })}
-          />
+          <div className="classify-panel">
+            <GraphClassifier
+              onComplete={this.onComplete}
+              onCancel={() => this.setState({ imageType: null })}
+            />
+          </div>
         );
       case 'table':
         return (
-          <TableClassifier
-            onComplete={this.onComplete}
-            onCancel={() => this.setState({ imageType: null })}
-          />
+          <div className="classify-panel">
+            <TableClassifier
+              onComplete={this.onComplete}
+              onCancel={() => this.setState({ imageType: null })}
+            />
+          </div>
         );
       case 'other':
         return (
-          <MiscClassifier
-            onComplete={this.onComplete}
-            onCancel={() => this.setState({ imageType: null })}
-          />
+          <div className="classify-panel">
+            <MiscClassifier
+              onComplete={this.onComplete}
+              onCancel={() => this.setState({ imageType: null })}
+            />
+          </div>
         );
       default:
         return (
-          <ImageTypeSelector
-            onSelect={imageType => this.setState({ imageType })}
-          />
+          <div className="classify-panel">
+            <ImageTypeSelector
+              onSelect={imageType => this.setState({ imageType })}
+            />
+          </div>
         );
     }
   }
