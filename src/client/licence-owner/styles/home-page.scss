@@ -22,8 +22,17 @@
           "licences licences imageFeed"
           "licences licences imageFeed"
           "contact feedback imageFeed";
+
+        .panel {
+          &.licences {
+            max-height: calc(66.67vh - 40px);
+          }
+          &.panel.image-feed {
+            max-height: calc(100vh - 40px);
+          }
+        }
       }
-      @media screen and (max-width: $medium-width) and (min-width: $phone-width) {
+      @media screen and (max-width: $medium-width) {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
           "licences licences"

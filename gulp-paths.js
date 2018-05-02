@@ -24,7 +24,7 @@ const paths = {
       },
       licenceOwner: {
         entryPoint: 'src/client/licence-owner/index.jsx',
-        scss: 'src/client/licence-owner/**/*.scss',
+        scss: 'src/client/licence-owner/styles/index.scss',
         serviceWorker: 'src/client/student/licence-owner/service-worker.js',
       },
       entryPoint: 'src/client/index.jsx',

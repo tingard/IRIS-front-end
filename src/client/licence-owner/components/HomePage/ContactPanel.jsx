@@ -11,7 +11,14 @@ const ContactPanel = () => (
       please get in touch by emailing
       &nbsp;<a href="mailto:contact@grapheel.com">contact@grapheel.com</a>&nbsp;
       or finding us on
-      &nbsp;<a href="https://twitter.com/grapheelTeam">Twitter</a>.
+      &nbsp;
+      <a
+        href="https://twitter.com/grapheelTeam"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Twitter
+      </a>.
     </p>
   </div>
 );

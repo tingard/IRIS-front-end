@@ -1,0 +1,20 @@
+.image-feed {
+  overflow-y: scroll;
+  ul#licence-owner-images-list {
+    border-top: 1px solid #ddd;
+    margin: 0;
+    padding: 0;
+    .iris-image {
+      margin-top: 10px;
+      border-bottom: 1px solid #ddd;
+      list-style-type: none;
+      padding-bottom: 10px;
+      h3 {
+        font-size: 1.2em;
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}

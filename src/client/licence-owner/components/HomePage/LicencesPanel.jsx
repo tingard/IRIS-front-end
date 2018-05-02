@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import IrisLoader from '../../common-resources/IrisLoader';
+import IrisLoader from '../../../common-resources/IrisLoader';
 import Licence from './Licence';
 
 const LicencesPanel = ({ state, licences }) => (
@@ -10,18 +10,6 @@ const LicencesPanel = ({ state, licences }) => (
       <React.Fragment>
         <h2>Your Licences</h2>
         <ul>
-          {licences.map(
-            licence => <Licence key={licence.get('_id')} licence={licence} />,
-          )}
-          {licences.map(
-            licence => <Licence key={licence.get('_id')} licence={licence} />,
-          )}
-          {licences.map(
-            licence => <Licence key={licence.get('_id')} licence={licence} />,
-          )}
-          {licences.map(
-            licence => <Licence key={licence.get('_id')} licence={licence} />,
-          )}
           {licences.map(
             licence => <Licence key={licence.get('_id')} licence={licence} />,
           )}
