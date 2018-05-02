@@ -3,40 +3,51 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Redirect } from 'react-router-dom';
 // import Select from 'react-select';
+import Swipeable from 'react-swipeable';
+import ImagePanel from './ImagePanel';
 import ImageClassifier from '../containers/imageClassifier';
 
-const ClassifyPage = props => (
-  props.card != null ? (
-    <div className="w3-container">
-      <div className="w3-row">
-        <div className="w3-col l6">
-          <div className="w3-row">
-            <div className="w3-panel card-page-image-wrapper">
-              <img src={props.card.get('url')} className="card-page-image" alt="this is being described" />
-            </div>
-          </div>
-          <div className="w3-row" style={{ marginBottom: '10px' }}>
-            <h5>Student asked:</h5>
-            <div className="image-card-message">
-              <p>
-                {props.card.get('question')}
-              </p>
-            </div>
+class ClassifyPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showClassifierPanel: false,
+      preventPanelSwitching: false,
+    };
+  }
+  render() {
+    console.log(this.props);
+    if (!this.props.card) {
+      return <Redirect to="/volunteer" />;
+    }
+    return (
+      <Swipeable
+        onSwipedLeft={() => (
+          this.state.preventPanelSwitching ? null :
+            this.setState({ showClassifierPanel: true })
+        )}
+        onSwipedRight={() => (
+          this.state.preventPanelSwitching ? null :
+          this.setState({ showClassifierPanel: false })
+        )}
+      >
+        <div className="classify-page-wrapper">
+          <div className={`classify-page ${this.state.showClassifierPanel ? 'right' : ''}`}>
+            <ImagePanel
+              onImageMove={() => this.setState({ preventPanelSwitching: true })}
+              onImageDoneMoving={() => this.setState({ preventPanelSwitching: false })}
+              card={this.props.card}
+            />
+            <ImageClassifier
+              push={this.props.history.push}
+              imageId={this.props.card.get('_id')}
+            />
           </div>
         </div>
-        <div className="w3-col l6">
-          <div className="w3-card-4 card-panel-right-pane">
-            <div className="w3-container">
-              <ImageClassifier push={props.history.push} imageId={props.card.get('_id')} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  ) : (
-    <Redirect to="/volunteer" />
-  )
-);
+      </Swipeable>
+    );
+  }
+}
 
 ClassifyPage.propTypes = {
   // user: PropTypes.object,
