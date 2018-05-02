@@ -1,11 +1,8 @@
 {
-  "short_name": "IRIS",
-  "name": "Grapheel IRIS",
-  "display": "standalone",
   "background_color": "#fff",
-  "theme_color": "#555",
-  "orientation": "portrait",
-  "start_url": "?launcher=true",
+  "display": "standalone",
+  "description": "The app that helps visually impaired students gain access to visual STEM data",
+  "name": "Grapheel IRIS",
   "icons": [
     {
       "src": "images/irisProposed_withoutBackground_100x100.png",
@@ -22,5 +19,9 @@
       "type": "image/png",
       "sizes": "960x960"
     }
-  ]
+  ],
+  "orientation": "portrait",
+  "short_name": "IRIS",
+  "theme_color": "#555",
+  "start_url": "/?launcher=true"
 }
