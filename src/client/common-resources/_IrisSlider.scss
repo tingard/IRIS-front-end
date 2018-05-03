@@ -1,84 +1,88 @@
-input[type=range].slider {
+@mixin slider-thumb() {
+  border: 1px solid #000;
+  height: 36px;
+  width: 36px;
+  border-radius: 100%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px #555;
+}
+
+
+$track-color: #3a3;
+@mixin track-sizing() {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+}
+@mixin track-style() {
+  box-shadow: 1px 1px 3px #000 1px 1px 5px #333;
+  background: $track-color;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+// Style the thumb
+input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 100%;
-  margin: 0px 0;
+  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  @include slider-thumb();
 }
-input[type=range].slider:focus {
-  outline: none;
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  @include slider-thumb();
 }
-input[type=range].slider::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 32px;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: #ffffd6;
-  border-radius: 0px;
-  border: 0px solid #010101;
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+  @include slider-thumb();
 }
-input[type=range].slider::-webkit-slider-thumb {
-  box-shadow: 0.8px 0.8px 1.9px rgba(0, 0, 62, 0.67), 0px 0px 0.8px rgba(0, 0, 88, 0.67);
-  border: 1.9px solid rgba(0, 30, 0, 0.57);
-  height: 32px;
-  width: 32px;
-  border-radius: 4px;
-  background: #3071a9;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: 0px;
+
+// And the track
+input[type=range]::-webkit-slider-runnable-track {
+  @include track-sizing();
+  @include track-style();
 }
-input[type=range].slider:focus::-webkit-slider-runnable-track {
-  background: #fffff0;
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: darken($track-color, 10%);
 }
-input[type=range].slider::-moz-range-track {
-  width: 100%;
-  height: 32px;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: #ffffd6;
-  border-radius: 0px;
-  border: 0px solid #010101;
+
+input[type=range]::-moz-range-track {
+  @include track-sizing();
+  @include track-style();
 }
-input[type=range].slider::-moz-range-thumb {
-  box-shadow: 0.8px 0.8px 1.9px rgba(0, 0, 62, 0.67), 0px 0px 0.8px rgba(0, 0, 88, 0.67);
-  border: 1.9px solid rgba(0, 30, 0, 0.57);
-  height: 32px;
-  width: 32px;
-  border-radius: 4px;
-  background: #3071a9;
-  cursor: pointer;
-}
-input[type=range].slider::-ms-track {
-  width: 100%;
-  height: 32px;
-  cursor: pointer;
+
+input[type=range]::-ms-track {
+  @include track-sizing();
   background: transparent;
   border-color: transparent;
+  border-width: 16px 0;
   color: transparent;
 }
-input[type=range].slider::-ms-fill-lower {
-  background: #ffffbd;
-  border: 0px solid #010101;
-  border-radius: 0px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+input[type=range]::-ms-fill-lower {
+  @include track-style();
 }
-input[type=range].slider::-ms-fill-upper {
-  background: #ffffd6;
-  border: 0px solid #010101;
-  border-radius: 0px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+
+input[type=range]:focus::-ms-fill-lower {
+  background: darken($track-color, 10%);
 }
-input[type=range].slider::-ms-thumb {
-  box-shadow: 0.8px 0.8px 1.9px rgba(0, 0, 62, 0.67), 0px 0px 0.8px rgba(0, 0, 88, 0.67);
-  border: 1.9px solid rgba(0, 30, 0, 0.57);
-  width: 32px;
-  border-radius: 4px;
-  background: #3071a9;
-  cursor: pointer;
-  height: 32px;
+
+input[type=range]::-ms-fill-upper {
+  @include track-style();
 }
-input[type=range].slider:focus::-ms-fill-lower {
-  background: #ffffd6;
-}
-input[type=range].slider:focus::-ms-fill-upper {
-  background: #fffff0;
+input[type=range]:focus::-ms-fill-upper {
+  background: darken($track-color, 10%);
 }

@@ -32,7 +32,7 @@ class GraphClassifier extends React.Component {
           </label>
           <input
             id="graph-classifier-x-axis-input"
-            className="w3-input w3-border w3-round"
+            className="iris-input"
             type="text"
             disabled={!this.state.xAxis}
             placeholder="What is the x-axis label?"
@@ -53,7 +53,7 @@ class GraphClassifier extends React.Component {
           </label>
           <input
             id="graph-classifier-y-axis-input"
-            className="w3-input w3-border w3-round"
+            className="iris-input"
             type="text"
             disabled={!this.state.yAxis}
             placeholder="What is the y-axis label?"
@@ -74,7 +74,7 @@ class GraphClassifier extends React.Component {
           </label>
           <input
             id="graph-classifier-title-input"
-            className="w3-input w3-border w3-round"
+            className="iris-input"
             type="text"
             disabled={!this.state.title}
             placeholder="What is the title?"

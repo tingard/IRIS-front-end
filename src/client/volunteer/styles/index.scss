@@ -5,16 +5,16 @@
 @import '../../common-resources/IrisButton';
 @import '../../common-resources/IrisAlert';
 @import '../../common-resources/IrisLoader';
+@import '../../common-resources/IrisInput';
 @import '../../common-resources/select';
 @import '../../common-resources/switch';
 @import '../../common-resources/imageDescription/tableDescriptor';
 
 @import './home-page.scss';
-@import './card-page.scss';
+@import './classify-page.scss';
 @import './profile-page.scss';
 @import './message-page.scss';
 @import './loading-page.scss';
-@import './classify-page.scss';
 @import './navbar.scss';
 
 .content-section {
