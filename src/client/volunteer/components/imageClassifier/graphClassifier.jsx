@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import IrisButton from '../../../common-resources/IrisButton';
+import TableEditor from './TableEditor';
 
 class GraphClassifier extends React.Component {
   constructor(props) {
@@ -12,6 +13,8 @@ class GraphClassifier extends React.Component {
       yAxisValue: '',
       title: false,
       titleValue: '',
+      table: false,
+      tableValue: '',
       plotDescription: '',
     };
   }
@@ -81,6 +84,21 @@ class GraphClassifier extends React.Component {
             value={this.state.titleValue}
             onChange={e => this.setState({ titleValue: e.target.value })}
           />
+        </div>
+        <div className="w3-row w3-padding-16">
+          <label className="switch" htmlFor="graph-classifier-table">
+            <span>Use a table to describe this graph?</span>
+            <input
+              type="checkbox"
+              className="grapheel-checkbox"
+              id="graph-classifier-table"
+              checked={this.state.table}
+              onChange={e => this.setState({ table: e.target.checked })}
+            />
+          </label>
+          {this.state.table ? (
+            <TableEditor onChange={tableValue => this.setState({ tableValue })} />
+          ) : null}
         </div>
         <div className="w3-row w3-padding-16">
           <label className="switch" htmlFor="graph-classifier-about">

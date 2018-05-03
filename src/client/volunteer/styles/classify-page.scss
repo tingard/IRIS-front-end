@@ -31,7 +31,6 @@ h1 {
       margin: 20px;
       background-color: #555;
       border-radius: 20px;
-      align-self: flex-start;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -71,7 +70,7 @@ h1 {
           border: 1px solid #ccc;
           border-radius: 0.5em;
         }
-        #image-classifier-table {
+        .image-classifier-table-editor {
           .table-size-picker {
             width: 30%;
             display: inline;
@@ -126,6 +125,7 @@ h1 {
       display: flex;
       justify-content: space-around;
       .image-panel {
+        align-self: flex-start;
         flex-grow: 1;
         flex-basis: 0;
       }

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import IrisButton from '../../../common-resources/IrisButton';
 
-class GraphClassifier extends React.Component {
+class TableClassifier extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,7 +95,10 @@ class GraphClassifier extends React.Component {
     return (
       <div className="w3-container card-panel-right-pane">
         <h3>Construct your table:</h3>
-        <div className="w3-row w3-padding-16" id="image-classifier-table">
+        <div
+          className="w3-row w3-padding-16 image-classifier-table-editor"
+          id="image-classifier-table"
+        >
           <div className="w3-row w3-margin-bottom">
             <label htmlFor="classifier-table-column-picker">
               <span>Number of columns:</span>
@@ -157,9 +160,9 @@ class GraphClassifier extends React.Component {
   }
 }
 
-GraphClassifier.propTypes = {
+TableClassifier.propTypes = {
   onComplete: PropTypes.func,
   onCancel: PropTypes.func,
 };
 
-export default GraphClassifier;
+export default TableClassifier;
