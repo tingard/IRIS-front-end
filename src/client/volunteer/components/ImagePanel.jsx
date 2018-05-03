@@ -99,6 +99,7 @@ class ImagePanel extends React.Component {
             src={this.props.card.get('url')}
             ref={(r) => { this.image = r; }}
             alt="This is being described"
+            className={this.state.zoom > 1 ? 'zoomed' : ''}
             style={{
               transform: `scale(${this.state.zoom})`,
               top: `${this.state.top}px`,
