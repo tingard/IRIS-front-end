@@ -89,6 +89,7 @@ class TableEditor extends React.Component {
             type="text"
             key={`classifier-input-${i}`}
             className="header"
+            onChange={() => this.props.onChange(this.compileTable())}
           />,
         );
       } else {
