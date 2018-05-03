@@ -64,7 +64,7 @@ class HomePage extends React.Component {
       card => <ImageCard {...card.toObject()} key={card.get('_id')} user={this.props.user} />,
     );
     return (
-      <div>
+      <div className="iris-narrow-page">
         <div className="main-page-topmessage">
           {/* TODO: alert holder here, tie visibility to state and pass function to hide */}
           <label htmlFor="subject-filter-dropdown">

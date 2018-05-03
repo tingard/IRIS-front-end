@@ -21,6 +21,7 @@ class ImagePanel extends React.Component {
     };
   }
   onPanStart(e) {
+    e.preventDefault();
     if (this.state.zoom !== 1) this.props.onImageMove();
     let touchDownPoint;
     if (typeof e.changedTouches !== 'undefined') {
@@ -48,7 +49,8 @@ class ImagePanel extends React.Component {
       this.setState({ left, top, touchDownPoint });
     }
   }
-  onPanEnd() {
+  onPanEnd(e) {
+    e.preventDefault();
     if (this.state.zoom !== 1) this.props.onImageDoneMoving();
     this.setState({ isTouching: false });
   }

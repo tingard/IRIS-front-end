@@ -90,7 +90,7 @@ class ProfilePage extends React.Component {
   render() {
     if (this.props.user.get('state').get('isFetching')) return <IrisLoader />;
     return (
-      <div className="profile-page">
+      <div className="profile-page iris-narrow-page">
         <div className="w3-padding-16">
           <div className="w3-row w3-card-2">
             <div className="w3-panel">
