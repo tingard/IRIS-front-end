@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import IrisButton from '../../../common-resources/IrisButton';
 
-class GraphClassifier extends React.Component {
+class MiscClassifier extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,9 +40,9 @@ class GraphClassifier extends React.Component {
   }
 }
 
-GraphClassifier.propTypes = {
+MiscClassifier.propTypes = {
   onComplete: PropTypes.func,
   onCancel: PropTypes.func,
 };
 
-export default GraphClassifier;
+export default MiscClassifier;
