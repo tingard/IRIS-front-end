@@ -41,6 +41,7 @@ h1 {
         img {
           max-width: 100%;
           position: relative;
+          touch-action: none;
         }
       }
     }
