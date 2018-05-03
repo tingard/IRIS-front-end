@@ -43,6 +43,12 @@ class ClassifyPage extends React.Component {
               imageId={this.props.card.get('_id')}
             />
           </div>
+          <div className="swipe-instruction">
+            <p data-direction={this.state.showClassifierPanel ? '<<<' : '>>>'}>
+              Swipe {this.state.showClassifierPanel ? 'left ' : 'right '}
+              to {this.state.showClassifierPanel ? 'see the image' : 'describe this image'}
+            </p>
+          </div>
         </div>
       </Swipeable>
     );

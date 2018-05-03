@@ -15,6 +15,9 @@ h1 {
 }
 .classify-page-wrapper {
   min-height: 100vh;
+  .swipe-instruction {
+    display: none;
+  }
   .classify-page {
     color: white;
     animation-duration: 0.1s;
@@ -26,14 +29,16 @@ h1 {
     .image-panel {
       padding: 10px;
       margin: 20px;
-      background-color: #333;
+      background-color: #555;
       border-radius: 20px;
+      align-self: flex-start;
       display: flex;
       flex-direction: column;
       align-items: center;
       div {
         overflow: hidden;
         background-color: #000;
+        border-radius: 10px;
         img {
           max-width: 100%;
           position: relative;
@@ -43,8 +48,49 @@ h1 {
     .classify-panel {
       padding: 10px;
       margin: 20px;
-      background-color: #333;
+      background-color: #555;
       border-radius: 20px;
+      .card-panel-right-pane {
+        padding-top: 10px;
+        min-height: 500px;
+        @media screen and (max-width: $medium-width) {
+          min-height: auto;
+        }
+        margin-bottom: 10px;
+        padding: 10px;
+        color: white;
+        border-radius: 5px;
+        input {
+          &:disabled {
+            background-color: #ddd;
+            color: #444;
+          }
+        }
+        .classifier-textarea {
+          width: 100%;
+          border: 1px solid #ccc;
+          border-radius: 0.5em;
+        }
+        #image-classifier-table {
+          .table-size-picker {
+            width: 30%;
+            display: inline;
+            margin-left: 10px;
+          }
+          .table {
+            overflow-x: scroll;
+            display: grid;
+            input {
+              border: 0.5px solid #ddd;
+            }
+            .header {
+              font-weight: bold;
+              text-align: center;
+              background-color: #eee;
+            }
+          }
+        }
+      }
     }
   }
   @media screen and (min-width: $tablet-width) {
@@ -64,6 +110,18 @@ h1 {
   @media screen and (max-device-width: $phone-width), screen and (max-device-width: $tablet-width) and (orientation: portrait) {
     width: 100vw;
     overflow-x: hidden;
+    .swipe-instruction {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      p {
+        color: #aaa;
+        &::before, &::after {
+          content: ' ' attr(data-direction) ' ';
+        }
+      }
+    }
     .classify-page {
       display: flex;
       justify-content: space-around;
@@ -80,5 +138,14 @@ h1 {
         transform:translateX(-50%);
       }
     }
+  }
+}
+
+.card-page-image-wrapper {
+  height: 300px;
+  text-align: center;
+  .card-page-image {
+    max-width: 100%;
+    height: 100%;
   }
 }

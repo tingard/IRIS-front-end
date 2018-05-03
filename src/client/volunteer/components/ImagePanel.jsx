@@ -114,6 +114,7 @@ class ImagePanel extends React.Component {
           min="1"
           max="3"
           step="0.1"
+          style={{ marginTop: '40px' }}
           value={this.state.zoom}
           onChange={this.onZoomChange}
           onTouchStart={this.onZoomStart}
