@@ -146,7 +146,6 @@ class TableEditor extends React.Component {
         <div className="table" style={gridStyle}>
           {this.inputs}
         </div>
-        <button onClick={() => this.props.onChange('')}>Click</button>
       </div>
     );
   }
