@@ -1,63 +1,56 @@
-/* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { List } from 'immutable';
+import IrisIncrementer from '../../../common-resources/IrisIncrementer';
 
 class TableEditor extends React.Component {
   constructor(props) {
     super(props);
+    this.changeTableSize = this.changeTableSize.bind(this);
+    this.changeTableRows = this.changeTableRows.bind(this);
+    this.changeTableCols = this.changeTableCols.bind(this);
+    let table = List([]);
+    const nRows = 3;
+    const nCols = 2;
+    for (let i = 0; i < nRows; i += 1) {
+      for (let j = 0; j < nCols; j += 1) {
+        table = table.set((i * nCols) + j);
+      }
+    }
     this.state = {
-      nCols: 2,
-      nRows: 3,
-      hasHeaders: true,
-      foo: true,
+      nRows, nCols, table, hasHeaders: true,
     };
-    this.inputs = [];
-    this.inputVals = [];
   }
-  componentWillReceiveProps() {
-    console.log('getting props');
+  changeTableRows(nRows) {
+    this.changeTableSize(nRows, this.state.nCols);
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    return (
-      nextState.nCols !== this.state.nCols ||
-      nextState.nRows !== this.state.nRows
-    );
+  changeTableCols(nCols) {
+    this.changeTableSize(this.state.nRows, nCols);
   }
-  componentWillUpdate(nextProps, nextState) {
-    const oldVals = [];
-    document.querySelectorAll('.image-classifier-table-editor .table input').forEach(
-      ipt => oldVals.push(ipt.value),
-    );
-    this.inputVals = [];
-    let newIdx;
-    oldVals.forEach(
-      (val, i) => {
-        newIdx = (Math.floor(i / this.state.nCols) * nextState.nCols) + (i % this.state.nCols);
-        this.inputVals[newIdx] = val;
-      },
-    );
-  }
-  componentDidUpdate() {
-    /* eslint-disable no-param-reassign */
-    document.querySelectorAll('.image-classifier-table-editor .table input').forEach(
-      (ipt, i) => { ipt.value = this.inputVals[i] || ''; },
-    );
+  changeTableSize(nRows, nCols) {
+    let table = List().setSize(nRows * nCols);
+    for (let i = 0; i < this.state.nRows; i += 1) {
+      for (let j = 0; j < this.state.nCols; j += 1) {
+        table = table.set(
+          (i * nRows) + j,
+          i < this.state.nRows && j < this.state.nCols ?
+            this.state.table[(i * this.state.nRows) + j] :
+            '',
+        );
+      }
+    }
     this.props.onChange(this.compileTable());
-    /* eslint-enable no-param-reassign */
+    this.setState({ nRows, nCols, table });
   }
   compileTable() {
-    const inputVals = [];
-    document.querySelectorAll('.image-classifier-table-editor .table input').forEach(
-      ipt => inputVals.push(ipt.value),
-    );
     let rowN;
     let cell;
     let tag;
-    const out = inputVals.map(
+    const out = this.state.table.map(
       (value, i) => {
         tag = this.state.hasHeaders && i < this.state.nCols ? 'th' : 'td';
         rowN = i % this.state.nCols;
-        cell = `<${tag}>${value}</${tag}>`;
+        cell = `<${tag}>${value || ''}</${tag}>`;
         if (rowN === 0) {
           cell = `<tr>${cell}`;
           if (tag === 'th') {
@@ -81,23 +74,21 @@ class TableEditor extends React.Component {
     const gridStyle = {
       gridTemplateColumns: 'minmax(80px, 1fr) '.repeat(this.state.nCols),
     };
-    this.inputs = [];
-    for (let i = 0; i < this.state.nCols * this.state.nRows; i += 1) {
-      if (this.state.hasHeaders && i < this.state.nCols) {
-        this.inputs.push(
+    const table = [];
+    for (let i = 0; i < this.state.nRows; i += 1) {
+      for (let j = 0; j < this.state.nCols; j += 1) {
+        table.push(
           <input
             type="text"
-            key={`classifier-input-${i}`}
-            className="header"
-            onChange={() => this.props.onChange(this.compileTable())}
-          />,
-        );
-      } else {
-        this.inputs.push(
-          <input
-            type="text"
-            key={`classifier-input-${i}`}
-            onChange={() => this.props.onChange(this.compileTable())}
+            key={`classifier-input-${i}.${j}`}
+            className={this.state.hasHeaders && i === 0 ? 'header' : ''}
+            value={this.state.table[(i * this.state.nRows) + j]}
+            onChange={e => this.setState({
+              table: this.state.table.set(
+                (i * this.state.nRows) + j,
+                e.target.value,
+              ),
+            }, () => this.props.onChange(this.compileTable()))}
           />,
         );
       }
@@ -107,28 +98,18 @@ class TableEditor extends React.Component {
         <div className="w3-row w3-margin-bottom">
           <label htmlFor="classifier-table-column-picker">
             <span>Number of columns:</span>
-            <input
-              type="number"
-              className="w3-input w3-border w3-round table-size-picker"
-              id="classifier-table-column-picker"
-              min="1"
-              max="5"
-              value={this.state.nCols}
-              onChange={e => this.setState({ nCols: e.target.value })}
+            <IrisIncrementer
+              onDecrease={() => this.changeTableCols(Math.max(1, this.state.nCols - 1))}
+              onIncrease={() => this.changeTableCols(this.state.nCols + 1)}
             />
           </label>
         </div>
         <div className="w3-row w3-margin-bottom">
           <label htmlFor="classifier-table-row-picker">
             <span>Number of rows:</span>
-            <input
-              className="w3-input w3-border w3-round table-size-picker"
-              id="classifier-table-row-picker"
-              type="number"
-              min="2"
-              max="10"
-              value={this.state.nRows}
-              onChange={e => this.setState({ nRows: e.target.value })}
+            <IrisIncrementer
+              onDecrease={() => this.changeTableRows(Math.max(1, this.state.nRows - 1))}
+              onIncrease={() => this.changeTableRows(this.state.nRows + 1)}
             />
           </label>
         </div>
@@ -145,7 +126,7 @@ class TableEditor extends React.Component {
           </label>
         </div>
         <div className="table" style={gridStyle}>
-          {this.inputs}
+          {table}
         </div>
       </div>
     );
