@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
 import IrisButton from '../../../common-resources/IrisButton';
@@ -24,66 +25,51 @@ class GraphClassifier extends React.Component {
         <h3>What's present in this graph?</h3>
         <div className="w3-row w3-padding-16">
           <label className="switch" htmlFor="graph-classifier-x-axis">
-            <span>X-axis</span>
+            <span>X-axis label</span>
             <input
-              type="checkbox"
-              className="grapheel-checkbox"
               id="graph-classifier-x-axis"
-              checked={this.state.xAxis}
-              onChange={e => this.setState({ xAxis: e.target.checked })}
+              className="iris-input"
+              type="text"
+              placeholder="What is the x-axis label? (if there is one)"
+              value={this.state.xAxisValue}
+              onChange={e => this.setState({
+                xAxis: e.target.value.length > 0,
+                xAxisValue: e.target.value,
+              })}
             />
           </label>
-          <input
-            id="graph-classifier-x-axis-input"
-            className="iris-input"
-            type="text"
-            disabled={!this.state.xAxis}
-            placeholder="What is the x-axis label?"
-            value={this.state.xAxisValue}
-            onChange={e => this.setState({ xAxisValue: e.target.value })}
-          />
         </div>
         <div className="w3-row w3-padding-16">
           <label className="switch" htmlFor="graph-classifier-y-axis">
-            <span>Y-axis</span>
+            <span>Y-axis label</span>
             <input
-              type="checkbox"
-              className="grapheel-checkbox"
               id="graph-classifier-y-axis"
-              checked={this.state.yAxis}
-              onChange={e => this.setState({ yAxis: e.target.checked })}
+              className="iris-input"
+              type="text"
+              placeholder="What is the y-axis label?"
+              value={this.state.yAxisValue}
+              onChange={e => this.setState({
+                yAxis: e.target.value.length > 0,
+                yAxisValue: e.target.value,
+              })}
             />
           </label>
-          <input
-            id="graph-classifier-y-axis-input"
-            className="iris-input"
-            type="text"
-            disabled={!this.state.yAxis}
-            placeholder="What is the y-axis label?"
-            value={this.state.yAxisValue}
-            onChange={e => this.setState({ yAxisValue: e.target.value })}
-          />
         </div>
         <div className="w3-row w3-padding-16">
           <label className="switch" htmlFor="graph-classifier-title">
-            <span>Title</span>
+            <span>Is there a title?</span>
             <input
-              type="checkbox"
-              className="grapheel-checkbox"
-              id="graph-classifier-title"
-              checked={this.state.title}
-              onChange={e => this.setState({ title: e.target.checked })}
+              id="graph-classifier-title-input"
+              className="iris-input"
+              type="text"
+              placeholder="What is the title?"
+              value={this.state.titleValue}
+              onChange={e => this.setState({
+                title: e.target.value.length > 0,
+                titleValue: e.target.value,
+              })}
             />
           </label>
-          <input
-            id="graph-classifier-title-input"
-            className="iris-input"
-            type="text"
-            disabled={!this.state.title}
-            placeholder="What is the title?"
-            value={this.state.titleValue}
-            onChange={e => this.setState({ titleValue: e.target.value })}
-          />
         </div>
         <div className="w3-row w3-padding-16">
           <label className="switch" htmlFor="graph-classifier-table">
