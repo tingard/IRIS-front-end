@@ -15,17 +15,17 @@ const Description = (props) => {
         <div className="w3-row">
           <ImageDescription classification={props.classification} />
         </div>
-        <p>
-          Received <span className="mf-disable">{moment(props.startDate).fromNow()}</span>.
+        <p className="mf-disable">
+          {`Received ${moment(props.startDate).fromNow()}. ${
+            props.messages.size > 1 ? (
+              `This conversation has
+                ${Math.max(props.messages.size - 1, 0)} ${props.messages.size > 2 ? 'messages.' : 'message.'}
+                Most recent message
+                ${moment(m.get('sendDate')).fromNow()}
+              `
+            ) : ''
+          }`}
         </p>
-        {props.messages.size > 1 ?
-          <p className="mf-disable">
-            {`This conversation has
-              ${Math.max(props.messages.size - 1, 0)} ${props.messages.size > 2 ? 'messages.' : 'message.'}
-              Most recent message
-              ${moment(m.get('sendDate')).fromNow()}
-            `}
-          </p> : ''}
         {props.markedAsCompleted ? (
           <p className="mf-disable">
             {`You accepted this message and rated the description
