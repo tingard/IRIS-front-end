@@ -24,13 +24,13 @@ const DescriptionsPage = (props) => {
           <ul
             style={{ listStyle: 'none', paddingLeft: 0 }}
             aria-label="Descriptions list"
-            role="grid"
+            role="list"
             aria-live="polite"
             aria-relevant="additions removals"
           >
             {
               props.messages.map(m => (
-                <li key={m.get('_id')} role="row">
+                <li key={m.get('_id')} role="listitem">
                   <Description {...m.toObject()} acceptDescription={props.acceptDescription} />
                 </li>
               ))

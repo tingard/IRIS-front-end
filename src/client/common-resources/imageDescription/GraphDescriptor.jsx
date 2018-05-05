@@ -30,7 +30,7 @@ const GraphDescriptor = (props) => {
   }
   return (
     <React.Fragment>
-      <h3>Graph details:</h3>
+      {/* <h3>Graph details:</h3> */}
       <table className="iris-table-description">
         <tbody>{graphInfoRows}</tbody>
       </table>
