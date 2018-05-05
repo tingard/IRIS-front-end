@@ -20,19 +20,17 @@ const Description = (props) => {
         </p>
         {props.messages.size > 1 ?
           <p className="mf-disable">
-            This conversation has&nbsp;
-            <span className="mf-disable">
-              {Math.max(props.messages.size - 1, 0)} message{props.messages.size > 2 ? 's. ' : '. '}
-            </span>
-            Most recent message&nbsp;
-            <span className="mf-disable">
-              {moment(m.get('sendDate')).fromNow()}
-            </span>
+            {`This conversation has
+              ${Math.max(props.messages.size - 1, 0)} ${props.messages.size > 2 ? 'messages.' : 'message.'}
+              Most recent message
+              ${moment(m.get('sendDate')).fromNow()}
+            `}
           </p> : ''}
         {props.markedAsCompleted ? (
-          <p>
-            You accepted this message and rated the description:&nbsp;
-            <em className="mf-disable">{ratingValues[props.rating].text}</em>
+          <p className="mf-disable">
+            {`You accepted this message and rated the description
+              ${ratingValues[props.rating].text}
+            `}
           </p>
         ) : (
           <React.Fragment>
