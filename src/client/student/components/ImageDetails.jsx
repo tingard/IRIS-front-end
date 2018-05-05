@@ -11,15 +11,10 @@ const ImageDetails = props => (
     <img src={resizeCloudinaryImage(props.image.get('url'), 200)} alt={props.image.get('note')} />
     <div>
       <p>
-          Image with note: <em className="mf-disable">{`"${props.image.get('note')}"`}</em>,
-          uploaded <span className="mf-disable">{moment(props.image.get('uploadDate')).fromNow()}</span>,
-          has
-        <span className="mf-disable">
-          {props.messages.size !== 1 ?
-              ` ${props.messages.size} replies` :
-              ` ${props.messages.size} reply`
-            }
-        </span>
+        {`Image with note ${props.image.get('note')},
+          uploaded ${moment(props.image.get('uploadDate')).fromNow()},
+          has ${props.messages.size} ${props.messages.size !== 1 ? 'replies' : 'reply'}
+        `}
       </p>
       <div className="w3-panel" role="group" aria-label="action buttons">
         <div className="w3-btn-bar">
