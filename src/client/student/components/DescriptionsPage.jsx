@@ -8,7 +8,7 @@ const DescriptionsPage = (props) => {
   if (!props.isFiltered || props.invalidId) {
     return <Redirect to="/volunteer/images" />;
   }
-  if (props.isFetching) return <div>Loading Spinner</div>;
+  if (props.isStale && props.isFetching) return <div>Loading Spinner</div>;
   return (
     <div
       className="w3-container w3-animate-opacity"
@@ -51,6 +51,7 @@ const DescriptionsPage = (props) => {
 };
 
 DescriptionsPage.propTypes = {
+  isStale: PropTypes.bool,
   isFetching: PropTypes.bool,
   isFiltered: PropTypes.bool,
   invalidId: PropTypes.bool,
