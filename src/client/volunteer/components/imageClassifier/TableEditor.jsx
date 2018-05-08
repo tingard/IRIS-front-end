@@ -14,7 +14,7 @@ class TableEditor extends React.Component {
     const nCols = 2;
     for (let i = 0; i < nRows; i += 1) {
       for (let j = 0; j < nCols; j += 1) {
-        table = table.set((i * nCols) + j);
+        table = table.set((i * nCols) + j, '');
       }
     }
     this.state = {
@@ -28,19 +28,21 @@ class TableEditor extends React.Component {
     this.changeTableSize(this.state.nRows, nCols);
   }
   changeTableSize(nRows, nCols) {
-    let table = List().setSize(nRows * nCols);
-    for (let i = 0; i < this.state.nRows; i += 1) {
-      for (let j = 0; j < this.state.nCols; j += 1) {
+    let table = List();
+    for (let i = 0; i < nRows; i += 1) {
+      for (let j = 0; j < nCols; j += 1) {
         table = table.set(
-          (i * nRows) + j,
+          (i * nCols) + j,
           i < this.state.nRows && j < this.state.nCols ?
-            this.state.table[(i * this.state.nRows) + j] :
+            this.state.table.get((i * this.state.nCols) + j) :
             '',
         );
       }
     }
-    this.props.onChange(this.compileTable());
-    this.setState({ nRows, nCols, table });
+    this.setState(
+      { nRows, nCols, table },
+      () => this.props.onChange(this.compileTable()),
+    );
   }
   compileTable() {
     let rowN;
@@ -82,13 +84,16 @@ class TableEditor extends React.Component {
             type="text"
             key={`classifier-input-${i}.${j}`}
             className={this.state.hasHeaders && i === 0 ? 'header' : ''}
-            value={this.state.table[(i * this.state.nRows) + j]}
-            onChange={e => this.setState({
-              table: this.state.table.set(
-                (i * this.state.nRows) + j,
-                e.target.value,
-              ),
-            }, () => this.props.onChange(this.compileTable()))}
+            value={this.state.table.get((i * this.state.nCols) + j)}
+            onChange={e => this.setState(
+              {
+                table: this.state.table.set(
+                  (() => (i * this.state.nCols) + j)(),
+                  e.target.value,
+                ),
+              },
+              () => this.props.onChange(this.compileTable()),
+            )}
           />,
         );
       }
