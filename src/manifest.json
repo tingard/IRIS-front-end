@@ -23,5 +23,5 @@
   "orientation": "portrait",
   "short_name": "IRIS",
   "theme_color": "#555",
-  "start_url": "/?launcher=true"
+  "start_url": "/login?launcher=true"
 }

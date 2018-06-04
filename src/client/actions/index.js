@@ -13,7 +13,7 @@ export const fetchWrapper = api => (
         // make sure we have auth loaded in
         api.loadTokenFromStorage();
         if (!api.state.user.type) {
-          window.location.replace('/login/volunteer');
+          window.location.replace('/login/');
         }
         // send the the request action (start loading spinners etc...)
         dispatch(type.sendRequest(payload));
