@@ -13,7 +13,9 @@ export const fetchWrapper = api => (
         // make sure we have auth loaded in
         api.loadTokenFromStorage();
         if (!api.state.user.type) {
-          window.location.replace('/login/');
+          window.location.replace('/login');
+        } else if (window.location.pathname.search(`^/${api.state.user.type}`) < 0) {
+          window.location.replace(`/${api.state.user.type}`);
         }
         // send the the request action (start loading spinners etc...)
         dispatch(type.sendRequest(payload));
