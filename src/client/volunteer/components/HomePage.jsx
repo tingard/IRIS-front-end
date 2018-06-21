@@ -104,7 +104,7 @@ class HomePage extends React.Component {
         </div>
         <div className="cardHolder">
           {cardList.size > 0 ? cardList.toArray() : (
-            <h4 className="w3-padding-32">Looks like there aren't any cards here!</h4>)}
+            <h4 className="w3-padding-32">Looks like there aren't any images here!</h4>)}
         </div>
       </div>
     );
