@@ -48,21 +48,19 @@ class HomePage extends React.Component {
     if (this.props.cards.get('state').get('isFetching') || this.props.user.get('isFetching')) {
       return <IrisLoader />;
     }
-    const cardListGood = this.props.cards.get('cards').filter(
-      card => this.props.user.get('levels').get(card.get('subject')) > card.get('difficulty'),
-    );
-    const cardListBad = this.props.cards.get('cards').filter(
-      card => this.props.user.get('levels').get(card.get('subject')) <= card.get('difficulty'),
-    );
-    const cardList = cardListGood.concat(cardListBad).filter(
-      card => (
-        this.state.selectedSubject === 'any' || card.get('subject') === this.state.selectedSubject
-      ) && (
-          parseFloat(this.state.selectedLevel) >= parseFloat(card.get('difficulty'))
+    const cardList = this.props.cards.get('cards')
+      .filter(
+        card => this.props.user.get('levels').get(card.get('subject')) > card.get('difficulty'),
+      )
+      .filter(
+        card => (
+          (this.state.selectedSubject === 'any' || card.get('subject') === this.state.selectedSubject)
+          && (parseFloat(this.state.selectedLevel) >= parseFloat(card.get('difficulty')))
         ),
-    ).map(
-      card => <ImageCard {...card.toObject()} key={card.get('_id')} user={this.props.user} />,
-    );
+      )
+      .map(
+        card => <ImageCard {...card.toObject()} key={card.get('_id')} user={this.props.user} />,
+      );
     return (
       <div className="iris-narrow-page">
         <div className="main-page-topmessage">
