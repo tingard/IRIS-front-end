@@ -1,8 +1,8 @@
 language: node_js
-node_js: "8.1.2"
+node_js: 8.1.2
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.6.0
-  - export PATH="$HOME/.yarn/bin:$PATH"
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.6.0
+- export PATH="$HOME/.yarn/bin:$PATH"
 script:
 - yarn test-travis
 notifications:
@@ -14,5 +14,5 @@ notifications:
 deploy:
   provider: heroku
   api_key:
-    secure: d3MZaaDmZ1ii2bUbUWCQDxNsoaeg5o/4oLKwcdl2QqAsJuUWFNuGm0lpj1pbXs2FjL6w7eD8UqxUvJJ8aeUGn8bXg4yXUKl2ahGxjwGYR4NoPyiNmYNOsN/RGXQsjhPyiaD846FLhpCsu6Xfl+jJsafQ0NVNu23+GfioIhBO4ITT2uotl7kMx6O9f82RSvNOSqGYYFboMY8ts43n1cYFNRbiI6O2R+VYymD/8sddt77Btmyn4cbuRf4FmDkrA4uWFeywbVSt9Nt8Mo/iZFsZ7t88dBi3oVzvLfjefVdkqBzsjKeY5eBB/ULAnVvnptxGE3/TpTJFUjyRtuFvmqD0Du4EmfsENLtYSDs/3fgO3Mp3w7jeaRYf7jb68v81vHQ5su8j2s2WN/nXU7aKl+Lhen/2sJR/uTcbovhWfwT7oIP8uLLg/aMpWnXQ4M1UkX9znEj7nZ+WD8LG/ogI+K1hAL9FPpZiI1bE21QP6InsyZi8V11AY5vvZWePD8JW4I2mOxk0VWBdpEjcnOSAGYwf9F4ODGEAbzPXdmXdjRDZcX4prof9kEQwQHeOkgI7eQ2xzYNt5zUDgvMRqq5b1MYYQo0RUFD2HGk/bA0Zg7yRxpQjwH8b0dRH/wU9ybaTdqnpG8mUX0oQ/fSmax99buaIrOe1YqUEd4LXNnA8idqe2wU=
+    secure: KIheBAxH3PuA2XztneV2kjSSO420L4V4oD+yHeyuLx9TopR/LxrouquiSvOVhq7GG2bidc5E1eFQKrCJKMmwyQ4XGAYykoTOWP/Dd2hcKtAzVlJ7HGicuzxP8ne2G98hYjhs0+IMh9LH5OUQfXnpiweimnaOAQI8f+IE4aY25o3o1ISxut+Nmj8DQRkttj/IZRSNbrajUxp0P52UeN2tngXJLu/Zl/Vo9Ojn+wWLE5k0KEOFm/Ybnom3Na2cBhEVU7fmnZPoFrP1x5CqIE0J7lJFnxCuLX1MfY8dpGzoBX0rSMq4AbkjHD6vapOQNvilaGINYTiQacN+/AARuCWGyi4bbqBjQHZQ51/XZFdFqMG7EizQSKE8PzmQF6PpOdDNLm9lGW2p3ASH3PtHCjsA3bj+ayQJcLyIQGkPAcRt7tvSi8JmSgZOvfsYvD0eR0ZM5clEHTqBeRFV0xA+e3/jA6uqhz0xMbjcWfuF13JEStTN6UEYdCkod3WGm9I7Cxm6eoW/TWCNQp+qEVst4sp+Vx5b06pSh2jKN4HbTYos5sacfTxUexQoqQolVpOKY40u43NB173y8oYqd7ybXtHln/4rtfyJ4DMlN6AepM3Xf+0dJwjDZEHGJM4HzzX3CAQkChkXVHXiErsAb1yD6HYOHqcyi32pSIY6U+fjGlLZ7Xs=
   app: grapheel-iris-front-end
