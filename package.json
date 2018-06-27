@@ -88,7 +88,7 @@
   "engines": {
     "node": "~8.1.2",
     "npm": "~6.0.0",
-    "yarn": "~1.6.0"
+    "yarn": "^1.6.0"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/src/enzymeConfiguration.js",

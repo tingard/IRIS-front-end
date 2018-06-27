@@ -6,7 +6,7 @@ import IrisButton from '../../../common-resources/IrisButton';
 const ImageDetails = (props) => {
   const nReplies = props.image.get('classifications').size;
   return (
-    <li className="iris-image">
+    <li className="iris-image-listitem">
       <img src={props.image.get('url')} alt={props.image.get('note')} />
       <p>Question: {props.image.get('question')}</p>
       <IrisButton

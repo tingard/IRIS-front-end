@@ -5,10 +5,10 @@ export default {
     filename: '[name]-bundle.js',
   },
   entry: {
-    main: './src/client/main/index.jsx',
-    student: './src/client/student/index.jsx',
-    volunteer: './src/client/volunteer/index.jsx',
-    'licence-owner': './src/client/licence-owner/index.jsx',
+    main: ['babel-polyfill', './src/client/main/index.jsx'],
+    student: ['babel-polyfill', './src/client/student/index.jsx'],
+    volunteer: ['babel-polyfill', './src/client/volunteer/index.jsx'],
+    'licence-owner': ['babel-polyfill', './src/client/licence-owner/index.jsx'],
   },
   devtool: 'cheap-source-map',
   module: {
