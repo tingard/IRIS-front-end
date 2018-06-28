@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import IrisButton from '../../../common-resources/IrisButton';
+import { Link } from 'react-router-dom';
 import IrisLoader from '../../../common-resources/IrisLoader';
 import Licence from './Licence';
 
@@ -17,12 +17,13 @@ const LicencesPanel = ({ state, licences }) => (
         </ul>
       </React.Fragment>
     )}
-    <IrisButton
-      type="action"
-      text="+"
+    <Link
+      to="/licence-owner/purchase"
+      className="iris-button floating action"
       aria-label="Purchase a licence"
-      className="floating"
-    />
+    >
+      +
+    </Link>
   </div>
 );
 

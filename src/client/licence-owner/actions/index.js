@@ -31,6 +31,7 @@ export const getImages = fetch(images.get);
 // SECTION: Licences
 export const getLicences = fetch(licences.get);
 export const updateLicences = fetch(licences.get);
+export const purchaseLicence = fetch(licences.purchase);
 
 // SECTION: Service worker
 export const passSwRegistrationToAPI = fetch(serviceWorker.register);

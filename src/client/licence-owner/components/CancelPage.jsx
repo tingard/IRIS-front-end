@@ -8,7 +8,9 @@ const CancelPage = props => (
       <h3>Cancel a licence</h3>
       <p>
         If you would like  to cancel a licence, please email us at&nbsp;
-        <a href="mailto:contact@grapheel.com">contact@grapheel.com</a>
+        <a href="mailto:contact@grapheel.com?subject=Cancel an IRIS licence">
+          contact@grapheel.com
+        </a>
       </p>
       {props.match.params.licenceId ? (
         <React.Fragment>

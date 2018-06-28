@@ -10,8 +10,9 @@ import ApiWrapper from './containers/apiWrapper';
 import HomePage from './containers/homePage';
 import RepliesPage from './containers/repliesPage';
 import CancelPage from './components/CancelPage';
-import StudentPage from './containers/studentPage';
 import AddToStudentPage from './components/AddToStudentPage';
+import StudentPage from './containers/studentPage';
+import PurchasePage from './containers/purchasePage';
 import userReducer from './reducers/userReducer';
 import imagesReducer from './reducers/imagesReducer';
 
@@ -44,6 +45,7 @@ const LicenceOwnerApp = () => (
                   component={AddToStudentPage}
                 />
                 <Route exact path="/licence-owner/cancel/" component={CancelPage} />
+                <Route exact path="/licence-owner/purchase/" component={PurchasePage} />
                 <Route exact path="/licence-owner/cancel/:licenceId" component={CancelPage} />
                 <Route exact path="/licence-owner/student/:licenceId" component={StudentPage} />
                 <Route render={() => <Redirect to="/licence-owner" />} />

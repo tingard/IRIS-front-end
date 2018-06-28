@@ -24,6 +24,7 @@
     padding: 5px;
     width: 45px;
     height: 45px;
+    border-radius: 100%;
     @media screen and (max-width: $medium-width) {
       position: unset;
       float: right;

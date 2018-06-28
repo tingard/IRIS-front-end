@@ -11,7 +11,7 @@ const ContactPanel = () => (
       using our feedback portal on GitHub, or by sending us an email!
     </p>
     <a
-      className="iris-button action"
+      className="iris-button tertiary"
       href="https://github.com/Grapheel/IRIS"
       target="_blank"
       rel="noopener noreferrer"

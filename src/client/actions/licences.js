@@ -4,7 +4,7 @@ export const get = {
   success: res => ({ type: 'GET_LICENCES_SUCCESS', res }),
   failure: error => ({ type: 'GET_LICENCES_FAILURE', error }),
 };
-export const upload = {
+export const purchase = {
   name: 'PURCHASE_LICENCE',
   sendRequest: formData => ({ type: 'PURCHASE_LICENCE', formData }),
   success: res => ({ type: 'PURCHASE_LICENCE_SUCCESS', res }),
