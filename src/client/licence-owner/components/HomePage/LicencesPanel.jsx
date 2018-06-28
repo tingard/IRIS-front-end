@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import IrisButton from '../../../common-resources/IrisButton';
 import IrisLoader from '../../../common-resources/IrisLoader';
 import Licence from './Licence';
 
@@ -16,6 +17,12 @@ const LicencesPanel = ({ state, licences }) => (
         </ul>
       </React.Fragment>
     )}
+    <IrisButton
+      type="action"
+      text="+"
+      aria-label="Purchase a licence"
+      className="floating"
+    />
   </div>
 );
 

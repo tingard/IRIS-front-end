@@ -9,8 +9,10 @@ import { createLogger } from 'redux-logger';
 import ApiWrapper from './containers/apiWrapper';
 import HomePage from './containers/homePage';
 import RepliesPage from './containers/repliesPage';
+import CancelPage from './components/CancelPage';
+import StudentPage from './containers/studentPage';
+import AddToStudentPage from './components/AddToStudentPage';
 import userReducer from './reducers/userReducer';
-import licencesReducer from './reducers/licencesReducer';
 import imagesReducer from './reducers/imagesReducer';
 
 const loggerMiddleware = createLogger({
@@ -21,7 +23,6 @@ const store = createStore(
   combineReducers({
     user: userReducer,
     images: imagesReducer,
-    licences: licencesReducer,
   }),
   applyMiddleware(thunkMiddleware, loggerMiddleware),
 );
@@ -35,9 +36,16 @@ const LicenceOwnerApp = () => (
           <div id="modal-root">
             <ApiWrapper>
               <Switch>
-                <Route exact path="/licence-owner/images/:imageId" component={RepliesPage} />
-                <Route exact path="/licence-owner/:imageId/:replyId" component={HomePage} />
                 <Route exact path="/licence-owner" component={HomePage} />
+                <Route exact path="/licence-owner/images/:imageId" component={RepliesPage} />
+                <Route
+                  exact
+                  path="/licence-owner/connect/:licenceId"
+                  component={AddToStudentPage}
+                />
+                <Route exact path="/licence-owner/cancel/" component={CancelPage} />
+                <Route exact path="/licence-owner/cancel/:licenceId" component={CancelPage} />
+                <Route exact path="/licence-owner/student/:licenceId" component={StudentPage} />
                 <Route render={() => <Redirect to="/licence-owner" />} />
               </Switch>
             </ApiWrapper>

@@ -5,24 +5,20 @@ import { Link } from 'react-router-dom';
 const CancelPage = props => (
   <div className="licence-owner-page">
     <div className="panel">
-      <h3>Cancel a licence</h3>
+      <h3>Connect a student to a licence</h3>
       <p>
-        If you would like  to cancel a licence, please email us at&nbsp;
+        To connect a student to one of your licences, please email&nbsp;
         <a href="mailto:contact@grapheel.com">contact@grapheel.com</a>
       </p>
       {props.match.params.licenceId ? (
         <React.Fragment>
           <p>
             In your email, please quote the licence ID: {props.match.params.licenceId},
-            as well as the email address of the student account whose licence needs cancelling
+            as well as the email address of the student account to connect to
           </p>
         </React.Fragment>
         ) : null
       }
-      <p>
-        We will then cancel renewal of your licence, and the licence will expire
-        one month after your most recent payment
-      </p>
       <Link to="/licence-owner" className="iris-button tertiary">Go back</Link>
     </div>
   </div>

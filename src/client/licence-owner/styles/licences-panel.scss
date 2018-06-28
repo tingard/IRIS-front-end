@@ -1,3 +1,5 @@
+@import '../../common-resources/size-constants';
+
 .licences {
   overflow-y: scroll;
   ul {
@@ -11,6 +13,20 @@
       h3 {
         font-size: 1.2em;
       }
+    }
+  }
+  .floating {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    padding: 5px;
+    width: 45px;
+    height: 45px;
+    @media screen and (max-width: $medium-width) {
+      position: unset;
+      float: right;
     }
   }
 }

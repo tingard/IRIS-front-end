@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisLoader from '../../../common-resources/IrisLoader';
-import ImageDetails from './ImageDetails';
+import ImageDetails from '../ImageDetails';
 
 const ImagePanel = props => (
   <div className="panel image-feed">
@@ -20,11 +20,12 @@ const ImagePanel = props => (
                 .reverse()
                 .map(
                   image => (
-                    <ImageDetails
-                      key={image.get('_id')}
-                      image={image}
-                      history={props.history}
-                    />
+                    <li className="iris-image-listitem" key={image.get('_id')}>
+                      <ImageDetails
+                        image={image}
+                        history={props.history}
+                      />
+                    </li>
                   ),
                 )
               }

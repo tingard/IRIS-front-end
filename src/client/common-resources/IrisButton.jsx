@@ -6,6 +6,7 @@ const IrisButton = props => (
     className={`iris-button ${props.type} ${props.className}`}
     onClick={props.onClick}
     disabled={props.disabled}
+    aria-label={props['aria-label'] || ''}
   >
     {props.text}
   </button>
@@ -13,6 +14,7 @@ const IrisButton = props => (
 
 IrisButton.propTypes = {
   text: PropTypes.string.isRequired,
+  'aria-label': PropTypes.string,
   disabled: PropTypes.bool,
   type: PropTypes.string,
   onClick: PropTypes.func,

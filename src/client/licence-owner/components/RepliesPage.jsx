@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import IrisLoader from '../../common-resources/IrisLoader';
 import IrisButton from '../../common-resources/IrisButton';
 import ImageDescription from '../../common-resources/imageDescription';
@@ -13,17 +14,17 @@ const RepliesPage = props => (
         <Link to="/licence-owner" className="iris-button tertiary">Go back</Link>
         <h3>Image</h3>
         <img src={props.image.get('url')} alt={props.image.get('name')} className="iris-image" />
-        <p>{props.image.get('note')}</p>
-        <p>{props.image.get('question')}</p>
-        <p>{props.image.get('subject')}</p>
-        <p>{props.image.get('uploadDate')}</p>
+        <p>{`Named: ${props.image.get('note')}`}</p>
+        <p>{`Question: ${props.image.get('question')}`}</p>
+        <p>{`Marked as ${props.image.get('subject')}`}</p>
+        <p>{`Uploaded ${moment(props.image.get('uploadDate')).fromNow()}`}</p>
         <IrisButton text="Remove image from IRIS" type="action" />
         <h3>Replies:</h3>
         <ul>
           {props.image.get('classifications').map(
             classification => (
-              <li>
-                <ImageDescription classification={classification.get('classification')} key={classification.get('_id')} />
+              <li key={classification.get('_id')} >
+                <ImageDescription classification={classification.get('classification')} />
                 <IrisButton text="Flag" type="action" />
               </li>
             ),

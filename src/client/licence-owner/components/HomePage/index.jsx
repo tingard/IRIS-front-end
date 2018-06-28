@@ -28,7 +28,7 @@ class HomePage extends React.Component {
           history={this.props.history}
         />
         <FeedbackPanel />
-        <ContactPanel />
+        <ContactPanel logout={this.props.logout} />
       </section>
     );
   }
@@ -62,6 +62,7 @@ HomePage.propTypes = {
       }),
     ),
   }),
+  logout: PropTypes.func.isRequired,
   /* eslint-disable react/forbid-prop-types */
   history: PropTypes.object.isRequired,
 };
