@@ -10,11 +10,15 @@ const LicencesPanel = ({ state, licences }) => (
     {state.get('isStale') ? <IrisLoader /> : (
       <React.Fragment>
         <h2>Your Licences</h2>
-        <ul>
-          {licences.map(
-            licence => <Licence key={licence.get('_id')} licence={licence} />,
-          )}
-        </ul>
+        {licences.length > 0 ? (
+          <ul>
+            {licences.map(
+              licence => <Licence key={licence.get('_id')} licence={licence} />,
+            )}
+          </ul>
+        ) : (
+          <p>You don't have any active licences</p>
+        )}
       </React.Fragment>
     )}
     <Link

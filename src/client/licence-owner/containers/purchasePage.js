@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PurchasePage from '../components/PurchasePage';
-import { purchaseLicence } from '../actions';
+import { getUserDetails, purchaseLicence } from '../actions';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  purchaseLicence: () => dispatch(purchaseLicence()).then(() => ownProps.history.push('/licence-owner')),
+  purchaseLicence: () => dispatch(purchaseLicence()).then(() => dispatch(getUserDetails())).then(() => ownProps.history.push('/licence-owner')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PurchasePage);

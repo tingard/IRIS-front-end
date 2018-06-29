@@ -18,7 +18,11 @@ const RepliesPage = props => (
         <p>{`Question: ${props.image.get('question')}`}</p>
         <p>{`Marked as ${props.image.get('subject')}`}</p>
         <p>{`Uploaded ${moment(props.image.get('uploadDate')).fromNow()}`}</p>
-        <IrisButton text="Remove image from IRIS" type="action" />
+        <p>
+          If you want this image or any of the associated replies removed from IRIS,
+          please email us at&nbsp;
+          <a href="mailto:contact@grapheel.com">contact@grapheel.com</a>
+        </p>
         <h3>Replies:</h3>
         <ul>
           {props.image.get('classifications').map(
