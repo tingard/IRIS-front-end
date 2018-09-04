@@ -20,7 +20,6 @@ class MainApp extends React.Component {
     this.api = new ClientAPI();
   }
   componentDidMount() {
-    console.log('main app mounted 2');
     this.api.init()
       .then(
         (result) => {
@@ -47,21 +46,20 @@ class MainApp extends React.Component {
     );
   }
   render() {
-    console.log(this.api);
     return (
       <Router>
         <Fragment>
           <Route
             path="/login"
             render={
-            (props) => {
-              if (this.state.isLoggedIn && this.state.user.type) {
-                window.location.replace(`/${this.state.user.type}`);
-                return <span />;
+              (props) => {
+                if (this.state.isLoggedIn && this.state.user.type) {
+                  window.location.replace(`/${this.state.user.type}`);
+                  return <span />;
+                }
+                return <LoginPage {...props} onLogin={this.onLogin} />;
               }
-              return <LoginPage {...props} onLogin={this.onLogin} />;
             }
-          }
           />
           <Route
             exact
@@ -70,7 +68,15 @@ class MainApp extends React.Component {
           />
           <Route
             path="/create/:utype?"
-            render={p => <SignUpPage api={this.api} {...p} />}
+            render={
+              (p) => {
+                if (this.state.isLoggedIn && this.state.user.type) {
+                  window.location.replace(`/${this.state.user.type}`);
+                  return <span />;
+                }
+                return <SignUpPage api={this.api} {...p} />;
+              }
+            }
           />
           <Route
             path="/forgotten/:id?"

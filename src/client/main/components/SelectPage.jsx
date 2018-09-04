@@ -10,7 +10,7 @@ const SelectPage = () => (
     >
       <div className="panel">
         <div className="image-holder">
-          <img src="https://i.imgur.com/Ce3hu9g.png" alt="A cartoon mortarboard" />
+          <img src="https://res.cloudinary.com/dutzhgozy/image/upload/v1536087632/Ce3hu9g_ywf3b7.png" alt="A cartoon mortarboard" />
         </div>
         <h2>VIP student</h2>
         <p>
@@ -26,7 +26,7 @@ const SelectPage = () => (
     >
       <div className="panel">
         <div className="image-holder">
-          <img src="https://i.imgur.com/8rS4yzv.png" alt="A cartoon pair of glasses" />
+          <img src="https://res.cloudinary.com/dutzhgozy/image/upload/v1536087642/8rS4yzv_mejtuo.png" alt="A cartoon pair of glasses" />
         </div>
         <h2>Sighted Volunteer</h2>
         <p>
@@ -42,7 +42,7 @@ const SelectPage = () => (
     >
       <div className="panel">
         <div className="image-holder">
-          <img src="https://i.imgur.com/c3lmqEB.png" alt="A cartoon tie" />
+          <img src="https://res.cloudinary.com/dutzhgozy/image/upload/v1536087652/c3lmqEB_mi2w99.png" alt="A cartoon tie" />
         </div>
         <h2>Licence manager</h2>
         <p>
