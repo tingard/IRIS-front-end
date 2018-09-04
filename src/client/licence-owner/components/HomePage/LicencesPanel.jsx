@@ -10,24 +10,34 @@ const LicencesPanel = ({ state, licences }) => (
     {state.get('isStale') ? <IrisLoader /> : (
       <React.Fragment>
         <h2>Your Licences</h2>
-        {licences.length > 0 ? (
+        {licences.size > 0 ? (
           <ul>
             {licences.map(
               licence => <Licence key={licence.get('_id')} licence={licence} />,
             )}
           </ul>
         ) : (
-          <p>You don't have any active licences</p>
+          <React.Fragment>
+            <p>You don't have any active licences</p>
+            <Link
+              to="/licence-owner/purchase"
+              className="iris-button action"
+            >
+              Purchase a licence
+            </Link>
+          </React.Fragment>
         )}
       </React.Fragment>
     )}
-    <Link
-      to="/licence-owner/purchase"
-      className="iris-button floating action"
-      aria-label="Purchase a licence"
-    >
-      +
-    </Link>
+    {licences.size > 0 ? (
+      <Link
+        to="/licence-owner/purchase"
+        className="iris-button floating action"
+        aria-label="Purchase a licence"
+      >
+        +
+      </Link>
+    ) : null}
   </div>
 );
 
