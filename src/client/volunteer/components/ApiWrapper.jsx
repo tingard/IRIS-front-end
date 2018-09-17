@@ -19,17 +19,6 @@ class ApiWrapper extends React.Component {
         this.props.handlePushMessage(event.data);
       });
       this.timers = {};
-    } else {
-      // There is no service worker, do things the old fashioned way!
-      console.log('No service workers allowed. Polling the API once a minute instead.');
-      const getMessagesTimer = setInterval(1000 * 60, this.props.getMessages);
-      const getImagesTimer = setInterval(1000 * 60, this.props.getImages);
-      const getUserDetailsTimer = setInterval(1000 * 60, this.props.getUserDetails);
-      this.timers = {
-        getMessagesTimer,
-        getImagesTimer,
-        getUserDetailsTimer,
-      };
     }
     if (!('Notification' in window)) {
       console.warn('This browser does not support desktop notification');
@@ -48,9 +37,25 @@ class ApiWrapper extends React.Component {
         }
       });
     }
-  }
-  componentWillUnmount() {
-    Object.values(this.timers).map(t => clearInterval(t));
+    if ('Pusher' in window) {
+      Pusher.logToConsole = true;
+
+      const pusher = new Pusher('594d0f4f3d9849505782', {
+        cluster: 'eu',
+        forceTLS: true,
+      });
+
+      const channel = pusher.subscribe('iris-updates');
+      // TODO: send just the image object across, rather than re-requesting the entire list?
+      channel.bind('new-image', () => {
+        this.props.getImages();
+      });
+      // TODO: don't ask for every message to be re-fetched whenever anyone does anything on IRIS!
+      // payload could be a hashed version of the target email / user id?
+      channel.bind('new-message', () => {
+        this.props.getImages();
+      });
+    }
   }
   render() {
     if (this.props.messages.get('state').get('isStale') && !this.props.messages.get('state').get('isFetching')) {

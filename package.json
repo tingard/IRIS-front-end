@@ -109,7 +109,8 @@
       "jest": true
     },
     "globals": {
-      "Stripe": true
+      "Stripe": true,
+      "Pusher": true
     },
     "rules": {
       "function-paren-newline": 0,
