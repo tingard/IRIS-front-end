@@ -39,8 +39,9 @@ class ApiWrapper extends React.Component {
     }
     if ('Pusher' in window) {
       Pusher.logToConsole = true;
-
-      const pusher = new Pusher('594d0f4f3d9849505782', {
+      const pusherID = window.location.host === 'iris.grapheel.com' ?
+        '594d0f4f3d9849505782' : 'd8237a6f562be62749ed';
+      const pusher = new Pusher(pusherID, {
         cluster: 'eu',
         forceTLS: true,
       });
