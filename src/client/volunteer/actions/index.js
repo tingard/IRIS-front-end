@@ -33,14 +33,3 @@ export const sendMessage = fetch(messages.send);
 export const passSwRegistrationToAPI = fetch(serviceWorker.register);
 export const subscribeToPushNotifications = fetch(serviceWorker.subscribe);
 export const unsubscribeFromPushNotifications = fetch(serviceWorker.unsubscribe);
-
-export const handlePushMessage = (msg) => {
-  switch (msg.status) {
-    case 'NEW_MESSAGE':
-      return getMessages();
-    case 'NEW_IMAGE':
-      return getImages();
-    default:
-      return () => false;
-  }
-};
