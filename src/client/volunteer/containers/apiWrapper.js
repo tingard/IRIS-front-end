@@ -6,7 +6,6 @@ import {
   getImages,
   passSwRegistrationToAPI,
   subscribeToPushNotifications,
-  handlePushMessage,
 } from '../actions';
 
 
@@ -22,7 +21,6 @@ const mapDispatchToProps = dispatch => ({
   getImages: () => dispatch(getImages()),
   passSwRegistrationToAPI: swReg => dispatch(passSwRegistrationToAPI(swReg)),
   subscribeToPushNotifications: () => dispatch(subscribeToPushNotifications()),
-  handlePushMessage: pushedMessage => dispatch(handlePushMessage(pushedMessage)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApiWrapper);

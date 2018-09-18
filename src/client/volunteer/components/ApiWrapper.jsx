@@ -15,9 +15,6 @@ class ApiWrapper extends React.Component {
         .catch((error) => {
           console.error('Service Worker Error', error);
         });
-      navigator.serviceWorker.addEventListener('message', (event) => {
-        this.props.handlePushMessage(event.data);
-      });
       this.timers = {};
     }
     if (!('Notification' in window)) {
@@ -96,7 +93,6 @@ ApiWrapper.propTypes = {
   getUserDetails: PropTypes.func,
   passSwRegistrationToAPI: PropTypes.func,
   subscribeToPushNotifications: PropTypes.func,
-  handlePushMessage: PropTypes.func,
   children: PropTypes.oneOfType(
     [
       PropTypes.arrayOf(PropTypes.node),
