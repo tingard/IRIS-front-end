@@ -14,8 +14,8 @@ const IrisAlert = props => (
     >
       &times;
     </button>
-    <h3>{props.title}</h3>
-    <p>{props.message}</p>
+    <h3 className="iris-alert-title">{props.title}</h3>
+    <p className="iris-alert-message">{props.message}</p>
   </div>
 );
 

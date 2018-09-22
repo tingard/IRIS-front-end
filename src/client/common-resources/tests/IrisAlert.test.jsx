@@ -9,10 +9,18 @@ describe('<IrisAlert />', function () {
   const component = shallow(
     <IrisAlert title="test-title" message="test-message" type="test" onClose={closeSpy} />,
   );
-
-  it('should be of the right type');
-  it('should have the right title');
-  it('should have the right message');
+  it('should render without crashing', function () {
+    expect(component.exists()).toBe(true);
+  });
+  it('should be of the right type', function () {
+    expect(component.find('.iris-alert.test').length).toEqual(1);
+  });
+  it('should have the right title', function () {
+    expect(component.find('.iris-alert-title').text()).toEqual('test-title');
+  });
+  it('should have the right message', function () {
+    expect(component.find('.iris-alert-message').text()).toEqual('test-message');
+  });
   it('should have a close button', function () {
     expect(component.find('button').length).toEqual(1);
   });
