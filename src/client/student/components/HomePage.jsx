@@ -1,8 +1,9 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../common-resources/IrisButton';
-// import Modal from './Modal';
+import IrisLoader from '../../common-resources/IrisLoader';
 
 // TODO: Upload form should be a modal which users are guided through
 // (with clearly labelled steps)
@@ -72,7 +73,7 @@ class HomePage extends React.Component {
         this.props.images.get('state').get('isStale')
       )
     ) {
-      return <div>Loading spinner</div>;
+      return <IrisLoader />;
     }
     return (
       <div className="w3-container w3-animate-opacity iris-narrow-page">

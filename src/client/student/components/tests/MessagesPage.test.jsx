@@ -16,7 +16,7 @@ const props = {
 
 describe('The Student MessagesPage', function () {
   let component;
-  beforeEach(function () {
+  beforeAll(function () {
     component = shallow(
       <DescriptionsPage {...props} />,
     );
