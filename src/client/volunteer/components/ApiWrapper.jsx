@@ -35,10 +35,9 @@ class ApiWrapper extends React.Component {
       });
     }
     if ('Pusher' in window) {
-      Pusher.logToConsole = true;
-      const pusherID = window.location.host === 'iris.grapheel.com' ?
-        '594d0f4f3d9849505782' : 'd8237a6f562be62749ed';
-      const pusher = new Pusher(pusherID, {
+      const pusherKey = window.location.host === 'iris.grapheel.com' ?
+        'd8237a6f562be62749ed' : '594d0f4f3d9849505782';
+      const pusher = new Pusher(pusherKey, {
         cluster: 'eu',
         forceTLS: true,
       });
@@ -51,7 +50,7 @@ class ApiWrapper extends React.Component {
       // TODO: don't ask for every message to be re-fetched whenever anyone does anything on IRIS!
       // payload could be a hashed version of the target email / user id?
       channel.bind('new-message', () => {
-        this.props.getImages();
+        this.props.getMessages();
       });
     }
   }
