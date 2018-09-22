@@ -32,9 +32,7 @@ class ApiWrapper extends React.Component {
       };
     }
     if (this.props.user.get('browserNotifications')) {
-      if (!('Notification' in window)) {
-        console.warn('This browser does not support desktop notification');
-      } else if (
+      if (
         (Notification.permission !== 'denied' || Notification.permission === 'default') &&
         Notification.permission !== 'granted'
       ) {
@@ -49,12 +47,30 @@ class ApiWrapper extends React.Component {
         });
       }
     }
+    if ('Pusher' in window) {
+      const pusherKey = window.location.host === 'iris.grapheel.com' ?
+        'd8237a6f562be62749ed' : '594d0f4f3d9849505782';
+      const pusher = new Pusher(pusherKey, {
+        cluster: 'eu',
+        forceTLS: true,
+      });
+
+      const channel = pusher.subscribe('iris-updates');
+      // TODO: send just the image object across, rather than re-requesting the entire list?
+      channel.bind('new-image', () => {
+        this.props.getImages();
+      });
+      // TODO: don't ask for every message to be re-fetched whenever anyone does anything on IRIS!
+      // payload could be a hashed version of the target email / user id?
+      channel.bind('new-message', () => {
+        this.props.getMessages();
+      });
+    }
   }
   componentWillUnmount() {
     Object.keys(this.timers).map(key => clearInterval(this.timers[key]));
   }
   render() {
-    console.log('rendering');
     if (this.props.messages.get('state').get('isStale') && !this.props.messages.get('state').get('isFetching')) {
       this.props.getMessages();
     }
