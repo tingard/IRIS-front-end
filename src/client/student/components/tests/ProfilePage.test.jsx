@@ -8,7 +8,7 @@ import { initialState as userState } from '../../reducers/userReducer';
 
 describe('The Student ProfilePage', function () {
   let component;
-  beforeEach(function () {
+  beforeAll(function () {
     component = shallow(
       <ProfilePage {...userState.toObject()} />,
     );
