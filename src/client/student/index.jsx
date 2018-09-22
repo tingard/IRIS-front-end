@@ -31,7 +31,11 @@ const store = createStore(
     messages: messagesReducer,
     images: imagesReducer,
   }),
-  applyMiddleware(thunkMiddleware, loggerMiddleware),
+  process.env.NODE_ENV === 'production' ? (
+    applyMiddleware(thunkMiddleware)
+  ) : (
+    applyMiddleware(thunkMiddleware, loggerMiddleware)
+  ),
 );
 
 const StudentApp = () => (
