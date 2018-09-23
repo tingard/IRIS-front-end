@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../common-resources/IrisButton';
+import IrisSelect from '../../common-resources/IrisSelect';
 import IrisLoader from '../../common-resources/IrisLoader';
 
 // TODO: Upload form should be a modal which users are guided through
@@ -11,20 +12,23 @@ import IrisLoader from '../../common-resources/IrisLoader';
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.inputs = {};
     this.formShouldSubmit = this.formShouldSubmit.bind(this);
     this.checkIfInputsComplete = this.checkIfInputsComplete.bind(this);
     this.state = {
       successDialogActive: false,
       inputsAreComplete: false,
+      question: '',
+      note: '',
+      subject: 'maths',
+      file: null,
     };
   }
   checkIfInputsComplete() {
     this.setState({
       inputsAreComplete: (
-        this.inputs.imageInput.files.length > 0 &&
-        this.inputs.noteInput.value.length > 0 &&
-        this.inputs.questionInput.value.length > 0
+        this.state.file !== null &&
+        this.state.note.length > 0 &&
+        this.state.question.length > 0
       ),
     });
   }
@@ -34,30 +38,27 @@ class HomePage extends React.Component {
 
     // image file input, chosen by user
     const data = {
-      file: this.inputs.imageInput.files[0],
-      question: this.inputs.questionInput.value,
-      note: this.inputs.noteInput.value,
-      difficulty: this.inputs.difficultyInput.value,
-      subject: this.inputs.subjectInput.value,
+      irisImage: this.state.file,
+      question: this.state.question,
+      note: this.state.note,
+      difficulty: this.state.difficulty,
+      subject: this.state.subject,
     };
-    if (data.question.length === 0) {
-      alert('Please specify a question to ask');
-    } else if (data.note.length === 0) {
-      alert('Please specify a note so you can find this image later');
-    } else {
-      formData.append('irisImage', data.file);
-      formData.append('question', data.question);
-      formData.append('note', data.note);
-      formData.append('difficulty', data.difficulty);
-      formData.append('subject', data.subject);
-      this.props.uploadImage(formData);
-      this.setState({ successDialogActive: true }, this.props.getImages);
-      this.inputs.imageInput.value = '';
-      this.inputs.questionInput.value = '';
-      this.inputs.noteInput.value = '';
-      this.inputs.difficultyInput.value = 'maths';
-      this.inputs.subjectInput.value = '0';
-    }
+    Object.entries(data).forEach((key, value) => {
+      formData.append(key, value);
+    });
+    this.props.uploadImage(formData);
+    this.setState(
+      {
+        successDialogActive: true,
+        inputsAreComplete: false,
+        question: '',
+        note: '',
+        subject: 'maths',
+        file: null,
+      },
+      this.props.getImages,
+    );
     return false;
   }
   render() {
@@ -94,9 +95,11 @@ class HomePage extends React.Component {
                 name="image"
                 accept="image/*"
                 id="imageInput"
-                ref={(r) => { this.inputs.imageInput = r; }}
                 className="iris-input"
-                onChange={this.checkIfInputsComplete}
+                onChange={e => this.setState(
+                  { file: e.target.files.length > 0 ? e.target.files[0] : null },
+                  this.checkIfInputsComplete,
+                )}
               />
             </label>
             <label htmlFor="questionInput" className="w3-panel">
@@ -106,9 +109,12 @@ class HomePage extends React.Component {
                 name="question"
                 id="questionInput"
                 autoComplete="off"
-                ref={(r) => { this.inputs.questionInput = r; }}
                 className="iris-input"
-                onChange={this.checkIfInputsComplete}
+                value={this.state.question}
+                onChange={e => this.setState(
+                  { question: e.target.value },
+                  this.checkIfInputsComplete)
+                }
               />
             </label>
             <label htmlFor="noteInput" className="w3-panel">
@@ -117,39 +123,40 @@ class HomePage extends React.Component {
                 type="text"
                 name="note"
                 id="noteInput"
-                ref={(r) => { this.inputs.noteInput = r; }}
+                value={this.state.note}
+                onChange={e => this.setState(
+                  { note: e.target.value },
+                  this.checkIfInputsComplete)
+                }
                 className="iris-input"
-                onChange={this.checkIfInputsComplete}
               />
             </label>
-            <label htmlFor="subjectInput" className="w3-panel">
-              What subject field is this image from?
-              <select
-                id="subjectInput"
-                ref={(r) => { this.inputs.subjectInput = r; }}
-                className="w3-input w3-border iris-select"
-              >
-                <option value="maths">Maths</option>
-                <option value="physics">Physics</option>
-                <option value="chemistry">Chemistry</option>
-                <option value="biology">Biology</option>
-                <option value="computerScience">Computer Science</option>
-                <option value="psychology">Psychology</option>
-                <option value="finance">Finance</option>
-              </select>
-            </label>
-            <label htmlFor="difficultyInput" className="w3-panel">
-              What study level is this image?
-              <select
-                id="difficultyInput"
-                ref={(r) => { this.inputs.difficultyInput = r; }}
-                className="w3-input w3-border iris-select"
-              >
-                <option value="0">GCSE level or below</option>
-                <option value="1">A-level</option>
-                <option value="2">Degree Level</option>
-              </select>
-            </label>
+            <IrisSelect
+              id="subjectInput"
+              label="What subject field is this image from?"
+              options={[
+                { value: 'maths', text: 'Maths' },
+                { value: 'physics', text: 'Physics' },
+                { value: 'chemistry', text: 'Chemistry' },
+                { value: 'biology', text: 'Biology' },
+                { value: 'computerScience', text: 'Computer Science' },
+                { value: 'psychology', text: 'Psychology' },
+                { value: 'finance', text: 'Finance' },
+              ]}
+              value={this.state.subject}
+              onChange={val => this.setState({ subject: val })}
+            />
+            <IrisSelect
+              id="difficultyInput"
+              label="What study level is this image?"
+              options={[
+                { value: '0', text: 'GCSE level or below' },
+                { value: '1', text: 'A-level' },
+                { value: '2', text: 'Degree Level' },
+              ]}
+              value={this.state.difficulty}
+              onChange={val => this.setState({ difficulty: val })}
+            />
           </form>
           <div>
             <p>
