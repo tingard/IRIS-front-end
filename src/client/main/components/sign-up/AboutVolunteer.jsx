@@ -124,7 +124,7 @@ class AboutVolunteer extends React.Component {
                   <label htmlFor={`${s}-level-select`} className="w3-margin-right">
                     {`${s.charAt(0).toUpperCase()}${s.slice(1)}`}
                   </label>
-                  <select id={`${s}-level-select`} className="select-style" ref={(r) => { this.selects[s] = r; }}>
+                  <select id={`${s}-level-select`} className="iris-select" ref={(r) => { this.selects[s] = r; }}>
                     {levelOptions.map(
                       l => <option value={l.value} key={`select-${s}-${l.value}`}>{l.text}</option>,
                     )}

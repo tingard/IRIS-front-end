@@ -40,7 +40,7 @@ class UtypeSelect extends React.Component {
               <select
                 ref={(r) => { this.select = r; }}
                 name="subject-filter-dropdown"
-                className={`select-style ${
+                className={`iris-select ${
                   this.state.alertInvalidSelection ? 'invalid' : ''
                 }`}
               >

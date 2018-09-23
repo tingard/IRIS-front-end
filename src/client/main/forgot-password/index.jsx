@@ -121,7 +121,7 @@ class ForgotPassword extends React.Component {
               I am a
               <select
                 id="resetPwd-utype-select"
-                className="select-style"
+                className="iris-select"
                 ref={(r) => { this.utypeSelect = r; }}
                 disabled={this.state.linkHasExpired}
               >
