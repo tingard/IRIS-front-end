@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const MessageOrderSelector = ({ onChange }) => (
   <select
     aria-labelledby="message-order-selector-label"
-    className="select-style"
+    className="iris-select"
     name="message-order-selector"
     onChange={e => onChange(e.target.value)}
   >

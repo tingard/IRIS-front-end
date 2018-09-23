@@ -54,7 +54,7 @@ class AcceptDescriptionPage extends React.Component {
             <select
               id="rating-input"
               ref={(r) => { this.ratingInput = r; }}
-              className={`w3-input w3-border w3-margin-bottom select-style ${level}`}
+              className={`w3-input w3-border w3-margin-bottom iris-select ${level}`}
               value={this.state.rating}
               onChange={e => this.setState({ rating: e.target.value })}
             >

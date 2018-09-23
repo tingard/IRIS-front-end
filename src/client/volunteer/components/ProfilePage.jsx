@@ -173,7 +173,7 @@ class ProfilePage extends React.Component {
                     <select
                       id={`profile-page-${s[0]}-level`}
                       name={`profile-page-${s[0]}-level`}
-                      className="w3-input w3-border select-style"
+                      className="w3-input w3-border iris-select"
                       value={this.getDefaultLevelSelect(s)}
                       onChange={e => this.props.setUserDetails({
                         id: this.props.user.get('_id'),
