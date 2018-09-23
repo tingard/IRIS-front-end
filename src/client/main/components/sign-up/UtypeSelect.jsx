@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import IrisButton from '../../../common-resources/IrisButton';
+import IrisSelect from '../../../common-resources/IrisSelect';
 
 class UtypeSelect extends React.Component {
   constructor(props) {
@@ -9,21 +10,22 @@ class UtypeSelect extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       alertInvalidSelection: false,
+      userType: 'none',
     };
   }
   handleChange() {
-    if (this.select.value !== 'none') {
-      this.props.history.push(`/create/${this.select.value}`);
+    if (this.state.userType !== 'none') {
+      this.props.history.push(`/create/${this.state.userType}`);
     } else {
       this.setState({ alertInvalidSelection: true });
     }
   }
   render() {
     const options = [
-      { value: 'none', label: 'I\'m a...' },
-      { value: 'student', label: 'I\'m a student' },
-      { value: 'volunteer', label: 'I\'m a volunteer' },
-      { value: 'licence-owner', label: 'I want to buy IRIS licences for others' },
+      { value: 'none', text: 'I\'m a...' },
+      { value: 'student', text: 'I\'m a student' },
+      { value: 'volunteer', text: 'I\'m a volunteer' },
+      { value: 'licence-owner', text: 'I want to buy IRIS licences for others' },
     ];
 
     return (
@@ -37,21 +39,13 @@ class UtypeSelect extends React.Component {
         <div className="w3-col m6" style={{ marginTop: '1em' }}>
           <div className="w3-margin-left" style={{ height: '150px' }}>
             <div className="w3-row">
-              <select
-                ref={(r) => { this.select = r; }}
-                name="subject-filter-dropdown"
-                className={`iris-select ${
-                  this.state.alertInvalidSelection ? 'invalid' : ''
-                }`}
-              >
-                {options.map(
-                  o => (
-                    <option value={o.value} key={`sign-up-select-${o.value}`}>
-                      {o.label}
-                    </option>
-                  ),
-                )}
-              </select>
+              <IrisSelect
+                id="resetPwd-utype"
+                label=""
+                options={options}
+                value={this.state.userType}
+                onChange={val => this.setState({ userType: val })}
+              />
               {
                 this.state.alertInvalidSelection ? (
                   <div role="alert">

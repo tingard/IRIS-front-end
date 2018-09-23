@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import IrisButton from '../../common-resources/IrisButton';
 import IrisAlert from '../../common-resources/IrisAlert';
+import IrisSelect from '../../common-resources/IrisSelect';
 
 class ForgotPassword extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class ForgotPassword extends React.Component {
         didSuccessfullySetPassword: false,
         isResetLink: newProps.match.params.id || false,
         linkHasExpired: false,
+        userType: 'student',
       });
     }
   }
@@ -41,7 +43,7 @@ class ForgotPassword extends React.Component {
       return;
     }
     this.props.api.setNewPassword({
-      utype: this.utypeSelect.value,
+      utype: this.state.userType,
       email: this.emailInput.value,
       pwd: this.passwordInput.value,
       resetLink: this.props.match.params.id,
@@ -67,7 +69,7 @@ class ForgotPassword extends React.Component {
   }
   requestResetLink() {
     this.props.api.requestPasswordReset({
-      utype: this.utypeSelect.value,
+      utype: this.state.userType,
       email: this.emailInput.value,
     })
       .then((r) => {
@@ -117,18 +119,16 @@ class ForgotPassword extends React.Component {
             ) : null }
           </div>
           <div className="w3-row w3-margin-bottom">
-            <label htmlFor="resetPwd-utype-select">
-              I am a
-              <select
-                id="resetPwd-utype-select"
-                className="iris-select"
-                ref={(r) => { this.utypeSelect = r; }}
-                disabled={this.state.linkHasExpired}
-              >
-                <option value="volunteer">Sighted volunteer</option>
-                <option value="student">VIP Student</option>
-              </select>
-            </label>
+            <IrisSelect
+              id="resetPwd-utype"
+              label="I am a"
+              options={[
+                { value: 'volunteer', text: 'Sighted Volunteer' },
+                { value: 'student1', text: 'VIP Student' },
+              ]}
+              value={this.state.userType}
+              onChange={val => this.setState({ userType: val })}
+            />
           </div>
           <div className="w3-row">
             <label htmlFor="resetPwd-email-input">
@@ -193,8 +193,8 @@ class ForgotPassword extends React.Component {
               }
               {this.state.didSuccessfullySetPassword ?
                 <IrisAlert
-                  title="Okay, check your email!"
-                  text="Succesfully set new password!"
+                  title="Success!"
+                  message="Check your email for a reset link!"
                   type="success"
                   onClose={() => this.setState({ didSuccessfullySetPassword: false })}
                 />

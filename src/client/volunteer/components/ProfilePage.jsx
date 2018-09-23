@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-// import Select from 'react-select';
 import moment from 'moment';
 import IrisLoader from '../../common-resources/IrisLoader';
 import IrisButton from '../../common-resources/IrisButton';
 import IrisAlert from '../../common-resources/IrisAlert';
+import IrisSelect from '../../common-resources/IrisSelect';
 
 const isValidEmail = v => /\S+@\S+\.\S+/.test(v) || v === '';
 
@@ -19,10 +19,10 @@ const subjects = [
   ['finance', 'Finance'],
 ];
 const level = [
-  { value: '0', label: 'None' },
-  { value: '1', label: 'GCSE level' },
-  { value: '2', label: 'A-level' },
-  { value: '3', label: 'Degree level' },
+  { value: '0', text: 'None' },
+  { value: '1', text: 'GCSE level' },
+  { value: '2', text: 'A-level' },
+  { value: '3', text: 'Degree level' },
 ];
 
 class ProfilePage extends React.Component {
@@ -170,24 +170,16 @@ class ProfilePage extends React.Component {
                     style={{ paddingTop: '5px' }}
                     mf-data-replace={`${s[0]} level select`}
                   >
-                    <select
+                    <IrisSelect
                       id={`profile-page-${s[0]}-level`}
-                      name={`profile-page-${s[0]}-level`}
-                      className="w3-input w3-border iris-select"
+                      label={null}
+                      options={level}
                       value={this.getDefaultLevelSelect(s)}
-                      onChange={e => this.props.setUserDetails({
+                      onChange={val => this.props.setUserDetails({
                         id: this.props.user.get('_id'),
-                        details: { levels: { [`${s[0]}`]: parseInt(e.target.value, 10) } },
+                        details: { levels: { [`${s[0]}`]: parseInt(val, 10) } },
                       })}
-                    >
-                      {
-                        level.map(
-                          ({ value, label }) => (
-                            <option value={value} key={`subjectInput-${value}`}>{label}</option>
-                          ),
-                        )
-                      }
-                    </select>
+                    />
                   </div>
                 </div>
               </label>

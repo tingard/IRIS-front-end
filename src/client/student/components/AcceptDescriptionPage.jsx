@@ -2,21 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../common-resources/IrisButton';
-import ImageDescription from '../../common-resources/imageDescription';
+import IrisSelect from '../../common-resources/IrisSelect';
 import IrisAlert from '../../common-resources/IrisAlert';
+import ImageDescription from '../../common-resources/imageDescription';
 import ratingValues from '../../common-resources/ratingValues';
 
 class AcceptDescriptionPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rating: 2,
+      rating: '2',
       didError: false,
     };
     this.acceptDescription = this.acceptDescription.bind(this);
   }
   acceptDescription() {
-    this.props.acceptDescription(this.ratingInput.value)
+    this.props.acceptDescription(this.state.rating)
       .then(
         (m) => {
           console.log(m);
@@ -36,9 +37,6 @@ class AcceptDescriptionPage extends React.Component {
     if (this.props.isFetching || this.props.message === null) {
       return <p>Loading...</p>;
     }
-    let level;
-    level = this.state.rating > 0 ? 'okay' : 'bad';
-    level = this.state.rating > 1 ? 'good' : level;
     return (
       <div className="w3-container accept-description-page">
         <h1>Accept description</h1>
@@ -47,26 +45,16 @@ class AcceptDescriptionPage extends React.Component {
           <ImageDescription classification={this.props.message.get('classification')} />
         </section>
         <section role="group" aria-labelledby="w3-padding-16 accept-description-rating-header">
-          <label htmlFor="rating-input">
-            <h2 id="accept-description-rating-header">
-              How would you rate this description?
-            </h2>
-            <select
-              id="rating-input"
-              ref={(r) => { this.ratingInput = r; }}
-              className={`w3-input w3-border w3-margin-bottom iris-select ${level}`}
-              value={this.state.rating}
-              onChange={e => this.setState({ rating: e.target.value })}
-            >
-              {ratingValues.map(
-                rating => (
-                  <option key={`rating-${rating.value}`} value={rating.value}>
-                    {rating.text}
-                  </option>
-                ),
-              )}
-            </select>
-          </label>
+          <h2 id="accept-description-rating-header">
+            How would you rate this description?
+          </h2>
+          <IrisSelect
+            id="rating-input"
+            label="Choose a rating"
+            options={ratingValues}
+            value={this.state.rating}
+            onChange={val => this.setState({ rating: val })}
+          />
           <IrisButton
             text="Submit"
             onClick={this.acceptDescription}

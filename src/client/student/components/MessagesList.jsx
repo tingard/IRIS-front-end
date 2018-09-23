@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import MessageOrderSelector from './MessageOrderSelector';
+import IrisSelect from '../../common-resources/IrisSelect';
 import Message from './Message';
 
 class MessagesPanel extends React.Component {
@@ -17,15 +17,19 @@ class MessagesPanel extends React.Component {
            Most recent message <span className="mf-disable">{this.props.mostRecent}</span>:
         </p>
         <div className="w3-margin" role="group">
-          <label htmlFor="message-order-selector" id="message-order-selector-label">
-            Change message order
-            <MessageOrderSelector
-              onChange={order => this.setState(
-                { messageOrder: order },
-                () => this.props.setOrder(order),
-              )}
-            />
-          </label>
+          <IrisSelect
+            id="message-order-selector"
+            label="Change message order"
+            options={[
+              { value: 'newest', text: 'Newest First' },
+              { value: 'oldest', text: 'Oldest First' },
+            ]}
+            value={this.state.messageOrder}
+            onChange={order => this.setState(
+              { messageOrder: order },
+              () => this.props.setOrder(order),
+            )}
+          />
         </div>
         <ul
           role="list"
