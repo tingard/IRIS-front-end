@@ -24,7 +24,7 @@ const IrisSelect = (props) => {
   }
   return (
     <label htmlFor={`${id}-select`} className="w3-panel">
-      {props.label}
+      <span className="iris-select-label">{props.label}</span>
       {select}
     </label>
   );
