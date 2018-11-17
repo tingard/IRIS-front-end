@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import UtypeSelect from './UtypeSelect';
-import AboutVolunteer from './AboutVolunteer';
-import AboutStudent from './AboutStudent';
-import AboutLicenceOwner from './AboutLicenceOwner';
+import VolunteerInformation from './VolunteerInformation';
+import StudentInformation from './StudentInformation';
+import LicenceOwnerInformation from './LicenceOwnerInformation';
 
 class SignUpPage extends React.Component {
   constructor(props) {
@@ -32,14 +32,14 @@ class SignUpPage extends React.Component {
           <Route
             exact
             path="/create/volunteer"
-            render={p => <AboutVolunteer onComplete={this.onComplete} {...p} />}
+            render={p => <VolunteerInformation onComplete={this.onComplete} {...p} />}
           />
           <Route
             exact
             path="/create/student"
-            render={p => <AboutStudent onComplete={this.onComplete} {...p} />}
+            render={p => <StudentInformation onComplete={this.onComplete} {...p} />}
           />
-          <Route path="/create/licence-owner" component={AboutLicenceOwner} />
+          <Route path="/create/licence-owner" component={LicenceOwnerInformation} />
           <Route path="/" render={() => <p>Not found</p>} />
         </Switch>
       </div>

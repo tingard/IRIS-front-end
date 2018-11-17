@@ -4,6 +4,24 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import IrisButton from '../../../common-resources/IrisButton';
+import IrisSelect from '../../../common-resources/IrisSelect';
+
+const availableSubjects = [
+  { value: 'physics', text: 'Physics' },
+  { value: 'maths', text: 'Maths' },
+  { value: 'biology', text: 'Biology' },
+  { value: 'chemistry', text: 'Chemistry' },
+  { value: 'computerScience', text: 'Computer Science' },
+  { value: 'psychology', text: 'Psychology' },
+  { value: 'finance', text: 'Finance' },
+];
+
+const levelOptions = [
+  { value: '0', text: 'Not at all' },
+  { value: '1', text: 'GCSE level' },
+  { value: '2', text: 'A-level' },
+  { value: '3', text: 'Degree level' },
+];
 
 const wrapQuestion = (q, htmlFor) => (
   <MediaQuery minWidth={601}>
@@ -34,7 +52,11 @@ class AboutVolunteer extends React.Component {
     this.state = {
       isValidEmail: true,
       allFieldsDone: false,
+      levels: {},
     };
+    availableSubjects.forEach(({ value }) => {
+      this.state.levels[value] = '0';
+    });
     this.selects = {};
     this.validateEmail = this.validateEmail.bind(this);
     this.checkFields = this.checkFields.bind(this);
@@ -58,20 +80,11 @@ class AboutVolunteer extends React.Component {
       email: this.emailInput.value,
       name: this.nameInput.value,
       pwd: this.passwordInput.value,
-      levels: {},
+      levels: this.state.levels,
     };
-    Object.entries(this.selects).forEach(
-      (i) => { payload.levels[i[0]] = i[1].value; },
-    );
     this.props.onComplete(payload);
   }
   render() {
-    const levelOptions = [
-      { value: '0', text: 'Not at all' },
-      { value: '1', text: 'GCSE level' },
-      { value: '2', text: 'A-level' },
-      { value: '3', text: 'Degree level' },
-    ];
     return (
       <div
         className="w3-row-padding w3-animate-opacity"
@@ -118,17 +131,18 @@ class AboutVolunteer extends React.Component {
         >
           {wrapQuestion('What subjects would you like to help with?', '')}
           <div className="w3-half" style={{ paddingTop: '10px' }}>
-            {['physics', 'biology', 'chemistry', 'maths', 'Computer Science'].map(
-              s => (
-                <div className="w3-row w3-margin-bottom" key={`select-${s}`}>
-                  <label htmlFor={`${s}-level-select`} className="w3-margin-right">
-                    {`${s.charAt(0).toUpperCase()}${s.slice(1)}`}
-                  </label>
-                  <select id={`${s}-level-select`} className="iris-select" ref={(r) => { this.selects[s] = r; }}>
-                    {levelOptions.map(
-                      l => <option value={l.value} key={`select-${s}-${l.value}`}>{l.text}</option>,
+            {availableSubjects.map(
+              ({ value, text }) => (
+                <div className="w3-row" key={`select-${value}`}>
+                  <IrisSelect
+                    id={`volunteer-${value}-level-select`}
+                    options={levelOptions}
+                    label={text}
+                    value={this.state.levels[value]}
+                    onChange={e => this.setState(
+                      { levels: Object.assign({}, this.state.levels, { [value]: e }) },
                     )}
-                  </select>
+                  />
                 </div>
               ),
             )}
