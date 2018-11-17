@@ -17,6 +17,7 @@ const initialState = Map({
   rating: 0,
   emailNotifications: false,
   browserNotifications: false,
+  notificationLevel: 0,
   levels: Map({
     physics: 1,
     biology: 1,
