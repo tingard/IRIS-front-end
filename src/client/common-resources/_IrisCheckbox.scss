@@ -1,0 +1,67 @@
+// Credit: https://www.w3schools.com/howto/howto_css_custom_checkbox.asp
+@import 'color-scheme';
+
+.iris-checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 50px;
+  padding-top: 3px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1.3em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Hide the browser's default checkbox */
+  input {
+     position: absolute;
+     opacity: 0;
+     cursor: pointer;
+     height: 0;
+     width: 0;
+   }
+   /* On mouse-over, add a grey background color */
+   &:hover{
+     input ~ .iris-checkbox-checkmark {
+       background-color: #ccc;
+     }
+   }
+   /* When the checkbox is checked, add a blue background */
+   input:checked ~ .iris-checkbox-checkmark {
+     background-color: darken($mint-color, 20%);
+     /* Show the checkmark when checked */
+     &:after {
+       display: block;
+     }
+   }
+   /* Style the checkmark/indicator */
+   .iris-checkbox-checkmark:after {
+     left: 12px;
+     top: 2px;
+     width: 9px;
+     height: 25px;
+     border: solid white;
+     border-width: 0 3px 3px 0;
+     -webkit-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     transform: rotate(45deg);
+   }
+}
+
+/* Create a custom checkbox */
+.iris-checkbox-checkmark {
+  position: absolute;
+  border-radius: 5px;
+  top: 0;
+  left: 0;
+  height: 33px;
+  width: 33px;
+  background-color: #eee;
+  /* Create the checkmark/indicator (hidden when not checked) */
+  &:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+}
