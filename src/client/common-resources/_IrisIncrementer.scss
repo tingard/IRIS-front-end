@@ -1,5 +1,6 @@
 @import './color-scheme';
 @import './size-constants';
+
 .iris-incrementer {
   @media screen and (max-width: $phone-width) {
     display: flex;

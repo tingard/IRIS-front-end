@@ -1,5 +1,19 @@
-@import 'common-style';
+@import 'color-scheme';
 @import 'size-constants';
+
+$primaryButton: ( text: #ffffff, normal: darken($mint-color, 35%),
+  hover: darken($mint-color, 45%), border: darken($mint-color, 60%) );
+
+$secondaryButton: ( text: #ffffff, normal: $blue-color,
+  hover: darken($blue-color, 10%), border: darken($blue-color, 30%) );
+
+$tertiaryButton: ( text: #444444, normal: #ffffff, hover: #dddddd, border: #aaaaaa );
+
+$actionButton: ( text: #ffffff, normal: $red-color,
+  hover: darken($red-color, 10%), border: darken($red-color, 30%) );
+
+$deleteButton: ( text: #110000, normal: #fff2f2, hover: #ffe2e2, border: #ad1313 );
+
 
 @mixin disable() {
   &:disabled {
