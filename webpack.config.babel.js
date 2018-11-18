@@ -1,4 +1,5 @@
 // import paths from './gulp-paths';
+const WebpackBar = require('webpackbar');
 
 export default {
   output: {
@@ -28,4 +29,7 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  plugins: [
+    new WebpackBar(),
+  ],
 };
