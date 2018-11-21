@@ -1,3 +1,4 @@
+/* eslint no-bitwise: ["error", { "allow": ["&"] }] */
 import React from 'react';
 import PropTypes from 'prop-types';
 import IrisSelect from '../../common-resources/IrisSelect';
@@ -8,17 +9,27 @@ class NotificationPreferences extends React.Component {
     this.state = {
       email: props.email,
       browser: props.browser,
-      level: props.level,
+      messages: props.level & 1,
+      newImage: (props.level & 2) / 2,
     };
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
       email: nextProps.email,
       browser: nextProps.browser,
-      level: nextProps.level,
+      messages: nextProps.level & 1,
+      newImage: (nextProps.level & 2) / 2,
     });
   }
+  bundleReturn(state) {
+    return {
+      email: state.email,
+      browser: state.browser,
+      level: parseInt(state.newImage * 2, 10) + parseInt(state.messages, 10),
+    };
+  }
   render() {
+    console.log(this.state);
     return (
       <section>
         <h3>Notifications</h3>
@@ -35,7 +46,9 @@ class NotificationPreferences extends React.Component {
               checked={this.state.email}
               onChange={e => this.setState(
                 { email: e.target.checked },
-                () => this.props.onChange(this.state),
+                () => this.props.onChange(
+                  this.bundleReturn(this.state),
+                ),
               )}
             />
             <span className="iris-checkbox-checkmark" />
@@ -54,7 +67,9 @@ class NotificationPreferences extends React.Component {
               checked={this.state.browser}
               onChange={e => this.setState(
                 { browser: e.target.checked },
-                () => this.props.onChange(this.state),
+                () => this.props.onChange(
+                  this.bundleReturn(this.state),
+                ),
               )}
             />
             <span className="iris-checkbox-checkmark" />
@@ -62,16 +77,32 @@ class NotificationPreferences extends React.Component {
         </div>
         <IrisSelect
           id="volunteer-notification-level-select"
-          label="When should we notify you that students need help?"
+          label="Should we notify you when you have a new message?"
+          options={[
+            { value: '0', text: 'Never' },
+            { value: '1', text: 'Immediatey' },
+          ]}
+          value={(this.state.messages).toString()}
+          onChange={messages => this.setState(
+            { messages },
+            () => this.props.onChange(
+              this.bundleReturn(this.state),
+            ),
+          )}
+        />
+        <IrisSelect
+          id="volunteer-notification-level-select"
+          label="Should we notify you when a student need help?"
           options={[
             { value: '0', text: 'Not at all' },
-            { value: '1', text: 'Daily' },
-            { value: '2', text: 'Immediatey' },
+            { value: '1', text: 'Immediatey' },
           ]}
-          value={this.state.level.toString()}
-          onChange={level => this.setState(
-            { level },
-            () => this.props.onChange(this.state),
+          value={this.state.newImage.toString()}
+          onChange={newImage => this.setState(
+            { newImage },
+            () => this.props.onChange(
+              this.bundleReturn(this.state),
+            ),
           )}
         />
       </section>
@@ -87,7 +118,7 @@ NotificationPreferences.propTypes = {
 };
 
 NotificationPreferences.defaulProps = {
-  level: '0',
+  level: '3',
 };
 
 export default NotificationPreferences;
