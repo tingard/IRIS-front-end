@@ -5,6 +5,7 @@ lib
 dist/bundles
 dist/styles/
 dist/*-service-worker.js
+dist/*-bundle.js*
 #yarn.lock
 .yarnclean
 *.tgz

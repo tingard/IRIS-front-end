@@ -1,8 +1,12 @@
 // import paths from './gulp-paths';
-const WebpackBar = require('webpackbar');
+import WebpackBar from 'webpackbar';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import webpack from 'webpack';
+import path from 'path';
 
 export default {
   output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name]-bundle.js',
   },
   entry: {
@@ -11,9 +15,10 @@ export default {
     volunteer: './src/client/volunteer/index.jsx',
     'licence-owner': './src/client/licence-owner/index.jsx',
   },
-  devtool: 'cheap-source-map',
+  devtool: process.env.NODE_ENV === 'production' ? false : 'cheap-source-map',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
@@ -29,7 +34,14 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  plugins: [
-    new WebpackBar(),
-  ],
+  plugins: (process.env.NODE_ENV === 'production'
+    ? [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production'),
+      }),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new UglifyJsPlugin(),
+    ]
+    : [new WebpackBar()]
+  ),
 };
