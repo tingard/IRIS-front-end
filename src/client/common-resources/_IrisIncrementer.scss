@@ -1,7 +1,9 @@
 @import './color-scheme';
 @import './size-constants';
+@import './IrisFont';
 
 .iris-incrementer {
+  font-family: $iris-font;
   @media screen and (max-width: $phone-width) {
     display: flex;
   }

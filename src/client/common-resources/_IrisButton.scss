@@ -1,5 +1,6 @@
 @import 'color-scheme';
 @import 'size-constants';
+@import './IrisFont';
 
 $primaryButton: ( text: #ffffff, normal: darken($mint-color, 35%),
   hover: darken($mint-color, 45%), border: darken($mint-color, 60%) );
@@ -34,6 +35,7 @@ $deleteButton: ( text: #110000, normal: #fff2f2, hover: #ffe2e2, border: #ad1313
 }
 .iris-button {
   border: 1px solid #ddd;
+  @include iris-font();
   box-sizing: border-box;
   display: inline-block;
   padding: 8px 16px;

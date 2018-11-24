@@ -1,19 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './_IrisIncrementer.scss';
 
-const Incrementer = props => (
+const Incrementer = ({ onDecrease, onIncrease }) => (
   <div className="iris-incrementer">
     <button
       className="decrease"
       aria-label="decrease"
-      onClick={props.onDecrease}
-    >-
+      type="button"
+      onClick={onDecrease}
+    >
+-
     </button>
     <button
       className="increase"
       aria-label="increase"
-      onClick={props.onIncrease}
-    >+
+      type="button"
+      onClick={onIncrease}
+    >
++
     </button>
   </div>
 );
