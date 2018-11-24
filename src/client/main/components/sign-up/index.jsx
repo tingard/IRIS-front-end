@@ -12,14 +12,16 @@ class SignUpPage extends React.Component {
     this.api = props.api;
     this.onComplete = this.onComplete.bind(this);
   }
+
   onComplete(payload) {
     this.api.registerUser(payload).then(
       (res) => { if (res.success) location.reload(); },
     );
   }
+
   render() {
     return (
-      <div className="w3-container w3-display-container sign-up-sheet" style={{ minHeight: '100vh' }}>
+      <div className="w3-container w3-display-container" style={{ minHeight: '100vh' }}>
         <div className="w3-center w3-padding-16">
           <img
             src="/images/irisProposed_withoutBackground_100x100.png"

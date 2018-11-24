@@ -4,24 +4,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import IrisButton from '../../../common-resources/IrisButton';
-import IrisSelect from '../../../common-resources/IrisSelect';
-
-const availableSubjects = [
-  { value: 'physics', text: 'Physics' },
-  { value: 'maths', text: 'Maths' },
-  { value: 'biology', text: 'Biology' },
-  { value: 'chemistry', text: 'Chemistry' },
-  { value: 'computerScience', text: 'Computer Science' },
-  { value: 'psychology', text: 'Psychology' },
-  { value: 'finance', text: 'Finance' },
-];
-
-const levelOptions = [
-  { value: '0', text: 'Not at all' },
-  { value: '1', text: 'GCSE level' },
-  { value: '2', text: 'A-level' },
-  { value: '3', text: 'Degree level' },
-];
+import IrisLevelsSelect from '../../../common-resources/IrisLevelsSelect';
+import validateEmail from '../../../common-resources/validateEmail';
+import '../../../common-resources/_IrisInput.scss';
+import '../../styles/sign-up.scss';
 
 const wrapQuestion = (q, htmlFor) => (
   <MediaQuery minWidth={601}>
@@ -52,38 +38,42 @@ class AboutVolunteer extends React.Component {
     this.state = {
       isValidEmail: true,
       allFieldsDone: false,
+      name: '',
+      email: '',
+      password: '',
       levels: {},
     };
-    availableSubjects.forEach(({ value }) => {
-      this.state.levels[value] = '0';
+    IrisLevelsSelect.subjects.forEach((v) => {
+      this.state.levels[v[0]] = '0';
     });
-    this.selects = {};
-    this.validateEmail = this.validateEmail.bind(this);
     this.checkFields = this.checkFields.bind(this);
     this.registerUser = this.registerUser.bind(this);
   }
-  validateEmail() {
-    const isValidEmail = /\S+@\S+\.\S+/.test(this.emailInput.value) || this.emailInput.value === '';
-    this.setState({ isValidEmail }, this.checkFields);
-  }
+
   checkFields() {
-    const allFieldsDone = (
-      this.passwordInput.value !== '' &&
-      this.emailInput.value !== '' &&
-      this.nameInput.value !== '' && this.state.isValidEmail
-    );
-    this.setState({ allFieldsDone });
+    this.setState(prevState => ({
+      allFieldsDone: (
+        prevState.name !== ''
+        && prevState.email !== ''
+        && prevState.password !== ''
+        && validateEmail(prevState.email)
+      ),
+    }));
   }
+
   registerUser() {
-    const payload = {
+    const {
+      name, email, password,
+    } = this.state;
+    this.props.onComplete({
       utype: 'volunteer',
-      email: this.emailInput.value,
-      name: this.nameInput.value,
-      pwd: this.passwordInput.value,
+      email,
+      name,
+      pwd: password,
       levels: this.state.levels,
-    };
-    this.props.onComplete(payload);
+    });
   }
+
   render() {
     return (
       <div
@@ -94,78 +84,82 @@ class AboutVolunteer extends React.Component {
           Great! We're always looking for more volunteers to help out students.
           Could you answer a few questions about yourself for us?
         </h3>
-        <div className="w3-row" role="group" aria-label="Tell us your name">
-          {wrapQuestion('What\'s your name?', 'name-input')}
-          <div className="w3-half">
+        <section role="region" aria-label="basic information">
+          <div
+            className="sign-up-question"
+            role="group"
+            aria-label="Tell us your name"
+          >
+            {wrapQuestion('What\'s your name?', 'name-input')}
             <input
               id="name-input"
               placeholder="Albert Einstein"
-              className="grapheel-input"
-              ref={(r) => { this.nameInput = r; }}
+              className="iris-input"
               aria-label="Type your name here"
-              onChange={this.checkFields}
+              onChange={({ target: { value } }) => this.setState(
+                { name: value },
+                this.checkFields,
+              )}
+              value={this.state.name}
             />
           </div>
-        </div>
-        <div
-          className="w3-row w3-padding-16"
-          role="group"
-          aria-label="What is your email address"
-        >
-          {wrapQuestion('And your email address?', 'email-input')}
-          <div className="w3-half">
+          <div
+            className="sign-up-question"
+            role="group"
+            aria-label="What is your email address"
+          >
+            {wrapQuestion('And your email address?', 'email-input')}
             <input
               id="email-input"
               type="email"
               placeholder="You'll use this to login"
-              className={`grapheel-input ${this.state.isValidEmail ? '' : 'invalid'}`}
-              ref={(r) => { this.emailInput = r; }}
-              onChange={this.validateEmail}
+              className={`iris-input ${validateEmail(this.state.email) ? '' : 'invalid'}`}
+              onChange={({ target: { value } }) => this.setState(
+                { email: value },
+                this.checkFields,
+              )}
+              value={this.state.email}
             />
           </div>
-        </div>
-        <div
-          className="w3-row w3-padding-16"
-          role="group"
-          aria-label="Which subjects can you help with?"
-        >
-          {wrapQuestion('What subjects would you like to help with?', '')}
-          <div className="w3-half" style={{ paddingTop: '10px' }}>
-            {availableSubjects.map(
-              ({ value, text }) => (
-                <div className="w3-row" key={`select-${value}`}>
-                  <IrisSelect
-                    id={`volunteer-${value}-level-select`}
-                    options={levelOptions}
-                    label={text}
-                    value={this.state.levels[value]}
-                    onChange={e => this.setState(
-                      { levels: Object.assign({}, this.state.levels, { [value]: e }) },
-                    )}
-                  />
-                </div>
-              ),
-            )}
-          </div>
-        </div>
-        <div
-          className="w3-row w3-padding-16"
-          role="group"
-          aria-label="Set a password"
-        >
-          {wrapQuestion('Lastly, set a password:', 'passwordInput')}
-          <div className="w3-half">
+          <div
+            className="sign-up-question"
+            role="group"
+            aria-label="Set a password"
+          >
+            {wrapQuestion('Next, set a password:', 'password-input')}
             <input
               id="password-input"
               type="password"
               placeholder="Type a password"
-              className="grapheel-input"
-              ref={(r) => { this.passwordInput = r; }}
-              onChange={this.checkFields}
-              onKeyPress={e => (e.key === 'Enter' ? this.registerUser() : null)}
+              className="iris-input"
+              onChange={({ target: { value } }) => this.setState(
+                { password: value },
+                this.checkFields,
+              )}
+              value={this.state.password}
             />
           </div>
-        </div>
+        </section>
+        <section
+          className="w3-row"
+          style={{ maxWidth: '80vw', margin: 'auto' }}
+          role="region"
+          aria-labelledby="about-iris-levels-header"
+        >
+          <h3 id="about-iris-levels-header">What students can you help?</h3>
+          <p>
+            Please let us know which students you would feel comfortable helping.
+            You can always change these options in your profile.
+          </p>
+          <IrisLevelsSelect
+            levels={this.state.levels}
+            onChange={(s, v) => this.setState(
+              prevState => ({
+                levels: Object.assign({}, prevState.levels, { [`${s}`]: v }),
+              }),
+            )}
+          />
+        </section>
         <div className="w3-row">
           <IrisButton
             disabled={!this.state.allFieldsDone}

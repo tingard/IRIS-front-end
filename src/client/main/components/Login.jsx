@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import validateEmail from '../../common-resources/validateEmail';
 import IrisAlert from '../../common-resources/IrisAlert';
+import '../styles/login.scss';
 
 class Login extends React.Component {
   constructor(props) {
@@ -17,13 +18,14 @@ class Login extends React.Component {
       detailsAreInvalid: false,
     };
   }
+
   onLogin() {
     this.setState(
       { didFailLogin: false, emailIsInvalid: false, detailsAreInvalid: false },
       () => (
-        validateEmail(this.state.email) ?
-          this.sendLogin() :
-          setTimeout(
+        validateEmail(this.state.email)
+          ? this.sendLogin()
+          : setTimeout(
             () => this.setState({
               didFailLogin: true,
               emailIsInvalid: true,
@@ -34,6 +36,7 @@ class Login extends React.Component {
       ),
     );
   }
+
   sendLogin() {
     this.props.onLogin(
       this.props.type,
@@ -42,7 +45,6 @@ class Login extends React.Component {
     )
       .then(
         (r) => {
-          console.log('tried to login', r);
           if (!r.success) {
             this.setState({
               didFailLogin: true,
@@ -56,6 +58,7 @@ class Login extends React.Component {
         e => console.log('caught login error', e),
       );
   }
+
   render() {
     return (
       <div
@@ -81,14 +84,14 @@ class Login extends React.Component {
         ) : null}
         <input
           type="email"
-          className={`grapheel-input ${this.state.didFailLogin ? 'invalid' : ''}`}
+          className={`iris-input ${this.state.didFailLogin ? 'invalid' : ''}`}
           placeholder="email address"
           value={this.state.email}
           onChange={e => this.setState({ email: e.target.value })}
         />
         <input
           type="password"
-          className={`grapheel-input ${this.state.didFailLogin ? 'invalid' : ''}`}
+          className={`iris-input ${this.state.didFailLogin ? 'invalid' : ''}`}
           placeholder="password"
           onKeyPress={e => (e.key === 'Enter' ? this.onLogin() : null)}
           value={this.state.password}
@@ -97,12 +100,14 @@ class Login extends React.Component {
         <Link to="/forgotten">Forgotten password?</Link>
         <button
           className="iris-button primary"
+          type="button"
           onClick={this.onLogin}
         >
           Login
         </button>
-        <div>
-          <Link to={`/create/${this.props.type}`}>Create an account</Link>&nbsp;
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Link to={`/create/${this.props.type}`}>Create an account</Link>
+          {' '}
           <Link to="/">IRIS home</Link>
         </div>
       </div>

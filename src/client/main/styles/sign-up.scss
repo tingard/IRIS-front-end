@@ -1,8 +1,28 @@
+@import '../../common-resources/size-constants';
+
 p {
   line-height: 2.0;
   color: #333;
 }
-label.sign-up-question {
-  display: block;
-  padding-top: 22px;
+
+.sign-up-question {
+  justify-content: center;
+  label {
+    flex-grow: 1;
+    display: block;
+    padding-top: 22px;
+    margin-right: 10px;
+  }
+  input {
+    width: 100%;
+  }
+  @media screen and (min-width: $phone-width) {
+    display: flex;
+    label {
+      text-align: right;
+    }
+    input {
+      width: 50%;
+    }
+  }
 }

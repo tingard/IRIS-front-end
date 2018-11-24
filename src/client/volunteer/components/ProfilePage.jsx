@@ -27,6 +27,7 @@ class ProfilePage extends React.Component {
       },
     };
   }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       email: nextProps.user.get('email'),
@@ -39,12 +40,14 @@ class ProfilePage extends React.Component {
       },
     });
   }
+
   getDefaultLevelSelect(s) {
     if (this.props.user.get('levels').get(s[0])) {
       return this.props.user.get('levels').get(s[0]).toString();
     }
     return '0';
   }
+
   saveProfile() {
     if (this.state.emailIsValid) {
       this.props.setUserDetails({
@@ -60,6 +63,7 @@ class ProfilePage extends React.Component {
       this.emailInput.scrollIntoView();
     }
   }
+
   render() {
     if (this.props.user.get('state').get('isFetching')) return <IrisLoader />;
     return (
@@ -81,12 +85,12 @@ class ProfilePage extends React.Component {
                   email: value,
                   emailIsValid: isValidEmail(value),
                 })}
-                onBlur={({ target: { value } }) => (isValidEmail(value) ?
-                  this.props.setUserDetails({
+                onBlur={({ target: { value } }) => (isValidEmail(value)
+                  ? this.props.setUserDetails({
                     id: this.props.user.get('id'),
                     details: { email: value },
-                  }) :
-                  Promise.reject()
+                  })
+                  : Promise.reject()
                 )}
               />
             </label>
@@ -141,13 +145,15 @@ class ProfilePage extends React.Component {
               text="Save Profile"
             />
           </div>
-          { this.props.user.get('state').get('updateDidSucceed') &&
+          { this.props.user.get('state').get('updateDidSucceed')
+            && (
             <IrisAlert
               title="Saved"
               message="Succesfully updated profile!"
               type="success"
               onClose={this.props.dismissUpdateAlert}
             />
+            )
           }
           <div className="w3-padding-16">
             <IrisButton

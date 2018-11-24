@@ -1,6 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../../common-resources/_IrisBase.scss';
+import '../../common-resources/_IrisButton.scss';
+import '../styles/home-page.scss';
 
 const HomePage = () => (
   <div id="iris-home-page">

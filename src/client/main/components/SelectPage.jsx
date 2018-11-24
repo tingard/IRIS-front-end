@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/select-page.scss';
 
 const SelectPage = () => (
   <div className="login-container" key="select-page">

@@ -13,6 +13,7 @@ class CheckoutForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleSubmit(ev) {
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
@@ -23,6 +24,7 @@ class CheckoutForm extends React.Component {
       buttonIsDisabled: true,
     });
     this.props.stripe.createToken({ name: this.props.user.name }).then(({ token }) => {
+      console.log(token);
       this.props.registerCard(token);
     })
       .catch(
@@ -44,7 +46,7 @@ class CheckoutForm extends React.Component {
         <IrisButton
           type="primary"
           text="Register Card"
-          onClick={() => true}
+          onClick={this.handleSubmit}
           disabled={this.state.buttonIsDisabled}
         />
       </form>

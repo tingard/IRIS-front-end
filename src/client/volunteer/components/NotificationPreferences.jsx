@@ -13,6 +13,7 @@ class NotificationPreferences extends React.Component {
       newImage: (props.level & 2) / 2,
     };
   }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       email: nextProps.email,
@@ -21,6 +22,7 @@ class NotificationPreferences extends React.Component {
       newImage: (nextProps.level & 2) / 2,
     });
   }
+
   bundleReturn(state) {
     return {
       email: state.email,
@@ -28,6 +30,7 @@ class NotificationPreferences extends React.Component {
       level: parseInt(state.newImage * 2, 10) + parseInt(state.messages, 10),
     };
   }
+
   render() {
     console.log(this.state);
     return (

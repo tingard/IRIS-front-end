@@ -3,18 +3,21 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import Login from './Login';
 import SelectPage from './SelectPage';
+import '../styles/login.scss';
 
 const LoginPage = props => (
   <div id="login-root">
     <Route
       exact
       path="/login/student"
-      render={p => (<Login
-        type="student"
-        title="Student"
-        onLogin={props.onLogin}
-        {...p}
-      />)}
+      render={p => (
+        <Login
+          type="student"
+          title="Student"
+          onLogin={props.onLogin}
+          {...p}
+        />
+      )}
     />
     <Route
       exact
@@ -45,7 +48,7 @@ const LoginPage = props => (
       path="/login"
       render={p => (
         <SelectPage {...p} />
-    )}
+      )}
     />
   </div>
 );

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ClientAPI from 'grapheel-iris-client-api';
+import '../common-resources/_IrisBase.scss';
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
 import SignUpPage from './components/sign-up';
@@ -19,6 +20,7 @@ class MainApp extends React.Component {
     };
     this.api = new ClientAPI();
   }
+
   componentDidMount() {
     this.api.init()
       .then(
@@ -32,6 +34,7 @@ class MainApp extends React.Component {
         },
       );
   }
+
   onLogin(utype, email, password) {
     return this.api.login(utype, email, password).then(
       (result) => {
@@ -45,6 +48,7 @@ class MainApp extends React.Component {
       },
     );
   }
+
   render() {
     return (
       <Router>
@@ -89,6 +93,6 @@ class MainApp extends React.Component {
 }
 
 ReactDOM.render(
-  <MainApp />
-  , document.querySelector('.app'),
+  <MainApp />,
+  document.querySelector('.app'),
 );

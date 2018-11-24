@@ -10,7 +10,6 @@
     "dev": "poi dev",
     "build": "poi build",
     "fast-lint": "eslint \"./src/**/*.js?(x)\" -c ./package.json",
-    "build": "gulp compile",
     "start": "gulp start",
     "start-static": "node src/server/index.js",
     "lint": "gulp lint",
@@ -122,6 +121,7 @@
       "no-restricted-globals": "warn",
       "no-underscore-dangle": 0,
       "react/destructuring-assignment": 0,
+      "react/jsx-one-expression-per-line": 0,
       "react/forbid-prop-types": [
         1
       ],
