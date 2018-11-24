@@ -1,30 +1,30 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
 import PropTypes from 'prop-types';
+import './_IrisSelect.scss';
 
-const IrisSelect = (props) => {
-  let { id } = props;
-  if (id === false) {
-    id = Math.random();
-  }
+const IrisSelect = ({
+  id, options, label, value, onChange,
+}) => {
+  const idString = `${id === false ? Math.random() : id}-select`;
   const select = (
     <select
-      id={`${id}-select`}
+      id={idString}
       className="iris-select"
-      onChange={e => props.onChange(e.target.value)}
-      value={props.value}
+      onChange={e => onChange(e.target.value)}
+      value={value}
     >
-      {props.options.map(
+      {options.map(
         (option, i) => <option key={i} value={option.value}>{option.text}</option>,
       )}
     </select>
   );
-  if (!props.label) {
+  if (!label) {
     return select;
   }
   return (
-    <label htmlFor={`${id}-select`} className="w3-panel">
-      <span className="iris-select-label">{props.label}</span>
+    <label htmlFor={idString} className="w3-panel">
+      <span className="iris-select-label">{label}</span>
       {select}
     </label>
   );

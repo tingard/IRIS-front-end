@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './_IrisButton.scss';
 
-const IrisButton = props => (
+const IrisButton = ({
+  text, disabled, type, onClick, className,
+}) => (
   <button
-    className={`iris-button ${props.type} ${props.className}`}
-    onClick={props.onClick}
-    disabled={props.disabled}
+    className={`iris-button ${type} ${className}`}
+    type="button"
+    onClick={onClick}
+    disabled={disabled}
   >
-    {props.text}
+    {text}
   </button>
 );
 

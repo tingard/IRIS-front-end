@@ -1,4 +1,5 @@
 import React from 'react';
+import './_IrisLoader.scss';
 // loading gif from https://codepen.io/Roosa/pen/yOQrdg
 
 const IrisLoader = () => {

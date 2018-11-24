@@ -1,21 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './_IrisAlert.scss';
 
-const IrisAlert = props => (
+const IrisAlert = ({
+  type, title, message, onClose,
+}) => (
   <div
-    className={`iris-alert ${props.type} w3-display-container`}
+    className={`iris-alert ${type} w3-display-container`}
     role="alertdialog"
-    aria-label={props.title}
+    aria-label={title}
   >
     <button
-      onClick={props.onClose}
+      onClick={onClose}
+      type="button"
       aria-label="close"
       className="w3-button w3-medium w3-display-topright"
     >
       &times;
     </button>
-    <h3 className="iris-alert-title">{props.title}</h3>
-    <p className="iris-alert-message">{props.message}</p>
+    <h3 className="iris-alert-title">{title}</h3>
+    <p className="iris-alert-message">{message}</p>
   </div>
 );
 

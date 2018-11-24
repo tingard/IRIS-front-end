@@ -4,21 +4,21 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import GraphDescriptor from './GraphDescriptor';
 import TableDescriptor from './TableDescriptor';
 
-const ImageDescription = (props) => {
-  switch (props.classification.get('imageType')) {
+const ImageDescription = ({ classification }) => {
+  switch (classification.get('imageType')) {
     case 'graph':
-      return <GraphDescriptor {...props.classification.get('imageDetails').toObject()} />;
+      return <GraphDescriptor {...classification.get('imageDetails').toObject()} />;
     case 'table':
-      return <TableDescriptor {...props.classification.get('imageDetails').toObject()} />;
+      return <TableDescriptor {...classification.get('imageDetails').toObject()} />;
     case 'other':
       return (
         <React.Fragment>
           {/* <h3>Image Details</h3> */}
-          {props.classification.get('imageDetails').get('value').length > 0 ?
-            props.classification.get('imageDetails').get('value').split(/\n/g).map(
+          {classification.get('imageDetails').get('value').length > 0
+            ? classification.get('imageDetails').get('value').split(/\n/g).map(
               (paragraph, i) => <p key={i}>{paragraph}</p>,
-            ) :
-          ''}
+            )
+            : ''}
         </React.Fragment>
       );
     default:
