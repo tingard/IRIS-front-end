@@ -1,0 +1,67 @@
+@import '../../common-resources/size-constants';
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  justify-content: space-evenly;
+  @media screen and (min-width: $medium-width) {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+a.login-option {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  &:hover {
+    border: 1px solid #aaa;
+    position: relative;
+    top: -1px;
+    box-shadow: 0px 7px 10px #ccc;
+  }
+  &:active {
+    box-shadow: 0px 3px 4px #aaa;
+    top: 1px;
+  }
+}
+.login-option {
+  background-color: white;
+  padding: 0 10px;
+  text-align: center;
+  margin: 10px;
+  flex-basis: 0%;
+  box-shadow: 0px 5px 4px #ccc;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  &.login {
+    &.failed {
+      animation: shake 1s;
+    }
+    flex-grow: 1;
+    max-width: 400px;
+    padding: 20px;
+  }
+  @media screen and (max-width: 700px) {
+    width: 90%;
+    flex-grow: 0;
+    height: auto;
+  }
+  .image-holder {
+    text-align: center;
+    margin-top: 10px;
+    img {
+      max-height: 100px;
+    }
+  }
+  a {
+    color: #111;
+    &:hover {
+      color: #666;
+    }
+  }
+}

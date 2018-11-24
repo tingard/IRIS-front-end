@@ -3,143 +3,156 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
+import '../../../common-resources/_IrisInput.scss';
+import '../../../common-resources/_IrisCheckbox.scss';
+import validateEmail from '../../../common-resources/validateEmail';
 import IrisAlert from '../../../common-resources/IrisAlert';
 import IrisButton from '../../../common-resources/IrisButton';
 import RegisterStripeCard from './registerStripeCard';
+import '../../styles/sign-up.scss';
 
 const wrapQuestion = (q, htmlFor) => (
   <MediaQuery minWidth={601}>
     {(matches) => {
       if (matches) {
         return (
-          <div className="w3-half w3-right-align">
-            <label htmlFor={htmlFor} className="w3-margin-right sign-up-question">
-              {q}
-            </label>
-          </div>
+          <label htmlFor={htmlFor}>
+            {q}
+          </label>
         );
       }
       return (
-        <div className="w3-half w3-left-align">
-          <label htmlFor={htmlFor} className="w3-margin-right">
-            {q}
-          </label>
-        </div>
+        <label htmlFor={htmlFor}>
+          {q}
+        </label>
       );
     }}
   </MediaQuery>
 );
 
-class AboutStudent extends React.Component {
+class StudentInformation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isValidEmail: true,
       allFieldsDone: false,
       payForOwnLicence: false,
-      user: {},
+      name: '',
+      email: '',
+      password: '',
+      cardToken: null,
     };
     this.stripe = new Stripe('pk_test_dkKtfYjdT6PXQKYtNseZmkPb');
-    this.validateEmail = this.validateEmail.bind(this);
     this.checkFields = this.checkFields.bind(this);
     this.registerCard = this.registerCard.bind(this);
     this.registerUser = this.registerUser.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
-  validateEmail() {
-    const isValidEmail = /\S+@\S+\.\S+/.test(this.emailInput.value) || this.emailInput.value === '';
-    this.setState({ isValidEmail }, this.checkFields);
+
+  getUser() {
+    const {
+      name, email, password, cardToken,
+    } = this.state;
+    return {
+      name, email, password, cardToken,
+    };
   }
+
   checkFields() {
-    const allFieldsDone = (
-      this.passwordInput.value !== '' &&
-      this.emailInput.value !== '' &&
-      this.nameInput.value !== '' &&
-      this.state.isValidEmail &&
-      (!this.state.payForOwnLicence || !!(this.state.user.cardToken || false))
-    );
-    this.setState({
-      allFieldsDone,
-      user: {
-        name: this.nameInput.value,
-        email: this.emailInput.value,
-        pwd: this.passwordInput.value,
-        cardToken: this.state.user.cardToken,
-        licenceId: '',
-      },
-      cardLinkStatusDismissed: false,
-    });
+    this.setState(prevState => ({
+      allFieldsDone: (
+        prevState.name !== ''
+        && prevState.email !== ''
+        && prevState.password !== ''
+        && validateEmail(prevState.email)
+        && (!prevState.payForOwnLicence || !!(prevState.cardToken || false))
+      ),
+    }));
   }
+
   registerCard(cardToken) {
+    console.log('registered card');
     this.setState(
-      { user: Object.assign({}, this.state.user, { cardToken }) },
+      { cardToken },
       this.checkFields,
     );
   }
-  registerUser() {
-    const payload = Object.assign(
-      { utype: 'student' },
-      this.state.user,
-    );
 
-    this.props.onComplete(payload);
+  registerUser() {
+    const {
+      name, email, password, cardToken,
+    } = this.state;
+    this.props.onComplete({
+      utype: 'student', name, email, pwd: password, cardToken,
+    });
   }
+
   render() {
     return (
       <div
         className="w3-row-padding w3-animate-opacity"
         style={{ zIndex: 1, backgroundColor: 'white' }}
       >
-        <h3 className="w3-padding-16 w3-margin-bottom" style={{ maxWidth: '80vw', margin: 'auto' }}>
+        <h3
+          className="w3-padding-16 w3-margin-bottom"
+          style={{ maxWidth: '80vw', margin: 'auto' }}
+        >
           We look forward to being able to help you!
         </h3>
         <section role="region" aria-label="basic information">
-          <div className="w3-row w3-margin-bottom" role="group" aria-label="Tell us your name">
+          <div
+            className="sign-up-question"
+            role="group"
+            aria-label="Tell us your name"
+          >
             {wrapQuestion('What\'s your name?', 'name-input')}
-            <div className="w3-half">
-              <input
-                id="name-input"
-                placeholder="Albert Einstein"
-                className="grapheel-input"
-                ref={(r) => { this.nameInput = r; }}
-                aria-label="Type your name here"
-                onChange={this.checkFields}
-              />
-            </div>
+            <input
+              id="name-input"
+              placeholder="Albert Einstein"
+              className="iris-input"
+              aria-label="Type your name here"
+              onChange={({ target: { value } }) => this.setState(
+                { name: value },
+                this.checkFields,
+              )}
+              value={this.state.name}
+            />
           </div>
           <div
-            className="w3-row w3-margin-bottom"
+            className="sign-up-question"
             role="group"
             aria-label="What is your email address"
           >
             {wrapQuestion('And your email address?', 'email-input')}
-            <div className="w3-half">
-              <input
-                id="email-input"
-                type="email"
-                placeholder="You'll use this to login"
-                className={`grapheel-input ${this.state.isValidEmail ? '' : 'invalid'}`}
-                ref={(r) => { this.emailInput = r; }}
-                onChange={this.validateEmail}
-              />
-            </div>
+            <input
+              id="email-input"
+              type="email"
+              placeholder="You'll use this to login"
+              className={`iris-input ${this.state.isValidEmail ? '' : 'invalid'}`}
+              onChange={({ target: { value } }) => this.setState(
+                { email: value },
+                this.checkFields,
+              )}
+              value={this.state.email}
+            />
           </div>
           <div
-            className="w3-row w3-margin-bottom"
+            className="sign-up-question"
             role="group"
             aria-label="Set a password"
           >
-            {wrapQuestion('Next, set a password:', 'passwordInput')}
-            <div className="w3-half">
-              <input
-                id="password-input"
-                type="password"
-                placeholder="Type a password"
-                className="grapheel-input"
-                ref={(r) => { this.passwordInput = r; }}
-                onChange={this.checkFields}
-                onKeyPress={e => (e.key === 'Enter' ? this.registerUser() : null)}
-              />
-            </div>
+            {wrapQuestion('Next, set a password:', 'password-input')}
+            <input
+              id="password-input"
+              type="password"
+              placeholder="Type a password"
+              className="iris-input"
+              onChange={({ target: { value } }) => this.setState(
+                { password: value },
+                this.checkFields,
+              )}
+              value={this.state.password}
+            />
           </div>
         </section>
         <section
@@ -172,21 +185,25 @@ class AboutStudent extends React.Component {
           >
             Add payment details
           </h3>
-          <label className="switch" htmlFor="pay-for-own-licence-checkbox">
-            <span>I am paying for my own IRIS subscription:</span>
-            <input
-              type="checkbox"
-              className="grapheel-checkbox no-mouseflow"
-              id="pay-for-own-licence-checkbox"
-              name="pay-for-own-licence-checkbox"
-              ref={(r) => { this.ownLicenceCheckbox = r; }}
-              checked={this.state.payForOwnLicence}
-              onChange={e => this.setState(
-                { payForOwnLicence: e.target.checked },
-                this.checkFields,
-              )}
-            />
-          </label>
+          <div className="w3-padding-16">
+            <label
+              htmlFor="student-sign-up__paying-for-own"
+              className="iris-checkbox-container"
+            >
+              I am paying for my own IRIS subscription:
+              <input
+                type="checkbox"
+                className="no-mouseflow"
+                id="student-sign-up__paying-for-own"
+                checked={this.state.payForOwnLicence}
+                onChange={e => this.setState(
+                  { payForOwnLicence: e.target.checked },
+                  this.checkFields,
+                )}
+              />
+              <span className="iris-checkbox-checkmark" />
+            </label>
+          </div>
           { this.state.payForOwnLicence ? (
             <React.Fragment>
               <div
@@ -208,14 +225,14 @@ class AboutStudent extends React.Component {
                           <RegisterStripeCard
                             stripe={this.stripe}
                             registerCard={this.registerCard}
-                            user={this.state.user}
+                            user={this.getUser()}
                           />
                         </div>
                       ) : (
                         <div>
                           <RegisterStripeCard
                             stripe={this.stripe}
-                            user={this.state.user}
+                            user={this.getUser()}
                             registerCard={this.registerCard}
                           />
                         </div>
@@ -224,7 +241,7 @@ class AboutStudent extends React.Component {
                   }
                 </MediaQuery>
               </div>
-              {((this.state.user.cardToken || false) && !this.state.cardLinkStatusDismissed) ? (
+              {((this.state.cardToken || false) && !this.state.cardLinkStatusDismissed) ? (
                 <IrisAlert
                   title="Card successfully linked"
                   message="This card will be linked to your account"
@@ -241,7 +258,7 @@ class AboutStudent extends React.Component {
         </section>
         <div className="w3-row">
           <IrisButton
-            disabled={!this.state.allFieldsDone}
+            disabled={this.state.payForOwnLicence && (!this.state.allFieldsDone)}
             onClick={this.registerUser}
             className="w3-margin-top w3-bar"
             text="Sign up to IRIS!"
@@ -255,7 +272,7 @@ class AboutStudent extends React.Component {
   }
 }
 
-AboutStudent.propTypes = {
+StudentInformation.propTypes = {
   onComplete: PropTypes.func,
 };
-export default AboutStudent;
+export default StudentInformation;

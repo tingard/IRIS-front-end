@@ -1,12 +1,12 @@
 @import './IrisFont';
+@import 'color-scheme';
 
 input.iris-input {
   // border: 1px solid #eee;
-  font-family: $iris-font;
+  @include iris-font();
   padding: 10px 10px;
   margin: 10px 0;
   display: block;
-  width: 100%;
   border-radius: 4px;
   outline: none;
   border: 1px solid #DDDDDD;
