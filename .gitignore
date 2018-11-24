@@ -2,10 +2,7 @@ node_modules
 npm-debug.log
 yarn-error.log
 lib
-dist/bundles
-dist/styles/
-dist/*-service-worker.js
-dist/*-bundle.js*
+dist/
 #yarn.lock
 .yarnclean
 *.tgz
