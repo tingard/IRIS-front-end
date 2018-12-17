@@ -1,0 +1,10 @@
+{
+  "public": "dist",
+  "rewrites": [
+    { "source": "/login/**", "destination": "/index.html" },
+    { "source": "/create/**", "destination": "/index.html" },
+    { "source": "/student/**", "destination": "/student/index.html" },
+    { "source": "/volunteer/**", "destination": "/volunteer/index.html" },
+    { "source": "/licence-owner/**", "destination": "/licence-owner/index.html" }
+  ]
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImageDetails from './ImageDetails';
+import '../styles/images-page.scss';
 
 /* eslint-disable no-sequences */
 const ImagesPage = (props) => {

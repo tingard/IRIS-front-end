@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  uploadImage: formData => dispatch(uploadImage(formData)),
+  uploadImage: (formData) => { console.log('uploading', formData); return dispatch(uploadImage(formData)); },
   getImages: () => dispatch(getImages()),
 });
 

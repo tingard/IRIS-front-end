@@ -1,4 +1,6 @@
-import { Map, List, Record } from 'immutable';
+import {
+  Map, List, Record, fromJS,
+} from 'immutable';
 
 const StateRecord = new Record({
   isFetching: false,
@@ -47,7 +49,7 @@ const messageReducer = (state = initialState, action) => {
     case 'GET_MESSAGES_SUCCESS':
       // potentially many changes, so simply gonna update things here
       return state.merge({
-        messages: action.res.messages,
+        messages: fromJS(action.res.messages),
       }).set(
         'state',
         state.get('state')

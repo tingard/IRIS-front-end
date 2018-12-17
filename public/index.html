@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Grapheel IRIS</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -9,14 +10,40 @@
     <meta charset="UTF-8" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="/manifest.json" />
+    <!-- favicon -->
+    <!-- IE -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+    <!-- other browsers -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?" />
+
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <title>poi-test-project</title>
+    <script type="text/javascript">
+      window._mfq = window._mfq || [];
+      (function() {
+        var mf = document.createElement("script");
+        mf.type = "text/javascript"; mf.async = true;
+        mf.src = "//cdn.mouseflow.com/projects/b7ecad10-facc-42fc-920c-9d22f4b38081.js";
+        document.getElementsByTagName("head")[0].appendChild(mf);
+      })();
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102556390-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-102556390-2');
+    </script>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but poi-test-project doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <h1>Whoops!</h1>
+      <p>
+        IRIS relies on Javascript to operate for now. Please enable javascript
+        or try switching browsers.
+      </p>
     </noscript>
     <div class="app"></div>
   </body>

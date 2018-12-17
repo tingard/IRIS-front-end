@@ -8,6 +8,7 @@ import MessagesPanel from './MessagesList';
 import SendMessageBox from './SendMessageBox';
 import AcceptDescriptionPrompt from './AcceptDescriptionPrompt';
 import ratingValues from '../../common-resources/ratingValues';
+import '../styles/conversation-page.scss';
 
 class ConversationPage extends React.Component {
   constructor(props) {
@@ -18,16 +19,19 @@ class ConversationPage extends React.Component {
     this.setOrder = this.setOrder.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
   }
+
   setOrder(order) {
     // TODO: should this be reflected in redux?
     this.setState({ messageOrder: order });
   }
+
   sendMessage(message) {
     this.props.sendMessage(
       { messageId: this.props._id, message },
     );
     this.input.value = '';
   }
+
   render() {
     if (this.props._id === null) {
       return <Redirect to="/volunteer/messages" />;

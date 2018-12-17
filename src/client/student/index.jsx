@@ -81,6 +81,6 @@ const StudentApp = () => (
 );
 
 ReactDOM.render(
-  <StudentApp />
-  , document.querySelector('.app'),
+  <StudentApp />,
+  document.querySelector('.app'),
 );

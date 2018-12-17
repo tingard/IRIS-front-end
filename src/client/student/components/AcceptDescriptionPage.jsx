@@ -6,6 +6,7 @@ import IrisSelect from '../../common-resources/IrisSelect';
 import IrisAlert from '../../common-resources/IrisAlert';
 import ImageDescription from '../../common-resources/imageDescription';
 import ratingValues from '../../common-resources/ratingValues';
+import '../styles/accept-description-page.scss';
 
 class AcceptDescriptionPage extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class AcceptDescriptionPage extends React.Component {
     };
     this.acceptDescription = this.acceptDescription.bind(this);
   }
+
   acceptDescription() {
     this.props.acceptDescription(this.state.rating)
       .then(
@@ -33,6 +35,7 @@ class AcceptDescriptionPage extends React.Component {
         e => ((console.warn('accepting description failed', e), Promise.reject(e))),
       );
   }
+
   render() {
     if (this.props.isFetching || this.props.message === null) {
       return <p>Loading...</p>;
@@ -59,12 +62,14 @@ class AcceptDescriptionPage extends React.Component {
             text="Submit"
             onClick={this.acceptDescription}
           />
-          {this.state.didError ? <IrisAlert
-            title="Whoops, something went wrong..."
-            message="Please try again later!"
-            type="warning"
-            onClose={() => this.setState({ didError: false })}
-          /> : null}
+          {this.state.didError ? (
+            <IrisAlert
+              title="Whoops, something went wrong..."
+              message="Please try again later!"
+              type="warning"
+              onClose={() => this.setState({ didError: false })}
+            />
+          ) : null}
         </section>
       </div>
     );

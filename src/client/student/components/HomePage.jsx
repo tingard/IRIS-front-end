@@ -5,6 +5,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../common-resources/IrisButton';
 import IrisSelect from '../../common-resources/IrisSelect';
 import IrisLoader from '../../common-resources/IrisLoader';
+import '../../common-resources/_IrisBase.scss';
+import '../../common-resources/_IrisInput.scss';
 
 // TODO: Upload form should be a modal which users are guided through
 // (with clearly labelled steps)
@@ -23,30 +25,34 @@ class HomePage extends React.Component {
       file: null,
     };
   }
+
   checkIfInputsComplete() {
-    this.setState({
+    this.setState(oldState => ({
       inputsAreComplete: (
-        this.state.file !== null &&
-        this.state.note.length > 0 &&
-        this.state.question.length > 0
+        oldState.file !== null
+        && oldState.note.length > 0
+        && oldState.question.length > 0
       ),
-    });
+    }));
   }
+
   formShouldSubmit(e) {
     e.preventDefault();
     const formData = new FormData();
 
     // image file input, chosen by user
     const data = {
-      irisImage: this.state.file,
       question: this.state.question,
       note: this.state.note,
       difficulty: this.state.difficulty,
       subject: this.state.subject,
     };
+    console.log(data);
     Object.entries(data).forEach((key, value) => {
       formData.append(key, value);
     });
+    formData.append('irisImage', this.state.file, this.state.file.name);
+    console.log(formData);
     this.props.uploadImage(formData);
     this.setState(
       {
@@ -61,17 +67,18 @@ class HomePage extends React.Component {
     );
     return false;
   }
+
   render() {
     if (
       (
-        this.props.user.get('state').get('isFetching') &&
-        this.props.user.get('state').get('isStale')
+        this.props.user.get('state').get('isFetching')
+        && this.props.user.get('state').get('isStale')
       ) || (
-        this.props.messages.get('state').get('isFetching') &&
-        this.props.messages.get('state').get('isStale')
+        this.props.messages.get('state').get('isFetching')
+        && this.props.messages.get('state').get('isStale')
       ) || (
-        this.props.images.get('state').get('isFetching') &&
-        this.props.images.get('state').get('isStale')
+        this.props.images.get('state').get('isFetching')
+        && this.props.images.get('state').get('isStale')
       )
     ) {
       return <IrisLoader />;
@@ -95,7 +102,7 @@ class HomePage extends React.Component {
                 name="image"
                 accept="image/*"
                 id="imageInput"
-                className="iris-input"
+                className="iris-input iris-input__full-width"
                 onChange={e => this.setState(
                   { file: e.target.files.length > 0 ? e.target.files[0] : null },
                   this.checkIfInputsComplete,
@@ -109,7 +116,7 @@ class HomePage extends React.Component {
                 name="question"
                 id="questionInput"
                 autoComplete="off"
-                className="iris-input"
+                className="iris-input iris-input__full-width"
                 value={this.state.question}
                 onChange={e => this.setState(
                   { question: e.target.value },
@@ -123,12 +130,12 @@ class HomePage extends React.Component {
                 type="text"
                 name="note"
                 id="noteInput"
+                className="iris-input iris-input__full-width"
                 value={this.state.note}
                 onChange={e => this.setState(
                   { note: e.target.value },
                   this.checkIfInputsComplete)
                 }
-                className="iris-input"
               />
             </label>
             <IrisSelect

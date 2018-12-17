@@ -8,12 +8,15 @@ class ModalPortal extends React.Component {
     this.el = document.createElement('div');
     this.modalRoot = document.getElementById(this.props.target);
   }
+
   componentDidMount() {
     if (this.modalRoot) this.modalRoot.appendChild(this.el);
   }
+
   componentWillUnmount() {
     if (this.modalRoot) this.modalRoot.removeChild(this.el);
   }
+
   render() {
     return ReactDOM.createPortal(this.props.children, this.el);
   }
@@ -42,6 +45,7 @@ class Modal extends React.Component {
   componentDidMount() {
     this.mainDiv.focus();
   }
+
   render() {
     const n = Math.random();
     return (
@@ -57,7 +61,7 @@ class Modal extends React.Component {
           <div>
             <h2 id={`modal-${n}-head`}>{this.props.title}</h2>
             <p id={`modal-${n}-body`}>{this.props.message}</p>
-            <button onClick={this.props.handleHide}>Hide modal</button>
+            <button type="button" onClick={this.props.handleHide}>Hide modal</button>
           </div>
         </div>
       </ModalPortal>
