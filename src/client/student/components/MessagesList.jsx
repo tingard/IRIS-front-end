@@ -9,6 +9,7 @@ class MessagesPanel extends React.Component {
     super(props);
     this.state = { messageOrder: 'newest' };
   }
+
   render() {
     return (
       <React.Fragment>

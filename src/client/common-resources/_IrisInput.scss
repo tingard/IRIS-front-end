@@ -28,4 +28,7 @@ input.iris-input {
       border-color: $red-color
     }
   }
+  &.iris-input__full-width {
+    width: 100%;
+  }
 }

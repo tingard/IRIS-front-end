@@ -14,9 +14,9 @@ const DescriptionsPage = (props) => {
       className="w3-container w3-animate-opacity"
     >
       <h1 id="messages-header">{(
-          props.isFiltered ?
-            `Descriptions for your image tagged ${props.messages.get(0).get('image').get('note')}` :
-            'Your Messages'
+          props.isFiltered
+            ? `Descriptions for your image tagged ${props.messages.get(0).get('image').get('note')}`
+            : 'Your Messages'
         )}
       </h1>
       {

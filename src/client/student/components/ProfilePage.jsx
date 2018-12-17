@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../common-resources/IrisButton';
 import IrisAlert from '../../common-resources/IrisAlert';
+import '../styles/profile-page.scss';
+import '../../common-resources/_IrisBase.scss';
+import '../../common-resources/_IrisInput.scss';
+import '../../common-resources/_IrisCheckbox.scss';
 
 const isValidEmail = v => /\S+@\S+\.\S+/.test(v) || v === '';
 
@@ -22,18 +26,20 @@ class ProfilePage extends React.Component {
       },
     };
   }
+
   componentWillReceiveProps(nextProps) {
-    this.setState({
+    this.setState(prevState => ({
       name: nextProps.name,
       email: nextProps.email,
-      bio: nextProps.bio || this.state.bio,
+      bio: nextProps.bio || prevState.bio,
       emailIsValid: /\S+@\S+\.\S+/.test(nextProps.email) && nextProps.email !== '',
       notificationPrefs: {
         email: nextProps.emailNotifications,
         browser: nextProps.browserNotifications,
       },
-    });
+    }));
   }
+
   update() {
     this.setState({
       name: this.nameInput.value,
@@ -46,6 +52,7 @@ class ProfilePage extends React.Component {
       },
     });
   }
+
   saveProfile() {
     this.props.setUserDetails({
       id: this.props._id,
@@ -58,6 +65,7 @@ class ProfilePage extends React.Component {
       },
     });
   }
+
   render() {
     if (this.props.state.get('isFetching') && this.props.state.get('isStale')) {
       return <div>Connecting to the IRIS database...</div>;
@@ -71,7 +79,7 @@ class ProfilePage extends React.Component {
               What should we call you? (Visible to volunteers)
               <input
                 id="profile-page-name-input"
-                className="w3-input w3-border w3-round"
+                className="iris-input iris-input__full-width"
                 type="text"
                 ref={(r) => { this.nameInput = r; }}
                 value={this.state.name}
@@ -84,7 +92,7 @@ class ProfilePage extends React.Component {
               Your email:
               <input
                 id="profile-page-email-input"
-                className={`w3-input w3-border w3-round ${this.state.emailIsValid ? '' : 'invalid'}`}
+                className={`iris-input iris-input__full-width ${this.state.emailIsValid ? '' : 'invalid'}`}
                 type="email"
                 ref={(r) => { this.emailInput = r; }}
                 value={this.state.email}
@@ -107,29 +115,37 @@ class ProfilePage extends React.Component {
             </label>
           </div>
           <div className="w3-padding-16">
-            <label className="switch" htmlFor="profile-page-email-notifcations">
-              <span>Email Notifications:</span>
+            <label
+              htmlFor="profile-page-email-notifications"
+              className="iris-checkbox-container"
+            >
+              Email Notifications
               <input
                 type="checkbox"
-                className="grapheel-checkbox"
+                className="no-mouseflow"
                 id="profile-page-email-notifications"
                 ref={(r) => { this.emailNotifications = r; }}
                 checked={this.state.notificationPrefs.email}
                 onChange={() => this.update()}
               />
+              <span className="iris-checkbox-checkmark" />
             </label>
           </div>
           <div className="w3-padding-16">
-            <label className="switch" htmlFor="profile-page-browser-notifcations">
-              <span>Browser Notifications:</span>
+            <label
+              htmlFor="profile-page-browser-notifcations"
+              className="iris-checkbox-container"
+            >
+              Browser Notifications
               <input
                 type="checkbox"
-                className="grapheel-checkbox"
-                id="profile-page-browser-notifications"
+                className="no-mouseflow"
+                id="profile-page-browser-notifcations"
                 ref={(r) => { this.browserNotifications = r; }}
                 checked={this.state.notificationPrefs.browser}
                 onChange={() => this.update()}
               />
+              <span className="iris-checkbox-checkmark" />
             </label>
           </div>
         </div>
@@ -180,7 +196,7 @@ ProfilePage.propTypes = {
   bio: PropTypes.string,
   emailNotifications: PropTypes.bool,
   browserNotifications: PropTypes.bool,
-  state: ImmutablePropTypes.contains({
+  state: PropTypes.shape({
     isFetching: PropTypes.bool,
     updateDidSucceed: PropTypes.bool,
   }),

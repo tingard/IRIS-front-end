@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import IrisButton from '../../common-resources/IrisButton';
+import '../../common-resources/_IrisInput.scss';
 
 class SendMessageBox extends React.Component {
   constructor(props) {
@@ -8,10 +9,12 @@ class SendMessageBox extends React.Component {
     this.state = { message: '' };
     this._sendMessage = this._sendMessage.bind(this);
   }
+
   _sendMessage(message) {
     this.props.sendMessage(message);
     this.setState({ message: '' });
   }
+
   render() {
     return (
       <React.Fragment>

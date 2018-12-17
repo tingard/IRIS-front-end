@@ -1,145 +1,146 @@
 {
-  "name": "IRIS",
-  "version": "1.0.1",
-  "description": "Grapheel's IRIS webapp",
-  "main": "src/client/index.jsx",
-  "author": "Tim Lingard",
-  "license": "MIT",
-  "private": true,
-  "scripts": {
-    "dev": "poi dev",
-    "build": "poi build",
-    "fast-lint": "eslint \"./src/**/*.js?(x)\" -c ./package.json",
-    "start": "gulp start",
-    "start-static": "node src/server/index.js",
-    "lint": "gulp lint",
-    "jest": "jest",
-    "test": "gulp lint && jest",
-    "test-travis": "gulp lint && jest --passWithNoTests",
-    "precommit": "eslint \"./src/**/*.js?(x)\" -c ./package.json && jest --passWithNoTests"
-  },
-  "devDependencies": {
-    "assert": "^1.4.1",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^5.9.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-babel": "^8.0.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.5.1",
-    "expect": "^23.6.0",
-    "file-loader": "^2.0.0",
-    "husky": "^1.1.4",
-    "jest": "^23.6.0",
-    "node-sass": "^4.10.0",
-    "nsp": "^3.2.1",
-    "poi": "^11.0.0-beta.6",
-    "sass-loader": "^7.1.0",
-    "sinon": "^7.1.1",
-    "uglifyjs-webpack-plugin": "^2.0.1"
-  },
-  "dependencies": {
-    "grapheel-iris-client-api": "^1.5.15",
-    "helmet": "^3.12.0",
-    "history": "^4.7.2",
-    "immutable": "^4.0.0-rc.12",
-    "moment": "^2.22.2",
-    "prop-types": "^15.6.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-immutable-proptypes": "^2.1.0",
-    "react-redux": "^5.1.1",
-    "react-responsive": "^6.0.1",
-    "react-router-dom": "^4.3.1",
-    "react-router-redux": "next",
-    "react-stripe-elements": "^2.0.1",
-    "react-swipeable": "^4.3.0",
-    "react-test-renderer": "^16.6.3",
-    "redux": "^4.0.1",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/react"
-    ]
-  },
-  "engines": {
-    "node": "~8.10.0",
-    "npm": "~6.0.0",
-    "yarn": "^1.9.4"
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/src/enzymeConfiguration.js",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
-    }
-  },
-  "eslintConfig": {
-    "extends": "airbnb",
-    "plugins": [
-      "react",
-      "import"
-    ],
-    "env": {
-      "browser": true,
-      "es6": true,
-      "node": true,
-      "jest": true
-    },
-    "globals": {
-      "Stripe": true,
-      "Pusher": true
-    },
-    "rules": {
-      "class-methods-use-this": 0,
-      "function-paren-newline": 0,
-      "jsx-a11y/anchor-is-valid": [
-        "error",
-        {
-          "components": [
-            "Link"
-          ],
-          "specialLink": [
-            "to"
-          ],
-          "aspects": [
-            "noHref",
-            "invalidHref",
-            "preferButton"
-          ]
-        }
-      ],
-      "jsx-a11y/label-has-for": "warn",
-      "jsx-a11y/no-autofocus": "warn",
-      "jsx-a11y/no-noninteractive-element-to-interactive-role": 0,
-      "jsx-a11y/no-noninteractive-tabindex": 1,
-      "jsx-a11y/no-redundant-roles": 0,
-      "no-console": 0,
-      "no-restricted-globals": "warn",
-      "no-underscore-dangle": 0,
-      "react/destructuring-assignment": 0,
-      "react/jsx-one-expression-per-line": 0,
-      "react/forbid-prop-types": [
-        1
-      ],
-      "react/no-array-index-key": 0,
-      "react/no-unescaped-entities": [
-        0
-      ],
-      "react/no-unused-state": "warn",
-      "react/require-default-props": 0,
-      "new-cap": [
-        2,
-        {
-          "capIsNewExceptions": [
-            "Map",
-            "List"
-          ]
-        }
-      ]
-    }
-  }
+	"name": "IRIS",
+	"version": "1.0.1",
+	"description": "Grapheel's IRIS webapp",
+	"main": "src/client/index.jsx",
+	"author": "Tim Lingard",
+	"license": "MIT",
+	"private": true,
+	"scripts": {
+		"dev": "poi dev",
+		"build": "poi build",
+		"fast-lint": "eslint \"./src/**/*.js?(x)\" -c ./package.json",
+		"start": "gulp start",
+		"start-static": "node src/server/index.js",
+		"lint": "gulp lint",
+		"jest": "jest",
+		"test": "gulp lint && jest",
+		"test-travis": "gulp lint && jest --passWithNoTests",
+		"precommit": "eslint \"./src/**/*.js?(x)\" -c ./package.json && jest --passWithNoTests"
+	},
+	"devDependencies": {
+		"assert": "^1.4.1",
+		"enzyme": "^3.3.0",
+		"enzyme-adapter-react-16": "^1.1.1",
+		"eslint": "^5.9.0",
+		"eslint-config-airbnb": "^17.1.0",
+		"eslint-config-babel": "^8.0.1",
+		"eslint-plugin-import": "^2.2.0",
+		"eslint-plugin-jsx-a11y": "^6.0.3",
+		"eslint-plugin-react": "^7.5.1",
+		"expect": "^23.6.0",
+		"file-loader": "^2.0.0",
+		"husky": "^1.1.4",
+		"jest": "^23.6.0",
+		"node-sass": "^4.10.0",
+		"nsp": "^3.2.1",
+		"poi": "^11.0.0-beta.6",
+		"sass-loader": "^7.1.0",
+		"sinon": "^7.1.1",
+		"uglifyjs-webpack-plugin": "^2.0.1"
+	},
+	"dependencies": {
+		"grapheel-iris-client-api": "^1.5.15",
+		"helmet": "^3.12.0",
+		"history": "^4.7.2",
+		"immutable": "^4.0.0-rc.12",
+		"moment": "^2.22.2",
+		"prop-types": "^15.6.2",
+		"react": "^16.6.3",
+		"react-dom": "^16.6.3",
+		"react-immutable-proptypes": "^2.1.0",
+		"react-redux": "^5.1.1",
+		"react-responsive": "^6.0.1",
+		"react-router-dom": "^4.3.1",
+		"react-router-redux": "next",
+		"react-stripe-elements": "^2.0.1",
+		"react-swipeable": "^4.3.0",
+		"react-test-renderer": "^16.6.3",
+		"redux": "^4.0.1",
+		"redux-logger": "^3.0.6",
+		"redux-thunk": "^2.3.0",
+		"serve": "^10.1.1"
+	},
+	"babel": {
+		"presets": [
+			"@babel/env",
+			"@babel/react"
+		]
+	},
+	"engines": {
+		"node": "~8.10.0",
+		"npm": "~6.0.0",
+		"yarn": "^1.9.4"
+	},
+	"jest": {
+		"setupTestFrameworkScriptFile": "<rootDir>/src/enzymeConfiguration.js",
+		"moduleNameMapper": {
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+		}
+	},
+	"eslintConfig": {
+		"extends": "airbnb",
+		"plugins": [
+			"react",
+			"import"
+		],
+		"env": {
+			"browser": true,
+			"es6": true,
+			"node": true,
+			"jest": true
+		},
+		"globals": {
+			"Stripe": true,
+			"Pusher": true
+		},
+		"rules": {
+			"class-methods-use-this": 0,
+			"function-paren-newline": 0,
+			"jsx-a11y/anchor-is-valid": [
+				"error",
+				{
+					"components": [
+						"Link"
+					],
+					"specialLink": [
+						"to"
+					],
+					"aspects": [
+						"noHref",
+						"invalidHref",
+						"preferButton"
+					]
+				}
+			],
+			"jsx-a11y/label-has-for": "warn",
+			"jsx-a11y/no-autofocus": "warn",
+			"jsx-a11y/no-noninteractive-element-to-interactive-role": 0,
+			"jsx-a11y/no-noninteractive-tabindex": 1,
+			"jsx-a11y/no-redundant-roles": 0,
+			"no-console": 0,
+			"no-restricted-globals": "warn",
+			"no-underscore-dangle": 0,
+			"react/destructuring-assignment": 0,
+			"react/jsx-one-expression-per-line": 0,
+			"react/forbid-prop-types": [
+				1
+			],
+			"react/no-array-index-key": 0,
+			"react/no-unescaped-entities": [
+				0
+			],
+			"react/no-unused-state": "warn",
+			"react/require-default-props": 0,
+			"new-cap": [
+				2,
+				{
+					"capIsNewExceptions": [
+						"Map",
+						"List"
+					]
+				}
+			]
+		}
+	}
 }

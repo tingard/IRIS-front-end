@@ -1,4 +1,6 @@
-import { Map, List, Record } from 'immutable';
+import {
+  Map, List, Record, fromJS,
+} from 'immutable';
 
 const StateRecord = new Record({
   isFetching: false,
@@ -19,7 +21,7 @@ const imagesReducer = (state = initialState, action) => {
     case 'GET_IMAGES_SUCCESS':
       // potentially many changes, so simply gonna update things here
       if (action.res.success) {
-        return state.merge({ images: action.res.images })
+        return state.mergeDeep({ images: fromJS(action.res.images) })
           .set(
             'state',
             state.get('state')
