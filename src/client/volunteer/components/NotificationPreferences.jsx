@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import IrisSelect from '../../common-resources/IrisSelect';
+import '../../common-resources/_IrisCheckbox.scss';
 
 class NotificationPreferences extends React.Component {
   constructor(props) {
@@ -32,7 +33,6 @@ class NotificationPreferences extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <section>
         <h3>Notifications</h3>
@@ -95,7 +95,7 @@ class NotificationPreferences extends React.Component {
         />
         <IrisSelect
           id="volunteer-notification-level-select"
-          label="Should we notify you when a student need help?"
+          label="Should we notify you when a student needs help?"
           options={[
             { value: '0', text: 'Not at all' },
             { value: '1', text: 'Immediatey' },

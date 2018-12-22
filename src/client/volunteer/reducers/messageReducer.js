@@ -1,4 +1,6 @@
-import { Map, List, Record } from 'immutable';
+import {
+  Map, List, Record, fromJS,
+} from 'immutable';
 
 // this state contains all possible flags which impact on UX (i.e. alert rendering etc...)
 // for instance, if sendMessageDidFail then all messages in pendingMessages should be
@@ -34,8 +36,8 @@ const messageReducer = (state = initialState, action) => {
       return state.set('state', new StateRecord({ isFetching: true }));
     case 'GET_MESSAGES_SUCCESS':
       return state.merge({
-        messages: action.res.messages,
-        pendingMessages: [],
+        messages: fromJS(action.res.messages),
+        pendingMessages: fromJS([]),
       }).set('state', state.get('state').set('isStale', false).set('isFetching', false));
     case 'REPLY_IMAGE':
       return state;
@@ -53,7 +55,7 @@ const messageReducer = (state = initialState, action) => {
               sendDate: (new Date()).toISOString(),
             })),
         );
-      } else if (action.message.imageId || false) {
+      } if (action.message.imageId || false) {
         return state.set(
           'pendingMessages',
           state.get('pendingMessages')

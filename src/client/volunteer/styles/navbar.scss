@@ -1,3 +1,5 @@
+@import '../../common-resources/size-constants.scss';
+
 @mixin color-transition($time) {
   transition: $time;
   transition-timing-function: ease-in-out;

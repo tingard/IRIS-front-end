@@ -1,10 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisLoader from '../../common-resources/IrisLoader';
 import ImageCard from './ImageCard';
-
+import '../../common-resources/_IrisLoader.scss';
+import '../../common-resources/_IrisButton.scss';
+import '../styles/home-page.scss';
 
 const HomePage = (props) => {
   if (props.cards.get('state').get('isFetching') || props.user.get('isFetching')) {
@@ -28,20 +29,22 @@ const HomePage = (props) => {
 };
 
 HomePage.propTypes = {
-  cards: ImmutablePropTypes.contains({
-    cards: ImmutablePropTypes.listOf(
-      ImmutablePropTypes.contains({
+  cards: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+    cards: PropTypes.arrayOf(
+      PropTypes.shape({
         subject: PropTypes.string,
         difficulty: PropTypes.number,
         key: PropTypes.string,
       }),
     ),
-    state: ImmutablePropTypes.contains({
+    state: PropTypes.shape({
       isFetching: PropTypes.bool,
     }),
   }),
-  user: ImmutablePropTypes.contains({
-    level: ImmutablePropTypes.contains({
+  user: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+    level: PropTypes.shape({
       physics: PropTypes.number,
       biology: PropTypes.number,
       chemistry: PropTypes.number,
@@ -50,7 +53,7 @@ HomePage.propTypes = {
       psychology: PropTypes.number,
       finance: PropTypes.number,
     }),
-    state: ImmutablePropTypes.contains({
+    state: PropTypes.shape({
       isFetching: PropTypes.bool,
     }),
   }),

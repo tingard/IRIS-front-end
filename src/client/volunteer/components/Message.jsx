@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import ImageDescription from './../../common-resources/imageDescription';
-import IrisAlert from './../../common-resources/IrisAlert';
-import IrisButton from './../../common-resources/IrisButton';
+import ImageDescription from '../../common-resources/imageDescription';
+import IrisAlert from '../../common-resources/IrisAlert';
+import IrisButton from '../../common-resources/IrisButton';
+import '../../common-resources/_IrisInput.scss';
 
 class Message extends React.Component {
   constructor(props) {
@@ -15,21 +16,26 @@ class Message extends React.Component {
       shouldShowCompletedAlert: true,
     };
   }
+
   componentDidMount() {
     this.scrollToEndMessage();
   }
+
   componentDidUpdate() {
     this.scrollToEndMessage();
   }
+
   scrollToEndMessage() {
     this.messagesBox.scrollTop = this.messagesBox.clientHeight;
   }
+
   sendMessage() {
     this.props.sendMessage(
       { messageId: this.props.message.get('_id'), message: this.input.value },
     );
     this.input.value = '';
   }
+
   render() {
     const messageSendFailed = this.props.messagesState.get('sendMessageDidFail') ? 'pending-failed' : '';
     return (
@@ -113,7 +119,7 @@ class Message extends React.Component {
           ) : (
             <React.Fragment>
               <input
-                className="w3-input w3-boder w3-round"
+                className="iris-input iris-input__full-width"
                 type="text"
                 disabled={this.props.message.get('markedAsCompleted')}
                 ref={(r) => { this.input = r; }}
@@ -134,19 +140,21 @@ class Message extends React.Component {
 }
 
 Message.propTypes = {
-  messagesState: ImmutablePropTypes.contains({
+  messagesState: PropTypes.shape({
     sendMessageDidFail: PropTypes.bool,
+    get: PropTypes.func.isRequired,
   }),
-  message: ImmutablePropTypes.contains({
+  message: PropTypes.shape({
     _id: PropTypes.string,
     message: PropTypes.string,
     markedAsCompleted: PropTypes.bool,
-    image: ImmutablePropTypes.contains({
+    image: PropTypes.shape({
       url: PropTypes.string,
     }),
+    get: PropTypes.func.isRequired,
   }),
   pendingMessages: ImmutablePropTypes.listOf(
-    ImmutablePropTypes.contains({
+    PropTypes.shape({
       chainId: PropTypes.string,
       message: PropTypes.string,
     }),

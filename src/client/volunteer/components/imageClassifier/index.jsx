@@ -5,6 +5,7 @@ import ImageTypeSelector from './imageTypeSelector';
 import GraphClassifier from './graphClassifier';
 import MiscClassifier from './miscClassifier';
 import TableClassifier from './tableClassifier';
+import '../../styles/classify-page.scss';
 
 class ImageClassifier extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class ImageClassifier extends React.Component {
       imageType: null,
     };
   }
+
   onComplete(details) {
     this.props.classifyImage({ imageType: this.state.imageType, details })
       .then(
@@ -23,6 +25,7 @@ class ImageClassifier extends React.Component {
         },
       );
   }
+
   render() {
     switch (this.state.imageType) {
       case 'graph':

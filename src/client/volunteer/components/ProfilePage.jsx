@@ -8,6 +8,7 @@ import IssueTrackerPrompt from './IssueTrackerPrompt';
 import AboutVolunteer from './AboutVolunteer';
 import UserLevelsSelect from './UserLevelsSelect';
 import NotificationPreferences from './NotificationPreferences';
+import '../styles/profile-page.scss';
 
 const isValidEmail = v => /\S+@\S+\.\S+/.test(v) || v === '';
 
