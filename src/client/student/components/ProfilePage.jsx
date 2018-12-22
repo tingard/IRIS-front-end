@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../common-resources/IrisButton';
 import IrisAlert from '../../common-resources/IrisAlert';
 import '../styles/profile-page.scss';
-import '../../common-resources/_IrisBase.scss';
 import '../../common-resources/_IrisInput.scss';
 import '../../common-resources/_IrisCheckbox.scss';
 

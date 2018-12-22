@@ -1,9 +1,10 @@
 @import './color-scheme';
 @import './size-constants';
 @import './IrisFont';
+@import './IrisButtonColors';
 
 .iris-incrementer {
-  font-family: $iris-font;
+  @include iris-font();
   @media screen and (max-width: $phone-width) {
     display: flex;
   }

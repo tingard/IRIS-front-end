@@ -5,7 +5,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisButton from '../../common-resources/IrisButton';
 import IrisSelect from '../../common-resources/IrisSelect';
 import IrisLoader from '../../common-resources/IrisLoader';
-import '../../common-resources/_IrisBase.scss';
 import '../../common-resources/_IrisInput.scss';
 
 // TODO: Upload form should be a modal which users are guided through
@@ -23,6 +22,7 @@ class HomePage extends React.Component {
       note: '',
       subject: 'maths',
       file: null,
+      difficulty: '0',
     };
   }
 
@@ -48,9 +48,7 @@ class HomePage extends React.Component {
       subject: this.state.subject,
     };
     console.log(data);
-    Object.entries(data).forEach((key, value) => {
-      formData.append(key, value);
-    });
+    Object.entries(data).forEach(entry => formData.set(entry[0], entry[1]));
     formData.append('irisImage', this.state.file, this.state.file.name);
     console.log(formData);
     this.props.uploadImage(formData);
@@ -191,6 +189,7 @@ class HomePage extends React.Component {
                   onClick={() => this.setState({ successDialogActive: false })}
                   className="w3-button w3-display-topright"
                   aria-label="Close this message"
+                  type="button"
                 >
                   &times;
                 </button>
