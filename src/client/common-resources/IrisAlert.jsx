@@ -14,7 +14,7 @@ const IrisAlert = ({
       onClick={onClose}
       type="button"
       aria-label="close"
-      className="w3-button w3-medium w3-display-topright"
+      className="iris-alert-close-button"
     >
       &times;
     </button>

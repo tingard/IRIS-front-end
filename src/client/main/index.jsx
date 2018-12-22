@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { hot } from 'react-hot-loader/root';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ClientAPI from 'grapheel-iris-client-api';
@@ -92,7 +93,9 @@ class MainApp extends React.Component {
   }
 }
 
+const MainAppHot = hot(MainApp);
+
 ReactDOM.render(
-  <MainApp />,
+  <MainAppHot />,
   document.querySelector('.app'),
 );

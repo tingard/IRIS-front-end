@@ -1,14 +1,18 @@
 module.exports = {
-  title: 'Grapheel IRIS',
+  output: {
+    html: {
+      title: 'Grapheel IRIS',
+    },
+  },
   pages: {
     index: {
       entry: './src/client/main/index.jsx',
       title: 'Grapheel IRIS',
     },
-    // volunteer: {
-    //   entry: './src/client/volunteer/index.jsx',
-    //   title: 'Grapheel IRIS',
-    // },
+    'volunteer/index': {
+      entry: './src/client/volunteer/index.jsx',
+      title: 'Grapheel IRIS',
+    },
     'student/index': {
       entry: './src/client/student/index.jsx',
       title: 'Grapheel IRIS',
@@ -19,9 +23,7 @@ module.exports = {
     // },
   },
   devServer: {
-    hotEntries: ['index', 'student/index'], // , 'volunteer/index', 'licence-owner/index'],
-    open: 'Chrome',
-    overlay: true,
+    hotEntries: ['index', 'student/index', 'volunteer/index'], // , 'licence-owner/index'],
     hot: true,
     historyApiFallback: {
       rewrites: [
@@ -36,6 +38,9 @@ module.exports = {
     // add the service workers
     config.entry('student/service-worker')
       .add('./src/client/student/service-worker/service-worker.js')
+      .end();
+    config.entry('volunteer/service-worker')
+      .add('./src/client/volunteer/service-worker/service-worker.js')
       .end();
     // this might impact global config, not just service workers, but ahh well
     config.output

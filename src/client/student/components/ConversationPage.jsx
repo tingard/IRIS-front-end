@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import moment from 'moment';
 import { Link, Redirect } from 'react-router-dom';
 import ImageDescription from '../../common-resources/imageDescription';
-import MessagesPanel from './MessagesList';
+import MessagesList from './MessagesList';
 import SendMessageBox from './SendMessageBox';
 import AcceptDescriptionPrompt from './AcceptDescriptionPrompt';
 import ratingValues from '../../common-resources/ratingValues';
@@ -29,7 +29,6 @@ class ConversationPage extends React.Component {
     this.props.sendMessage(
       { messageId: this.props._id, message },
     );
-    this.input.value = '';
   }
 
   render() {
@@ -70,7 +69,7 @@ class ConversationPage extends React.Component {
             <ImageDescription classification={this.props.message.get('classification')} />
           </section>
           <section>
-            <MessagesPanel
+            <MessagesList
               mostRecent={mostRecent}
               messages={sortedMessages}
               setOrder={this.setOrder}

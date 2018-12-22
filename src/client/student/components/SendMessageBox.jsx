@@ -25,7 +25,7 @@ class SendMessageBox extends React.Component {
             name="question"
             id="questionInput"
             placeholder="Type a message"
-            className="iris-input"
+            className="iris-input iris-input__full-width"
             value={this.state.message}
             onChange={e => this.setState({ message: e.target.value })}
             onKeyPress={(e) => {
