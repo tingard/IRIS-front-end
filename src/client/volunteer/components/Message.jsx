@@ -43,11 +43,13 @@ class Message extends React.Component {
         <div className="w3-row messages-box" ref={(r) => { this.messagesBox = r; }}>
           <div className="w3-row message-image-box w3-padding-16">
             <div className="w3-display-container">
-              <img
-                className="w3-display-middle"
-                src={this.props.message.get('image').get('url')}
-                alt="this is being described"
-              />
+              <a href={this.props.message.get('image').get('url')}>
+                <img
+                  className="w3-display-middle"
+                  src={this.props.message.get('image').get('url')}
+                  alt="this is being described"
+                />
+              </a>
             </div>
           </div>
           <div className="w3-row w3-padding-16">

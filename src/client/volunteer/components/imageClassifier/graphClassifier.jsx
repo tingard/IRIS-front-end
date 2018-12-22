@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import IrisButton from '../../../common-resources/IrisButton';
 import TableEditor from './TableEditor';
+import '../../../common-resources/_IrisCheckbox.scss';
 
 class GraphClassifier extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class GraphClassifier extends React.Component {
       plotDescription: '',
     };
   }
+
   render() {
     return (
       <div className="w3-container card-panel-right-pane">
@@ -28,7 +30,7 @@ class GraphClassifier extends React.Component {
             <span>X-axis label</span>
             <input
               id="graph-classifier-x-axis"
-              className="iris-input"
+              className="iris-input iris-input__full-width"
               type="text"
               placeholder="What is the x-axis label? (if there is one)"
               value={this.state.xAxisValue}
@@ -44,7 +46,7 @@ class GraphClassifier extends React.Component {
             <span>Y-axis label</span>
             <input
               id="graph-classifier-y-axis"
-              className="iris-input"
+              className="iris-input iris-input__full-width"
               type="text"
               placeholder="What is the y-axis label?"
               value={this.state.yAxisValue}
@@ -60,7 +62,7 @@ class GraphClassifier extends React.Component {
             <span>Is there a title?</span>
             <input
               id="graph-classifier-title-input"
-              className="iris-input"
+              className="iris-input iris-input__full-width"
               type="text"
               placeholder="What is the title?"
               value={this.state.titleValue}
@@ -72,15 +74,19 @@ class GraphClassifier extends React.Component {
           </label>
         </div>
         <div className="w3-row w3-padding-16">
-          <label className="switch" htmlFor="graph-classifier-table">
-            <span>Use a table to describe this graph?</span>
+          <label
+            htmlFor="graph-classifier-table"
+            className="iris-checkbox-container"
+          >
+            Use a table to describe this graph?
             <input
               type="checkbox"
-              className="grapheel-checkbox"
+              className="no-mouseflow"
               id="graph-classifier-table"
               checked={this.state.table}
               onChange={e => this.setState({ table: e.target.checked })}
             />
+            <span className="iris-checkbox-checkmark" />
           </label>
           {this.state.table ? (
             <TableEditor onChange={tableValue => this.setState({ tableValue })} />

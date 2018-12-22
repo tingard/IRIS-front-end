@@ -1,50 +1,15 @@
 import React from 'react';
-import Shadow from './SvgShadow';
-import IconCircle from './IconCircle';
 
 export default () => (
-  <svg
-    width="34.547028mm"
-    height="34.547028mm"
-    viewBox="0 0 34.547028 34.547028"
-    version="1.1"
-    id="svg8"
-  >
-    <Shadow />
-    <g
-      id="layer1"
-      transform="translate(-21.847028,-17.600005)"
-    >
-      <g
-        id="g4909"
-        transform="matrix(0.25220753,0,0,0.25220753,16.337043,13.161151)"
-      >
-        <IconCircle className="home-icon" />
-        <g className="iconCenter">
-          <rect
-            style={{ fill: '#f24d36', fillOpacity: 1, strokeWidth: '1.04906988' }}
-            id="rect836"
-            width="52.078827"
-            height="52.078827"
-            x="63.809822"
-            y="69.978592"
-          />
-          <path
-            style={{ fill: '#f24d36', fillOpacity: 1, strokeWidth: '1.04906988' }}
-            id="path868"
-            d="m 128.52286,75.5152 -107.695332,-10e-7 53.847666,-93.266893 z"
-            transform="matrix(0.65210393,0,0,0.35870824,41.340585,50.793916)"
-          />
-          <rect
-            style={{ fill: '#f24d36', fillOpacity: 1, strokeWidth: '1.04906988' }}
-            id="rect872"
-            width="5.2453494"
-            height="10.490699"
-            x="105.77263"
-            y="54.916935"
-          />
+  <div className="navbar__home-button" title="Home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <g data-name="Layer 2">
+        <g data-name="home">
+          <rect width="24" height="24" opacity="0" />
+          <rect x="10" y="14" width="4" height="7" />
+          <path d="M20.42 10.18L12.71 2.3a1 1 0 0 0-1.42 0l-7.71 7.89A2 2 0 0 0 3 11.62V20a2 2 0 0 0 1.89 2H8v-9a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v9h3.11A2 2 0 0 0 21 20v-8.38a2.07 2.07 0 0 0-.58-1.44z" />
         </g>
       </g>
-    </g>
-  </svg>
+    </svg>
+  </div>
 );
