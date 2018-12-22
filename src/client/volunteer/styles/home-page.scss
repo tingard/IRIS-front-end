@@ -1,3 +1,6 @@
+@import '../../common-resources/size-constants.scss';
+@import '../../common-resources/color-scheme.scss';
+
 @mixin colorBorder($color) {
   border-color: $color;
 }

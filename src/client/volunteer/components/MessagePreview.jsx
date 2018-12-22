@@ -5,6 +5,9 @@ import moment from 'moment';
 import { NavLink } from 'react-router-dom';
 
 const MessagePreview = (props) => {
+  if (props.image === null) {
+    return <p>:(</p>;
+  }
   const lastMessageDate = props.messages.get(props.messages.size - 1).get('sendDate');
   const regExp = /res.cloudinary.com\/(.*?)\/image\/upload\/(.*?)$/i;
   const match = regExp.exec(props.image.get('url'));
@@ -22,7 +25,7 @@ const MessagePreview = (props) => {
               <span className="message-preview-message mf-disable">
                 {`${
                   props.messages.get(props.messages.size - 1)
-                  .get('message').slice(0, 25).trim()}...`}
+                    .get('message').slice(0, 25).trim()}...`}
               </span>
             </div>
             {/*  Time since last message */}
@@ -40,10 +43,11 @@ const MessagePreview = (props) => {
 
 MessagePreview.propTypes = {
   _id: PropTypes.string,
-  image: ImmutablePropTypes.contains({
+  image: PropTypes.shape({
     url: PropTypes.string,
+    get: PropTypes.func.isRequired,
   }),
-  messages: ImmutablePropTypes.listOf(
+  messages: PropTypes.arrayOf(
     ImmutablePropTypes.contains({
       message: PropTypes.string,
     }),

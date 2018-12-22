@@ -2,6 +2,7 @@ import React from 'react';
 import MessagesPageButton from './MessagesPageButton';
 import HomePageButton from './HomePageButton';
 import ProfilePageButton from './ProfilePageButton';
+import '../styles/navbar.scss';
 
 const Navbar = () => (
   <div className="grapheel-navbar">

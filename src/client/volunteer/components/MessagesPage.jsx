@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import MediaQuery from 'react-responsive';
 import { Redirect } from 'react-router-dom';
 import Message from '../containers/message';
-import MessagePreview from '../components/MessagePreview';
+import MessagePreview from './MessagePreview';
 import IrisLoader from '../../common-resources/IrisLoader';
+import '../styles/message-page.scss';
 
 class MessagesPage extends React.Component {
   constructor(props) {
@@ -15,17 +15,18 @@ class MessagesPage extends React.Component {
       open: true,
     };
   }
+
   render() {
     if (this.props.messages.get('state').get('isFetching') && this.props.messages.get('messages').size === 0) {
       return <IrisLoader />;
     }
     const routerMessageID = this.props.match.params.messageID || false;
-    const selectedMessage = routerMessageID ?
-      this.props.messages.get('messages').filter(m => m.get('_id') === routerMessageID).get(0)
+    const selectedMessage = routerMessageID
+      ? this.props.messages.get('messages').filter(m => m.get('_id') === routerMessageID).get(0)
       : this.props.messages.get('messages').get(0);
     if (routerMessageID && !selectedMessage) {
       return <Redirect to="/volunteer/messages" />;
-    } else if (!selectedMessage) {
+    } if (!selectedMessage) {
       return (
         <div className="w3-container w3-panel">
           <h2>You don't have any messages yet.</h2>
@@ -37,33 +38,39 @@ class MessagesPage extends React.Component {
       <div className="w3-container w3-panel">
         {/* Load the naviagtion menu only if the screen is big
           enough or a message has not been selected */}
-        {this.props.match.params.messageID ?
+        {this.props.match.params.messageID
           /* We have a selected message */
-          <MediaQuery minWidth={601}>
-            {/* That's not been scaled down */}
+          ? (
+            <MediaQuery minWidth={601}>
+              {/* That's not been scaled down */}
+              <div className="w3-col m4 message-page-navigation">
+                {this.props.messages.get('messages').map(m => <MessagePreview key={m.get('_id')} {...m.toObject()} />)}
+              </div>
+            </MediaQuery>
+          )
+          : (
             <div className="w3-col m4 message-page-navigation">
               {this.props.messages.get('messages').map(m => <MessagePreview key={m.get('_id')} {...m.toObject()} />)}
             </div>
-          </MediaQuery>
-          :
-          <div className="w3-col m4 message-page-navigation">
-            {this.props.messages.get('messages').map(m => <MessagePreview key={m.get('_id')} {...m.toObject()} />)}
-          </div>
+          )
         }
         {/* Load the content panel only if the screen is big
           enough or a message has been selected */}
-        {!routerMessageID ?
+        {!routerMessageID
           /* We do not have a selected message */
-          <MediaQuery minWidth={601}>
-            {/* That's not been scaled down */}
+          ? (
+            <MediaQuery minWidth={601}>
+              {/* That's not been scaled down */}
+              <div className="w3-col m8 message-page-content">
+                <Message message={selectedMessage} />
+              </div>
+            </MediaQuery>
+          )
+          : (
             <div className="w3-col m8 message-page-content">
               <Message message={selectedMessage} />
             </div>
-          </MediaQuery>
-          :
-          <div className="w3-col m8 message-page-content">
-            <Message message={selectedMessage} />
-          </div>
+          )
         }
       </div>
     );
@@ -71,9 +78,9 @@ class MessagesPage extends React.Component {
 }
 
 MessagesPage.propTypes = {
-  messages: ImmutablePropTypes.contains({
-    messages: ImmutablePropTypes.listOf(
-      ImmutablePropTypes.contains({
+  messages: PropTypes.shape({
+    messages: PropTypes.arrayOf(
+      PropTypes.shape({
         _id: PropTypes.string,
       }),
     ),

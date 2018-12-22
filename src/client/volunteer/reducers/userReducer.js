@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { Map, Record } from 'immutable';
+import { Map, Record, fromJS } from 'immutable';
 
 const StateRecord = new Record({
   isFetching: false,
@@ -39,7 +39,7 @@ const userReducer = (state = initialState, action) => {
       );
     case 'GET_USER_DETAILS_SUCCESS':
       // potentially many changes, so simply gonna update things here
-      return state.mergeDeep(action.res.volunteer)
+      return state.mergeDeep(fromJS(action.res.volunteer))
         .set('state',
           state.get('state')
             .set('isFetching', false)

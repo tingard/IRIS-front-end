@@ -1,4 +1,6 @@
-import { Map, List, Record } from 'immutable';
+import {
+  Map, List, Record, fromJS,
+} from 'immutable';
 
 // const url = require('../../images/test.jpg');
 const StateRecord = new Record({
@@ -19,7 +21,7 @@ const cardReducer = (state = initialState, action) => {
       return state.set('state', state.get('state').set('isFetching', true));
     case 'GET_IMAGES_SUCCESS':
       return state.merge({
-        cards: action.res.images,
+        cards: fromJS(action.res.images),
         state: state.get('state').set('isStale', false).set('isFetching', false),
       });
     case 'REPLY_IMAGE':

@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 // watches for stale things and updates accordingly
 
 class ApiWrapper extends React.Component {
   componentDidMount() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/volunteer-service-worker.js')
+      navigator.serviceWorker.register('/volunteer/service-worker.bundle.js')
         .then((swReg) => {
           this.props.passSwRegistrationToAPI(swReg);
           this.props.subscribeToPushNotifications();
@@ -20,9 +19,9 @@ class ApiWrapper extends React.Component {
     if (!('Notification' in window)) {
       console.warn('This browser does not support desktop notification');
     } else if (
-      this.props.user.browserNotifications &&
-      (Notification.permission !== 'denied' || Notification.permission === 'default') &&
-      Notification.permission !== 'granted'
+      this.props.user.browserNotifications
+      && (Notification.permission !== 'denied' || Notification.permission === 'default')
+      && Notification.permission !== 'granted'
     ) {
       Notification.requestPermission((permission) => {
         // If the user accepts, let's create a notification
@@ -35,8 +34,8 @@ class ApiWrapper extends React.Component {
       });
     }
     if ('Pusher' in window) {
-      const pusherKey = window.location.host === 'iris.grapheel.com' ?
-        'd8237a6f562be62749ed' : '594d0f4f3d9849505782';
+      const pusherKey = window.location.host === 'iris.grapheel.com'
+        ? 'd8237a6f562be62749ed' : '594d0f4f3d9849505782';
       const pusher = new Pusher(pusherKey, {
         cluster: 'eu',
         forceTLS: true,
@@ -54,6 +53,7 @@ class ApiWrapper extends React.Component {
       });
     }
   }
+
   render() {
     if (this.props.messages.get('state').get('isStale') && !this.props.messages.get('state').get('isFetching')) {
       this.props.getMessages();
@@ -69,23 +69,27 @@ class ApiWrapper extends React.Component {
 }
 
 ApiWrapper.propTypes = {
-  messages: ImmutablePropTypes.contains({
-    state: ImmutablePropTypes.contains({
+  messages: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+    state: PropTypes.shape({
       isStale: PropTypes.bool,
       isFetching: PropTypes.bool,
     }),
   }),
-  cards: ImmutablePropTypes.contains({
-    state: ImmutablePropTypes.contains({
+  cards: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+    state: PropTypes.shape({
       isStale: PropTypes.bool,
       isFetching: PropTypes.bool,
     }),
   }),
-  user: ImmutablePropTypes.contains({
-    state: ImmutablePropTypes.contains({
+  user: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+    state: PropTypes.shape({
       isStale: PropTypes.bool,
       isFetching: PropTypes.bool,
     }),
+    browserNotifications: PropTypes.bool,
   }),
   getMessages: PropTypes.func,
   getImages: PropTypes.func,
