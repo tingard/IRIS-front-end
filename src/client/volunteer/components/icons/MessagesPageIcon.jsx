@@ -1,46 +1,14 @@
 import React from 'react';
-import Shadow from './SvgShadow';
-import IconCircle from './IconCircle';
 
 export default () => (
-  <svg
-    width="34.547028mm"
-    height="34.547028mm"
-    viewBox="0 0 34.547028 34.547028"
-    version="1.1"
-    id="svg8"
-  >
-    <Shadow />
-    <g
-      id="layer1"
-      transform="translate(-21.847028,-17.600005)"
-    >
-      <g
-        id="g4909"
-        transform="matrix(0.25220753,0,0,0.25220753,16.337043,13.161151)"
-      >
-        <IconCircle className="messages-icon" />
-        <g
-          id="g1452"
-          className="iconCenter"
-          transform="translate(4.4642466,2.4031061)"
-        >
-          <rect
-            ry="21.259502"
-            y="57.914276"
-            x="48.448441"
-            height="47.957481"
-            width="73.809563"
-            id="rect1440"
-            style={{ fill: '#87eeb4', fillOpacity: 1, strokeWidth: 1.46118176 }}
-          />
-          <path
-            id="path1444"
-            d="M 115.17992,117.00473 92.915816,103.91826 115.38109,91.180215 Z"
-            style={{ fill: '#87eeb4', fillOpacity: 1, strokeWidth: 1.46118176 }}
-          />
+  <div title="Your Messages">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <g data-name="Layer 2">
+        <g data-name="message-circle">
+          <rect width="24" height="24" opacity="0" />
+          <path d="M19.07 4.93a10 10 0 0 0-16.28 11 1.06 1.06 0 0 1 .09.64L2 20.8a1 1 0 0 0 .27.91A1 1 0 0 0 3 22h.2l4.28-.86a1.26 1.26 0 0 1 .64.09 10 10 0 0 0 11-16.28zM8 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm4 0a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm4 0a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" />
         </g>
       </g>
-    </g>
-  </svg>
+    </svg>
+  </div>
 );

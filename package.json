@@ -41,6 +41,7 @@
 		"uglifyjs-webpack-plugin": "^2.0.1"
 	},
 	"dependencies": {
+		"filepond": "^3.7.0",
 		"grapheel-iris-client-api": "^1.5.15",
 		"helmet": "^3.12.0",
 		"history": "^4.7.2",
