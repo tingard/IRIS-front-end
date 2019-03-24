@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { List } from 'immutable';
 import IrisButton from '../../../common-resources/IrisButton';
 import TableEditor from './TableEditor';
 
@@ -8,7 +9,8 @@ class TableClassifier extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableValue: '',
+      table: List([]),
+      hasHeader: true,
     };
     this.inputs = [];
     this.inputVals = [];
@@ -17,10 +19,13 @@ class TableClassifier extends React.Component {
   render() {
     return (
       <div className="w3-container card-panel-right-pane">
-        <TableEditor onChange={tableValue => this.setState({ tableValue })} />;
+        <TableEditor onChange={newState => this.setState(newState)} />
         <IrisButton
           className="w3-bar w3-margin-top"
-          onClick={() => this.props.onComplete(this.state)}
+          onClick={() => this.props.onComplete({
+            hasHeader: this.state.hasHeader,
+            value: this.state.table.map(t => t.toJSON()).toJSON(),
+          })}
           type="primary"
           text="Finish"
         />

@@ -6,9 +6,9 @@ import MediaQuery from 'react-responsive';
 import '../../../common-resources/_IrisInput.scss';
 import '../../../common-resources/_IrisCheckbox.scss';
 import validateEmail from '../../../common-resources/validateEmail';
-import IrisAlert from '../../../common-resources/IrisAlert';
+// import IrisAlert from '../../../common-resources/IrisAlert';
 import IrisButton from '../../../common-resources/IrisButton';
-import RegisterStripeCard from './registerStripeCard';
+// import RegisterStripeCard from './registerStripeCard';
 import '../../styles/sign-up.scss';
 
 const wrapQuestion = (q, htmlFor) => (
@@ -155,7 +155,7 @@ class StudentInformation extends React.Component {
             />
           </div>
         </section>
-        <section
+        {/* <section
           className="w3-row"
           style={{ maxWidth: '80vw', margin: 'auto' }}
           role="region"
@@ -255,7 +255,7 @@ class StudentInformation extends React.Component {
               the "paying for own subscription" checkbox to continue.
             </p>
           )}
-        </section>
+        </section> */}
         <div className="w3-row">
           <IrisButton
             disabled={this.state.payForOwnLicence && (!this.state.allFieldsDone)}

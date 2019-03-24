@@ -3,7 +3,7 @@
 @import './IrisFont';
 
 .iris-checkbox-container {
-  @include iris-font();
+  // @include iris-font();
   display: block;
   position: relative;
   padding-left: 50px;
@@ -37,6 +37,22 @@
        display: block;
      }
    }
+   /* Create a custom checkbox */
+   .iris-checkbox-checkmark {
+     position: absolute;
+     border-radius: 5px;
+     top: 0;
+     left: 0;
+     height: 33px;
+     width: 33px;
+     background-color: #eee;
+     /* Create the checkmark/indicator (hidden when not checked) */
+     &:after {
+       content: "";
+       position: absolute;
+       display: none;
+     }
+   }
    /* Style the checkmark/indicator */
    .iris-checkbox-checkmark:after {
      left: 12px;
@@ -49,21 +65,4 @@
      -ms-transform: rotate(45deg);
      transform: rotate(45deg);
    }
-}
-
-/* Create a custom checkbox */
-.iris-checkbox-checkmark {
-  position: absolute;
-  border-radius: 5px;
-  top: 0;
-  left: 0;
-  height: 33px;
-  width: 33px;
-  background-color: #eee;
-  /* Create the checkmark/indicator (hidden when not checked) */
-  &:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
 }

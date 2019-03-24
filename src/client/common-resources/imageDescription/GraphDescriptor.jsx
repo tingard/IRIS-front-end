@@ -1,9 +1,12 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 import PropTypes from 'prop-types';
+import TableDescriptor from './TableDescriptor';
+
 
 const GraphDescriptor = ({
-  title, titleValue, xAxis, xAxisValue, yAxis, yAxisValue, table, tableValue, plotDescription,
+  title, titleValue, xAxis, xAxisValue, yAxis, yAxisValue,
+  table, tableValue, tableHasHeaders, plotDescription,
 }) => {
   const graphInfoRows = [];
   if (title) {
@@ -32,16 +35,21 @@ const GraphDescriptor = ({
   }
   return (
     <React.Fragment>
-      {/* <h3>Graph details:</h3> */}
       <table className="iris-table-description">
         <tbody>{graphInfoRows}</tbody>
       </table>
-      {table ? [
-        <h4 key="data-table-header">Description of data:</h4>,
-        <table key="data-table" className="iris-table-description">
-          <tbody dangerouslySetInnerHTML={{ __html: tableValue }} />
-        </table>,
-      ] : null}
+      {table ? (
+        <React.Fragment>
+          <h4 key="data-table-header">Description of data:</h4>
+          {(typeof tableValue === 'string') ? (
+            <table key="data-table" className="iris-table-description">
+              <tbody dangerouslySetInnerHTML={{ __html: tableValue }} />
+            </table>
+          ) : (
+            <TableDescriptor value={tableValue} hasHeader={tableHasHeaders} />
+          )}
+        </React.Fragment>
+      ) : null}
       {plotDescription.length > 0
         ? plotDescription.split(/\n/g).map(
           (paragraph, i) => <p key={i}>{paragraph}</p>,
@@ -59,7 +67,11 @@ GraphDescriptor.propTypes = {
   title: PropTypes.bool,
   titleValue: PropTypes.string,
   table: PropTypes.bool,
-  tableValue: PropTypes.string,
+  tableValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  tableHasHeaders: PropTypes.bool,
   plotDescription: PropTypes.string,
 };
 
