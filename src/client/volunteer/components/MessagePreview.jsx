@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+// import ImmutablePropTypes from 'react-immutable-proptypes';
+import { List, Map } from 'immutable';
 import moment from 'moment';
 import { NavLink } from 'react-router-dom';
 
 const MessagePreview = (props) => {
   if (props.image === null) {
-    return <p>:(</p>;
+    return (
+      <div>
+        <p>Something went wrong</p>
+      </div>
+    );
   }
   const lastMessageDate = props.messages.get(props.messages.size - 1).get('sendDate');
   const regExp = /res.cloudinary.com\/(.*?)\/image\/upload\/(.*?)$/i;
@@ -43,15 +48,8 @@ const MessagePreview = (props) => {
 
 MessagePreview.propTypes = {
   _id: PropTypes.string,
-  image: PropTypes.shape({
-    url: PropTypes.string,
-    get: PropTypes.func.isRequired,
-  }),
-  messages: PropTypes.arrayOf(
-    ImmutablePropTypes.contains({
-      message: PropTypes.string,
-    }),
-  ),
+  image: PropTypes.instanceOf(Map),
+  messages: PropTypes.instanceOf(List),
 };
 
 export default MessagePreview;

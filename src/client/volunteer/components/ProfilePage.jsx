@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import IrisLoader from '../../common-resources/IrisLoader';
 import IrisButton from '../../common-resources/IrisButton';
 import IrisAlert from '../../common-resources/IrisAlert';
@@ -190,21 +189,21 @@ class ProfilePage extends React.Component {
 }
 
 ProfilePage.propTypes = {
-  user: ImmutablePropTypes.contains({
+  user: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
     emailNotifications: PropTypes.bool,
     browserNotifications: PropTypes.bool,
     points: PropTypes.number,
     bio: PropTypes.string,
-    level: ImmutablePropTypes.contains({
+    level: PropTypes.shape({
       physics: PropTypes.number,
       biology: PropTypes.number,
       chemistry: PropTypes.number,
       maths: PropTypes.number,
       computerScience: PropTypes.number,
     }),
-    state: ImmutablePropTypes.contains({
+    state: PropTypes.shape({
       updateDidSucceed: PropTypes.bool,
     }),
   }),

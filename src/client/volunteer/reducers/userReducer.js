@@ -39,14 +39,20 @@ const userReducer = (state = initialState, action) => {
       );
     case 'GET_USER_DETAILS_SUCCESS':
       // potentially many changes, so simply gonna update things here
-      return state.mergeDeep(fromJS(action.res.volunteer))
-        .set('state',
-          state.get('state')
-            .set('isFetching', false)
-            .set('isStale', false),
-        )
-        .set('id', action.res.volunteer._id)
-        .remove('_id');
+      if (typeof action.res.volunteer !== 'undefined') {
+        return state.mergeDeep(fromJS(action.res.volunteer))
+          .set('state',
+            state.get('state')
+              .set('isFetching', false)
+              .set('isStale', false),
+          )
+          .set('id', action.res.volunteer._id)
+          .remove('_id');
+      }
+      return state.set(
+        'state',
+        state.get('state').set('updateDidFail', true),
+      );
     case 'SET_USER_DETAILS':
       return state.mergeDeep(action.details);
     case 'SET_USER_DETAILS_SUCCESS':

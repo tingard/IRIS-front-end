@@ -15,20 +15,20 @@ class ClassifyPage extends React.Component {
       preventPanelSwitching: false,
     };
   }
+
   render() {
-    console.log(this.props);
     if (!this.props.card) {
       return <Redirect to="/volunteer" />;
     }
     return (
       <Swipeable
         onSwipedLeft={() => (
-          this.state.preventPanelSwitching ? null :
-            this.setState({ showClassifierPanel: true })
+          this.state.preventPanelSwitching ? null
+            : this.setState({ showClassifierPanel: true })
         )}
         onSwipedRight={() => (
-          this.state.preventPanelSwitching ? null :
-          this.setState({ showClassifierPanel: false })
+          this.state.preventPanelSwitching ? null
+            : this.setState({ showClassifierPanel: false })
         )}
       >
         <div className="classify-page-wrapper">

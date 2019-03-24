@@ -20,9 +20,18 @@ const cardReducer = (state = initialState, action) => {
     case 'GET_IMAGES':
       return state.set('state', state.get('state').set('isFetching', true));
     case 'GET_IMAGES_SUCCESS':
+      if (typeof action.res.images !== 'undefined') {
+        return state.merge({
+          cards: fromJS(action.res.images),
+          state: state.get('state').set('isStale', false).set('isFetching', false),
+        });
+      }
       return state.merge({
-        cards: fromJS(action.res.images),
-        state: state.get('state').set('isStale', false).set('isFetching', false),
+        cards: fromJS([]),
+        state: state.get('state')
+          .set('isStale', false)
+          .set('isFetching', false)
+          .set('updateDidFail', true),
       });
     case 'REPLY_IMAGE':
       return state.set('cards', state.get('cards').filter(

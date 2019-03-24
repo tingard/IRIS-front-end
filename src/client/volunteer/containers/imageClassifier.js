@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
-import ImageClassifier from '../components/imageClassifier';
-// import { sendMessage } from '../actions';
+import ImageClassifier from '../components/ImageClassifier';
 import { replyImage } from '../actions';
-
 
 const mapStateToProps = (state, ownProps) => ({
   push: ownProps.push,
@@ -11,10 +9,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   classifyImage: m => dispatch(
     replyImage(
-      Object.assign(
-        { imageId: ownProps.imageId },
-        m,
-      ),
+      Object.assign({ imageId: ownProps.imageId }, m),
     ),
   ),
 });

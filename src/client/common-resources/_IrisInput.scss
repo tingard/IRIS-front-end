@@ -1,7 +1,7 @@
 @import './IrisFont';
 @import 'color-scheme';
 
-input.iris-input {
+.iris-input {
   // border: 1px solid #eee;
   @include iris-font();
   padding: 10px 10px;

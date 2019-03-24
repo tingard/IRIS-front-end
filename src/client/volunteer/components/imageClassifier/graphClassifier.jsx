@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { List } from 'immutable';
 import IrisButton from '../../../common-resources/IrisButton';
 import TableEditor from './TableEditor';
 import '../../../common-resources/_IrisCheckbox.scss';
@@ -16,9 +17,23 @@ class GraphClassifier extends React.Component {
       title: false,
       titleValue: '',
       table: false,
-      tableValue: '',
+      tableHasHeaders: false,
+      tableValue: List([List([])]),
       plotDescription: '',
     };
+    this.onComplete = this.onComplete.bind(this);
+  }
+
+  onComplete() {
+    console.log(this.state.tableValue.toJS());
+    this.props.onComplete(
+      Object.assign(
+        this.state,
+        {
+          tableValue: this.state.tableValue.toJS(),
+        },
+      ),
+    );
   }
 
   render() {
@@ -89,7 +104,12 @@ class GraphClassifier extends React.Component {
             <span className="iris-checkbox-checkmark" />
           </label>
           {this.state.table ? (
-            <TableEditor onChange={tableValue => this.setState({ tableValue })} />
+            <TableEditor
+              onChange={({ table, hasHeaders }) => this.setState({
+                tableValue: table,
+                tableHasHeaders: hasHeaders,
+              })}
+            />
           ) : null}
         </div>
         <div className="w3-row w3-padding-16">
@@ -108,13 +128,13 @@ class GraphClassifier extends React.Component {
         </div>
         <IrisButton
           className="w3-bar w3-margin-top"
-          onClick={() => this.props.onComplete(this.state)}
+          onClick={this.onComplete}
           type="primary"
           text="Finish"
         />
         <IrisButton
           className="w3-margin-top w3-margin-bottom"
-          onClick={() => this.props.onCancel()}
+          onClick={this.props.onCancel}
           type="tertiary"
           text="Go back"
         />
