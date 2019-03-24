@@ -15,8 +15,12 @@
 		"lint": "gulp lint",
 		"jest": "jest",
 		"test": "gulp lint && jest",
-		"test-travis": "gulp lint && jest --passWithNoTests",
-		"precommit": "eslint \"./src/**/*.js?(x)\" -c ./package.json && jest --passWithNoTests"
+		"test-travis": "gulp lint && jest --passWithNoTests"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "eslint \"./src/**/*.js?(x)\" -c ./package.json && jest --passWithNoTests"
+		}
 	},
 	"devDependencies": {
 		"assert": "^1.4.1",
@@ -30,7 +34,7 @@
 		"eslint-plugin-react": "^7.5.1",
 		"expect": "^23.6.0",
 		"file-loader": "^2.0.0",
-		"husky": "^1.2.1",
+		"husky": "^1.3.1",
 		"jest": "^23.6.0",
 		"node-sass": "^4.10.0",
 		"nsp": "^3.2.1",

@@ -1,5 +1,7 @@
 import ClientAPI from 'grapheel-iris-client-api';
-import { fetchWrapper, serviceWorker, messages, userDetails, images } from '../../actions';
+import {
+  fetchWrapper, serviceWorker, messages, userDetails, images,
+} from '../../actions';
 
 // -----------------------------------------------------------------------------
 // List of all actions used in the volunteer app, could be broken into sub-files
