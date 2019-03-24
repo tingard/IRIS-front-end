@@ -13,6 +13,7 @@ class UtypeSelect extends React.Component {
       userType: 'none',
     };
   }
+
   handleChange() {
     if (this.state.userType !== 'none') {
       this.props.history.push(`/create/${this.state.userType}`);
@@ -20,6 +21,7 @@ class UtypeSelect extends React.Component {
       this.setState({ alertInvalidSelection: true });
     }
   }
+
   render() {
     const options = [
       { value: 'none', text: 'I\'m a...' },

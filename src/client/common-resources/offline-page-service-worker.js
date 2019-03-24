@@ -73,9 +73,9 @@ self.addEventListener('fetch', (event) => {
   // request.mode of 'navigate' is unfortunately not supported in Chrome
   // versions older than 49, so we need to include a less precise fallback,
   // which checks for a GET request with an Accept: text/html header.
-  if (event.request.mode === 'navigate' ||
-      (event.request.method === 'GET' &&
-       event.request.headers.get('accept').includes('text/html'))) {
+  if (event.request.mode === 'navigate'
+      || (event.request.method === 'GET'
+       && event.request.headers.get('accept').includes('text/html'))) {
     event.respondWith(
       fetch(event.request).catch((error) => {
         // The catch is only triggered if fetch() throws an exception, which will most likely

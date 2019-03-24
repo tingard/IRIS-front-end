@@ -27,7 +27,7 @@ const ImageDetails = props => (
             >
                 See descriptions
             </Link>
-            ) : null}
+          ) : null}
           <IrisButton
             onClick={() => props.toggleActive(props.image.get('_id'))}
             type="secondary"

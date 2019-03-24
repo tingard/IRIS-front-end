@@ -19,6 +19,7 @@ class ForgotPassword extends React.Component {
       linkHasExpired: false,
     };
   }
+
   componentWillReceiveProps(newProps) {
     if (this.state.isResetLink !== newProps.match.params.id || false) {
       if (this.passwordInput) {
@@ -36,6 +37,7 @@ class ForgotPassword extends React.Component {
       });
     }
   }
+
   setNewPassword() {
     if (this.passwordInput.value === '') {
       this.setState({ invalidPassword: true });
@@ -67,6 +69,7 @@ class ForgotPassword extends React.Component {
         return e;
       });
   }
+
   requestResetLink() {
     this.props.api.requestPasswordReset({
       utype: this.state.userType,
@@ -85,6 +88,7 @@ class ForgotPassword extends React.Component {
         }
       });
   }
+
   submit() {
     const isValidEmail = /\S+@\S+\.\S+/.test(this.emailInput.value);
     if (this.state.didSuccessfullyRequest || this.state.didSuccessfullySetPassword) {
@@ -101,6 +105,7 @@ class ForgotPassword extends React.Component {
       this.setState({ isValidEmail: false });
     }
   }
+
   render() {
     return (
       <div className="w3-container" style={{ maxWidth: '1000px', margin: 'auto' }}>
@@ -174,31 +179,37 @@ class ForgotPassword extends React.Component {
             </span>
           </div>
           <div role="status">
-            {this.state.isNotRegitsteredUser ?
-              <IrisAlert
-                title="Invalid email"
-                text="This email is not registered on IRIS for this user type"
-                type="warning"
-                onClose={() => this.setState({ isNotRegitsteredUser: false })}
-              /> : null
+            {this.state.isNotRegitsteredUser
+              ? (
+                <IrisAlert
+                  title="Invalid email"
+                  text="This email is not registered on IRIS for this user type"
+                  type="warning"
+                  onClose={() => this.setState({ isNotRegitsteredUser: false })}
+                />
+              ) : null
             }
             <div role="status">
-              {this.state.didSuccessfullyRequest ?
-                <IrisAlert
-                  title="Okay, check your email!"
-                  text="Succesfully generated a password reset link, check your email!"
-                  type="success"
-                  onClose={() => this.setState({ didSuccessfullyRequest: false })}
-                /> : null
+              {this.state.didSuccessfullyRequest
+                ? (
+                  <IrisAlert
+                    title="Okay, check your email!"
+                    text="Succesfully generated a password reset link, check your email!"
+                    type="success"
+                    onClose={() => this.setState({ didSuccessfullyRequest: false })}
+                  />
+                ) : null
               }
-              {this.state.didSuccessfullySetPassword ?
-                <IrisAlert
-                  title="Success!"
-                  message="Check your email for a reset link!"
-                  type="success"
-                  onClose={() => this.setState({ didSuccessfullySetPassword: false })}
-                />
- : null
+              {this.state.didSuccessfullySetPassword
+                ? (
+                  <IrisAlert
+                    title="Success!"
+                    message="Check your email for a reset link!"
+                    type="success"
+                    onClose={() => this.setState({ didSuccessfullySetPassword: false })}
+                  />
+                )
+                : null
               }
             </div>
           </div>

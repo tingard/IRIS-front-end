@@ -19,8 +19,8 @@ const mapStateToProps = (state, ownProps) => {
     ),
     messages: messages.sort(
       (m1, m2) => (
-        m2.get('messages').get(m2.get('messages').size - 1).get('sendDate') <
-        m1.get('messages').get(m1.get('messages').size - 1).get('sendDate')
+        m2.get('messages').get(m2.get('messages').size - 1).get('sendDate')
+        < m1.get('messages').get(m1.get('messages').size - 1).get('sendDate')
       ),
     ),
     user: state.user,

@@ -20,6 +20,7 @@ class ImagePanel extends React.Component {
       touchDownPoint: [0, 0],
     };
   }
+
   onPanStart(e) {
     if (this.state.zoom !== 1) this.props.onImageMove();
     let touchDownPoint;
@@ -32,6 +33,7 @@ class ImagePanel extends React.Component {
     console.log(touchDownPoint);
     return false;
   }
+
   onPanMove(e) {
     if (this.state.isTouching) {
       let touchDownPoint;
@@ -47,24 +49,29 @@ class ImagePanel extends React.Component {
       this.setState({ left, top, touchDownPoint });
     }
   }
+
   onPanEnd() {
     if (this.state.zoom !== 1) this.props.onImageDoneMoving();
     this.setState({ isTouching: false });
   }
+
   onZoomStart() {
     if (this.state.zoom !== 1) this.props.onImageMove();
   }
+
   onZoomChange(e) {
     const { left, top } = this.wrapPanToImageSize(this.state.left, this.state.top);
     this.setState({ left, top, zoom: e.target.value });
     return false;
   }
+
   onZoomEnd() {
     this.props.onImageDoneMoving();
     const { left, top } = this.wrapPanToImageSize(this.state.left, this.state.top);
     this.setState({ left, top });
     return false;
   }
+
   wrapPanToImageSize(proposedLeft, proposedTop) {
     if (this.state.zoom === 1) return { left: 0, top: 0 };
     const scalingConst = 0.5 * (this.state.zoom - 1);
@@ -84,6 +91,7 @@ class ImagePanel extends React.Component {
     );
     return { left, top };
   }
+
   render() {
     return (
       <div className="image-panel">

@@ -57,6 +57,7 @@ class ApiWrapper extends React.Component {
     if (shouldFetch(userState)) this.props.getUserDetails();
     if (shouldFetch(imagesState)) this.props.getImages();
   }
+
   componentWillReceiveProps(nextProps) {
     const shouldFetch = state => state.get('isStale') && !state.get('isFetching');
 
@@ -71,9 +72,11 @@ class ApiWrapper extends React.Component {
       nextProps.getImages();
     }
   }
+
   componentWillUnmount() {
     // Object.keys(this.timers).map(key => clearInterval(this.timers[key]));
   }
+
   render() {
     return <div id="api-watcher">{this.props.children}</div>;
   }
