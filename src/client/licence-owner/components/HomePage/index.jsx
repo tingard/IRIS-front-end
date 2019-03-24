@@ -11,6 +11,7 @@ import FeedbackPanel from './FeedbackPanel';
 class HomePage extends React.Component {
   componentDidMount() {
   }
+
   render() {
     if (this.props.user.get('state').get('isStale')) {
       return <IrisLoader />;

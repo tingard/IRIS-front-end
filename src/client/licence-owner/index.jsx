@@ -45,6 +45,6 @@ const LicenceOwnerApp = () => (
 );
 
 ReactDOM.render(
-  <LicenceOwnerApp />
-  , document.querySelector('.app'),
+  <LicenceOwnerApp />,
+  document.querySelector('.app'),
 );

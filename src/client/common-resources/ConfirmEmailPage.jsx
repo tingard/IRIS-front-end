@@ -11,6 +11,7 @@ class ConfirmEmailPage extends React.Component {
       successfulConfirmation: true,
     };
   }
+
   componentWillMount() {
     this.props.confirmEmail(this.props.match.params.id)
       .then(
@@ -28,6 +29,7 @@ class ConfirmEmailPage extends React.Component {
         }),
       );
   }
+
   render() {
     if (this.state.waitingForConfirmation) {
       return (

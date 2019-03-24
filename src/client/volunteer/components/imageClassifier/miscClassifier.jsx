@@ -10,6 +10,7 @@ class MiscClassifier extends React.Component {
       value: '',
     };
   }
+
   render() {
     return (
       <div className="w3-container card-panel-right-pane">
