@@ -1,27 +1,42 @@
 {
-  "background_color": "#fff",
+  "background_color": "#eee",
   "display": "standalone",
-  "description": "The app that helps visually impaired students gain access to visual STEM data",
+  "description": "IRIS helps visually impaired students gain access to visual STEM data, aiding autonomy and promoting equal access in education.",
   "name": "Grapheel IRIS",
   "icons": [
     {
-      "src": "images/irisProposed_withoutBackground_100x100.png",
+      "src": "images/iris-logo/android-launchericon-48-48.png",
       "type": "image/png",
-      "sizes": "100x100"
+      "sizes": "48x48"
     },
     {
-      "src": "images/irisProposed_withoutBackground_300x300.png",
+      "src": "images/iris-logo/android-launchericon-72-72.png",
       "type": "image/png",
-      "sizes": "300x300"
+      "sizes": "72x72"
     },
     {
-      "src": "images/irisProposed_withoutBackground.png",
+      "src": "images/iris-logo/android-launchericon-96-96.png",
       "type": "image/png",
-      "sizes": "960x960"
+      "sizes": "96x96"
+    },
+    {
+      "src": "images/iris-logo/android-launchericon-144-144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "images/iris-logo/android-launchericon-192-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "images/iris-logo/android-launchericon-512-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "orientation": "portrait",
   "short_name": "IRIS",
-  "theme_color": "#555",
+  "theme_color": "#66AD85",
   "start_url": "/login?launcher=true"
 }
