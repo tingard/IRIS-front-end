@@ -1,6 +1,8 @@
 {
   "public": "dist",
   "rewrites": [
+    { "source": "/student/service-worker.bundle.js", "destination": "/runtime~student/service-worker.bundle.js" },
+    { "source": "/volunteer/service-worker.bundle.js", "destination": "/runtime~volunteer/service-worker.bundle.js" },
     { "source": "/login/**", "destination": "/index.html" },
     { "source": "/create/**", "destination": "/index.html" },
     { "source": "/student/**", "destination": "/student/index.html" },

@@ -27,7 +27,7 @@ class ApiWrapper extends React.Component {
         // If the user accepts, let's create a notification
         if (permission === 'granted') {
           /* eslint-disable no-unused-vars */
-          const notification = new Notification('This is what notifications look like!');
+          // const notification = new Notification('This is what notifications look like!');
           this.props.subscribeToPushNotifications();
           /* eslint-enable no-unused-vars */
         }
