@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ImageClassifier from '../components/ImageClassifier';
+import ImageClassifier from '../components/imageClassifier';
 import { replyImage } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
