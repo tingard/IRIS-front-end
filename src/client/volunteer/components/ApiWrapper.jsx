@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 class ApiWrapper extends React.Component {
   componentDidMount() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/volunteer/service-worker.bundle.js')
+      navigator.serviceWorker.register('/service-worker/volunteer.js')
         .then((swReg) => {
           this.props.passSwRegistrationToAPI(swReg);
           this.props.subscribeToPushNotifications();

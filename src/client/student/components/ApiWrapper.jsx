@@ -6,7 +6,7 @@ class ApiWrapper extends React.Component {
   componentDidMount() {
     this.timers = [];
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/student/service-worker.bundle.js')
+      navigator.serviceWorker.register('/service-worker/student.js')
         .then((swReg) => {
           this.props.passSwRegistrationToAPI(swReg);
           this.props.subscribeToPushNotifications();

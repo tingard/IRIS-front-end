@@ -48,7 +48,7 @@
 	"dependencies": {
 		"@babel/preset-react": "^7.0.0",
 		"filepond": "^3.7.2",
-		"grapheel-iris-client-api": "^1.6.2",
+		"grapheel-iris-client-api": "^1.6.3",
 		"helmet": "^3.12.0",
 		"history": "^4.7.2",
 		"immutable": "^4.0.0-rc.12",
