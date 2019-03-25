@@ -26,8 +26,8 @@ describe('<IrisSelect />', function () {
   it('should have the correct label', function () {
     expect(component.find('.iris-select-label').text()).toEqual(props.label);
   });
-  it('should have the correct value');
-  it('should have the correct options available');
+  test.todo('should have the correct value');
+  test.todo('should have the correct options available');
   it('should call onChange once when it is changed', function () {
     component.find('select').simulate('change', { target: { value: '1' } });
     expect(onChange.calledOnce).toEqual(true);

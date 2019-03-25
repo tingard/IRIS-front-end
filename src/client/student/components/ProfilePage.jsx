@@ -197,6 +197,7 @@ ProfilePage.propTypes = {
   state: PropTypes.shape({
     isFetching: PropTypes.bool,
     updateDidSucceed: PropTypes.bool,
+    get: PropTypes.func,
   }),
   setUserDetails: PropTypes.func,
   dismissUpdateAlert: PropTypes.func,

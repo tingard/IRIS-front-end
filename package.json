@@ -12,10 +12,10 @@
 		"fast-lint": "eslint \"./src/**/*.js?(x)\" -c ./package.json",
 		"start": "poi --serve",
 		"start-static": "serve",
-		"lint": "gulp lint",
+		"lint": "eslint src",
 		"jest": "jest",
-		"test": "gulp lint && jest",
-		"test-travis": "gulp lint && jest --passWithNoTests"
+		"test": "eslint src && jest",
+		"test-travis": "eslint src && jest --passWithNoTests"
 	},
 	"husky": {
 		"hooks": {
@@ -23,7 +23,10 @@
 		}
 	},
 	"devDependencies": {
+		"@babel/core": "^7.4.0",
+		"@babel/preset-env": "^7.4.2",
 		"assert": "^1.4.1",
+		"babel-jest": "^24.5.0",
 		"enzyme": "^3.3.0",
 		"enzyme-adapter-react-16": "^1.7.1",
 		"eslint": "^5.11.1",
@@ -35,17 +38,17 @@
 		"expect": "^23.6.0",
 		"file-loader": "^2.0.0",
 		"husky": "^1.3.1",
-		"jest": "^23.6.0",
+		"jest": "^24.5.0",
 		"node-sass": "^4.10.0",
-		"nsp": "^3.2.1",
 		"poi": "^12.2.12",
 		"sass-loader": "^7.1.0",
 		"sinon": "^7.2.2",
 		"uglifyjs-webpack-plugin": "^2.1.1"
 	},
 	"dependencies": {
+		"@babel/preset-react": "^7.0.0",
 		"filepond": "^3.7.2",
-		"grapheel-iris-client-api": "^1.5.15",
+		"grapheel-iris-client-api": "^1.6.2",
 		"helmet": "^3.12.0",
 		"history": "^4.7.2",
 		"immutable": "^4.0.0-rc.12",
@@ -79,9 +82,12 @@
 		"yarn": "^1.9.4"
 	},
 	"jest": {
-		"setupTestFrameworkScriptFile": "<rootDir>/src/enzymeConfiguration.js",
+		"setupFilesAfterEnv": [
+			"<rootDir>/src/enzymeConfiguration.js"
+		],
 		"moduleNameMapper": {
-			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+			"\\.(scss|css)": "<rootDir>/__mocks__/styleMock.js"
 		}
 	},
 	"eslintConfig": {
