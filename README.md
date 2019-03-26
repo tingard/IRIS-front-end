@@ -1,12 +1,5 @@
 # IRIS
 
-## Notes on Git
-While we believe case sensitive file names have been eliminated, it may be needed for OS X users to tell git to ignore cases:
-
-``` bash
-git config core.ignorecase true
-```
-
 ## Prerequisites
 This readme will assume that the reader has already setup a working
 node/react development environment. Node `~8.10.0` is required,
@@ -23,6 +16,13 @@ Windows users can install [here](https://yarnpkg.com/latest.msi).
 
 ## Building
 
+### Notes on Git
+
+While we believe case sensitive file names have been eliminated, it may be needed for OS X users to tell git to ignore cases:
+
+``` bash
+git config core.ignorecase true
+```
 
 Navigate to your IRIS directory, then `yarn install` will install dependencies
 
