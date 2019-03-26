@@ -4671,10 +4671,10 @@ graceful-fs@^4.1.15, graceful-fs@^4.1.2:
   version "4.1.15"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
 
-grapheel-iris-client-api@1.6.x:
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/grapheel-iris-client-api/-/grapheel-iris-client-api-1.6.4.tgz#d0ed456cc3902214042378fcbfdf685b2371d24b"
-  integrity sha512-C3XPlk3CRZm6eiVPmv872FKmC0VAqxLT1HLhytrYEjepck3QuPGDwR87bQpl00lJptQWZ05nl8befh8Rk3BBMQ==
+grapheel-iris-client-api@^1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/grapheel-iris-client-api/-/grapheel-iris-client-api-1.6.6.tgz#d51788a24eed4eb53e90af57d581afd9a0e5e993"
+  integrity sha512-+429Wzlf/7Zfc6s3Wb3jhLAyJxa63k1Q4QLRUZ9pKSBIc/p/VgQLCP7KiJxK+/OGQEdxyKt0TaPmT6utRIgx7g==
   dependencies:
     eslint-plugin-jsx-a11y "^6.2.1"
     eslint-plugin-react "^7.12.4"
